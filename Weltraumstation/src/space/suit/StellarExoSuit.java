@@ -11,4 +11,9 @@ public class StellarExoSuit extends Suit{
 		
 	}
 
+	@Override
+	public void upgrade() {
+		
+	}
+
 }

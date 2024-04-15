@@ -1,6 +1,6 @@
 package space.simulation;
 
-public class SpaceStation implements Buildable, Demolitionable, Upgradable{
+public class SpaceStation extends Building{
 	
 	private String name;
 	private int capacity;

@@ -1,10 +1,8 @@
 package space.ship;
 
-import space.simulation.Buildable;
-import space.simulation.Demolitionable;
-import space.simulation.Upgradable;
+import space.simulation.Vehicle;
 
-public abstract class Ship implements Buildable, Demolitionable, Upgradable{
+public abstract class Ship extends Vehicle{
 	
 	private int defense;
 	private int capacity;

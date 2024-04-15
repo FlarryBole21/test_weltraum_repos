@@ -1,6 +1,6 @@
 package space.simulation;
 
-public class Stock implements Buildable, Demolitionable, Upgradable{
+public class Stock extends Building{
 	
 	private String name;
 	private int stockSize;

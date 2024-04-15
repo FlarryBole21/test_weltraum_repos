@@ -13,6 +13,7 @@ public class Planet {
 	private String name;
 	private double size;
 	private double mass;
+	private double radius; 
 	private double gravity;
 	private boolean habitable;
 	private LinkedList<Resource> resources;
@@ -23,11 +24,12 @@ public class Planet {
 	private Atmosphere atmosphere;
 	
 	
-	public Planet(String name, double size, double mass, 
+	public Planet(String name, double size, double mass, double radius,
 			double gravity, boolean habitable, Atmosphere atmosphere) {
 		this.name = name;
 		this.size = size;
 		this.mass = mass;
+		this.radius = radius;
 		this.gravity = gravity;
 		this.habitable = habitable;
 		this.atmosphere = atmosphere;

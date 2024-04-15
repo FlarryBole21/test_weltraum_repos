@@ -2,12 +2,9 @@ package space.lifeform;
 
 public class Monster extends Lifeform{
 	
-	private int level;
-	
-	public Monster(String name){
-		super(name);
-		this.level = 1;
-		
+	public Monster(String name, int strength, int defense){
+		super(name, strength, defense);
+
 	}
 	
 	@Override

@@ -1,8 +1,8 @@
 package space.resource;
 
-import space.simulation.Usable;
+import space.food.Eatable;
 
-public class RawFood extends Resource implements Usable{
+public class RawFood extends Resource implements Eatable{
 
 	public RawFood(String name, int quality) {
 		super(name, quality);
@@ -16,7 +16,13 @@ public class RawFood extends Resource implements Usable{
 
 
 	@Override
-	public void use() {
+	public void eat() {
+		
+	}
+
+
+	@Override
+	public void drop() {
 		
 	}
 

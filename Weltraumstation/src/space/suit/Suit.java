@@ -4,8 +4,9 @@ import java.util.LinkedList;
 
 import space.effect.Buff;
 import space.item.Item;
+import space.simulation.Upgradable;
 
-public abstract class Suit extends Item implements Wearable{
+public abstract class Suit extends Item implements Wearable, Upgradable{
 	
 	private int defense;
 	private LinkedList<Buff> buffs;

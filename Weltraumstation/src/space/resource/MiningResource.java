@@ -13,13 +13,16 @@ public class MiningResource extends Resource implements Degradable{
 
 	@Override
 	public void degrade() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void collect() {
-		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drop() {
 		
 	}
 

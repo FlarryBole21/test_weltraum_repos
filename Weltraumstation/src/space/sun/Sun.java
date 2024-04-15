@@ -1,5 +1,5 @@
 package space.sun;
 
-public class Sun {
+public class Sun extends Star{
 
 }

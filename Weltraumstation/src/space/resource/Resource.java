@@ -1,6 +1,8 @@
 package space.resource;
 
-public abstract class Resource implements Collectable{
+import space.simulation.Droppable;
+
+public abstract class Resource implements Collectable, Droppable{
 	
 	private String name;
 	private int quality;

@@ -11,4 +11,9 @@ public class AstroplateArmor extends Suit{
 		
 	}
 
+	@Override
+	public void upgrade() {
+		
+	}
+
 }

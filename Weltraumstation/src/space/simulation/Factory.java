@@ -1,6 +1,6 @@
 package space.simulation;
 
-public class Factory implements Buildable, Demolitionable, Upgradable {
+public class Factory extends Building{
 	
 	private String name;
 	private int level;

@@ -1,4 +1,4 @@
-package space.simulation;
+package space.lifeform;
 
 public interface Killable {
 	

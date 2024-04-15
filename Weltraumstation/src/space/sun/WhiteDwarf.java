@@ -1,5 +1,5 @@
 package space.sun;
 
-public class WhiteDwarf {
+public class WhiteDwarf extends Star{
 
 }
