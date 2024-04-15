@@ -1,7 +1,7 @@
-package space.terrain;
+package space.simulation;
 
 public interface Accessible {
 	
-	public void onAccess();
+	public void access();
 
 }

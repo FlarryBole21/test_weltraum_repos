@@ -15,8 +15,14 @@ public class BattleShip extends Ship{
 	}
 
 	@Override
-	public void kill() {
+	public void demolition() {
 		
 	}
+
+	@Override
+	public void upgrade() {
+		
+	}
+
 
 }

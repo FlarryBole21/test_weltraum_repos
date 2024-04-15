@@ -3,7 +3,7 @@ package space.terrain;
 public class Volcano extends Terrain{
 
 	@Override
-	public void onAccess() {
+	public void access() {
 		
 	}
 

@@ -13,9 +13,15 @@ public class ColonyShip extends Ship{
 	}
 
 	@Override
-	public void kill() {
-		// TODO Auto-generated method stub
+	public void demolition() {
 		
 	}
+
+	@Override
+	public void upgrade() {
+		
+	}
+
+	
 
 }
