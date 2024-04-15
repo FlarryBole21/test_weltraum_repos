@@ -1,9 +1,10 @@
 package space.item;
 
+import space.resource.Collectable;
 import space.simulation.Droppable;
 import space.simulation.Usable;
 
-public class Item implements Droppable, Usable, Craftable{
+public class Item implements Droppable, Usable, Craftable, Collectable{
 
 	@Override
 	public void drop() {
@@ -17,6 +18,11 @@ public class Item implements Droppable, Usable, Craftable{
 
 	@Override
 	public void craft() {
+		
+	}
+
+	@Override
+	public void collect() {
 		
 	}
 

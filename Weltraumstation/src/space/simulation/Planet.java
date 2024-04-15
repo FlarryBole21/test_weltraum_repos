@@ -17,6 +17,8 @@ public class Planet {
 	private boolean habitable;
 	private LinkedList<Resource> resources;
 	private LinkedList<Terrain> terrains;
+	private LinkedList<Moon> moons;
+	private LinkedList<SpaceStation> spaceStations;
 	private LinkedList<Lifeform> lifeforms;
 	private Atmosphere atmosphere;
 	
@@ -30,6 +32,8 @@ public class Planet {
 		this.habitable = habitable;
 		this.atmosphere = atmosphere;
 		this.resources = new LinkedList<>();
+		this.moons = new LinkedList<>();
+		this.spaceStations = new LinkedList<>();
 		this.terrains = new LinkedList<>();
 		this.lifeforms = new LinkedList<>();
 		

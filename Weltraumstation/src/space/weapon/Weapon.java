@@ -3,7 +3,7 @@ package space.weapon;
 import space.item.Item;
 import space.simulation.Upgradable;
 
-public class Weapon extends Item implements Upgradable{
+public abstract class Weapon extends Item implements Upgradable{
 	
 	private int strength;
 	private int level;

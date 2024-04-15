@@ -1,6 +1,6 @@
 package space.weapon;
 
-public abstract class KineticWeapon extends Weapon{
+public abstract class KineticWeapon extends RangeWeapon{
 
 	public KineticWeapon(int strength) {
 		super(strength);

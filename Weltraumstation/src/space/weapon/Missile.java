@@ -1,6 +1,6 @@
 package space.weapon;
 
-public abstract class Missile extends Weapon{
+public abstract class Missile extends RangeWeapon{
 
 	public Missile(int strength) {
 		super(strength);
