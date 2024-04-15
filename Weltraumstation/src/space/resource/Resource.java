@@ -1,17 +1,13 @@
 package space.resource;
 
-public abstract class Resource implements Degradable{
+public abstract class Resource implements Collectable{
 	
 	private String name;
 	private int quality;
-	private int miningDifficulty;
-	private int miningTime;
-	
-	public Resource(String name, int quality, int miningDifficulty, int miningTime) {
+
+	public Resource(String name, int quality) {
 		this.name=name;
 		this.quality = quality;
-		this.miningDifficulty = miningDifficulty;
-		this.miningTime = miningTime;
 	}
 
 }

@@ -1,4 +1,4 @@
-package space.simulation;
+package space.item;
 
 public interface Craftable {
 	

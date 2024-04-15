@@ -1,6 +1,6 @@
 package space.simulation;
 
-public class Stock implements Buildable, Demolitionable{
+public class Stock implements Buildable, Demolitionable, Upgradable{
 	
 	private String name;
 	private int stockSize;
@@ -19,6 +19,11 @@ public class Stock implements Buildable, Demolitionable{
 
 	@Override
 	public void build() {
+		
+	}
+
+	@Override
+	public void upgrade() {
 		
 	}
 

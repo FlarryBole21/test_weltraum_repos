@@ -2,8 +2,9 @@ package space.ship;
 
 import space.simulation.Buildable;
 import space.simulation.Demolitionable;
+import space.simulation.Upgradable;
 
-public abstract class Ship implements Buildable, Demolitionable{
+public abstract class Ship implements Buildable, Demolitionable, Upgradable{
 	
 	private int defense;
 	private int capacity;
@@ -16,10 +17,6 @@ public abstract class Ship implements Buildable, Demolitionable{
 		this.condition = "voll funktionsfähig";
 		this.level = 1;
 	}
-	
-	
-	public abstract void upgrade();
-	
-	
+
 
 }

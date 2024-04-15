@@ -1,6 +1,6 @@
 package space.simulation;
 
-public class Factory implements Buildable, Demolitionable {
+public class Factory implements Buildable, Demolitionable, Upgradable {
 	
 	private String name;
 	private int level;
@@ -19,6 +19,12 @@ public class Factory implements Buildable, Demolitionable {
 
 	@Override
 	public void build() {
+		
+	}
+
+	@Override
+	public void upgrade() {
+		// TODO Auto-generated method stub
 		
 	}
 

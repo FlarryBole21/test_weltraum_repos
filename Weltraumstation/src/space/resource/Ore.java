@@ -1,6 +1,6 @@
 package space.resource;
 
-public class Ore extends Resource{
+public class Ore extends MiningResource{
 
 	public Ore(String name, int quality, int miningDifficulty, int miningTime) {
 		super(name, quality, miningDifficulty, miningTime);
@@ -8,6 +8,11 @@ public class Ore extends Resource{
 
 	@Override
 	public void degrade() {
+		
+	}
+
+	@Override
+	public void collect() {
 		
 	}
 

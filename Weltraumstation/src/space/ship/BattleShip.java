@@ -1,8 +1,12 @@
 package space.ship;
 
+import java.util.LinkedList;
+
+import space.weapon.Weapon;
 
 public class BattleShip extends Ship{
 	private int strength;
+	private LinkedList<Weapon> weapons;
 
 	public BattleShip(int strength, int defense, int capacity) {
 		super(defense, capacity);
@@ -23,6 +27,11 @@ public class BattleShip extends Ship{
 	public void upgrade() {
 		
 	}
+	
+	public void addWeapon(Weapon weapon) {
+		this.weapons.add(weapon);
+	}
+	
 
 
 }

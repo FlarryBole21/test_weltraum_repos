@@ -1,6 +1,6 @@
 package space.resource;
 
-public class Crystal extends Resource {
+public class Crystal extends MiningResource {
 
 	public Crystal(String name, int quality, int miningDifficulty, int miningTime) {
 		super(name, quality, miningDifficulty, miningTime);
@@ -8,6 +8,11 @@ public class Crystal extends Resource {
 
 	@Override
 	public void degrade() {
+		
+	}
+
+	@Override
+	public void collect() {
 		
 	}
 
