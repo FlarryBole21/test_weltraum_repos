@@ -1,14 +1,21 @@
 package space.ship;
 
+
 public class BattleShip extends Ship{
+	private int strength;
 
 	public BattleShip(int strength, int defense, int capacity) {
-		super(strength, defense, capacity);
+		super(defense, capacity);
+		this.strength = strength;
 	}
 
 	@Override
 	public void build() {
-		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void kill() {
 		
 	}
 
