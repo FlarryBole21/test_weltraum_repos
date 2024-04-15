@@ -3,7 +3,7 @@ package space.item;
 import space.simulation.Droppable;
 import space.simulation.Usable;
 
-public class Item implements Droppable, Usable{
+public class Item implements Droppable, Usable, Craftable{
 
 	@Override
 	public void drop() {
@@ -12,6 +12,11 @@ public class Item implements Droppable, Usable{
 
 	@Override
 	public void use() {
+		
+	}
+
+	@Override
+	public void craft() {
 		
 	}
 
