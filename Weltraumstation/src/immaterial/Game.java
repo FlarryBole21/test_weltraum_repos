@@ -2,12 +2,11 @@ package immaterial;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
 import java.util.Scanner;
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
-import space.environment.atmosphere.Atmosphere;
+
 
 public class Game {
 	
