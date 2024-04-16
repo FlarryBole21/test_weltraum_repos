@@ -1,10 +1,9 @@
 package space.inventory.item;
 
-import space.inventory.Collectable;
-import space.inventory.Droppable;
-import space.inventory.Usable;
 
-public class Item implements Droppable, Usable, Craftable, Collectable{
+import space.inventory.InventoryObject;
+
+public abstract class Item extends InventoryObject implements Craftable{
 
 	@Override
 	public void drop() {

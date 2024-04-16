@@ -1,6 +1,6 @@
 package space.inventory;
 
-public interface Usable {
+public interface Useable {
 
 	public void use();
 }
