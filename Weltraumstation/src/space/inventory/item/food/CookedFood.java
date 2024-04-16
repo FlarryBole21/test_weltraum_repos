@@ -1,0 +1,7 @@
+package space.inventory.item.food;
+
+import space.inventory.item.Item;
+
+public abstract class CookedFood extends Item implements Eatable{
+
+}
