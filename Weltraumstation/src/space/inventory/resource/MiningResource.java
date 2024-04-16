@@ -1,6 +1,6 @@
 package space.inventory.resource;
 
-public class MiningResource extends Resource implements Degradable{
+public abstract class MiningResource extends Resource implements Degradable{
 	
 	private int miningDifficulty;
 	private int miningTime;

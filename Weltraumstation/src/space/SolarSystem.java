@@ -16,6 +16,10 @@ public class SolarSystem {
 		this.planets = new LinkedList<>();
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	
 	public Sun addSun(String name, double mass, double radius, double temperature, double luminosity) {
 		Sun sun = new Sun(name, mass, radius, temperature, luminosity);

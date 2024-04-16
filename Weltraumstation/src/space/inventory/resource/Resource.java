@@ -1,10 +1,8 @@
 package space.inventory.resource;
 
-import space.inventory.Collectable;
-import space.inventory.Droppable;
-import space.inventory.Useable;
+import space.inventory.InventoryObject;
 
-public abstract class Resource implements Collectable, Droppable, Useable{
+public abstract class Resource extends InventoryObject{
 	
 	private String name;
 	private int quality;

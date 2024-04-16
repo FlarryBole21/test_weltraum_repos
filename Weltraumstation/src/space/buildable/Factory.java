@@ -1,6 +1,6 @@
 package space.buildable;
 
-public class Factory extends Building{
+public abstract class Factory extends Building{
 	
 	private String name;
 	private int level;

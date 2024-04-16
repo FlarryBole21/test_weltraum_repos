@@ -19,4 +19,23 @@ public class Galaxy {
 		
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public LinkedList<SolarSystem> getSolarSystems() {
+		return solarSystems;
+	}
+	
+	public LinkedList<String> getSolarSystemsNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getSolarSystems().size(); i++) {
+			names.add(getSolarSystems().get(i).getName());
+		}
+		return names;
+	}
+
+	
+	
+
 }
