@@ -1,25 +1,35 @@
 package immaterial;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.Scanner;
-
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
+import space.environment.atmosphere.Atmosphere;
 
 public class Game {
 	
+	private final static String PLANETCREATEPATH = "data/planetCreate.txt";
+	
+	private Universe universe;
 	public Game() {
 		
 	}
 	
 	public static void main(String[] args) {
-		Game game = new Game();
-		game.start();
 		try {
+			testFiles();
+			Game game = new Game();
+			game.start();
 			game.mainLoop();
-		} catch (RuntimeException e) {
-			System.err.println("Error --> " + e.getMessage());
+		}catch(FileNotFoundException e) {
+			System.err.println("Error --> " + e.getMessage() + "!");
+		}finally {
+			System.out.println("Programm wird beendet!");
 		}
+		
 	}
 	
 	
@@ -35,10 +45,10 @@ public class Game {
 	public void loopSetSolar(Scanner scanner) throws RuntimeException{
 		String input;
 		int numberInput;
-		System.out.println("Bitte gebe dem Universum einen Namen");
+		System.out.print("Bitte gebe dem Universum einen Namen: ");
 		input = scanner.nextLine();
-		Universe universe = new Universe(input);
-		System.out.println("Bitte gebe deiner Galaxie einen Namen");
+		universe = new Universe(input);
+		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
 		input = scanner.nextLine();
 		Galaxy galaxy = universe.addGalaxy(input);
 		while (true) {
@@ -46,21 +56,57 @@ public class Game {
 			input = scanner.nextLine();
 			try {
 				numberInput = Integer.valueOf(input);
-				break;
+				if(numberInput >= 1 && numberInput <= 3) {
+					break;
+				}else {
+					System.err.println("Error --> Zahl ist zu hoch oder zu niedrig!");
+				}
 			}catch(RuntimeException e) {
-				System.out.println("Error --> " + e.getMessage());
+				System.err.println("Error --> " + e.getMessage() + "!");
 			}
 			
 		}
-		System.out.println(input);
 		for(int i = 0; i < numberInput; i++) {
+			System.out.print("Bitte gebe den Namen für das " + (i+1) + ".Sonnensystem ein: ");
 			input = scanner.nextLine();
-			galaxy.addSolarSystem(input);
+			SolarSystem solarsystem = galaxy.addSolarSystem(input);
+			createRandomSolarSystem(solarsystem);
 		}
+		System.out.println("Folgende Sonnensysteme hast du erstellt: " + galaxy.getSolarSystemsNames());
+			
+	}
+	
+	
+	public void createRandomSolarSystem(SolarSystem solarsystem) {
+		int randomPlanetNumber = 0;
+		int randomSunNumber = 0;
+		do{
+			randomPlanetNumber = (int) (Math.random() * (10));
+			randomSunNumber = (int) (Math.random() * (10)) - ((int) randomPlanetNumber/2);
+		}while((randomSunNumber + 2) > randomPlanetNumber || randomPlanetNumber < 3 || randomSunNumber < 1);
+		
+		for(int i = 0; i < randomPlanetNumber; i++) {
+			
+		
+		}
+		System.out.println("Anzahl der erstellten Planten: " + randomPlanetNumber);
+		System.out.println("Anzahl der erstellten Sonnen: " + randomSunNumber);
+		
 		
 	}
 	
 	public void mainLoop() {
+		
+	}
+	
+	public static void testFiles() throws FileNotFoundException {
+		File path = new File("./" + Game.PLANETCREATEPATH);
+		if(path.exists()) {
+			System.out.println("Working directory: " + path.getAbsolutePath());
+		}else {
+			throw new FileNotFoundException("Datei: " + "./" + Game.PLANETCREATEPATH + " wurde nicht gefunden!");
+		}
+		
 		
 	}
 

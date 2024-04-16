@@ -12,6 +12,7 @@ public class SolarSystem {
 	private LinkedList<Planet> planets;
 	
 	public SolarSystem(String name) {
+		this.name = name;
 		this.suns = new LinkedList<>();
 		this.planets = new LinkedList<>();
 	}
