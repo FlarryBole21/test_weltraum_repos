@@ -16,12 +16,22 @@ public class SolarSystem {
 	private String name;
 	private LinkedList<Sun> suns;
 	private LinkedList<Planet> planets;
-	
+	private MainSequenceStar mainstar;
+
 	public SolarSystem(String name) {
 		this.name = name;
 		this.suns = new LinkedList<>();
 		this.planets = new LinkedList<>();
 	}
+	
+	public MainSequenceStar getMainstar() {
+		return mainstar;
+	}
+
+	public void setMainstar(MainSequenceStar mainstar) {
+		this.mainstar = mainstar;
+	}
+
 	
 	public String getName() {
 		return this.name;

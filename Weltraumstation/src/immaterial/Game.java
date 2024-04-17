@@ -81,7 +81,7 @@ public class Game {
 		Galaxy galaxy = universe.addGalaxy(input);
 		System.out.println("Als Nächstes brauchen wir Sonnensysteme! (Planten, Sonnen, Monde etc. werden zufällig erstellt)");
 		while (true) {
-			System.out.println("Wie viele Sonnensysteme möchtest du deiner Galaxie hinzufügen ? (MIN 1 - MAX 3)");
+			System.out.print("Wie viele Sonnensysteme möchtest du deiner Galaxie hinzufügen ? (MIN 1 - MAX 3): ");
 			input = scanner.nextLine();
 			try {
 				numberInput = Integer.valueOf(input);
@@ -106,13 +106,14 @@ public class Game {
 		System.out.println("Folgende Sonnensysteme hast du erstellt: " + galaxy.getSolarSystemsNames());
 		System.out.print("Planten & Sonnen-Daten einsehen? (1 -> Nur Namen, "
 				+ "2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos): ");
-		System.out.println();
 		input = scanner.nextLine();
+		System.out.println();
 		if(input.equals("1")) {
 			for(int i = 0; i < galaxy.getSolarSystems().size(); i++) {
 				System.out.println("-- Sonnensystem: " + galaxy.getSolarSystemsNames().get(i) + " --");
 				System.out.println("Planeten-Namen: " + galaxy.getSolarSystems().get(i).getPlanetNames());
 				System.out.println("Sonnen-Namen: " + galaxy.getSolarSystems().get(i).getSunNames());
+				System.out.println("Hauptsequenzstern: " + galaxy.getSolarSystems().get(i).getMainstar().getName());
 				System.out.println();
 				
 			}
@@ -120,13 +121,18 @@ public class Game {
 		}else if(input.equals("2")) {
 			for(int i = 0; i < galaxy.getSolarSystems().size(); i++) {
 				System.out.println("-- Sonnensystem: " + galaxy.getSolarSystemsNames().get(i) + " --");
+				System.out.println();
+				System.out.println("Hauptsequenzstern: " + galaxy.getSolarSystems().get(i).getMainstar().getName());
+				for(int k = 0; k < galaxy.getSolarSystems().get(i).getSuns().size();k++) {
+					System.out.println("Sonnen-Daten: " + galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation());
+				}
+				
+				System.out.println();
+				
 				for(int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size();j++) {
 					System.out.println("Planeten-Daten: " + 
 				galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation());
-				}
 				
-				for(int k = 0; k < galaxy.getSolarSystems().get(i).getSuns().size();k++) {
-					System.out.println("Sonnen-Daten: " + galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation());
 				}
 				
 				System.out.println();
@@ -229,6 +235,7 @@ public class Game {
 					if(mainstar.getPlanetNames().size() > 0) {
 						break;
 					}
+					solarsystem.setMainstar(mainstar);
 					for(int n=0; n<solarsystem.getPlanets().size();n++) {
 						//System.out.println("gemorial");
 						mainstar.addPlanet(solarsystem.getPlanets().get(n));
