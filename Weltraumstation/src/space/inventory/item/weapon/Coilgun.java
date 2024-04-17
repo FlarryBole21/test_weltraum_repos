@@ -6,4 +6,9 @@ public class Coilgun extends KineticWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Spulenkanone";
+	}
+
 }

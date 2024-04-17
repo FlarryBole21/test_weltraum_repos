@@ -6,4 +6,9 @@ public class PlasmaClaws extends MeleeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Plasma-Krallen";
+	}
+
 }

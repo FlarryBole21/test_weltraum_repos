@@ -6,4 +6,9 @@ public class QuantumTorpedo extends Missile{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Quantum-Torpedo";
+	}
+
 }

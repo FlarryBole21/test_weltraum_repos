@@ -7,4 +7,9 @@ public class CookedChicken extends CookedFood  {
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Gekochtes Hähnchen";
+	}
+
 }

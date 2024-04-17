@@ -16,4 +16,9 @@ public class GalacticGlideGear extends Suit{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Galaktische Gleiter-Rüstung";
+	}
+
 }

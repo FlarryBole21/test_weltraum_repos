@@ -6,4 +6,9 @@ public class EnergyGauntlet extends EnergyMeleeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Energie-Handschuhe";
+	}
+
 }

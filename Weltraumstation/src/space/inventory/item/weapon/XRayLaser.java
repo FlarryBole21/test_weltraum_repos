@@ -6,4 +6,9 @@ public class XRayLaser extends EnergyRangeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "XRay-Laser";
+	}
+
 }

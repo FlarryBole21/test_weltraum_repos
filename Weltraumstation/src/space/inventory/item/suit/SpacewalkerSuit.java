@@ -22,4 +22,9 @@ public class SpacewalkerSuit extends Suit {
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Weltraumwanderer-Anzug";
+	}
+
 }

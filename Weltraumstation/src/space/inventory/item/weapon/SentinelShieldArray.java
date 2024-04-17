@@ -6,4 +6,9 @@ public class SentinelShieldArray extends PointDefenseSystem{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Wächterschildfeld";
+	}
+
 }

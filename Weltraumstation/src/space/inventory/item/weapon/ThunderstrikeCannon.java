@@ -6,4 +6,9 @@ public class ThunderstrikeCannon extends KineticWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Donnerschlag-Kanone";
+	}
+
 }

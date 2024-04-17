@@ -1,6 +1,8 @@
 package space.lifeform;
 
-public abstract class LifeformObject implements Killable{
+import space.Typeable;
+
+public abstract class LifeformObject implements Typeable{
 	
 	private String name;
 	private int strength;

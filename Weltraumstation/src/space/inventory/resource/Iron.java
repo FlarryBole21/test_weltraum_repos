@@ -6,4 +6,9 @@ public class Iron extends Ore{
 		super(name, quality, miningDifficulty, miningTime);
 	}
 
+	@Override
+	public String getType() {
+		return "Eisen";
+	}
+
 }

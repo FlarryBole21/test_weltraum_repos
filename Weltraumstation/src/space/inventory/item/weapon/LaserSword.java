@@ -6,4 +6,9 @@ public class LaserSword extends EnergyMeleeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Laser-Schwert";
+	}
+
 }

@@ -6,4 +6,9 @@ public class MeteorMauler extends KineticWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Meteor-Mauler";
+	}
+
 }

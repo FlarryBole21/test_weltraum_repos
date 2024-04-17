@@ -6,4 +6,9 @@ public class PhotonPhaser extends EnergyRangeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Photonen-Phaser";
+	}
+
 }

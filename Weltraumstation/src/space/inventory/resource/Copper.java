@@ -6,4 +6,9 @@ public class Copper extends Ore{
 		super(name, quality, miningDifficulty, miningTime);
 	}
 
+	@Override
+	public String getType() {
+		return "Kupfer";
+	}
+
 }

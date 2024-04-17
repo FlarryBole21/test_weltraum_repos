@@ -5,8 +5,9 @@ import java.util.LinkedList;
 import space.Upgradable;
 import space.inventory.Collectable;
 import space.lifeform.Human;
+import space.lifeform.Killable;
 
-public class Player extends Human implements Upgradable{
+public class Player extends Human implements Upgradable, Killable{
 	
 	private LinkedList<Collectable> inventory;
 	private int miningLevel;
@@ -26,6 +27,17 @@ public class Player extends Human implements Upgradable{
 	@Override
 	public void upgrade() {
 		
+	}
+
+	@Override
+	public void kill() {
+		
+	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Spieler";
 	}
 
 }

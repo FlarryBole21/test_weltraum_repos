@@ -1,5 +1,7 @@
 package space.inventory;
 
-public abstract class InventoryObject implements Droppable, Useable, Collectable{
+import space.Typeable;
+
+public abstract class InventoryObject implements Droppable, Useable, Collectable, Typeable{
 
 }

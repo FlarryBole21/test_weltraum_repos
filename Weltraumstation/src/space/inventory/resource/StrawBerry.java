@@ -11,4 +11,9 @@ public class StrawBerry extends Berry{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Erdbeere";
+	}
+
 }

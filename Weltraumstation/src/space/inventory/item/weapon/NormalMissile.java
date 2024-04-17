@@ -6,4 +6,9 @@ public class NormalMissile extends Missile{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Normale Rakete";
+	}
+
 }

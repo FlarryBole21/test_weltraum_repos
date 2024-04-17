@@ -6,4 +6,9 @@ public class NovaSeekerMissile extends Missile{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Nova-Sucher-Rakete";
+	}
+
 }

@@ -6,4 +6,9 @@ public class CloseInWeaponSystem extends PointDefenseSystem {
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Close-In-Waffensystem";
+	}
+
 }

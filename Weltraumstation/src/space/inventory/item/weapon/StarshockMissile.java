@@ -6,4 +6,9 @@ public class StarshockMissile extends Missile{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Sternschock-Rakete";
+	}
+
 }

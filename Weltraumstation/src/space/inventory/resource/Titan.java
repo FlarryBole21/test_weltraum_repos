@@ -6,6 +6,11 @@ public class Titan extends Ore{
 		super(name, quality, miningDifficulty, miningTime);
 	}
 
+	@Override
+	public String getType() {
+		return "Titan";
+	}
+
 	
 
 }

@@ -6,4 +6,9 @@ public class Railgun extends EnergyRangeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Schienenkanone";
+	}
+
 }

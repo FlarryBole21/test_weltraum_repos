@@ -16,6 +16,11 @@ public class Crystal extends MiningResource {
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Kristall";
+	}
+
 	
 
 }

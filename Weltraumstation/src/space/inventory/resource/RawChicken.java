@@ -6,4 +6,9 @@ public class RawChicken extends RawFood{
 		super(name, quality);
 	}
 
+	@Override
+	public String getType() {
+		return "Rohes Hähnchen";
+	}
+
 }

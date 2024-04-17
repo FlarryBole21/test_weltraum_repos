@@ -6,4 +6,9 @@ public class PlasmaPulseBlaster extends EnergyRangeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Plasmapuls-Blaster";
+	}
+
 }

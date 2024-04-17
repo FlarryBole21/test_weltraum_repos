@@ -6,4 +6,10 @@ public class GuardianGatling extends PointDefenseSystem{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+
+		return "Wächter-Gatling";
+	}
+
 }

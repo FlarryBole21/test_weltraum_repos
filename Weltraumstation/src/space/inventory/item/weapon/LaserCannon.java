@@ -6,4 +6,9 @@ public class LaserCannon extends EnergyRangeWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Laser-Kanone";
+	}
+
 }

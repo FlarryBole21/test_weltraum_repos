@@ -16,4 +16,9 @@ public class AstroplateArmor extends Suit{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Astroplatten-Rüstung";
+	}
+
 }

@@ -6,4 +6,9 @@ public class TitanTurret extends KineticWeapon{
 		super(strength);
 	}
 
+	@Override
+	public String getType() {
+		return "Titan-Turret";
+	}
+
 }
