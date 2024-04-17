@@ -10,6 +10,7 @@ import space.celestial.star.Sun;
 import space.celestial.star.SuperGiant;
 import space.celestial.star.WhiteDwarf;
 import space.environment.atmosphere.Atmosphere;
+import space.environment.terrain.Terrain;
 
 public class SolarSystem {
 	
@@ -60,9 +61,9 @@ public class SolarSystem {
 	
 	
 	public Planet addPlanet(String name, double size, double mass, double radius,
-			double gravity, Atmosphere atmosphere) {
+			double gravity, Atmosphere atmosphere, Terrain terrain) {
 		
-		Planet planet = new Planet(name, size, mass, radius, gravity, atmosphere);
+		Planet planet = new Planet(name, size, mass, radius, gravity, atmosphere, terrain);
 		planets.add(planet);
 		return planet;
 		

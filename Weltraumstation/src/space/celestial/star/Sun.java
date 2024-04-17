@@ -34,12 +34,12 @@ public abstract class Sun extends CelestialObject{
     
     public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
-		information.add("Name: " + name);
-		information.add("Typ: " + getType());
-		information.add("Masse: " + mass);
-		information.add("Radius: " + radius);
-		information.add("Temperatur: " + temperature + " Celsius");
-		information.add("Helligkeit: " + luminosity);
+		information.add("Name <" + name + ">");
+		information.add("Typ <" + getType()+">");
+		information.add("Masse <" + mass+">");
+		information.add("Radius <" + radius+">");
+		information.add("Temperatur <" + temperature + ">");
+		information.add("Helligkeit <" + luminosity+">");
 
 		
 		return information;

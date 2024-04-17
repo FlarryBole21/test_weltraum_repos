@@ -7,7 +7,18 @@ import space.environment.atmosphere.Atmosphere;
 import space.environment.atmosphere.NormalAtmosphere;
 import space.environment.atmosphere.PollutedAtmosphere;
 import space.environment.atmosphere.ToxicAtmosphere;
+import space.environment.terrain.Canyon;
+import space.environment.terrain.Crater;
+import space.environment.terrain.Desert;
+import space.environment.terrain.Grassland;
+import space.environment.terrain.Jungle;
+import space.environment.terrain.Mountains;
+import space.environment.terrain.NormalForest;
+import space.environment.terrain.Savannah;
+import space.environment.terrain.Swamp;
 import space.environment.terrain.Terrain;
+import space.environment.terrain.Tundra;
+import space.environment.terrain.Volcano;
 import space.celestial.star.MainSequenceStar;
 import space.celestial.Planet;
 import space.celestial.star.BlueGiant;
@@ -32,7 +43,9 @@ public class Universe {
 		this.galaxies = new LinkedList<>();
 		this.atmospheres = new LinkedList<>();
 		this.suns = new LinkedList<>();
+		this.terrains = new LinkedList<>();
 		addAtmospheres();
+		addTerrains();
 		addSuns();
 		
 	}
@@ -98,6 +111,27 @@ public class Universe {
 
 	public LinkedList<Atmosphere> getAtmospheres() {
 		return atmospheres;
+	}
+	
+	public LinkedList<Terrain> getTerrains() {
+		return terrains;
+	}
+	
+	
+	private void addTerrains() {
+		terrains.add(new Canyon());
+		terrains.add(new Crater());
+		terrains.add(new Desert());
+		terrains.add(new Grassland());
+		terrains.add(new Jungle());
+		terrains.add(new Mountains());
+		terrains.add(new NormalForest());
+		terrains.add(new Savannah());
+		terrains.add(new Swamp());
+		terrains.add(new Tundra());
+		terrains.add(new Volcano());
+		
+		
 	}
 	
 	private void addSuns() {

@@ -45,12 +45,12 @@ public class Moon extends CelestialObject{
 	
 	public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
-		information.add("Name: " + name);
-		information.add("Größe: " + size);
-		information.add("Masse: " + mass);
-		information.add("Radius: " + radius);
-		information.add("Gravitation: " + gravity);
-		information.add("Atmosphäre: " + atmosphere.getType());
+		information.add("Name <" + name+">");
+		information.add("Größe <" + size+">");
+		information.add("Masse <" + mass+">");
+		information.add("Radius <" + radius+">");
+		information.add("Gravitation <" + gravity+">");
+		information.add("Atmosphäre <" + atmosphere.getType()+">");
 		
 		return information;
 		

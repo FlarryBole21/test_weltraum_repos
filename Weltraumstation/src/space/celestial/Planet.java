@@ -19,7 +19,7 @@ public class Planet extends CelestialObject{
 	private double radius; 
 	private double gravity;
 	private LinkedList<Resource> resources;
-	private LinkedList<Terrain> terrains;
+	private Terrain terrain;
 	private LinkedList<Moon> moons;
 	private LinkedList<SpaceStation> spaceStations;
 	private LinkedList<LifeformObject> lifeforms;
@@ -27,7 +27,7 @@ public class Planet extends CelestialObject{
 	
 	
 	public Planet(String name, double size, double mass, double radius,
-			double gravity, Atmosphere atmosphere) {
+			double gravity, Atmosphere atmosphere, Terrain terrain) {
 		super.setType("Planet");
 		this.name = name;
 		this.size = size;
@@ -35,28 +35,20 @@ public class Planet extends CelestialObject{
 		this.radius = radius;
 		this.gravity = gravity;
 		this.atmosphere = atmosphere;
+		this.terrain = terrain;
 		this.resources = new LinkedList<>();
 		this.moons = new LinkedList<>();
 		this.spaceStations = new LinkedList<>();
-		this.terrains = new LinkedList<>();
-		this.lifeforms = new LinkedList<>();
-		
-	}
-	
-	public Planet(String name, double size, double mass) {
-		this.name = name;
-		this.size = size;
-		this.mass = mass;
-		this.gravity = 9.8;
-		this.atmosphere = new NormalAtmosphere();
-		this.resources = new LinkedList<>();
-		this.terrains = new LinkedList<>();
 		this.lifeforms = new LinkedList<>();
 		
 	}
 	
 	public Atmosphere getAtmosphere() {
 		return atmosphere;
+	}
+	
+	public Terrain getTerrain() {
+		return terrain;
 	}
 
 	public String getName() {
@@ -65,6 +57,14 @@ public class Planet extends CelestialObject{
 	
 	public LinkedList<Moon> getMoons() {
 		return moons;
+	}
+	
+	public LinkedList<String> getMoonsNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getMoons().size(); i++) {
+			names.add(getMoons().get(i).getName());
+		}
+		return names;
 	}
 	
 	
@@ -80,12 +80,11 @@ public class Planet extends CelestialObject{
 		this.resources.add(resource);
 		
 	}
-	
-	public void addTerrain(Terrain terrain) {
-		this.terrains.add(terrain);
+
+	public void addSpaceStation(SpaceStation spaceStation) {
+		this.spaceStations.add(spaceStation);
 		
 	}
-	
 	
 	public void addLifeform(LifeformObject lifeform) {
 		this.lifeforms.add(lifeform);
@@ -102,22 +101,22 @@ public class Planet extends CelestialObject{
 	
 	public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
-		information.add("Name: " + name);
-		information.add("Größe: " + size);
-		information.add("Masse: " + mass);
-		information.add("Radius: " + radius);
-		information.add("Gravitation: " + gravity);
-		information.add("Atmosphäre: " + atmosphere.getType());
+		information.add("Name <" + name+">");
+		information.add("Größe <" + size+">");
+		information.add("Masse <" + mass+">");
+		information.add("Radius <" + radius+">");
+		information.add("Gravitation <" + gravity+">");
+		information.add("Atmosphäre <" + atmosphere.getType()+">");
+		information.add("Terrain <" + terrain.getType()+">");
+		if(getMoonsNames().size() != 0) {
+			information.add("Monde <" + getMoonsNames() +">");
+		}else {
+			information.add("Monde <Keine Monde vorhanden!>");
+		}
 		
 		return information;
 		
 	}
 
-	@Override
-	public String getType() {
-		return "Planet";
-	}
-
-
-
+	
 }

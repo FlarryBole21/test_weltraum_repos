@@ -96,23 +96,25 @@ public class Game {
 		}
 
 		System.out.println("Folgende Sonnensysteme hast du erstellt: " + galaxy.getSolarSystemsNames());
-		System.out.print("Planten, Sonnen-Daten & Mond-Daten einsehen? (1 -> Nur Namen, "
-				+ "2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos): ");
+		System.out.println("<SPOILER> Planten-, Sonnen- & Mond-Daten einsehen?");
+		System.out.println("Achtung! Nur einmaliger Blick, Danach müssen Planeten & Monde kolonisiert werden, "
+				+ "um Informationen zu erhalten");
+		System.out.print("(1 -> Nur Namen, 2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos, keine Spoiler :D ): ");
 		input = scanner.nextLine();
 		System.out.println();
 		if (input.equals("1")) {
 			for (int i = 0; i < galaxy.getSolarSystems().size(); i++) {
-				System.out.println("-- Sonnensystem: " + galaxy.getSolarSystemsNames().get(i) + " --");
-				System.out.println("Planeten-Namen: " + galaxy.getSolarSystems().get(i).getPlanetNames());
-				System.out.println("Sonnen-Namen: " + galaxy.getSolarSystems().get(i).getSunNames());
-				System.out.println("Hauptsequenzstern: " + galaxy.getSolarSystems().get(i).getMainstar().getName());
+				System.out.println("-- Sonnensystem <" + galaxy.getSolarSystemsNames().get(i) + "> --");
+				System.out.println("Planeten-Namen <" + galaxy.getSolarSystems().get(i).getPlanetNames()+">");
+				System.out.println("Sonnen-Namen <" + galaxy.getSolarSystems().get(i).getSunNames()+">");
+				System.out.println("Hauptsequenzstern <" + galaxy.getSolarSystems().get(i).getMainstar().getName()+">");
 				for (int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size(); j++) {
 					String planetName = galaxy.getSolarSystems().get(i).getPlanets().get(j).getName();
 					if(galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoons().size() != 0) {
-						System.out.println("Mond-Namen von " + planetName + ": "
-								+ galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoonNames());
+						System.out.println("Mond-Namen <Planet " + planetName + "> <"
+								+ galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoonNames()+">");
 					}else {
-						System.out.println("Mond-Namen von " + planetName + ": Keine Monde vorhanden!");
+						System.out.println("Mond-Namen <Planet" + planetName + "> <Keine Monde vorhanden>");
 					}
 				
 				}
@@ -122,24 +124,50 @@ public class Game {
 
 		} else if (input.equals("2")) {
 			for (int i = 0; i < galaxy.getSolarSystems().size(); i++) {
-				System.out.println("-- Sonnensystem: " + galaxy.getSolarSystemsNames().get(i) + " --");
+				System.out.println("||<----- Sonnensystem <" + galaxy.getSolarSystemsNames().get(i) + "> ----->||");
 				System.out.println();
-				System.out.println("Hauptsequenzstern: " + galaxy.getSolarSystems().get(i).getMainstar().getName());
+				System.out.println("|<-- Sonnen-Daten -->|");
+				System.out.println();
+				System.out.println("Hauptsequenzstern <" + galaxy.getSolarSystems().get(i).getMainstar().getName()+">");
+				System.out.println();
 				for (int k = 0; k < galaxy.getSolarSystems().get(i).getSuns().size(); k++) {
-					System.out.println(
-							"Sonnen-Daten: " + galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation());
+					System.out.println("|<-- Sonnen-Daten <" + galaxy.getSolarSystems().
+							get(i).getSuns().get(k).getName() + "> -->|");
+					System.out.println();
+					for(int b=0; b < galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation().size(); b++) {
+						System.out.println(galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation().get(b));
+						
+					}
+					
+					if(k != galaxy.getSolarSystems().get(i).getSuns().size()-1) {
+						System.out.println();
+					}
+	
 				}
 
+				System.out.println();
+				System.out.println("|<-- Planeten-Daten -->|");
 				System.out.println();
 
 				for (int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size(); j++) {
-					System.out.println(
-							"Planeten-Daten: " + galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation());
+					System.out.println("|<-- Planeten-Daten <" + galaxy.getSolarSystems().
+							get(i).getPlanets().get(j).getName() + "> -->|");
+					System.out.println();
+					for(int b=0; b < galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation().size(); b++) {
+						System.out.println(galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation().get(b));
+						
+					}
+					if(j != galaxy.getSolarSystems().get(i).getSuns().size()-1) {
+						System.out.println();
+					}
+//					System.out.println(
+//							"Planeten-Daten: " + galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation());
 
 				}
 
 				System.out.println();
-				
+				System.out.println("|<-- Mond-Daten -->|");
+				System.out.println();
 				
 				for (int m = 0; m < galaxy.getSolarSystems().get(i).getPlanets().size(); m++) {
 					String planetName = galaxy.getSolarSystems().get(i).getPlanets().get(m).getName();
@@ -147,14 +175,36 @@ public class Game {
 //						System.out.println("Mond-Namen von " + planetName + ": "
 //								+ galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoonNames());
 						for(int n=0; n < galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().size();n++) {
-							System.out.println(
-									"Mond-Daten von "+galaxy.getSolarSystems()
-									.get(i).getPlanets().get(m).getName()+": " 
-									+ galaxy.getSolarSystems().get(i)
-									.getPlanets().get(m).getMoons().get(n).getInformation());
+							System.out.println("|<-- Mond-Daten <Planet " + galaxy.getSolarSystems()
+						    .get(i).getPlanets().get(m).getName() + "> " +
+						    "<Moon " + galaxy.getSolarSystems()
+						    .get(i).getPlanets().get(m).getMoons().get(n).getName() + ">-->|");
+							System.out.println();
+//							System.out.println("|<-- Mond-Daten <Moon " + galaxy.getSolarSystems().
+//									get(i).getPlanets().get(m).getMoons().get(n).getName() + "> -->|");
+//							System.out.println();
+							for(int b=0; b < galaxy.getSolarSystems().get(i)
+									.getPlanets().get(m).getMoons().get(n).getInformation().size(); b++) {
+								System.out.println(galaxy.getSolarSystems()
+										.get(i).getPlanets().get(m).getMoons().get(n).getInformation().get(b));
+								
+							}
+//							System.out.println(
+//									"Mond-Daten zu Planet "+galaxy.getSolarSystems()
+//									.get(i).getPlanets().get(m).getName()+": " 
+//									+ galaxy.getSolarSystems().get(i)
+//									.getPlanets().get(m).getMoons().get(n).getInformation());
+							
+							if(n != galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().size()-1) {
+								System.out.println();
+							}
+						}
+						
+						if(m != galaxy.getSolarSystems().get(i).getPlanets().size()-1) {
+							System.out.println();
 						}
 					}else {
-						System.out.println("Mond-Namen von " + planetName + ": Keine Monde vorhanden!");
+						System.out.println("Mond-Daten <Planet " + planetName + "> <Keine Monde vorhanden>");
 					}
 				
 				}
@@ -197,7 +247,8 @@ public class Game {
 			universe.getPlanetdata().remove(randomIndex);
 			solarsystem.addPlanet(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
 					Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
-					universe.getAtmospheres().get((Integer.valueOf(randomData[5]))));
+					universe.getAtmospheres().get((Integer.valueOf(randomData[5]))),
+					universe.getTerrains().get((Integer.valueOf(randomData[6]))));
 
 		}
 		// System.out.println("Anzahl der erstellten Planten: " + randomPlanetNumber);
@@ -315,6 +366,8 @@ public class Game {
 
 		}
 	}
+	
+	
 
 	public void mainLoop() {
 
@@ -343,16 +396,35 @@ public class Game {
 		File path;
 		path = new File("./" + Game.PLANETCREATEPATH + ".txt");
 		if (!path.exists()) {
-			String text = "Terra 1.0 1.0 1.0 1.0 1\n" + "Draconis 0.8 0.6 0.9 0.7 0\n" + "Gaia 1.2 1.2 1.1 1.1 2\n"
-					+ "Aetheria 0.9 0.5 0.8 0.6 1\n" + "Novaria 1.1 1.3 1.2 1.2 1\n" + "Vulcan 0.7 0.4 0.6 0.5 0\n"
-					+ "Eden 1.3 1.5 1.3 1.3 2\n" + "Oasis 1.0 0.9 1.0 0.9 1\n" + "Inferno 0.6 0.3 0.5 0.4 0\n"
-					+ "Aurora 1.2 1.1 1.1 1.1 0\n" + "Celestia 0.8 0.7 0.9 0.7 1\n" + "Serenity 1.0 0.8 0.9 0.8 0\n"
-					+ "Titan 0.9 0.6 0.8 0.6 1\n" + "Zephyr 1.1 1.0 1.1 1.0 2\n" + "Infernum 0.7 0.5 0.6 0.5 2\n"
-					+ "Seraphim 1.3 1.2 1.2 1.1 2\n" + "Phoenix 0.8 0.6 0.8 0.6 0\n" + "Elysium 1.2 1.1 1.1 1.1 0\n"
-					+ "Nemesis 0.9 0.7 0.9 0.7 0\n" + "Halcyon 1.1 0.9 1.0 0.9 1\n" + "Helios 0.7 0.4 0.6 0.4 1\n"
-					+ "Arcadia 1.2 1.0 1.1 1.0 1\n" + "Abyss 0.8 0.5 0.7 0.5 1\n" + "Zenith 1.1 0.9 1.0 0.9 2\n"
-					+ "Aeolus 1.2 1.1 1.1 1.0 2\n" + "Hades 0.8 0.6 0.7 0.6 0\n" + "Utopia 1.1 1.0 1.1 1.0 2\n"
-					+ "Olympus 0.7 0.4 0.6 0.4 1\n";
+			
+			String text = "Terra 1.0 1.0 1.0 1.0 1 7\n" +
+		            "Draconis 0.8 0.6 0.9 0.7 0 3\n" +
+		            "Gaia 1.2 1.2 1.1 1.1 2 9\n" +
+		            "Aetheria 0.9 0.5 0.8 0.6 1 5\n" +
+		            "Novaria 1.1 1.3 1.2 1.2 1 8\n" +
+		            "Vulcan 0.7 0.4 0.6 0.5 0 2\n" +
+		            "Eden 1.3 1.5 1.3 1.3 2 6\n" +
+		            "Oasis 1.0 0.9 1.0 0.9 1 4\n" +
+		            "Inferno 0.6 0.3 0.5 0.4 0 7\n" +
+		            "Aurora 1.2 1.1 1.1 1.1 0 9\n" +
+		            "Celestia 0.8 0.7 0.9 0.7 1 1\n" +
+		            "Serenity 1.0 0.8 0.9 0.8 0 6\n" +
+		            "Titan 0.9 0.6 0.8 0.6 1 3\n" +
+		            "Zephyr 1.1 1.0 1.1 1.0 2 8\n" +
+		            "Infernum 0.7 0.5 0.6 0.5 2 4\n" +
+		            "Seraphim 1.3 1.2 1.2 1.1 2 5\n" +
+		            "Phoenix 0.8 0.6 0.8 0.6 0 7\n" +
+		            "Elysium 1.2 1.1 1.1 1.1 0 2\n" +
+		            "Nemesis 0.9 0.7 0.9 0.7 0 8\n" +
+		            "Halcyon 1.1 0.9 1.0 0.9 1 1\n" +
+		            "Helios 0.7 0.4 0.6 0.4 1 3\n" +
+		            "Arcadia 1.2 1.0 1.1 1.0 1 9\n" +
+		            "Abyss 0.8 0.5 0.7 0.5 1 6\n" +
+		            "Zenith 1.1 0.9 1.0 0.9 2 4\n" +
+		            "Aeolus 1.2 1.1 1.1 1.0 2 8\n" +
+		            "Hades 0.8 0.6 0.7 0.6 0 5\n" +
+		            "Utopia 1.1 1.0 1.1 1.0 2 7\n" +
+		            "Olympus 0.7 0.4 0.6 0.4 1 3\n";
 
 			createFileAndWrite(path, text);
 			// throw new FileNotFoundException("Datei: " + "./" + Game.PLANETCREATEPATH + "
