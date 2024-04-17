@@ -17,6 +17,7 @@ public class Player extends Human implements Upgradable, Killable{
 	
 	public Player(String name, int strength, int defense) {
 		super(name, strength, defense);
+		super.setType("Spieler");
 		this.inventory = new LinkedList<>();
 		this.miningLevel = 1;
 		this.cookingLevel = 1;
@@ -34,10 +35,6 @@ public class Player extends Human implements Upgradable, Killable{
 		
 	}
 
-	@Override
-	public String getType() {
-		// TODO Auto-generated method stub
-		return "Spieler";
-	}
+	
 
 }

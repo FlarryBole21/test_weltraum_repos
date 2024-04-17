@@ -2,14 +2,14 @@ package space.environment.atmosphere;
 
 public class PollutedAtmosphere extends Atmosphere {
 
+	public PollutedAtmosphere() {
+		super.setType("Verschmutzt");
+	}
+	
 	@Override
 	public void inhale() {
 		
 	}
 
-	@Override
-	public String getType() {
-		return "Verschmutzt";
-	}
 
 }

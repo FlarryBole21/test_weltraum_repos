@@ -8,6 +8,7 @@ import space.environment.atmosphere.NormalAtmosphere;
 import space.environment.atmosphere.PollutedAtmosphere;
 import space.environment.atmosphere.ToxicAtmosphere;
 import space.celestial.star.MainSequenceStar;
+import space.celestial.Planet;
 import space.celestial.star.BlueGiant;
 import space.celestial.star.RedDwarf;
 import space.celestial.star.RedGiant;
@@ -22,6 +23,7 @@ public class Universe {
 	private LinkedList<Sun> suns;
 	private LinkedList<String> planetdata;
 	private LinkedList<String> sundata;
+	private LinkedList<String> moondata;
 	
 	public Universe(String name) {
 		this.name = name;
@@ -33,12 +35,20 @@ public class Universe {
 		
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	public LinkedList<String> getPlanetdata() {
 		return planetdata;
 	}
 
 	public LinkedList<String> getSundata() {
 		return sundata;
+	}
+	
+	public LinkedList<String> getMoondata() {
+		return moondata;
 	}
 
 	public void setPlanetdata(LinkedList<String> planetdata) {
@@ -57,6 +67,16 @@ public class Universe {
 	        cleanedList.add(cleanedString);
 	    }
 	    this.sundata = cleanedList;
+	}
+	
+	
+	public void setMoondata(LinkedList<String> moondata) {
+	    LinkedList<String> cleanedList = new LinkedList<>();
+	    for (String str : moondata) {
+	    	String cleanedString = str.replaceAll("\\s+", " "); 
+	        cleanedList.add(cleanedString);
+	    }
+	    this.moondata = cleanedList;
 	}
 
 	

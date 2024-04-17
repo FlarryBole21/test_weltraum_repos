@@ -20,7 +20,15 @@ public class Moon extends CelestialObject{
 	
 	public Moon(String name, double size, double mass, double radius,
 			double gravity, Atmosphere atmosphere) {
-		
+		super.setType("Mond");
+		this.name=name;
+		this.size=size;
+		this.mass=size;
+		this.gravity=gravity;
+		this.atmosphere=atmosphere;
+		this.resources= new LinkedList<>();
+		this.terrains= new LinkedList<>();
+		this.lifeforms= new LinkedList<>();
 	}
 
 	@Override

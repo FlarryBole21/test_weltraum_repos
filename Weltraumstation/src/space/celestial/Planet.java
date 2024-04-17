@@ -27,6 +27,7 @@ public class Planet extends CelestialObject{
 	
 	public Planet(String name, double size, double mass, double radius,
 			double gravity, Atmosphere atmosphere) {
+		super.setType("Planet");
 		this.name = name;
 		this.size = size;
 		this.mass = mass;

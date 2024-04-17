@@ -4,8 +4,5 @@ import space.environment.EnvironmentObject;
 
 public abstract class Atmosphere extends EnvironmentObject implements Inhalable{
 	
-	public abstract String getType();
 	
-	
-
 }

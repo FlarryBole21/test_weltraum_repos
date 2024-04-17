@@ -1,6 +1,10 @@
 package space.environment.terrain;
 
 public class Grassland extends Plains {
+	
+	public Grassland() {
+		super.setType("Grassland");
+	}
 
 	@Override
 	public void enter() {
@@ -8,10 +12,5 @@ public class Grassland extends Plains {
 		
 	}
 
-	@Override
-	public String getType() {
-
-		return "Grasland";
-	}
 
 }

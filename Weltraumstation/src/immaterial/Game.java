@@ -10,14 +10,16 @@ import java.util.Scanner;
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
+import space.celestial.star.MainSequenceStar;
+import space.celestial.star.Sun;
 
 
 
 public class Game {
 	
-	private final static String PLANETCREATEPATH = "data/planetCreate.txt";
-	private final static String SUNCREATEPATH = "data/sunCreate.txt";
-	private final static String MOONCREATEPATH = "data/moonCreate.txt";
+	private final static String PLANETCREATEPATH = "data/planetCreate";
+	private final static String SUNCREATEPATH = "data/sunCreate";
+	private final static String MOONCREATEPATH = "data/moonCreate";
 	
 	
 	private Universe universe;
@@ -69,8 +71,9 @@ public class Game {
 		System.out.print("Bitte gebe dem Universum einen Namen: ");
 		input = scanner.nextLine();
 		universe = new Universe(input);
-		universe.setPlanetdata(readFile(Game.PLANETCREATEPATH));
-		universe.setSundata(readFile(Game.SUNCREATEPATH));
+		universe.setPlanetdata(readFile(Game.PLANETCREATEPATH+".txt"));
+		universe.setSundata(readFile(Game.SUNCREATEPATH+".txt"));
+		universe.setMoondata(readFile(Game.MOONCREATEPATH+".txt"));
 		//System.out.println(universe.getPlanetdata());
 		System.out.println("Als Zweites brauchen wir eine Galaxie!");
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
@@ -153,13 +156,14 @@ public class Game {
 			while(true) {
 				randomIndex = (int) (Math.random() * universe.getPlanetdata().size());
 				randomData = universe.getPlanetdata().get(randomIndex).split(" ");
+				
 				if(randomData.length > 1) {
 					break;
 				}else {
 					errorCount++;
 				}
 				
-				if(errorCount == 7) {
+				if(errorCount >= 50) {
 					throw new RuntimeException("Planeten konnten nicht ordungsgemäß erstellt werden!");
 				}
 			}
@@ -172,22 +176,43 @@ public class Game {
 		}
 		//System.out.println("Anzahl der erstellten Planten: " + randomPlanetNumber);
 		
-		
+		boolean mainStar = false;
 		
 		for(int i = 0; i < randomSunNumber; i++) {
 			String [] randomData;
 			int randomIndex;
 			int errorCount = 0;
+			
+			String starType;
 			while(true) {
-				randomIndex = (int) (Math.random() * universe.getSundata().size());
-				randomData = universe.getSundata().get(randomIndex).split(" ");
-				if(randomData.length > 1) {
-					break;
+				if(!mainStar) {
+					randomIndex = (int) (Math.random() * universe.getSundata().size());
+					randomData = universe.getSundata().get(randomIndex).split(" ");
+					starType=universe.getSuns().get((Integer.valueOf(randomData[5]))).getType();
+					
+					if(starType.equals("Hauptsequenzstern")) {
+						mainStar = true;
+					}
+					
 				}else {
+					do {
+						randomIndex = (int) (Math.random() * universe.getSundata().size());
+						randomData = universe.getSundata().get(randomIndex).split(" ");
+						starType=universe.getSuns().get((Integer.valueOf(randomData[5]))).getType();
+					}while(starType.equals("Hauptsequenzstern"));
+					
+				}
+				
+				if(randomData.length > 1 && (i!= randomSunNumber-1)) {
+					break;
+				}else if((randomData.length > 1) && (i== randomSunNumber-1) && (mainStar)) {
+					break;
+				}
+				else {
 					errorCount++;
 				}
 				
-				if(errorCount == 7) {
+				if(errorCount >= 50) {
 					throw new RuntimeException("Sonnen konnten nicht ordungsgemäß erstellt werden!");
 				}
 			}
@@ -196,6 +221,27 @@ public class Game {
 			solarsystem.addSun(randomData[0], Double.valueOf(randomData[1]), 
 					Double.valueOf(randomData[2]), Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
 					universe.getSuns().get((Integer.valueOf(randomData[5]))));
+			
+			for(int m=0; m<solarsystem.getSuns().size();m++) {
+				//System.out.println("mamorial");
+				if(solarsystem.getSuns().get(m) instanceof MainSequenceStar) {
+					MainSequenceStar mainstar = (MainSequenceStar) solarsystem.getSuns().get(m);
+					if(mainstar.getPlanetNames().size() > 0) {
+						break;
+					}
+					for(int n=0; n<solarsystem.getPlanets().size();n++) {
+						//System.out.println("gemorial");
+						mainstar.addPlanet(solarsystem.getPlanets().get(n));
+					}
+					
+//					System.out.println("MainSequenceStar-Name: " +  mainstar.getName() +
+//					" MainSequenceStar-Typ: " + mainstar.getType()+ " Planeten: "
+//					+ mainstar.getPlanetNames());
+					break;
+					
+				}
+				
+			}
 		
 		}
 		
@@ -229,7 +275,7 @@ public class Game {
 	public static void testFiles() throws IOException {
 		
 		File path;
-		path = new File("./" + Game.PLANETCREATEPATH);
+		path = new File("./" + Game.PLANETCREATEPATH+".txt");
 		if(!path.exists()) {
 			String text = "Terra 1.0 1.0 1.0 1.0 1\n" +
 		              "Draconis 0.8 0.6 0.9 0.7 0\n" +
@@ -264,7 +310,7 @@ public class Game {
 			createFileAndWrite(path, text);
 			//throw new FileNotFoundException("Datei: " + "./" + Game.PLANETCREATEPATH + " wurde nicht gefunden!");
 		}
-		path = new File("./" + Game.SUNCREATEPATH);
+		path = new File("./" + Game.SUNCREATEPATH+".txt");
 		if(!path.exists()) {
 			String text = "Sol 1.0 1.0 5778 1.0 4\n" +
 	                "Sirius 2.0 1.5 9940 23.6 1\n" +
@@ -279,12 +325,26 @@ public class Game {
 	                "Antares 15.0 680.0 3590 64000 0\n" +
 	                "Rigel 23.0 78.9 12100 120000 3\n" +
 	                "Aldebaran 1.1 44.2 3910 400.0 1\n" +
-	                "Spica 10.0 7.0 22400 2140.0 0\n";
-
+	                "Spica 10.0 7.0 22400 2140.0 0\n" +
+	                "Bellatrix 6.0 4.0 22000 800.0 0\n" +
+                    "Polaris 5.5 45.0 5800 430.0 0\n" +
+                    "Fomalhaut 1.8 1.6 8600 17.9 0\n" +
+                    "Achernar 6.2 11.0 15000 850.0 0\n" +
+                    "Alnilam 40.0 20.0 27900 375000 0\n" +
+					"Alkaid 2.0 3.0 14000 45.0 1\n" +
+		            "Denebola 2.8 2.2 11000 16.0 1\n" +
+		            "Mirfak 5.0 5.0 6200 500.0 1\n" +
+		            "Wezen 40.0 25.0 18000 140000 1\n" +
+		            "Alphard 7.5 2.0 24000 400.0 1\n"+
+		            "Alcyone 4.0 4.0 8000 250.0 0\n" +
+                    "Mirach 3.0 5.0 9000 220.0 0\n" +
+                    "Hamal 2.5 2.0 6700 40.0 0\n" +
+                    "Menkar 5.0 7.0 5200 550.0 0\n" +
+                    "Mirzam 15.0 10.0 18700 14000 0\n";
 			createFileAndWrite(path, text);
 			//throw new FileNotFoundException("Datei: " + "./" + Game.SUNCREATEPATH + " wurde nicht gefunden!");
 		}
-		path = new File("./" + Game.MOONCREATEPATH);
+		path = new File("./" + Game.MOONCREATEPATH+".txt");
 		if(!path.exists()) {
 			String text = "Luna 1.0 1.0 1.0 1.0 1\n" +
 		              "Phobos 0.8 0.6 0.9 0.7 0\n" +
