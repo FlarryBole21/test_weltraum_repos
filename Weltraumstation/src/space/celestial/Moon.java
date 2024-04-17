@@ -12,6 +12,7 @@ public class Moon extends CelestialObject{
 	private String name;
 	private double size;
 	private double mass;
+	private double radius;
 	private double gravity;
 	private LinkedList<Resource> resources;
 	private LinkedList<Terrain> terrains;
@@ -23,7 +24,8 @@ public class Moon extends CelestialObject{
 		super.setType("Mond");
 		this.name=name;
 		this.size=size;
-		this.mass=size;
+		this.mass=mass;
+		this.radius=radius;
 		this.gravity=gravity;
 		this.atmosphere=atmosphere;
 		this.resources= new LinkedList<>();
@@ -34,6 +36,24 @@ public class Moon extends CelestialObject{
 	@Override
 	public String getType() {
 		return "Mond";
+	}
+	
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public LinkedList<String> getInformation() {
+		LinkedList<String> information = new LinkedList<>();
+		information.add("Name: " + name);
+		information.add("Größe: " + size);
+		information.add("Masse: " + mass);
+		information.add("Radius: " + radius);
+		information.add("Gravitation: " + gravity);
+		information.add("Atmosphäre: " + atmosphere.getType());
+		
+		return information;
+		
 	}
 
 }

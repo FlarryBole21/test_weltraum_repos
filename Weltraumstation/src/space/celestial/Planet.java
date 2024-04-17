@@ -3,6 +3,7 @@ package space.celestial;
 import java.util.LinkedList;
 
 import space.buildable.SpaceStation;
+import space.celestial.star.Sun;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.atmosphere.NormalAtmosphere;
 import space.environment.terrain.Terrain;
@@ -62,6 +63,18 @@ public class Planet extends CelestialObject{
 		return this.name;
 	}
 	
+	public LinkedList<Moon> getMoons() {
+		return moons;
+	}
+	
+	
+	public Moon addMoon(String name, double size, double mass, double radius,
+			double gravity, Atmosphere atmosphere) {
+		
+		Moon moon = new Moon(name, size, mass, radius, gravity, atmosphere);
+		moons.add(moon);
+		return moon;
+	}
 	
 	public void addResource(Resource resource) {
 		this.resources.add(resource);
@@ -77,6 +90,14 @@ public class Planet extends CelestialObject{
 	public void addLifeform(LifeformObject lifeform) {
 		this.lifeforms.add(lifeform);
 		
+	}
+	
+	public LinkedList<String> getMoonNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getMoons().size(); i++) {
+			names.add(getMoons().get(i).getName());
+		}
+		return names;
 	}
 	
 	public LinkedList<String> getInformation() {

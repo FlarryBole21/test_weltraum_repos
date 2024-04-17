@@ -7,6 +7,7 @@ import space.environment.atmosphere.Atmosphere;
 import space.environment.atmosphere.NormalAtmosphere;
 import space.environment.atmosphere.PollutedAtmosphere;
 import space.environment.atmosphere.ToxicAtmosphere;
+import space.environment.terrain.Terrain;
 import space.celestial.star.MainSequenceStar;
 import space.celestial.Planet;
 import space.celestial.star.BlueGiant;
@@ -20,6 +21,7 @@ public class Universe {
 	private String name;
 	private LinkedList<Galaxy> galaxies;
 	private LinkedList<Atmosphere> atmospheres;
+	private LinkedList<Terrain> terrains;
 	private LinkedList<Sun> suns;
 	private LinkedList<String> planetdata;
 	private LinkedList<String> sundata;
