@@ -91,6 +91,11 @@ public class Planet extends CelestialObject{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Planet";
+	}
+
 
 
 }

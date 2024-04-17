@@ -23,4 +23,9 @@ public class Moon extends CelestialObject{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Mond";
+	}
+
 }

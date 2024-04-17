@@ -1,17 +1,17 @@
 package space.environment.terrain;
 
-public class Canyon extends Terrain{
+public class NormalForest extends Forest {
 
 	@Override
 	public void enter() {
+	
 		
 	}
 
 	@Override
 	public String getType() {
-		return "Canyon";
+		
+		return "Normaler Wald";
 	}
-
-	
 
 }

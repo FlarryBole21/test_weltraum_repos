@@ -7,6 +7,11 @@ public class Volcano extends Terrain{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Vulkangebiet";
+	}
+
 	
 
 }

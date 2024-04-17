@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
+
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
@@ -75,7 +76,7 @@ public class Game {
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
 		input = scanner.nextLine();
 		Galaxy galaxy = universe.addGalaxy(input);
-		System.out.println("Als Nächstes brauchen wir Sonnensysteme! (Planten, Sonnen & Monde werden zufällig erstellt)");
+		System.out.println("Als Nächstes brauchen wir Sonnensysteme! (Planten, Sonnen, Monde etc. werden zufällig erstellt)");
 		while (true) {
 			System.out.println("Wie viele Sonnensysteme möchtest du deiner Galaxie hinzufügen ? (MIN 1 - MAX 3)");
 			input = scanner.nextLine();
@@ -101,22 +102,21 @@ public class Game {
 		
 		System.out.println("Folgende Sonnensysteme hast du erstellt: " + galaxy.getSolarSystemsNames());
 		System.out.print("Planten & Sonnen-Daten einsehen? (1 -> Nur Namen, "
-				+ "2 -> detailreiche Infos, irgendwas anderes -> Keine Infos): ");
+				+ "2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos): ");
 		System.out.println();
 		input = scanner.nextLine();
 		if(input.equals("1")) {
 			for(int i = 0; i < galaxy.getSolarSystems().size(); i++) {
-				System.out.println("Planeten von " +galaxy.getSolarSystemsNames().get(i) + ": " +
-						galaxy.getSolarSystems().get(i).getPlanetNames());
-				System.out.println("Sonnen von " +galaxy.getSolarSystemsNames().get(i) + ": " +
-						galaxy.getSolarSystems().get(i).getSunNames());
+				System.out.println("-- Sonnensystem: " + galaxy.getSolarSystemsNames().get(i) + " --");
+				System.out.println("Planeten-Namen: " + galaxy.getSolarSystems().get(i).getPlanetNames());
+				System.out.println("Sonnen-Namen: " + galaxy.getSolarSystems().get(i).getSunNames());
 				System.out.println();
 				
 			}
 			
 		}else if(input.equals("2")) {
 			for(int i = 0; i < galaxy.getSolarSystems().size(); i++) {
-				System.out.println("Sonnensystem: " + galaxy.getSolarSystemsNames().get(i));
+				System.out.println("-- Sonnensystem: " + galaxy.getSolarSystemsNames().get(i) + " --");
 				for(int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size();j++) {
 					System.out.println("Planeten-Daten: " + 
 				galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation());
@@ -194,7 +194,8 @@ public class Game {
 			//System.out.println(new LinkedList<String>(Arrays.asList(randomData)));
 			universe.getSundata().remove(randomIndex);
 			solarsystem.addSun(randomData[0], Double.valueOf(randomData[1]), 
-					Double.valueOf(randomData[2]), Double.valueOf(randomData[3]), Double.valueOf(randomData[4]));
+					Double.valueOf(randomData[2]), Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
+					universe.getSuns().get((Integer.valueOf(randomData[5]))));
 		
 		}
 		
@@ -265,20 +266,20 @@ public class Game {
 		}
 		path = new File("./" + Game.SUNCREATEPATH);
 		if(!path.exists()) {
-			String text = "Sol 1.0 1.0 5778 1.0\n" +
-                    "Sirius 2.0 1.5 9940 23.6\n" +
-                    "Proxima 0.12 0.15 3042 0.0017\n" +
-                    "Alpha 1.5 2.0 10370 80.4\n" +
-                    "Betelgeuse 20.0 1.0 3130 120000\n" +
-                    "Vega 2.1 2.7 9602 40.1\n" +
-                    "Pollux 1.9 8.8 4736 36.0\n" +
-                    "Arcturus 1.1 25.4 4290 170.0\n" +
-                    "Deneb 19.0 203.0 8520 196000\n" +
-                    "Regulus 3.5 3.8 12100 288.0\n" +
-                    "Antares 15.0 680.0 3590 64000\n" +
-                    "Rigel 23.0 78.9 12100 120000\n" +
-                    "Aldebaran 1.1 44.2 3910 400.0\n" +
-                    "Spica 10.0 7.0 22400 2140.0\n";
+			String text = "Sol 1.0 1.0 5778 1.0 4\n" +
+	                "Sirius 2.0 1.5 9940 23.6 1\n" +
+	                "Proxima 0.12 0.15 3042 0.0017 3\n" +
+	                "Alpha 1.5 2.0 10370 80.4 0\n" +
+	                "Betelgeuse 20.0 1.0 3130 120000 5\n" +
+	                "Vega 2.1 2.7 9602 40.1 2\n" +
+	                "Pollux 1.9 8.8 4736 36.0 4\n" +
+	                "Arcturus 1.1 25.4 4290 170.0 2\n" +
+	                "Deneb 19.0 203.0 8520 196000 1\n" +
+	                "Regulus 3.5 3.8 12100 288.0 5\n" +
+	                "Antares 15.0 680.0 3590 64000 0\n" +
+	                "Rigel 23.0 78.9 12100 120000 3\n" +
+	                "Aldebaran 1.1 44.2 3910 400.0 1\n" +
+	                "Spica 10.0 7.0 22400 2140.0 0\n";
 
 			createFileAndWrite(path, text);
 			//throw new FileNotFoundException("Datei: " + "./" + Game.SUNCREATEPATH + " wurde nicht gefunden!");

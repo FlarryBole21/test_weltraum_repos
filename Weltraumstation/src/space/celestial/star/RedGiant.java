@@ -6,4 +6,13 @@ public class RedGiant extends Sun{
 		super(name, mass, radius, temperature, luminosity);
 	}
 
+	public RedGiant() {
+		super();
+	}
+	
+	@Override
+	public String getType() {
+		return "Roter Riese";
+	}
+
 }

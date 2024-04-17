@@ -7,6 +7,12 @@ public class Swamp extends Terrain{
 		
 	}
 
+	@Override
+	public String getType() {
+		
+		return "Sumpf";
+	}
+
 	
 
 }

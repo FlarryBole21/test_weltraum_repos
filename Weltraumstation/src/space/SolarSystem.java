@@ -2,7 +2,13 @@ package space;
 
 import java.util.LinkedList;
 import space.celestial.Planet;
+import space.celestial.star.BlueGiant;
+import space.celestial.star.MainSequenceStar;
+import space.celestial.star.RedDwarf;
+import space.celestial.star.RedGiant;
 import space.celestial.star.Sun;
+import space.celestial.star.SuperGiant;
+import space.celestial.star.WhiteDwarf;
 import space.environment.atmosphere.Atmosphere;
 
 public class SolarSystem {
@@ -22,8 +28,21 @@ public class SolarSystem {
 	}
 	
 	
-	public Sun addSun(String name, double mass, double radius, double temperature, double luminosity) {
-		Sun sun = new Sun(name, mass, radius, temperature, luminosity);
+	public Sun addSun(String name, double mass, double radius, double temperature, double luminosity, Sun suntype) {
+		Sun sun = null;
+		if(suntype instanceof MainSequenceStar) {
+			sun = new MainSequenceStar(name, mass, radius, temperature, luminosity);
+		}else if(suntype instanceof BlueGiant) {
+			sun = new BlueGiant(name, mass, radius, temperature, luminosity);
+		}else if(suntype instanceof WhiteDwarf) {
+			sun = new WhiteDwarf(name, mass, radius, temperature, luminosity);
+		}else if(suntype instanceof RedDwarf) {
+			sun = new RedDwarf(name, mass, radius, temperature, luminosity);
+		}else if(suntype instanceof RedGiant) {
+			sun = new RedGiant(name, mass, radius, temperature, luminosity);
+		}else if(suntype instanceof SuperGiant) {
+			sun = new SuperGiant(name, mass, radius, temperature, luminosity);
+		}
 		suns.add(sun);
 		return sun;
 		

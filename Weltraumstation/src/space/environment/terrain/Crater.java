@@ -7,6 +7,11 @@ public class Crater extends Terrain{
 	
 	}
 
+	@Override
+	public String getType() {
+		return "Crater";
+	}
+
 	
 
 }

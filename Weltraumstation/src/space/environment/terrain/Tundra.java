@@ -7,6 +7,12 @@ public class Tundra extends Terrain{
 		
 	}
 
+	@Override
+	public String getType() {
+
+		return "Tundra";
+	}
+
 	
 
 }

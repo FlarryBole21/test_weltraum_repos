@@ -7,5 +7,11 @@ public class Mountains extends Terrain{
 		
 	}
 
+	@Override
+	public String getType() {
+
+		return "Berge";
+	}
+
 	
 }

@@ -1,5 +1,7 @@
 package space.environment;
 
-public class EnvironmentObject {
+import space.Typeable;
+
+public abstract class EnvironmentObject implements Typeable{
 
 }

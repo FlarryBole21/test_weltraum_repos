@@ -1,5 +1,7 @@
 package space.celestial;
 
-public class CelestialObject {
+import space.Typeable;
+
+public abstract class CelestialObject implements Typeable{
 
 }

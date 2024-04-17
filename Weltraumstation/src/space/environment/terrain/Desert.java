@@ -7,6 +7,11 @@ public class Desert extends Terrain{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Wüste";
+	}
+
 	
 
 	
