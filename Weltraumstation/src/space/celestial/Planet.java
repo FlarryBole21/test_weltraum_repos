@@ -17,7 +17,6 @@ public class Planet extends CelestialObject{
 	private double mass;
 	private double radius; 
 	private double gravity;
-	private boolean habitable;
 	private LinkedList<Resource> resources;
 	private LinkedList<Terrain> terrains;
 	private LinkedList<Moon> moons;
@@ -27,13 +26,12 @@ public class Planet extends CelestialObject{
 	
 	
 	public Planet(String name, double size, double mass, double radius,
-			double gravity, boolean habitable, Atmosphere atmosphere) {
+			double gravity, Atmosphere atmosphere) {
 		this.name = name;
 		this.size = size;
 		this.mass = mass;
 		this.radius = radius;
 		this.gravity = gravity;
-		this.habitable = habitable;
 		this.atmosphere = atmosphere;
 		this.resources = new LinkedList<>();
 		this.moons = new LinkedList<>();
@@ -48,12 +46,19 @@ public class Planet extends CelestialObject{
 		this.size = size;
 		this.mass = mass;
 		this.gravity = 9.8;
-		this.habitable = true;
 		this.atmosphere = new NormalAtmosphere();
 		this.resources = new LinkedList<>();
 		this.terrains = new LinkedList<>();
 		this.lifeforms = new LinkedList<>();
 		
+	}
+	
+	public Atmosphere getAtmosphere() {
+		return atmosphere;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 	
 	
@@ -70,6 +75,19 @@ public class Planet extends CelestialObject{
 	
 	public void addLifeform(LifeformObject lifeform) {
 		this.lifeforms.add(lifeform);
+		
+	}
+	
+	public LinkedList<String> getInformation() {
+		LinkedList<String> information = new LinkedList<>();
+		information.add("Name: " + name);
+		information.add("Größe: " + size);
+		information.add("Masse: " + mass);
+		information.add("Radius: " + radius);
+		information.add("Gravitation: " + gravity);
+		information.add("Atmosphäre: " + atmosphere.getType());
+		
+		return information;
 		
 	}
 

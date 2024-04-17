@@ -1,5 +1,7 @@
 package space.celestial.star;
 
+import java.util.LinkedList;
+
 import space.celestial.CelestialObject;
 
 public abstract class Star extends CelestialObject {
@@ -17,5 +19,24 @@ public abstract class Star extends CelestialObject {
     	this.temperature=temperature;
     	this.luminosity=luminosity;
     }
+    
+    
+    public String getName() {
+		return this.name;
+	}
+    
+    
+    public LinkedList<String> getInformation() {
+		LinkedList<String> information = new LinkedList<>();
+		information.add("Name: " + name);
+		information.add("Masse: " + mass);
+		information.add("Radius: " + radius);
+		information.add("Temperatur: " + temperature + " Celsius");
+		information.add("Helligkeit: " + luminosity);
+
+		
+		return information;
+		
+	}
 
 }

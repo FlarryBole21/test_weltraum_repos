@@ -7,4 +7,10 @@ public class NormalAtmosphere extends Atmosphere{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Normal";
+	}
+
+
 }

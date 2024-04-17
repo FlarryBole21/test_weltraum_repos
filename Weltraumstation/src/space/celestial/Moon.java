@@ -13,13 +13,13 @@ public class Moon extends CelestialObject{
 	private double size;
 	private double mass;
 	private double gravity;
-	private boolean habitable;
 	private LinkedList<Resource> resources;
 	private LinkedList<Terrain> terrains;
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
 	
-	public Moon(String name) {
+	public Moon(String name, double size, double mass, double radius,
+			double gravity, Atmosphere atmosphere) {
 		
 	}
 

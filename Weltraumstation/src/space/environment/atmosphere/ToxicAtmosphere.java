@@ -7,4 +7,9 @@ public class ToxicAtmosphere extends Atmosphere {
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Giftig";
+	}
+
 }

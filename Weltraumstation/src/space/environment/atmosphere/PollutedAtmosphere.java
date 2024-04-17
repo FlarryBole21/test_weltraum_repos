@@ -7,4 +7,9 @@ public class PollutedAtmosphere extends Atmosphere {
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Verschmutzt";
+	}
+
 }
