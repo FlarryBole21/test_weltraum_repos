@@ -2,8 +2,8 @@ package space.inventory.resource;
 
 public class Apple extends Fruit{
 
-	public Apple(int requiredLevel) {
-		super(requiredLevel);
+	public Apple(int requiredLevel, int amount) {
+		super(requiredLevel, amount);
 		super.setType("Apfel");
 	}
 

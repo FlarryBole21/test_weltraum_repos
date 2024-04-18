@@ -1,6 +1,6 @@
 package space.environment.terrain;
 
-public abstract class Plains extends Terrain {
+public abstract class Plains extends PlanetTerrain {
 
 
 

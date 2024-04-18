@@ -4,8 +4,8 @@ public abstract class Fruit extends RawFood implements Harvestable{
 
 	private int requiredLevel;
 	
-	public Fruit(int requiredLevel) {
-		super();
+	public Fruit(int requiredLevel, int amount) {
+		super(amount);
 	}
 	
 	public int getRequiredLevel() {

@@ -1,6 +1,6 @@
 package space.environment.terrain;
 
-public class Canyon extends Terrain{
+public class Canyon extends PlanetTerrain{
 	
 	public Canyon() {
 		super.setType("Canyon");

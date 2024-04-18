@@ -2,8 +2,8 @@ package space.inventory.resource;
 
 public class RawChicken extends RawFood{
 
-	public RawChicken() {
-		super();
+	public RawChicken(int amount) {
+		super(amount);
 		super.setType("Rohes Hähnchen");
 	}
 	

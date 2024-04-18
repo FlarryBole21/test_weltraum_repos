@@ -2,8 +2,8 @@ package space.inventory.resource;
 
 public class Dattel extends Fruit{
 
-	public Dattel(int requiredLevel) {
-		super(requiredLevel);
+	public Dattel(int requiredLevel, int amount) {
+		super(requiredLevel, amount);
 		super.setType("Dattel");
 	}
 

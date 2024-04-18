@@ -1,6 +1,6 @@
 package space.environment.terrain;
 
-public class Swamp extends Terrain{
+public class Swamp extends PlanetTerrain{
 	
 	public Swamp() {
 		super.setType("Sumpf");

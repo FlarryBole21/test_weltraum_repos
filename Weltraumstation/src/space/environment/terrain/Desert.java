@@ -1,6 +1,6 @@
 package space.environment.terrain;
 
-public class Desert extends Terrain{
+public class Desert extends PlanetTerrain{
 	
 	public Desert() {
 		super.setType("Wüste");

@@ -1,6 +1,6 @@
 package space.environment.terrain;
 
-public class Crater extends Terrain{
+public class Crater extends PlanetTerrain{
 	
 	
 	public Crater() {

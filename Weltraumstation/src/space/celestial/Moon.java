@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
+import space.environment.terrain.MoonTerrain;
 import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
@@ -16,7 +17,7 @@ public class Moon extends CelestialObject{
 	private double radius;
 	private double gravity;
 	private LinkedList<Resource> resources;
-	private LinkedList<Terrain> terrains;
+	private MoonTerrain moonTerrain;
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
 	private Planet planet;
@@ -30,7 +31,7 @@ public class Moon extends CelestialObject{
 		this.gravity=gravity;
 		this.atmosphere=atmosphere;
 		this.resources= new LinkedList<>();
-		this.terrains= new LinkedList<>();
+		//this.moonterrain = moonTerrain;
 		this.lifeforms= new LinkedList<>();
 	}
 
