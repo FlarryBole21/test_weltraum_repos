@@ -2,10 +2,17 @@ package space.inventory.resource;
 
 public abstract class Fruit extends RawFood implements Harvestable{
 
-	public Fruit(String name, String quality) {
-		super(name, quality);
+	private int requiredLevel;
+	
+	public Fruit(int requiredLevel) {
+		super();
 	}
 	
+	public int getRequiredLevel() {
+		return requiredLevel;
+	}
+
+
 	@Override
 	public void harvest() {
 		

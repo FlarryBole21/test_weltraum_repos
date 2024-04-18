@@ -13,6 +13,7 @@ import space.SolarSystem;
 import space.Universe;
 import space.celestial.Planet;
 import space.celestial.star.MainSequenceStar;
+import space.inventory.resource.Crystal;
 
 public class Game {
 
@@ -110,8 +111,10 @@ public class Game {
 		} while ((randomSunNumber + 2) > randomPlanetNumber || randomPlanetNumber < 3 || randomSunNumber < 1);
 
 		createRandomPlanets(solarsystem, randomPlanetNumber);
+		resourcesToPlanets(solarsystem);
 		createRandomSuns(solarsystem, randomSunNumber);
 		createRandomMoons(solarsystem, randomMoonNumber);
+		
 	}
 
 	public void createRandomPlanets(SolarSystem solarsystem, int randomPlanetNumber) {
@@ -245,6 +248,56 @@ public class Game {
 				}
 			}
 		}
+	}
+	
+	public void resourcesToPlanets(SolarSystem solarsystem) {
+		
+		int randomResourceNumber = 0;
+
+		for(int i=0; i < solarsystem.getPlanets().size(); i++) {
+			
+			switch (solarsystem.getPlanets().get(i).getTerrain().getType()) {
+            case "Canyon":
+            	randomResourceNumber = (int) (Math.random() * (5));
+                if(randomResourceNumber == 0) {
+                	solarsystem.getPlanets().get(i).
+                	addResource(new Crystal(1));
+                }
+                break;
+            case "Krater":
+                System.out.println("You chose option 2");
+                break;
+            case "Wüste":
+                System.out.println("You chose option 3");
+            case "Grassland":
+                System.out.println("You chose option 4");
+                break;
+            case "Dschungel":
+                System.out.println("You chose option 5");
+                break;
+            case "Berge":
+                System.out.println("You chose option 6");
+                break;
+            case "Normaler Wald":
+                System.out.println("You chose option 7");
+                break;
+            case "Savanne":
+                System.out.println("You chose option 8");
+                break;
+            case "Sumpf":
+                System.out.println("You chose option 9");
+                break;
+            case "Tundra":
+                System.out.println("You chose option 10");
+                break;
+            case "Vulkangebiet":
+                System.out.println("You chose option 11");
+                break;
+            default:
+            	throw new RuntimeException("Planeten hat einen ungültigen Terrain-Typ!");
+        }
+		}
+		
 	}
 
 	public void moonsToPlanet(Planet planet) {

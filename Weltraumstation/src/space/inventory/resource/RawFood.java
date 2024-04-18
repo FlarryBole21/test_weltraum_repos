@@ -4,8 +4,8 @@ import space.inventory.item.food.Eatable;
 
 public abstract class RawFood extends Resource implements Eatable{
 
-	public RawFood(String name, String quality) {
-		super(name, quality);
+	public RawFood() {
+		super();
 	}
 	
 
