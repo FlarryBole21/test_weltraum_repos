@@ -71,6 +71,7 @@ public class Universe {
 	    	String cleanedString = str.replaceAll("\\s+", " "); 
 	    	cleanedList.add(cleanedString);
 	    }
+	    //System.out.println(cleanedList.get(0).split(" ").length);
 	    this.planetdata = cleanedList;
 	}
 

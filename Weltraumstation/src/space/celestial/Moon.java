@@ -2,6 +2,7 @@ package space.celestial;
 
 import java.util.LinkedList;
 
+import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
@@ -18,6 +19,7 @@ public class Moon extends CelestialObject{
 	private LinkedList<Terrain> terrains;
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
+	private Planet planet;
 	
 	public Moon(String name, double size, double mass, double gravity, Atmosphere atmosphere) {
 		super.setType("Mond");
@@ -32,9 +34,13 @@ public class Moon extends CelestialObject{
 		this.lifeforms= new LinkedList<>();
 	}
 
-	@Override
-	public String getType() {
-		return "Mond";
+	
+	public Planet getPlanet() {
+		return planet;
+	}
+
+	public void setPlanet(Planet planet) {
+		this.planet = planet;
 	}
 	
 	
@@ -50,6 +56,7 @@ public class Moon extends CelestialObject{
 		information.add("Radius <" + radius+">");
 		information.add("Gravitation <" + gravity+">");
 		information.add("Atmosphäre <" + atmosphere.getType()+">");
+		information.add("Zugehöriger Planet <" + planet.getName()+">");
 		
 		return information;
 		

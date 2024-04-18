@@ -118,6 +118,7 @@ public class Planet extends CelestialObject{
 		}else {
 			information.add("Monde <Keine Monde vorhanden!>");
 		}
+		information.add("Zugehöriger Hauptsequenzstern <" + mainstar.getName()+">");
 		
 		return information;
 		
