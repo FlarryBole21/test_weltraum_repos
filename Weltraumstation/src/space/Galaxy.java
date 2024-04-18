@@ -6,6 +6,7 @@ public class Galaxy {
 	
 	private String name;
 	private LinkedList<SolarSystem> solarSystems;
+	private Universe universe;
 	
 	public Galaxy(String name) {
 		this.name = name;
@@ -17,6 +18,14 @@ public class Galaxy {
 		solarSystems.add(solarSystem);
 		return solarSystem;
 		
+	}
+	
+	public Universe getUniverse() {
+		return this.universe;
+	}
+	
+	public void setUniverse(Universe universe) {
+		this.universe = universe;
 	}
 
 	public String getName() {

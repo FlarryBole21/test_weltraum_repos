@@ -16,7 +16,6 @@ import space.celestial.star.MainSequenceStar;
 
 public class Game {
 
-	
 	private Universe universe;
 
 	public static void main(String[] args) {
@@ -40,14 +39,14 @@ public class Game {
 		}
 
 	}
-
+	
 	public void start() throws RuntimeException {
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
 		Galaxy galaxy = setGalaxy(scanner);
 		setSolar(scanner, galaxy);
-		AskOracle.askSolarSystems(scanner, galaxy);
-		AskOracle.askGalaxyInfo(scanner, galaxy);
+		AskOracle.askUniverseInfo(scanner, galaxy);
+		AskOracle.askSunSystemInfo(scanner, galaxy);
 
 	}
 
@@ -64,6 +63,7 @@ public class Game {
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
 		input = scanner.nextLine();
 		Galaxy galaxy = universe.addGalaxy(input);
+		galaxy.setUniverse(universe);
 		return galaxy;
 	}
 

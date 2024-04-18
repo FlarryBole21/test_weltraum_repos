@@ -17,7 +17,6 @@ public abstract class FileOracle extends Oracle{
 
 	};
 
-
 	private final static String PLANETDATA = "Terra 1.0 1.0 1.0 1 7\n" + "Draconis 0.8 0.6 0.7 0 3\n"
 			+ "Gaia 1.2 1.2 1.1 2 9\n" + "Aetheria 0.9 0.5 0.6 1 5\n" + "Novaria 1.1 1.3 1.2 1 8\n"
 			+ "Vulcan 0.7 0.4 0.5 0 2\n" + "Eden 1.3 1.5 1.3 2 6\n" + "Oasis 1.0 0.9 0.9 1 4\n"

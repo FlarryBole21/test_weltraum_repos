@@ -6,17 +6,30 @@ import space.Galaxy;
 
 public abstract class AskOracle {
 	
-	public static void askSolarSystems(Scanner scanner, Galaxy galaxy) {
-		System.out.println("Folgende Sonnensysteme hast du erstellt: " + galaxy.getSolarSystemsNames());
+	public static void askUniverseInfo(Scanner scanner, Galaxy galaxy) {
+		String input;
+		System.out.println("-------------------------------------");
+		System.out.println("Universum-, Galaxie- & Sonnensystem-Daten einsehen?");
+		System.out.print(
+				"(1 -> Infos einsehen, Irgendwas anderes -> Keine Infos): ");
+		input = scanner.nextLine();
+		System.out.println();
+		if (input.equals("1")) {
+			System.out.println("Universum <"+ galaxy.getUniverse().getName() +">");
+			System.out.println("Galaxie <"+ galaxy.getName() +">");
+			for(int i = 0; i< galaxy.getSolarSystemsNames().size(); i++) {
+				System.out.println("Sonnensystem <"+ galaxy.getSolarSystems().get(i).getName() +">");
+			}
+		}
 	}
 	
 	
-	public static void askGalaxyInfo(Scanner scanner, Galaxy galaxy) {
+	public static void askSunSystemInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		System.out.println("-------------------------------------");
 		System.out.println("Planten-, Sonnen- & Mond-Daten einsehen?");
 		System.out.print(
-				"(1 -> Nur Namen, 2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos): ");
+				"(1 -> Infos einsehen (Nur Namen), 2 -> Infos einsehen (Mehr Details), Irgendwas anderes -> Keine Infos): ");
 		input = scanner.nextLine();
 		System.out.println();
 		if (input.equals("1")) {
@@ -24,12 +37,10 @@ public abstract class AskOracle {
 				System.out.println("-- Sonnensystem <" + galaxy.getSolarSystemsNames().get(i) + "> --");
 				System.out.println("Planeten-Namen <" + galaxy.getSolarSystems().get(i).getPlanetNames() + ">");
 				System.out.println("Sonnen-Namen <" + galaxy.getSolarSystems().get(i).getSunNames() + ">");
-				System.out
-						.println("Hauptsequenzstern <" + galaxy.getSolarSystems().get(i).getMainstar().getName() + ">");
 				for (int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size(); j++) {
 					String planetName = galaxy.getSolarSystems().get(i).getPlanets().get(j).getName();
 					if (galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoons().size() != 0) {
-						System.out.println("Mond-Namen <Planet " + planetName + "> <"
+						System.out.println("Mond-Namen <Planet " + planetName + "> <Monde "
 								+ galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoonNames() + ">");
 					} else {
 						System.out.println("Mond-Namen <Planet " + planetName + "> <Keine Monde vorhanden>");
