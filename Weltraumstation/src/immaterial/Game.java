@@ -25,10 +25,6 @@ public class Game {
 
 	private Universe universe;
 
-	public Game() {
-
-	}
-
 	public static void main(String[] args) {
 		try {
 			testFiles();
@@ -56,8 +52,8 @@ public class Game {
 		Scanner scanner = new Scanner(System.in);
 		Galaxy galaxy = setGalaxy(scanner);
 		setSolar(scanner, galaxy);
-		System.out.println("Folgende Sonnensysteme hast du erstellt: " + galaxy.getSolarSystemsNames());
-		askUniversalInfo(scanner, galaxy);
+		AskOracle.askSolarSystems(scanner, galaxy);
+		AskOracle.askGalaxyInfo(scanner, galaxy);
 
 	}
 
@@ -106,121 +102,6 @@ public class Game {
 			input = scanner.nextLine();
 			SolarSystem solarsystem = galaxy.addSolarSystem(input);
 			createRandomSolarSystem(solarsystem);
-		}
-
-	}
-
-	public void askUniversalInfo(Scanner scanner, Galaxy galaxy) {
-		String input;
-		System.out.println("-------------------------------------");
-		System.out.println("<SPOILER> Planten-, Sonnen- & Mond-Daten einsehen?");
-		System.out.println("Achtung! Nur einmaliger Blick, Danach müssen Planeten & Monde kolonisiert werden, "
-				+ "um Informationen zu erhalten");
-		System.out.print(
-				"(1 -> Nur Namen, 2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos, möchte selber erforschen): ");
-		input = scanner.nextLine();
-		System.out.println();
-		if (input.equals("1")) {
-			for (int i = 0; i < galaxy.getSolarSystems().size(); i++) {
-				System.out.println("-- Sonnensystem <" + galaxy.getSolarSystemsNames().get(i) + "> --");
-				System.out.println("Planeten-Namen <" + galaxy.getSolarSystems().get(i).getPlanetNames() + ">");
-				System.out.println("Sonnen-Namen <" + galaxy.getSolarSystems().get(i).getSunNames() + ">");
-				System.out
-						.println("Hauptsequenzstern <" + galaxy.getSolarSystems().get(i).getMainstar().getName() + ">");
-				for (int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size(); j++) {
-					String planetName = galaxy.getSolarSystems().get(i).getPlanets().get(j).getName();
-					if (galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoons().size() != 0) {
-						System.out.println("Mond-Namen <Planet " + planetName + "> <"
-								+ galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoonNames() + ">");
-					} else {
-						System.out.println("Mond-Namen <Planet " + planetName + "> <Keine Monde vorhanden>");
-					}
-
-				}
-				System.out.println();
-
-			}
-
-		} else if (input.equals("2")) {
-			for (int i = 0; i < galaxy.getSolarSystems().size(); i++) {
-				System.out.println("||<----- Sonnensystem <" + galaxy.getSolarSystemsNames().get(i) + "> ----->||");
-				System.out.println();
-				System.out.println("|<-- Sonnen-Daten -->|");
-				System.out.println();
-				System.out
-						.println("Hauptsequenzstern <" + galaxy.getSolarSystems().get(i).getMainstar().getName() + ">");
-				System.out.println();
-				for (int k = 0; k < galaxy.getSolarSystems().get(i).getSuns().size(); k++) {
-					System.out.println("|<-- Sonnen-Daten <"
-							+ galaxy.getSolarSystems().get(i).getSuns().get(k).getName() + "> -->|");
-					System.out.println();
-					for (int b = 0; b < galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation().size(); b++) {
-						System.out.println(galaxy.getSolarSystems().get(i).getSuns().get(k).getInformation().get(b));
-
-					}
-
-					if (k != galaxy.getSolarSystems().get(i).getSuns().size() - 1) {
-						System.out.println();
-					}
-
-				}
-
-				System.out.println();
-				System.out.println("|<-- Planeten-Daten -->|");
-				System.out.println();
-
-				for (int j = 0; j < galaxy.getSolarSystems().get(i).getPlanets().size(); j++) {
-					System.out.println("|<-- Planeten-Daten <"
-							+ galaxy.getSolarSystems().get(i).getPlanets().get(j).getName() + "> -->|");
-					System.out.println();
-					for (int b = 0; b < galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation()
-							.size(); b++) {
-						System.out.println(galaxy.getSolarSystems().get(i).getPlanets().get(j).getInformation().get(b));
-
-					}
-					if (j != galaxy.getSolarSystems().get(i).getSuns().size() - 1) {
-						System.out.println();
-					}
-				}
-
-				System.out.println();
-				System.out.println("|<-- Mond-Daten -->|");
-				System.out.println();
-
-				for (int m = 0; m < galaxy.getSolarSystems().get(i).getPlanets().size(); m++) {
-					String planetName = galaxy.getSolarSystems().get(i).getPlanets().get(m).getName();
-					if (galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().size() != 0) {
-						for (int n = 0; n < galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons()
-								.size(); n++) {
-							System.out.println("|<-- Mond-Daten <"
-									+ galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().get(n).getName()
-									+ ">-->|");
-							System.out.println();
-
-							for (int b = 0; b < galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().get(n)
-									.getInformation().size(); b++) {
-								System.out.println(galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().get(n)
-										.getInformation().get(b));
-
-							}
-
-							if (n != galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().size() - 1) {
-								System.out.println();
-							}
-						}
-
-						if (m != galaxy.getSolarSystems().get(i).getPlanets().size() - 1) {
-							System.out.println();
-						}
-					} else {
-						System.out.println("Mond-Daten <Planet " + planetName + "> <Keine Monde vorhanden>");
-					}
-
-				}
-				System.out.println();
-
-			}
-
 		}
 
 	}
@@ -405,9 +286,9 @@ public class Game {
 	public static void testFiles() throws IOException {
 
 		String[] textData = new String[FILES.length];
-		textData[0] = FileData.getPlanetdata();
-		textData[1] = FileData.getSundata();
-		textData[2] = FileData.getMoondata();
+		textData[0] = FileOracle.getPlanetdata();
+		textData[1] = FileOracle.getSundata();
+		textData[2] = FileOracle.getMoondata();
 
 		for (int i = 0; i < FILES.length; i++) {
 			if (!FILES[i].exists()) {
