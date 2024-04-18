@@ -8,6 +8,7 @@ import space.buildable.SpaceStation;
 import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.terrain.Grassland;
+import space.environment.terrain.MoonTerrain;
 import space.environment.terrain.PlanetTerrain;
 import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
@@ -30,7 +31,7 @@ public class Planet extends CelestialObject{
 	private MainSequenceStar mainstar;
 	
 	
-	public Planet(String name, double size, double mass, double gravity, Atmosphere atmosphere, Terrain planetTerrain) {
+	public Planet(String name, double size, double mass, double gravity, Atmosphere atmosphere, PlanetTerrain planetTerrain) {
 		super.setType("Planet");
 		this.name = name;
 		this.size = size;
@@ -38,11 +39,7 @@ public class Planet extends CelestialObject{
 		this.radius = size/2;
 		this.gravity = gravity;
 		this.atmosphere = atmosphere;
-		if(planetTerrain instanceof PlanetTerrain) {
-			this.planetTerrain = (PlanetTerrain) planetTerrain;
-		}else {
-			this.planetTerrain = new Grassland();
-		}
+		this.planetTerrain = planetTerrain;
 		this.resources = new HashSet<>(); 
 		this.moons = new LinkedList<>();
 		this.spaceStations = new LinkedList<>();
@@ -62,7 +59,7 @@ public class Planet extends CelestialObject{
 		return atmosphere;
 	}
 	
-	public Terrain getTerrain() {
+	public Terrain getPlanetTerrain() {
 		return planetTerrain;
 	}
 
@@ -83,9 +80,9 @@ public class Planet extends CelestialObject{
 	}
 	
 	
-	public Moon addMoon(String name, double size, double mass, double gravity, Atmosphere atmosphere) {
+	public Moon addMoon(String name, double size, double mass, double gravity, Atmosphere atmosphere, MoonTerrain terrain) {
 		
-		Moon moon = new Moon(name, size, mass, gravity, atmosphere);
+		Moon moon = new Moon(name, size, mass, gravity, atmosphere, terrain);
 		moons.add(moon);
 		return moon;
 	}

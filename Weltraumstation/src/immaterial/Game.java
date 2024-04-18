@@ -12,6 +12,7 @@ import immaterial.oracle.ResourceOracle;
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
+import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.star.MainSequenceStar;
 
@@ -112,13 +113,15 @@ public class Game {
 		} while ((randomSunNumber + 2) > randomPlanetNumber || randomPlanetNumber < 3 || randomSunNumber < 1);
 
 		createRandomPlanets(solarsystem, randomPlanetNumber);
-		resourcesToPlanets(solarsystem);
 		createRandomSuns(solarsystem, randomSunNumber);
 		createRandomMoons(solarsystem, randomMoonNumber);
+		resourcesToPlanets(solarsystem);
+		
+	
 		
 	}
 
-	public void createRandomPlanets(SolarSystem solarsystem, int randomPlanetNumber) {
+	public void createRandomPlanets(SolarSystem solarsystem, int randomPlanetNumber) throws RuntimeException {
 		boolean normalAtmosphere = false;
 		for (int i = 0; i < randomPlanetNumber; i++) {
 			String[] randomData;
@@ -148,13 +151,13 @@ public class Game {
 			universe.getPlanetdata().remove(randomIndex);
 			solarsystem.addPlanet(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
 					Double.valueOf(randomData[1]), universe.getAtmospheres().get((Integer.valueOf(randomData[4]))),
-					universe.getTerrains().get((Integer.valueOf(randomData[5]))));
+					universe.getPlanetTerrains().get((Integer.valueOf(randomData[5]))));
 
 		}
 
 	}
 
-	public void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) {
+	public void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) throws RuntimeException{
 		boolean mainStar = false;
 		for (int i = 0; i < randomSunNumber; i++) {
 			String[] randomData;
@@ -197,7 +200,7 @@ public class Game {
 		}
 	}
 
-	public void planetsToMainStar(SolarSystem solarsystem) {
+	public void planetsToMainStar(SolarSystem solarsystem) throws RuntimeException{
 		for (int m = 0; m < solarsystem.getSuns().size(); m++) {
 			if (solarsystem.getSuns().get(m) instanceof MainSequenceStar) {
 				MainSequenceStar mainstar = (MainSequenceStar) solarsystem.getSuns().get(m);
@@ -243,7 +246,8 @@ public class Game {
 					universe.getMoondata().remove(randomIndex);
 					mainstar.getPlanets().get(i).addMoon(randomData[0], Double.valueOf(randomData[1]),
 							Double.valueOf(randomData[2]), Double.valueOf(randomData[3]),
-							universe.getAtmospheres().get((Integer.valueOf(randomData[4]))));
+							universe.getAtmospheres().get((Integer.valueOf(randomData[4]))),
+							universe.getMoonTerrains().get((Integer.valueOf(randomData[5]))));
 
 					moonsToPlanet(mainstar.getPlanets().get(i));
 				}
@@ -251,59 +255,87 @@ public class Game {
 		}
 	}
 	
-	public void resourcesToPlanets(SolarSystem solarsystem) {
+	public void resourcesToPlanets(SolarSystem solarsystem) throws RuntimeException{
 		
 		int randomResourceNumber = (int) (Math.random() * (3));
 
-		for(int i=0; i < solarsystem.getPlanets().size(); i++) {
+		int count=0;
+		for(Planet planet: solarsystem.getPlanets()) {
 			
-			switch (solarsystem.getPlanets().get(i).getTerrain().getType()) {
+			switch (planet.getPlanetTerrain().getType()) {
             case "Canyon":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
                 break;
             case "Krater":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
                 break;
             case "Wüste":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
             	break;
             case "Grassland":
-            	ResourceOracle.addResourcesCategoryB(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryB(solarsystem, count);
                 break;
             case "Dschungel":
-            	ResourceOracle.addResourcesCategoryC(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryC(solarsystem, count);
                 break;
             case "Berge":
-            	ResourceOracle.addResourcesCategoryD(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryD(solarsystem, count);
                 break;
             case "Normaler Wald":
             	if(randomResourceNumber == 2) {
-            		ResourceOracle.addResourcesCategoryD(solarsystem, i);
+            		ResourceOracle.addResourcesCategoryD(solarsystem, count);
             	}else {
-            		ResourceOracle.addResourcesCategoryB(solarsystem, i);
+            		ResourceOracle.addResourcesCategoryB(solarsystem, count);
             	}
             	
                 break;
             case "Savanne":
-            	ResourceOracle.addResourcesCategoryC(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryC(solarsystem, count);
                 break;
             case "Sumpf":
-            	ResourceOracle.addResourcesCategoryB(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryB(solarsystem, count);
                 break;
             case "Tundra":
-            	ResourceOracle.addResourcesCategoryD(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryD(solarsystem, count);
                 break;
             case "Vulkangebiet":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
+            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
                 break;
             default:
-            	throw new RuntimeException("Planeten hat einen ungültigen Terrain-Typ!");
+            	throw new RuntimeException("Planeten haben einen ungültigen Terrain-Typ!");
         }
+			resourcesToMoons(planet);
+			count++;
+		}
+		
+		
+	}
+	
+    public void resourcesToMoons(Planet planet) throws RuntimeException{
+		
+		//int randomResourceNumber = (int) (Math.random() * (3));
+		int count=0;
+		for(Moon moon : planet.getMoons()) {
+			
+			switch (moon.getMoonTerrain().getType()) {
+            case "Mondkrater":
+            	ResourceOracle.addResourcesCategoryE(planet, count);
+                break;
+            case "Eisige Mondebenen":
+            	ResourceOracle.addResourcesCategoryF(planet, count);
+                break;
+            case "Vulkanische Mondebenen":
+            	ResourceOracle.addResourcesCategoryG(planet, count);
+            	break;
+            default:
+            	throw new RuntimeException("Monde haben einen ungültigen Terrain-Typ!");
+			}
+			count++;
 		}
 		
 	}
 
-	public void moonsToPlanet(Planet planet) {
+	public void moonsToPlanet(Planet planet)throws RuntimeException {
 		for (int m = 0; m < planet.getMoons().size(); m++) {
 			if (planet.getMoons().get(m).getPlanet() == null) {
 				planet.getMoons().get(m).setPlanet(planet);

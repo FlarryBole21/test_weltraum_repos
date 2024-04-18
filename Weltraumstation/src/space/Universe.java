@@ -12,8 +12,13 @@ import space.environment.terrain.Crater;
 import space.environment.terrain.Desert;
 import space.environment.terrain.Grassland;
 import space.environment.terrain.Jungle;
+import space.environment.terrain.MoonCrater;
+import space.environment.terrain.MoonIcyPlains;
+import space.environment.terrain.MoonTerrain;
+import space.environment.terrain.MoonVolcanicPlains;
 import space.environment.terrain.Mountains;
 import space.environment.terrain.NormalForest;
+import space.environment.terrain.PlanetTerrain;
 import space.environment.terrain.Savannah;
 import space.environment.terrain.Swamp;
 import space.environment.terrain.Terrain;
@@ -31,7 +36,8 @@ public class Universe {
 	private String name;
 	private LinkedList<Galaxy> galaxies;
 	private LinkedList<Atmosphere> atmospheres;
-	private LinkedList<Terrain> terrains;
+	private LinkedList<PlanetTerrain> planetTerrains;
+	private LinkedList<MoonTerrain> moonTerrains;
 	private LinkedList<Sun> suns;
 	private LinkedList<String> planetdata;
 	private LinkedList<String> sundata;
@@ -42,9 +48,11 @@ public class Universe {
 		this.galaxies = new LinkedList<>();
 		this.atmospheres = new LinkedList<>();
 		this.suns = new LinkedList<>();
-		this.terrains = new LinkedList<>();
+		this.planetTerrains = new LinkedList<>();
+		this.moonTerrains = new LinkedList<>();
 		addAtmospheres();
-		addTerrains();
+		addPlanetTerrains();
+		addMoonTerrains();
 		addSuns();
 		
 	}
@@ -113,23 +121,33 @@ public class Universe {
 		return atmospheres;
 	}
 	
-	public LinkedList<Terrain> getTerrains() {
-		return terrains;
+	public LinkedList<PlanetTerrain> getPlanetTerrains() {
+		return planetTerrains;
 	}
 	
+	public LinkedList<MoonTerrain> getMoonTerrains() {
+		return moonTerrains;
+	}
 	
-	private void addTerrains() {
-		terrains.add(new Canyon());
-		terrains.add(new Crater());
-		terrains.add(new Desert());
-		terrains.add(new Grassland());
-		terrains.add(new Jungle());
-		terrains.add(new Mountains());
-		terrains.add(new NormalForest());
-		terrains.add(new Savannah());
-		terrains.add(new Swamp());
-		terrains.add(new Tundra());
-		terrains.add(new Volcano());
+	private void addPlanetTerrains() {
+		planetTerrains.add(new Canyon());
+		planetTerrains.add(new Crater());
+		planetTerrains.add(new Desert());
+		planetTerrains.add(new Grassland());
+		planetTerrains.add(new Jungle());
+		planetTerrains.add(new Mountains());
+		planetTerrains.add(new NormalForest());
+		planetTerrains.add(new Savannah());
+		planetTerrains.add(new Swamp());
+		planetTerrains.add(new Tundra());
+		planetTerrains.add(new Volcano());
+		
+	}
+	
+	private void addMoonTerrains() {
+		moonTerrains.add(new MoonCrater());
+		moonTerrains.add(new MoonIcyPlains());
+		moonTerrains.add(new MoonVolcanicPlains());
 		
 		
 	}

@@ -1,6 +1,7 @@
 package immaterial.oracle;
 
 import space.SolarSystem;
+import space.celestial.Planet;
 import space.inventory.resource.Apple;
 import space.inventory.resource.Banana;
 import space.inventory.resource.BlueBerry;
@@ -13,9 +14,11 @@ import space.inventory.resource.Iron;
 import space.inventory.resource.Mango;
 import space.inventory.resource.MapleWood;
 import space.inventory.resource.Nanite;
+import space.inventory.resource.Neutronium;
 import space.inventory.resource.NormalWood;
 import space.inventory.resource.OakWood;
 import space.inventory.resource.Plasma;
+import space.inventory.resource.QuantumVacuum;
 import space.inventory.resource.Silver;
 import space.inventory.resource.Stellarite;
 import space.inventory.resource.StrawBerry;
@@ -32,6 +35,7 @@ public abstract class ResourceOracle extends Oracle {
 	private static final int LEVEL5 = 20;
 	private static final int LEVEL6 = 25;
 	private static final int LEVEL7 = 30;
+	private static final int LEVEL8 = 35;
 
 	private static Crystal getCrystal() {
 		return new Crystal(LEVEL1,500);
@@ -116,12 +120,25 @@ public abstract class ResourceOracle extends Oracle {
 	private static Stellarite getStellarite() {
 		return new Stellarite(LEVEL6,10);
 	}
+	
+	private static QuantumVacuum getQuantumVaccum() {
+		return new QuantumVacuum(LEVEL8,5);
+	}
+	
+	private static Neutronium getNeutronium() {
+		return new Neutronium(LEVEL8,5);
+	}
 
 	public static void basicResources(SolarSystem solarsystem, int planetNumber) {
 		solarsystem.getPlanets().get(planetNumber).addResource(getCrystal());
 		solarsystem.getPlanets().get(planetNumber).addResource(getNormalWood());
 		solarsystem.getPlanets().get(planetNumber).addResource(getCopper());
 		solarsystem.getPlanets().get(planetNumber).addResource(getIron());
+	}
+	
+	public static void basicMoonResources(Planet planet, int moonNumber) {
+		planet.getMoons().get(moonNumber).addResource(getCrystal());
+		planet.getMoons().get(moonNumber).addResource(getIron());
 	}
 
 	public static void addResourcesCategoryA(SolarSystem solarsystem, int planetNumber) {
@@ -211,5 +228,60 @@ public abstract class ResourceOracle extends Oracle {
 		}
 
 		basicResources(solarsystem, planetNumber);
+	}
+	
+	public static void addResourcesCategoryE(Planet planet, int moonNumber) {
+		int randomResourceNumber = 0;
+		randomResourceNumber = (int) (Math.random() * (4));
+		if(randomResourceNumber >= 1) {
+			planet.getMoons().get(moonNumber).addResource(getTitan());
+		}
+		if(randomResourceNumber >= 2) {
+			planet.getMoons().get(moonNumber).addResource(getStellarite());
+		}
+		if(randomResourceNumber >= 3) {
+			planet.getMoons().get(moonNumber).addResource(getQuantumVaccum());
+		}
+
+
+		basicMoonResources(planet, moonNumber);
+	}
+	
+	
+	public static void addResourcesCategoryF(Planet planet, int moonNumber) {
+		int randomResourceNumber = 0;
+		randomResourceNumber = (int) (Math.random() * (4));
+		planet.getMoons().get(moonNumber).addResource(getSilver());
+		if(randomResourceNumber >= 1) {
+			planet.getMoons().get(moonNumber).addResource(getChronium());
+		}
+		if(randomResourceNumber >= 2) {
+			planet.getMoons().get(moonNumber).addResource(getStellarite());
+		}
+		if(randomResourceNumber >= 3) {
+			planet.getMoons().get(moonNumber).addResource(getNeutronium());
+		}
+
+
+		basicMoonResources(planet, moonNumber);
+	}
+	
+	
+	public static void addResourcesCategoryG(Planet planet, int moonNumber) {
+		int randomResourceNumber = 0;
+		randomResourceNumber = (int) (Math.random() * (4));
+		planet.getMoons().get(moonNumber).addResource(getGold());
+		if(randomResourceNumber >= 1) {
+			planet.getMoons().get(moonNumber).addResource(getTitan());
+			planet.getMoons().get(moonNumber).addResource(getSilver());
+		}
+		if(randomResourceNumber >= 3) {
+			planet.getMoons().get(moonNumber).addResource(getQuantumVaccum());
+			planet.getMoons().get(moonNumber).addResource(getStellarite());
+			planet.getMoons().get(moonNumber).addResource(getNeutronium());
+		}
+
+
+		basicMoonResources(planet, moonNumber);
 	}
 }

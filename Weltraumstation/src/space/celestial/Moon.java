@@ -1,9 +1,12 @@
 package space.celestial;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
-import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
+import space.environment.terrain.Grassland;
+import space.environment.terrain.MoonCrater;
 import space.environment.terrain.MoonTerrain;
 import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
@@ -16,13 +19,13 @@ public class Moon extends CelestialObject{
 	private double mass;
 	private double radius;
 	private double gravity;
-	private LinkedList<Resource> resources;
+	private Set<Resource> resources;
 	private MoonTerrain moonTerrain;
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
 	private Planet planet;
 	
-	public Moon(String name, double size, double mass, double gravity, Atmosphere atmosphere) {
+	public Moon(String name, double size, double mass, double gravity, Atmosphere atmosphere,MoonTerrain moonTerrain) {
 		super.setType("Mond");
 		this.name=name;
 		this.size=size;
@@ -30,8 +33,8 @@ public class Moon extends CelestialObject{
 		this.radius=size/2;
 		this.gravity=gravity;
 		this.atmosphere=atmosphere;
-		this.resources= new LinkedList<>();
-		//this.moonterrain = moonTerrain;
+		this.resources= new HashSet<>(); 
+		this.moonTerrain = moonTerrain;
 		this.lifeforms= new LinkedList<>();
 	}
 
@@ -49,6 +52,29 @@ public class Moon extends CelestialObject{
 		return this.name;
 	}
 	
+	public Terrain getMoonTerrain() {
+		return moonTerrain;
+	}
+	
+	public Set<Resource> getResource() {
+		return this.resources;
+	}
+	
+	public void addResource(Resource resource) {
+		this.resources.add(resource);
+		
+	}
+	
+	public LinkedList<String> getResourceNames() {
+	    LinkedList<String> names = new LinkedList<>();
+	    for (Resource element : getResource()) {
+	        String type = element.getType();
+	        names.add(type + " <" + element.getAmount() + ">");
+	    }
+	 
+	    return names;
+	}
+	
 	public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
 		information.add("Name <" + name+">");
@@ -57,6 +83,12 @@ public class Moon extends CelestialObject{
 		information.add("Radius <" + radius+">");
 		information.add("Gravitation <" + gravity+">");
 		information.add("Atmosphäre <" + atmosphere.getType()+">");
+		information.add("Terrain <" + moonTerrain.getType()+">");
+		if(getResource().size() != 0) {
+			information.add("Ressourcen <" + getResourceNames() +">");
+		}else {
+			information.add("Ressourcen <Keine Ressourcen vorhanden!>");
+		}
 		information.add("Zugehöriger Planet <" + planet.getName()+">");
 		
 		return information;

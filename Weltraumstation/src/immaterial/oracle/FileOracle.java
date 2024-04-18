@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public abstract class FileOracle extends Oracle{
-	
+public abstract class FileOracle extends Oracle {
+
 	private final static String PLANETCREATEPATH = "data/planetCreate";
 	private final static String SUNCREATEPATH = "data/sunCreate";
 	private final static String MOONCREATEPATH = "data/moonCreate";
@@ -26,7 +26,7 @@ public abstract class FileOracle extends Oracle{
 			+ "Elysium 1.2 1.1 1.1 0 2\n" + "Nemesis 0.9 0.7 0.7 0 8\n" + "Halcyon 1.1 0.9 0.9 1 1\n"
 			+ "Helios 0.7 0.4 0.4 1 3\n" + "Arcadia 1.2 1.0 1.0 1 9\n" + "Abyss 0.8 0.5 0.5 1 6\n"
 			+ "Zenith 1.1 0.9 0.9 2 0\n" + "Aeolus 1.2 1.1 1.0 2 8\n" + "Hades 0.8 0.6 0.6 0 5\n"
-			+ "Utopia 1.1 1.0 1.0 2 7\n" + "Olympus 0.7 0.4 0.4 1 3\n";
+			+ "Utopia 1.1 1.0 1.0 2 7\n" + "Olympus 0.7 0.4 0.4 1 10\n";
 
 	private final static String SUNDATA = "Sol 1.0 1.0 5778 1.0 4\n" + "Sirius 2.0 1.5 9940 23.6 1\n"
 			+ "Proxima 0.12 0.15 3042 0.0017 3\n" + "Alpha 1.5 2.0 10370 80.4 0\n"
@@ -42,34 +42,37 @@ public abstract class FileOracle extends Oracle{
 			+ "Mirach 3.0 5.0 9000 220.0 0\n" + "Hamal 2.5 2.0 6700 40.0 0\n" + "Menkar 5.0 7.0 5200 550.0 0\n"
 			+ "Mirzam 15.0 10.0 18700 14000 0\n";
 
-	private final static String MOONDATA = "Luna 1.0 1.0 1.0 1\n" + "Phobos 0.8 0.6 0.7 0\n"
-			+ "Ganymede 1.2 1.2 1.1 2\n" + "Deimos 0.7 0.4 0.5 0\n" + "Io 1.3 1.5 1.3 2\n" + "Callisto 1.0 0.9 0.9 1\n"
-			+ "Enceladus 0.6 0.3 0.4 0\n" + "Triton 1.2 1.1 1.1 0\n" + "Charon 0.8 0.7 0.7 1\n"
-			+ "Phoebe 1.0 0.8 0.8 0\n" + "Rhea 0.9 0.6 0.6 1\n" + "Lapetus 1.1 1.0 1.0 2\n" + "Miranda 0.7 0.5 0.5 2\n"
-			+ "Titania 1.3 1.2 1.1 2\n" + "Umbriel 0.8 0.6 0.6 0\n" + "Dione 1.1 1.0 1.0 2\n" + "Ariel 0.7 0.4 0.4 1\n"
-			+ "Proteus 1.2 1.0 1.0 1\n" + "Nereid 0.8 0.5 0.5 1\n" + "Oberon 1.1 0.9 0.9 2\n" + "Charon 1.2 1.1 1.0 2\n"
-			+ "Puck 0.8 0.6 0.6 0\n" + "Caliban 1.1 1.0 1.0 2\n" + "Sycorax 0.7 0.4 0.4 1\n"
-			+ "Hyperion 1.0 1.0 1.0 1\n" + "Amalthea 0.8 0.6 0.7 0\n" + "Mimas 1.2 1.2 1.1 2\n"
-			+ "Tethys 0.9 0.5 0.6 1\n" + "Thebe 1.1 1.3 1.2 1\n" + "Rhea 0.7 0.4 0.5 0\n" + "Miranda 1.3 1.5 1.3 2\n"
-			+ "Callirrhoe 1.0 0.9 0.9 1\n" + "Paaliaq 0.6 0.3 0.4 0\n" + "Ymir 1.2 1.1 1.1 0\n"
-			+ "Carme 0.8 0.7 0.7 1\n" + "Ananke 1.0 0.8 0.8 0\n" + "Kalyke 0.9 0.6 0.6 1\n" + "Orthosie 1.1 1.0 1.0 2\n"
-			+ "Herse 0.7 0.5 0.5 2\n" + "Aitne 1.3 1.2 1.1 2\n" + "Eurydome 0.8 0.6 0.6 0\n" + "Autonoe 1.1 1.0 1.0 2\n"
-			+ "Thyone 0.7 0.4 0.4 1\n" + "Hermippe 1.2 1.1 1.0 1\n" + "Aedea 0.8 0.5 0.5 1\n"
-			+ "Euanthe 1.1 0.9 0.9 2\n" + "Helike 0.7 0.4 0.4 1\n" + "Orthosie 1.2 1.0 1.0 1\n"
-			+ "Hegemone 0.8 0.6 0.6 1\n" + "Philophrosyne 1.1 1.0 1.0 2\n" + "Dia 0.7 0.4 0.4 1\n"
-			+ "Sponde 1.2 1.0 1.0 1\n" + "Kale 0.8 0.5 0.5 1\n" + "Pasithee 1.1 0.9 0.9 2\n"
-			+ "Megaclite 0.7 0.4 0.4 1\n" + "Selene 1.0 1.0 1.0 0\n" + "Atlas 0.8 0.6 0.7 1\n" + "Eos 1.2 1.2 1.1 2\n"
-			+ "Helios 0.7 0.4 0.5 0\n" + "Artemis 1.3 1.5 1.3 1\n" + "Asteria 1.0 0.9 0.9 2\n"
-			+ "Cronus 0.6 0.3 0.4 0\n" + "Phoebe 1.2 1.1 1.1 2\n" + "Diana 0.8 0.7 0.7 1\n" + "Apollo 1.0 0.8 0.8 0\n"
-			+ "Aurora 0.9 0.6 0.6 1\n" + "Hyperion 1.1 1.0 1.0 2\n" + "Gaia 0.7 0.5 0.5 2\n" + "Athena 1.3 1.2 1.1 0\n"
-			+ "Demeter 0.8 0.6 0.6 0\n" + "Hera 1.1 1.0 1.0 2\n" + "Eros 0.8 0.5 0.5 1\n" + "Hermes 1.2 1.0 1.0 1\n"
-			+ "Hestia 0.8 0.5 0.5 1\n" + "Icarus 1.1 0.9 0.9 2\n" + "Iris 0.7 0.4 0.4 1\n" + "Janus 1.2 1.0 1.0 1\n"
-			+ "Metis 0.8 0.6 0.6 1\n" + "Nemesis 1.1 1.0 1.0 2\n" + "Pan 0.7 0.5 0.5 2\n" + "Perseus 1.3 1.2 1.1 0\n"
-			+ "Tethys 1.1 1.0 1.0 2\n" + "Themis 0.7 0.4 0.4 1\n" + "Zeus 1.2 1.1 1.0 1\n"
-			+ "Hephaestus 1.1 0.9 0.9 2\n" + "Nyx 0.7 0.4 0.4 1\n" + "Achilles 1.2 1.0 1.0 1\n"
-			+ "Ariadne 0.8 0.5 0.5 1\n";
-	
-	
+	private final static String MOONDATA = "Luna 1.0 1.0 1.0 1 0\n" + "Phobos 0.8 0.6 0.7 2 1\n"
+			+ "Ganymede 1.2 1.2 1.1 2 2\n" + "Deimos 0.7 0.4 0.5 1 0\n" + "Io 1.3 1.5 1.3 2 1\n"
+			+ "Callisto 1.0 0.9 0.9 1 2\n" + "Enceladus 0.6 0.3 0.4 1 2\n" + "Triton 1.2 1.1 1.1 1 1\n"
+			+ "Charon 0.8 0.7 0.7 1 0\n" + "Phoebe 1.0 0.8 0.8 1 2\n" + "Rhea 0.9 0.6 0.6 1 1\n"
+			+ "Lapetus 1.1 1.0 1.0 2 1\n" + "Miranda 0.7 0.5 0.5 2 2\n" + "Titania 1.3 1.2 1.1 2 2\n"
+			+ "Umbriel 0.8 0.6 0.6 1 0\n" + "Dione 1.1 1.0 1.0 2 1\n" + "Ariel 0.7 0.4 0.4 1 0\n"
+			+ "Proteus 1.2 1.0 1.0 1 0\n" + "Nereid 0.8 0.5 0.5 1 2\n" + "Oberon 1.1 0.9 0.9 2 2\n"
+			+ "Charon 1.2 1.1 1.0 2 1\n" + "Puck 0.8 0.6 0.6 1 0\n" + "Caliban 1.1 1.0 1.0 2 0\n"
+			+ "Sycorax 0.7 0.4 0.4 1 1\n" + "Hyperion 1.0 1.0 1.0 1 2\n" + "Amalthea 0.8 0.6 0.7 1 1\n"
+			+ "Mimas 1.2 1.2 1.1 2 1\n" + "Tethys 0.9 0.5 0.6 1 0\n" + "Thebe 1.1 1.3 1.2 1 0\n"
+			+ "Rhea 0.7 0.4 0.5 2 1\n" + "Miranda 1.3 1.5 1.3 2 1\n" + "Callirrhoe 1.0 0.9 0.9 1 1\n"
+			+ "Paaliaq 0.6 0.3 0.4 1 1\n" + "Ymir 1.2 1.1 1.1 2 2\n" + "Carme 0.8 0.7 0.7 1 1\n"
+			+ "Ananke 1.0 0.8 0.8 1 1\n" + "Kalyke 0.9 0.6 0.6 1 2\n" + "Orthosie 1.1 1.0 1.0 2 0\n"
+			+ "Herse 0.7 0.5 0.5 2 0\n" + "Aitne 1.3 1.2 1.1 2 2\n" + "Eurydome 0.8 0.6 0.6 1 1\n"
+			+ "Autonoe 1.1 1.0 1.0 2 0\n" + "Thyone 0.7 0.4 0.4 1 0\n" + "Hermippe 1.2 1.1 1.0 1 1\n"
+			+ "Aedea 0.8 0.5 0.5 1 0\n" + "Euanthe 1.1 0.9 0.9 2 2\n" + "Helike 0.7 0.4 0.4 1 2\n"
+			+ "Orthosie 1.2 1.0 1.0 1 0\n" + "Hegemone 0.8 0.6 0.6 1 1\n" + "Philophrosyne 1.1 1.0 1.0 2 1\n"
+			+ "Dia 0.7 0.4 0.4 1 1\n" + "Sponde 1.2 1.0 1.0 1 0\n" + "Kale 0.8 0.5 0.5 1 1\n"
+			+ "Pasithee 1.1 0.9 0.9 2 2\n" + "Megaclite 0.7 0.4 0.4 1 2\n" + "Selene 1.0 1.0 1.0 1 1\n"
+			+ "Atlas 0.8 0.6 0.7 1 1\n" + "Eos 1.2 1.2 1.1 2 2\n" + "Helios 0.7 0.4 0.5 2 2\n"
+			+ "Artemis 1.3 1.5 1.3 1 0\n" + "Asteria 1.0 0.9 0.9 2 0\n" + "Cronus 0.6 0.3 0.4 1 1\n"
+			+ "Phoebe 1.2 1.1 1.1 2 2\n" + "Diana 0.8 0.7 0.7 1 1\n" + "Apollo 1.0 0.8 0.8 1 0\n"
+			+ "Aurora 0.9 0.6 0.6 1 0\n" + "Hyperion 1.1 1.0 1.0 2 1\n" + "Gaia 0.7 0.5 0.5 2 2\n"
+			+ "Athena 1.3 1.2 1.1 0 0\n" + "Demeter 0.8 0.6 0.6 1 1\n" + "Hera 1.1 1.0 1.0 2 0\n"
+			+ "Eros 0.8 0.5 0.5 1 2\n" + "Hermes 1.2 1.0 1.0 1 0\n" + "Hestia 0.8 0.5 0.5 1 2\n"
+			+ "Icarus 1.1 0.9 0.9 2 2\n" + "Iris 0.7 0.4 0.4 1 1\n" + "Janus 1.2 1.0 1.0 1 2\n"
+			+ "Metis 0.8 0.6 0.6 1 1\n" + "Nemesis 1.1 1.0 1.0 2 0\n" + "Pan 0.7 0.5 0.5 2 0\n"
+			+ "Perseus 1.3 1.2 1.1 0 0\n" + "Tethys 1.1 1.0 1.0 2 2\n" + "Themis 0.7 0.4 0.4 1 0\n"
+			+ "Zeus 1.2 1.1 1.0 1 0\n" + "Hephaestus 1.1 0.9 0.9 2 1\n" + "Nyx 0.7 0.4 0.4 1 1\n"
+			+ "Achilles 1.2 1.0 1.0 1 0\n" + "Ariadne 0.8 0.5 0.5 1 1\n";
+
 	public static String getPlanetdata() {
 		return PLANETDATA;
 	}
@@ -81,7 +84,7 @@ public abstract class FileOracle extends Oracle{
 	public static String getMoondata() {
 		return MOONDATA;
 	}
-	
+
 	public static String getPlanetCreatePath() {
 		return PLANETCREATEPATH;
 	}
@@ -107,7 +110,7 @@ public abstract class FileOracle extends Oracle{
 			}
 		}
 	}
-	
+
 	public static void createFileAndWrite(File path, String text) throws IOException {
 		path.createNewFile();
 		FileWriter writer = new FileWriter(path);
@@ -115,7 +118,7 @@ public abstract class FileOracle extends Oracle{
 		writer.close();
 
 	}
-	
+
 	public static LinkedList<String> readFile(String path) {
 		LinkedList<String> rows = null;
 		try {
