@@ -86,7 +86,11 @@ public class Game {
 
 		}
 		for (int i = 0; i < numberInput; i++) {
-			System.out.print("Bitte gebe den Namen für das " + (i + 1) + ".Sonnensystem ein: ");
+			if(numberInput > 1) {
+				System.out.print("Bitte gebe den Namen für das " + (i + 1) + ".Sonnensystem ein: ");
+			}else {
+				System.out.print("Bitte gebe den Namen für das Sonnensystem ein: ");
+			}
 			input = scanner.nextLine();
 			SolarSystem solarsystem = galaxy.addSolarSystem(input);
 			createRandomSolarSystem(solarsystem);
@@ -224,6 +228,11 @@ public class Game {
 			randomSunNumber = (int) (Math.random() * (10)) - ((int) randomPlanetNumber / 2);
 		} while ((randomSunNumber + 2) > randomPlanetNumber || randomPlanetNumber < 3 || randomSunNumber < 1);
 
+		createRandomPlanets(solarsystem, randomPlanetNumber);
+		createRandomSuns(solarsystem, randomSunNumber);
+	}
+	
+	public void createRandomPlanets(SolarSystem solarsystem, int randomPlanetNumber) {
 		boolean normalAtmosphere = false;
 		for (int i = 0; i < randomPlanetNumber; i++) {
 			String[] randomData;
@@ -250,7 +259,6 @@ public class Game {
 					throw new RuntimeException("Planeten konnten nicht ordungsgemäß erstellt werden!");
 				}
 			}
-			// System.out.println(new LinkedList<String>(Arrays.asList(randomData)));
 			universe.getPlanetdata().remove(randomIndex);
 			solarsystem.addPlanet(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
 					Double.valueOf(randomData[1]),
@@ -258,8 +266,12 @@ public class Game {
 					universe.getTerrains().get((Integer.valueOf(randomData[5]))));
 
 		}
-		// System.out.println("Anzahl der erstellten Planten: " + randomPlanetNumber);
-
+		
+	}
+	
+	
+	public void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) {
+		
 		boolean mainStar = false;
 
 		for (int i = 0; i < randomSunNumber; i++) {
@@ -299,38 +311,32 @@ public class Game {
 					throw new RuntimeException("Sonnen konnten nicht ordungsgemäß erstellt werden!");
 				}
 			}
-			// System.out.println(new LinkedList<String>(Arrays.asList(randomData)));
 			universe.getSundata().remove(randomIndex);
 			solarsystem.addSun(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
 					Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
 					universe.getSuns().get((Integer.valueOf(randomData[5]))));
 
-			for (int m = 0; m < solarsystem.getSuns().size(); m++) {
-				// System.out.println("mamorial");
-				if (solarsystem.getSuns().get(m) instanceof MainSequenceStar) {
-					MainSequenceStar mainstar = (MainSequenceStar) solarsystem.getSuns().get(m);
-					if (mainstar.getPlanetNames().size() > 0) {
-						break;
-					}
-					solarsystem.setMainstar(mainstar);
-					for (int n = 0; n < solarsystem.getPlanets().size(); n++) {
-						// System.out.println("gemorial");
-						mainstar.addPlanet(solarsystem.getPlanets().get(n));
-					}
-
-//					System.out.println("MainSequenceStar-Name: " +  mainstar.getName() +
-//					" MainSequenceStar-Typ: " + mainstar.getType()+ " Planeten: "
-//					+ mainstar.getPlanetNames());
-					break;
-
-				}
-
-			}
-
+			planetsToMainStar(solarsystem);
 		}
-
-		// System.out.println("Anzahl der erstellten Sonnen: " + randomSunNumber);
-
+		
+	}
+	
+	
+	public void planetsToMainStar(SolarSystem solarsystem) {
+		for (int m = 0; m < solarsystem.getSuns().size(); m++) {
+			if (solarsystem.getSuns().get(m) instanceof MainSequenceStar) {
+				MainSequenceStar mainstar = (MainSequenceStar) solarsystem.getSuns().get(m);
+				if (mainstar.getPlanetNames().size() > 0) {
+					break;
+				}
+				solarsystem.setMainstar(mainstar);
+				for (int n = 0; n < solarsystem.getPlanets().size(); n++) {
+					mainstar.addPlanet(solarsystem.getPlanets().get(n));
+					solarsystem.getPlanets().get(n).setMainstar(mainstar);
+				}
+				break;
+			}
+		}
 	}
 
 	public void createRandomMoons(SolarSystem solarsystem) throws RuntimeException {

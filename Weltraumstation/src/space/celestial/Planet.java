@@ -2,6 +2,7 @@ package space.celestial;
 
 import java.util.LinkedList;
 import space.buildable.SpaceStation;
+import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
@@ -21,6 +22,7 @@ public class Planet extends CelestialObject{
 	private LinkedList<SpaceStation> spaceStations;
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
+	private MainSequenceStar mainstar;
 	
 	
 	public Planet(String name, double size, double mass, double gravity, Atmosphere atmosphere, Terrain terrain) {
@@ -37,6 +39,14 @@ public class Planet extends CelestialObject{
 		this.spaceStations = new LinkedList<>();
 		this.lifeforms = new LinkedList<>();
 		
+	}
+	
+	public MainSequenceStar getMainstar() {
+		return mainstar;
+	}
+
+	public void setMainstar(MainSequenceStar mainstar) {
+		this.mainstar = mainstar;
 	}
 	
 	public Atmosphere getAtmosphere() {
