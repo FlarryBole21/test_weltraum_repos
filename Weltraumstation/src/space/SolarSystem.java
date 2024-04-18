@@ -60,10 +60,10 @@ public class SolarSystem {
 	}
 	
 	
-	public Planet addPlanet(String name, double size, double mass, double radius,
+	public Planet addPlanet(String name, double size, double mass,
 			double gravity, Atmosphere atmosphere, Terrain terrain) {
 		
-		Planet planet = new Planet(name, size, mass, radius, gravity, atmosphere, terrain);
+		Planet planet = new Planet(name, size, mass, gravity, atmosphere, terrain);
 		planets.add(planet);
 		return planet;
 		

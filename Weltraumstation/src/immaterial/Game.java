@@ -99,7 +99,7 @@ public class Game {
 		System.out.println("<SPOILER> Planten-, Sonnen- & Mond-Daten einsehen?");
 		System.out.println("Achtung! Nur einmaliger Blick, Danach müssen Planeten & Monde kolonisiert werden, "
 				+ "um Informationen zu erhalten");
-		System.out.print("(1 -> Nur Namen, 2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos, keine Spoiler :D ): ");
+		System.out.print("(1 -> Nur Namen, 2 -> Detailreiche Infos, Irgendwas anderes -> Keine Infos, möchte selber erforschen): ");
 		input = scanner.nextLine();
 		System.out.println();
 		if (input.equals("1")) {
@@ -114,7 +114,7 @@ public class Game {
 						System.out.println("Mond-Namen <Planet " + planetName + "> <"
 								+ galaxy.getSolarSystems().get(i).getPlanets().get(j).getMoonNames()+">");
 					}else {
-						System.out.println("Mond-Namen <Planet" + planetName + "> <Keine Monde vorhanden>");
+						System.out.println("Mond-Namen <Planet " + planetName + "> <Keine Monde vorhanden>");
 					}
 				
 				}
@@ -177,7 +177,7 @@ public class Game {
 						for(int n=0; n < galaxy.getSolarSystems().get(i).getPlanets().get(m).getMoons().size();n++) {
 							System.out.println("|<-- Mond-Daten <Planet " + galaxy.getSolarSystems()
 						    .get(i).getPlanets().get(m).getName() + "> " +
-						    "<Moon " + galaxy.getSolarSystems()
+						    "<Mond " + galaxy.getSolarSystems()
 						    .get(i).getPlanets().get(m).getMoons().get(n).getName() + ">-->|");
 							System.out.println();
 //							System.out.println("|<-- Mond-Daten <Moon " + galaxy.getSolarSystems().
@@ -224,16 +224,23 @@ public class Game {
 			randomSunNumber = (int) (Math.random() * (10)) - ((int) randomPlanetNumber / 2);
 		} while ((randomSunNumber + 2) > randomPlanetNumber || randomPlanetNumber < 3 || randomSunNumber < 1);
 
-		// System.out.println(planetdata);
+		boolean normalAtmosphere = false;
 		for (int i = 0; i < randomPlanetNumber; i++) {
 			String[] randomData;
 			int randomIndex;
 			int errorCount = 0;
+			String atmosphereType;
 			while (true) {
 				randomIndex = (int) (Math.random() * universe.getPlanetdata().size());
 				randomData = universe.getPlanetdata().get(randomIndex).split(" ");
+				atmosphereType = universe.getAtmospheres().get((Integer.valueOf(randomData[4]))).getType();
+				if (atmosphereType.equals("Normal")) {
+					normalAtmosphere = true;
+				}
 
-				if (randomData.length > 1) {
+				if (randomData.length > 1 && (i != randomPlanetNumber - 1)) {
+					break;
+				} else if ((randomData.length > 1) && (i == randomPlanetNumber - 1) && (normalAtmosphere)) {
 					break;
 				} else {
 					errorCount++;
@@ -246,9 +253,9 @@ public class Game {
 			// System.out.println(new LinkedList<String>(Arrays.asList(randomData)));
 			universe.getPlanetdata().remove(randomIndex);
 			solarsystem.addPlanet(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
-					Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
-					universe.getAtmospheres().get((Integer.valueOf(randomData[5]))),
-					universe.getTerrains().get((Integer.valueOf(randomData[6]))));
+					Double.valueOf(randomData[1]),
+					universe.getAtmospheres().get((Integer.valueOf(randomData[4]))),
+					universe.getTerrains().get((Integer.valueOf(randomData[5]))));
 
 		}
 		// System.out.println("Anzahl der erstellten Planten: " + randomPlanetNumber);
@@ -358,8 +365,8 @@ public class Game {
 				if(randomMoonNumber != 0) {
 					universe.getMoondata().remove(randomIndex);
 					mainstar.getPlanets().get(i).addMoon(randomData[0], Double.valueOf(randomData[1]),
-							Double.valueOf(randomData[2]), Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
-							universe.getAtmospheres().get((Integer.valueOf(randomData[5]))));
+							Double.valueOf(randomData[2]), Double.valueOf(randomData[3]),
+							universe.getAtmospheres().get((Integer.valueOf(randomData[4]))));
 					
 				}
 			}
@@ -397,34 +404,34 @@ public class Game {
 		path = new File("./" + Game.PLANETCREATEPATH + ".txt");
 		if (!path.exists()) {
 			
-			String text = "Terra 1.0 1.0 1.0 1.0 1 7\n" +
-		            "Draconis 0.8 0.6 0.9 0.7 0 3\n" +
-		            "Gaia 1.2 1.2 1.1 1.1 2 9\n" +
-		            "Aetheria 0.9 0.5 0.8 0.6 1 5\n" +
-		            "Novaria 1.1 1.3 1.2 1.2 1 8\n" +
-		            "Vulcan 0.7 0.4 0.6 0.5 0 2\n" +
-		            "Eden 1.3 1.5 1.3 1.3 2 6\n" +
-		            "Oasis 1.0 0.9 1.0 0.9 1 4\n" +
-		            "Inferno 0.6 0.3 0.5 0.4 0 7\n" +
-		            "Aurora 1.2 1.1 1.1 1.1 0 9\n" +
-		            "Celestia 0.8 0.7 0.9 0.7 1 1\n" +
-		            "Serenity 1.0 0.8 0.9 0.8 0 6\n" +
-		            "Titan 0.9 0.6 0.8 0.6 1 3\n" +
-		            "Zephyr 1.1 1.0 1.1 1.0 2 8\n" +
-		            "Infernum 0.7 0.5 0.6 0.5 2 4\n" +
-		            "Seraphim 1.3 1.2 1.2 1.1 2 5\n" +
-		            "Phoenix 0.8 0.6 0.8 0.6 0 7\n" +
-		            "Elysium 1.2 1.1 1.1 1.1 0 2\n" +
-		            "Nemesis 0.9 0.7 0.9 0.7 0 8\n" +
-		            "Halcyon 1.1 0.9 1.0 0.9 1 1\n" +
-		            "Helios 0.7 0.4 0.6 0.4 1 3\n" +
-		            "Arcadia 1.2 1.0 1.1 1.0 1 9\n" +
-		            "Abyss 0.8 0.5 0.7 0.5 1 6\n" +
-		            "Zenith 1.1 0.9 1.0 0.9 2 4\n" +
-		            "Aeolus 1.2 1.1 1.1 1.0 2 8\n" +
-		            "Hades 0.8 0.6 0.7 0.6 0 5\n" +
-		            "Utopia 1.1 1.0 1.1 1.0 2 7\n" +
-		            "Olympus 0.7 0.4 0.6 0.4 1 3\n";
+			String text = "Terra 1.0 1.0 1.0 1 7\n" +
+		            "Draconis 0.8 0.6 0.7 0 3\n" +
+		            "Gaia 1.2 1.2 1.1 2 9\n" +
+		            "Aetheria 0.9 0.5 0.6 1 5\n" +
+		            "Novaria 1.1 1.3 1.2 1 8\n" +
+		            "Vulcan 0.7 0.4 0.5 0 2\n" +
+		            "Eden 1.3 1.5 1.3 2 6\n" +
+		            "Oasis 1.0 0.9 0.9 1 4\n" +
+		            "Inferno 0.6 0.3 0.4 0 7\n" +
+		            "Aurora 1.2 1.1 1.1 0 9\n" +
+		            "Celestia 0.8 0.7 0.7 1 1\n" +
+		            "Serenity 1.0 0.8 0.8 0 6\n" +
+		            "Titan 0.9 0.6 0.6 1 3\n" +
+		            "Zephyr 1.1 1.0 1.0 2 8\n" +
+		            "Infernum 0.7 0.5 0.5 2 4\n" +
+		            "Seraphim 1.3 1.2 1.1 2 5\n" +
+		            "Phoenix 0.8 0.6 0.6 0 7\n" +
+		            "Elysium 1.2 1.1 1.1 0 2\n" +
+		            "Nemesis 0.9 0.7 0.7 0 8\n" +
+		            "Halcyon 1.1 0.9 0.9 1 1\n" +
+		            "Helios 0.7 0.4 0.4 1 3\n" +
+		            "Arcadia 1.2 1.0 1.0 1 9\n" +
+		            "Abyss 0.8 0.5 0.5 1 6\n" +
+		            "Zenith 1.1 0.9 0.9 2 4\n" +
+		            "Aeolus 1.2 1.1 1.0 2 8\n" +
+		            "Hades 0.8 0.6 0.6 0 5\n" +
+		            "Utopia 1.1 1.0 1.0 2 7\n" +
+		            "Olympus 0.7 0.4 0.4 1 3\n";
 
 			createFileAndWrite(path, text);
 			// throw new FileNotFoundException("Datei: " + "./" + Game.PLANETCREATEPATH + "
@@ -452,36 +459,36 @@ public class Game {
 		}
 		path = new File("./" + Game.MOONCREATEPATH + ".txt");
 		if (!path.exists()) {
-			String text = "Luna 1.0 1.0 1.0 1.0 1\n" + "Phobos 0.8 0.6 0.9 0.7 0\n" + "Ganymede 1.2 1.2 1.1 1.1 2\n"
-					+ "Deimos 0.7 0.4 0.6 0.5 0\n" + "Io 1.3 1.5 1.3 1.3 2\n" + "Callisto 1.0 0.9 1.0 0.9 1\n"
-					+ "Enceladus 0.6 0.3 0.5 0.4 0\n" + "Triton 1.2 1.1 1.1 1.1 0\n" + "Charon 0.8 0.7 0.9 0.7 1\n"
-					+ "Phoebe 1.0 0.8 0.9 0.8 0\n" + "Rhea 0.9 0.6 0.8 0.6 1\n" + "Lapetus 1.1 1.0 1.1 1.0 2\n"
-					+ "Miranda 0.7 0.5 0.6 0.5 2\n" + "Titania 1.3 1.2 1.2 1.1 2\n" + "Umbriel 0.8 0.6 0.7 0.6 0\n"
-					+ "Dione 1.1 1.0 1.1 1.0 2\n" + "Ariel 0.7 0.4 0.6 0.4 1\n" + "Proteus 1.2 1.0 1.1 1.0 1\n"
-					+ "Nereid 0.8 0.5 0.7 0.5 1\n" + "Oberon 1.1 0.9 1.0 0.9 2\n" + "Charon 1.2 1.1 1.1 1.0 2\n"
-					+ "Puck 0.8 0.6 0.7 0.6 0\n" + "Caliban 1.1 1.0 1.1 1.0 2\n" + "Sycorax 0.7 0.4 0.6 0.4 1\n"
-					+ "Hyperion 1.0 1.0 1.0 1.0 1\n" + "Amalthea 0.8 0.6 0.9 0.7 0\n" + "Mimas 1.2 1.2 1.1 1.1 2\n"
-					+ "Tethys 0.9 0.5 0.8 0.6 1\n" + "Thebe 1.1 1.3 1.2 1.2 1\n" + "Rhea 0.7 0.4 0.6 0.5 0\n"
-					+ "Miranda 1.3 1.5 1.3 1.3 2\n" + "Callirrhoe 1.0 0.9 1.0 0.9 1\n" + "Paaliaq 0.6 0.3 0.5 0.4 0\n"
-					+ "Ymir 1.2 1.1 1.1 1.1 0\n" + "Carme 0.8 0.7 0.9 0.7 1\n" + "Ananke 1.0 0.8 0.9 0.8 0\n"
-					+ "Kalyke 0.9 0.6 0.8 0.6 1\n" + "Orthosie 1.1 1.0 1.1 1.0 2\n" + "Herse 0.7 0.5 0.6 0.5 2\n"
-					+ "Aitne 1.3 1.2 1.2 1.1 2\n" + "Eurydome 0.8 0.6 0.7 0.6 0\n" + "Autonoe 1.1 1.0 1.1 1.0 2\n"
-					+ "Thyone 0.7 0.4 0.6 0.4 1\n" + "Hermippe 1.2 1.1 1.1 1.0 1\n" + "Aedea 0.8 0.5 0.7 0.5 1\n"
-					+ "Euanthe 1.1 0.9 1.0 0.9 2\n" + "Helike 0.7 0.4 0.6 0.4 1\n" + "Orthosie 1.2 1.0 1.1 1.0 1\n"
-					+ "Hegemone 0.8 0.6 0.7 0.6 1\n" + "Philophrosyne 1.1 1.0 1.1 1.0 2\n" + "Dia 0.7 0.4 0.6 0.4 1\n"
-					+ "Sponde 1.2 1.0 1.1 1.0 1\n" + "Kale 0.8 0.5 0.7 0.5 1\n" + "Pasithee 1.1 0.9 1.0 0.9 2\n"
-					+ "Megaclite 0.7 0.4 0.6 0.4 1\n" + "Selene 1.0 1.0 1.0 1.0 0\n" + "Atlas 0.8 0.6 0.9 0.7 1\n"
-					+ "Eos 1.2 1.2 1.1 1.1 2\n" + "Helios 0.7 0.4 0.6 0.5 0\n" + "Artemis 1.3 1.5 1.3 1.3 1\n"
-					+ "Asteria 1.0 0.9 1.0 0.9 2\n" + "Cronus 0.6 0.3 0.5 0.4 0\n" + "Phoebe 1.2 1.1 1.1 1.1 2\n"
-					+ "Diana 0.8 0.7 0.9 0.7 1\n" + "Apollo 1.0 0.8 0.9 0.8 0\n" + "Aurora 0.9 0.6 0.8 0.6 1\n"
-					+ "Hyperion 1.1 1.0 1.1 1.0 2\n" + "Gaia 0.7 0.5 0.6 0.5 2\n" + "Athena 1.3 1.2 1.2 1.1 0\n"
-					+ "Demeter 0.8 0.6 0.7 0.6 0\n" + "Hera 1.1 1.0 1.1 1.0 2\n" + "Eros 0.8 0.5 0.7 0.5 1\n"
-					+ "Hermes 1.2 1.0 1.1 1.0 1\n" + "Hestia 0.8 0.5 0.7 0.5 1\n" + "Icarus 1.1 0.9 1.0 0.9 2\n"
-					+ "Iris 0.7 0.4 0.6 0.4 1\n" + "Janus 1.2 1.0 1.1 1.0 1\n" + "Metis 0.8 0.6 0.7 0.6 1\n"
-					+ "Nemesis 1.1 1.0 1.1 1.0 2\n" + "Pan 0.7 0.5 0.6 0.5 2\n" + "Perseus 1.3 1.2 1.2 1.1 0\n"
-					+ "Tethys 1.1 1.0 1.1 1.0 2\n" + "Themis 0.7 0.4 0.6 0.4 1\n" + "Zeus 1.2 1.1 1.1 1.0 1\n"
-					+ "Hephaestus 1.1 0.9 1.0 0.9 2\n" + "Nyx 0.7 0.4 0.6 0.4 1\n" + "Achilles 1.2 1.0 1.1 1.0 1\n"
-					+ "Ariadne 0.8 0.5 0.7 0.5 1\n";
+			String text = "Luna 1.0 1.0 1.0 1\n" + "Phobos 0.8 0.6 0.7 0\n" + "Ganymede 1.2 1.2 1.1 2\n"
+					+ "Deimos 0.7 0.4 0.5 0\n" + "Io 1.3 1.5 1.3 2\n" + "Callisto 1.0 0.9 0.9 1\n"
+					+ "Enceladus 0.6 0.3 0.4 0\n" + "Triton 1.2 1.1 1.1 0\n" + "Charon 0.8 0.7 0.7 1\n"
+					+ "Phoebe 1.0 0.8 0.8 0\n" + "Rhea 0.9 0.6 0.6 1\n" + "Lapetus 1.1 1.0 1.0 2\n"
+					+ "Miranda 0.7 0.5 0.5 2\n" + "Titania 1.3 1.2 1.1 2\n" + "Umbriel 0.8 0.6 0.6 0\n"
+					+ "Dione 1.1 1.0 1.0 2\n" + "Ariel 0.7 0.4 0.4 1\n" + "Proteus 1.2 1.0 1.0 1\n"
+					+ "Nereid 0.8 0.5 0.5 1\n" + "Oberon 1.1 0.9 0.9 2\n" + "Charon 1.2 1.1 1.0 2\n"
+					+ "Puck 0.8 0.6 0.6 0\n" + "Caliban 1.1 1.0 1.0 2\n" + "Sycorax 0.7 0.4 0.4 1\n"
+					+ "Hyperion 1.0 1.0 1.0 1\n" + "Amalthea 0.8 0.6 0.7 0\n" + "Mimas 1.2 1.2 1.1 2\n"
+					+ "Tethys 0.9 0.5 0.6 1\n" + "Thebe 1.1 1.3 1.2 1\n" + "Rhea 0.7 0.4 0.5 0\n"
+					+ "Miranda 1.3 1.5 1.3 2\n" + "Callirrhoe 1.0 0.9 0.9 1\n" + "Paaliaq 0.6 0.3 0.4 0\n"
+					+ "Ymir 1.2 1.1 1.1 0\n" + "Carme 0.8 0.7 0.7 1\n" + "Ananke 1.0 0.8 0.8 0\n"
+					+ "Kalyke 0.9 0.6 0.6 1\n" + "Orthosie 1.1 1.0 1.0 2\n" + "Herse 0.7 0.5 0.5 2\n"
+					+ "Aitne 1.3 1.2 1.1 2\n" + "Eurydome 0.8 0.6 0.6 0\n" + "Autonoe 1.1 1.0 1.0 2\n"
+					+ "Thyone 0.7 0.4 0.4 1\n" + "Hermippe 1.2 1.1 1.0 1\n" + "Aedea 0.8 0.5 0.5 1\n"
+					+ "Euanthe 1.1 0.9 0.9 2\n" + "Helike 0.7 0.4 0.4 1\n" + "Orthosie 1.2 1.0 1.0 1\n"
+					+ "Hegemone 0.8 0.6 0.6 1\n" + "Philophrosyne 1.1 1.0 1.0 2\n" + "Dia 0.7 0.4 0.4 1\n"
+					+ "Sponde 1.2 1.0 1.0 1\n" + "Kale 0.8 0.5 0.5 1\n" + "Pasithee 1.1 0.9 0.9 2\n"
+					+ "Megaclite 0.7 0.4 0.4 1\n" + "Selene 1.0 1.0 1.0 0\n" + "Atlas 0.8 0.6 0.7 1\n"
+					+ "Eos 1.2 1.2 1.1 2\n" + "Helios 0.7 0.4 0.5 0\n" + "Artemis 1.3 1.5 1.3 1\n"
+					+ "Asteria 1.0 0.9 0.9 2\n" + "Cronus 0.6 0.3 0.4 0\n" + "Phoebe 1.2 1.1 1.1 2\n"
+					+ "Diana 0.8 0.7 0.7 1\n" + "Apollo 1.0 0.8 0.8 0\n" + "Aurora 0.9 0.6 0.6 1\n"
+					+ "Hyperion 1.1 1.0 1.0 2\n" + "Gaia 0.7 0.5 0.5 2\n" + "Athena 1.3 1.2 1.1 0\n"
+					+ "Demeter 0.8 0.6 0.6 0\n" + "Hera 1.1 1.0 1.0 2\n" + "Eros 0.8 0.5 0.5 1\n"
+					+ "Hermes 1.2 1.0 1.0 1\n" + "Hestia 0.8 0.5 0.5 1\n" + "Icarus 1.1 0.9 0.9 2\n"
+					+ "Iris 0.7 0.4 0.4 1\n" + "Janus 1.2 1.0 1.0 1\n" + "Metis 0.8 0.6 0.6 1\n"
+					+ "Nemesis 1.1 1.0 1.0 2\n" + "Pan 0.7 0.5 0.5 2\n" + "Perseus 1.3 1.2 1.1 0\n"
+					+ "Tethys 1.1 1.0 1.0 2\n" + "Themis 0.7 0.4 0.4 1\n" + "Zeus 1.2 1.1 1.0 1\n"
+					+ "Hephaestus 1.1 0.9 0.9 2\n" + "Nyx 0.7 0.4 0.4 1\n" + "Achilles 1.2 1.0 1.0 1\n"
+					+ "Ariadne 0.8 0.5 0.5 1\n";
 
 			createFileAndWrite(path, text);
 			// throw new FileNotFoundException("Datei: " + "./" + Game.SUNCREATEPATH + "

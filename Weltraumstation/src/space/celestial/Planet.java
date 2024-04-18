@@ -1,21 +1,10 @@
 package space.celestial;
 
 import java.util.LinkedList;
-
 import space.buildable.SpaceStation;
-import space.celestial.star.Sun;
 import space.environment.atmosphere.Atmosphere;
-import space.environment.atmosphere.NormalAtmosphere;
 import space.environment.terrain.Terrain;
-import space.inventory.resource.Banana;
-import space.inventory.resource.BlueBerry;
-import space.inventory.resource.Copper;
-import space.inventory.resource.Crystal;
-import space.inventory.resource.Iron;
-import space.inventory.resource.RawChicken;
 import space.inventory.resource.Resource;
-import space.inventory.resource.StrawBerry;
-import space.inventory.resource.Titan;
 import space.lifeform.LifeformObject;
 
 
@@ -34,13 +23,12 @@ public class Planet extends CelestialObject{
 	private Atmosphere atmosphere;
 	
 	
-	public Planet(String name, double size, double mass, double radius,
-			double gravity, Atmosphere atmosphere, Terrain terrain) {
+	public Planet(String name, double size, double mass, double gravity, Atmosphere atmosphere, Terrain terrain) {
 		super.setType("Planet");
 		this.name = name;
 		this.size = size;
 		this.mass = mass;
-		this.radius = radius;
+		this.radius = size/2;
 		this.gravity = gravity;
 		this.atmosphere = atmosphere;
 		this.terrain = terrain;
@@ -76,10 +64,9 @@ public class Planet extends CelestialObject{
 	}
 	
 	
-	public Moon addMoon(String name, double size, double mass, double radius,
-			double gravity, Atmosphere atmosphere) {
+	public Moon addMoon(String name, double size, double mass, double gravity, Atmosphere atmosphere) {
 		
-		Moon moon = new Moon(name, size, mass, radius, gravity, atmosphere);
+		Moon moon = new Moon(name, size, mass, gravity, atmosphere);
 		moons.add(moon);
 		return moon;
 	}

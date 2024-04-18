@@ -9,6 +9,7 @@ public abstract class Sun extends CelestialObject{
 	private String name;
     private double mass; 
     private double radius; 
+    private double size;
     private double temperature; 
     private double luminosity;
 
@@ -17,6 +18,7 @@ public abstract class Sun extends CelestialObject{
     	this.name=name;
     	this.mass=mass;
     	this.radius=radius;
+    	this.size=radius*2;
     	this.temperature=temperature;
     	this.luminosity=luminosity;
     }
@@ -38,6 +40,7 @@ public abstract class Sun extends CelestialObject{
 		information.add("Typ <" + getType()+">");
 		information.add("Masse <" + mass+">");
 		information.add("Radius <" + radius+">");
+		information.add("Größe <" + size+">");
 		information.add("Temperatur <" + temperature + ">");
 		information.add("Helligkeit <" + luminosity+">");
 

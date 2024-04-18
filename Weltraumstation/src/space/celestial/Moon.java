@@ -19,13 +19,12 @@ public class Moon extends CelestialObject{
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
 	
-	public Moon(String name, double size, double mass, double radius,
-			double gravity, Atmosphere atmosphere) {
+	public Moon(String name, double size, double mass, double gravity, Atmosphere atmosphere) {
 		super.setType("Mond");
 		this.name=name;
 		this.size=size;
 		this.mass=mass;
-		this.radius=radius;
+		this.radius=size/2;
 		this.gravity=gravity;
 		this.atmosphere=atmosphere;
 		this.resources= new LinkedList<>();
