@@ -7,7 +7,15 @@ import space.celestial.star.Sun;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.atmosphere.NormalAtmosphere;
 import space.environment.terrain.Terrain;
+import space.inventory.resource.Banana;
+import space.inventory.resource.BlueBerry;
+import space.inventory.resource.Copper;
+import space.inventory.resource.Crystal;
+import space.inventory.resource.Iron;
+import space.inventory.resource.RawChicken;
 import space.inventory.resource.Resource;
+import space.inventory.resource.StrawBerry;
+import space.inventory.resource.Titan;
 import space.lifeform.LifeformObject;
 
 
@@ -117,6 +125,6 @@ public class Planet extends CelestialObject{
 		return information;
 		
 	}
-
+	
 	
 }

@@ -19,6 +19,16 @@ import space.environment.terrain.Swamp;
 import space.environment.terrain.Terrain;
 import space.environment.terrain.Tundra;
 import space.environment.terrain.Volcano;
+import space.inventory.resource.Banana;
+import space.inventory.resource.BlueBerry;
+import space.inventory.resource.Copper;
+import space.inventory.resource.Crystal;
+import space.inventory.resource.Iron;
+import space.inventory.resource.RawChicken;
+import space.inventory.resource.Resource;
+import space.inventory.resource.StrawBerry;
+import space.inventory.resource.Titan;
+import space.lifeform.LifeformObject;
 import space.celestial.star.MainSequenceStar;
 import space.celestial.Planet;
 import space.celestial.star.BlueGiant;
@@ -143,6 +153,7 @@ public class Universe {
 		suns.add(new SuperGiant());
 		
 	}
+	
 	
 	public LinkedList<Sun> getSuns() {
 		return suns;

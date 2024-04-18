@@ -4,32 +4,11 @@ import space.inventory.item.food.Eatable;
 
 public abstract class RawFood extends Resource implements Eatable{
 
-	public RawFood(String name, int quality) {
+	public RawFood(String name, String quality) {
 		super(name, quality);
 	}
+	
 
 
-	@Override
-	public void collect() {
-		
-	}
-
-
-	@Override
-	public void eat() {
-		
-	}
-
-
-	@Override
-	public void drop() {
-		
-	}
-
-
-	@Override
-	public void use() {
-		
-	}
 
 }

@@ -8,12 +8,9 @@ public class RedDwarf extends Sun{
 	}
 	
 	public RedDwarf() {
-		super();
+		super.setType("Roter Zwerg");
 	}
 
-	@Override
-	public String getType() {
-		return "Roter Zwerg";
-	}
+
 
 }

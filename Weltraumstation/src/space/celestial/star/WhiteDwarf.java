@@ -8,12 +8,8 @@ public class WhiteDwarf extends Sun{
 	}
 	
 	public WhiteDwarf() {
-		super();
+		super.setType("Weißer Zwerg");
 	}
 
-	@Override
-	public String getType() {
-		return "Weißer Zwerg";
-	}
 
 }

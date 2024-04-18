@@ -8,13 +8,8 @@ public class SuperGiant extends Sun{
 	}
 	
 	public SuperGiant() {
-		super();
+		super.setType("Superriese");
 	}
 
-
-	@Override
-	public String getType() {
-		return "Superriese";
-	}
 
 }

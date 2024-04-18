@@ -8,12 +8,8 @@ public class BlueGiant extends Sun{
 	}
 	
 	public BlueGiant() {
-		super();
+		super.setType("Blauer Riese");
 	}
 
-	@Override
-	public String getType() {	
-		return "Blauer Riese";
-	}
 
 }

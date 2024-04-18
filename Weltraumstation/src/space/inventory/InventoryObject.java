@@ -16,5 +16,17 @@ public abstract class InventoryObject implements Droppable, Useable, Collectable
 		this.type = type;
 		
 	}
+	
+	
+	@Override
+	public void collect() {
+		
+	}
+
+	@Override
+	public void drop() {
+		
+	}
+	
 
 }

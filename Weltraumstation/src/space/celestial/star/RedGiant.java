@@ -9,12 +9,9 @@ public class RedGiant extends Sun{
 	}
 
 	public RedGiant() {
-		super();
+		super.setType("Roter Riese");
 	}
 	
-	@Override
-	public String getType() {
-		return "Roter Riese";
-	}
+
 
 }
