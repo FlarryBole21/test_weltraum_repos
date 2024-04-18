@@ -1,6 +1,22 @@
-package immaterial;
+package immaterial.oracle;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 public abstract class FileOracle extends Oracle{
+	
+	private final static String PLANETCREATEPATH = "data/planetCreate";
+	private final static String SUNCREATEPATH = "data/sunCreate";
+	private final static String MOONCREATEPATH = "data/moonCreate";
+	private final static File[] FILES = { new File("./" + PLANETCREATEPATH + ".txt"),
+			new File("./" + SUNCREATEPATH + ".txt"), new File("./" + MOONCREATEPATH + ".txt")
+
+	};
+
 
 	private final static String PLANETDATA = "Terra 1.0 1.0 1.0 1 7\n" + "Draconis 0.8 0.6 0.7 0 3\n"
 			+ "Gaia 1.2 1.2 1.1 2 9\n" + "Aetheria 0.9 0.5 0.6 1 5\n" + "Novaria 1.1 1.3 1.2 1 8\n"
@@ -65,6 +81,58 @@ public abstract class FileOracle extends Oracle{
 
 	public static String getMoondata() {
 		return MOONDATA;
+	}
+	
+	public static String getPlanetCreatePath() {
+		return PLANETCREATEPATH;
+	}
+
+	public static String getSunCreatePath() {
+		return SUNCREATEPATH;
+	}
+
+	public static String getMoonCreatePath() {
+		return MOONCREATEPATH;
+	}
+
+	public static void testFiles() throws IOException {
+
+		String[] textData = new String[FILES.length];
+		textData[0] = FileOracle.getPlanetdata();
+		textData[1] = FileOracle.getSundata();
+		textData[2] = FileOracle.getMoondata();
+
+		for (int i = 0; i < FILES.length; i++) {
+			if (!FILES[i].exists()) {
+				createFileAndWrite(FILES[i], textData[i]);
+			}
+		}
+	}
+	
+	public static void createFileAndWrite(File path, String text) throws IOException {
+		path.createNewFile();
+		FileWriter writer = new FileWriter(path);
+		writer.write(text);
+		writer.close();
+
+	}
+	
+	public static LinkedList<String> readFile(String path) {
+		LinkedList<String> rows = null;
+		try {
+			File datei = new File(path);
+			Scanner scanner = new Scanner(datei);
+			rows = new LinkedList<>();
+			while (scanner.hasNextLine()) {
+				rows.add(scanner.nextLine());
+			}
+			scanner.close();
+			return rows;
+		} catch (FileNotFoundException e) {
+			System.out.println("Datei nicht gefunden: " + e.getMessage());
+		}
+
+		return rows;
 	}
 
 }

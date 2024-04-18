@@ -1,4 +1,4 @@
-package immaterial;
+package immaterial.oracle;
 
 import java.util.Scanner;
 

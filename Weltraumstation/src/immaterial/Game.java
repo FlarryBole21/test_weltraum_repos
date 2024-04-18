@@ -1,12 +1,13 @@
 package immaterial;
 
-import java.io.File;
+
+
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Scanner;
 
+import immaterial.oracle.AskOracle;
+import immaterial.oracle.FileOracle;
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
@@ -15,19 +16,12 @@ import space.celestial.star.MainSequenceStar;
 
 public class Game {
 
-	private final static String PLANETCREATEPATH = "data/planetCreate";
-	private final static String SUNCREATEPATH = "data/sunCreate";
-	private final static String MOONCREATEPATH = "data/moonCreate";
-	private final static File[] FILES = { new File("./" + Game.PLANETCREATEPATH + ".txt"),
-			new File("./" + Game.SUNCREATEPATH + ".txt"), new File("./" + Game.MOONCREATEPATH + ".txt")
-
-	};
-
+	
 	private Universe universe;
 
 	public static void main(String[] args) {
 		try {
-			testFiles();
+			FileOracle.testFiles();
 			Game game = new Game();
 			game.start();
 			game.mainLoop();
@@ -63,9 +57,9 @@ public class Game {
 		System.out.print("Bitte gebe dem Universum einen Namen: ");
 		input = scanner.nextLine();
 		universe = new Universe(input);
-		universe.setPlanetdata(readFile(Game.PLANETCREATEPATH + ".txt"));
-		universe.setSundata(readFile(Game.SUNCREATEPATH + ".txt"));
-		universe.setMoondata(readFile(Game.MOONCREATEPATH + ".txt"));
+		universe.setPlanetdata(FileOracle.readFile(FileOracle.getPlanetCreatePath() + ".txt"));
+		universe.setSundata(FileOracle.readFile(FileOracle.getSunCreatePath()+ ".txt"));
+		universe.setMoondata(FileOracle.readFile(FileOracle.getMoonCreatePath() + ".txt"));
 		System.out.println("Als Zweites brauchen wir eine Galaxie!");
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
 		input = scanner.nextLine();
@@ -265,44 +259,6 @@ public class Game {
 
 	}
 
-	public static LinkedList<String> readFile(String path) {
-		LinkedList<String> rows = null;
-		try {
-			File datei = new File(path);
-			Scanner scanner = new Scanner(datei);
-			rows = new LinkedList<>();
-			while (scanner.hasNextLine()) {
-				rows.add(scanner.nextLine());
-			}
-			scanner.close();
-			return rows;
-		} catch (FileNotFoundException e) {
-			System.out.println("Datei nicht gefunden: " + e.getMessage());
-		}
-
-		return rows;
-	}
-
-	public static void testFiles() throws IOException {
-
-		String[] textData = new String[FILES.length];
-		textData[0] = FileOracle.getPlanetdata();
-		textData[1] = FileOracle.getSundata();
-		textData[2] = FileOracle.getMoondata();
-
-		for (int i = 0; i < FILES.length; i++) {
-			if (!FILES[i].exists()) {
-				createFileAndWrite(FILES[i], textData[i]);
-			}
-		}
-	}
-
-	public static void createFileAndWrite(File path, String text) throws IOException {
-		path.createNewFile();
-		FileWriter writer = new FileWriter(path);
-		writer.write(text);
-		writer.close();
-
-	}
+	
 
 }
