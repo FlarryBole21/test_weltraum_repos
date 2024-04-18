@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 import immaterial.oracle.AskOracle;
 import immaterial.oracle.FileOracle;
+import immaterial.oracle.ResourceOracle;
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
 import space.celestial.Planet;
 import space.celestial.star.MainSequenceStar;
-import space.inventory.resource.Crystal;
 
 public class Game {
 
@@ -48,6 +48,7 @@ public class Game {
 		setSolar(scanner, galaxy);
 		AskOracle.askUniverseInfo(scanner, galaxy);
 		AskOracle.askSunSystemInfo(scanner, galaxy);
+		AskOracle.askMoonInfo(scanner, galaxy);
 
 	}
 
@@ -140,7 +141,7 @@ public class Game {
 					errorCount++;
 				}
 
-				if (errorCount >= 50) {
+				if (errorCount >= 100) {
 					throw new RuntimeException("Planeten konnten nicht ordungsgemäß erstellt werden!");
 				}
 			}
@@ -184,7 +185,7 @@ public class Game {
 				} else {
 					errorCount++;
 				}
-				if (errorCount >= 50) {
+				if (errorCount >= 100) {
 					throw new RuntimeException("Sonnen konnten nicht ordungsgemäß erstellt werden!");
 				}
 			}
@@ -233,8 +234,8 @@ public class Game {
 						errorCount++;
 					}
 
-					if (errorCount >= 50) {
-						throw new RuntimeException("Planeten konnten nicht ordungsgemäß erstellt werden!");
+					if (errorCount >= 100) {
+						throw new RuntimeException("Monde konnten nicht ordungsgemäß erstellt werden!");
 					}
 
 				}
@@ -252,46 +253,48 @@ public class Game {
 	
 	public void resourcesToPlanets(SolarSystem solarsystem) {
 		
-		int randomResourceNumber = 0;
+		int randomResourceNumber = (int) (Math.random() * (3));
 
 		for(int i=0; i < solarsystem.getPlanets().size(); i++) {
 			
 			switch (solarsystem.getPlanets().get(i).getTerrain().getType()) {
             case "Canyon":
-            	randomResourceNumber = (int) (Math.random() * (5));
-                if(randomResourceNumber == 0) {
-                	solarsystem.getPlanets().get(i).
-                	addResource(new Crystal(1));
-                }
+            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
                 break;
             case "Krater":
-                System.out.println("You chose option 2");
+            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
                 break;
             case "Wüste":
-                System.out.println("You chose option 3");
+            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
+            	break;
             case "Grassland":
-                System.out.println("You chose option 4");
+            	ResourceOracle.addResourcesCategoryB(solarsystem, i);
                 break;
             case "Dschungel":
-                System.out.println("You chose option 5");
+            	ResourceOracle.addResourcesCategoryC(solarsystem, i);
                 break;
             case "Berge":
-                System.out.println("You chose option 6");
+            	ResourceOracle.addResourcesCategoryD(solarsystem, i);
                 break;
             case "Normaler Wald":
-                System.out.println("You chose option 7");
+            	if(randomResourceNumber == 2) {
+            		ResourceOracle.addResourcesCategoryD(solarsystem, i);
+            	}else {
+            		ResourceOracle.addResourcesCategoryB(solarsystem, i);
+            	}
+            	
                 break;
             case "Savanne":
-                System.out.println("You chose option 8");
+            	ResourceOracle.addResourcesCategoryC(solarsystem, i);
                 break;
             case "Sumpf":
-                System.out.println("You chose option 9");
+            	ResourceOracle.addResourcesCategoryB(solarsystem, i);
                 break;
             case "Tundra":
-                System.out.println("You chose option 10");
+            	ResourceOracle.addResourcesCategoryD(solarsystem, i);
                 break;
             case "Vulkangebiet":
-                System.out.println("You chose option 11");
+            	ResourceOracle.addResourcesCategoryA(solarsystem, i);
                 break;
             default:
             	throw new RuntimeException("Planeten hat einen ungültigen Terrain-Typ!");

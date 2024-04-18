@@ -20,12 +20,12 @@ public abstract class FileOracle extends Oracle{
 	private final static String PLANETDATA = "Terra 1.0 1.0 1.0 1 7\n" + "Draconis 0.8 0.6 0.7 0 3\n"
 			+ "Gaia 1.2 1.2 1.1 2 9\n" + "Aetheria 0.9 0.5 0.6 1 5\n" + "Novaria 1.1 1.3 1.2 1 8\n"
 			+ "Vulcan 0.7 0.4 0.5 0 2\n" + "Eden 1.3 1.5 1.3 2 6\n" + "Oasis 1.0 0.9 0.9 1 4\n"
-			+ "Inferno 0.6 0.3 0.4 0 7\n" + "Aurora 1.2 1.1 1.1 0 9\n" + "Celestia 0.8 0.7 0.7 1 1\n"
+			+ "Inferno 0.6 0.3 0.4 0 0\n" + "Aurora 1.2 1.1 1.1 0 9\n" + "Celestia 0.8 0.7 0.7 1 1\n"
 			+ "Serenity 1.0 0.8 0.8 0 6\n" + "Titan 0.9 0.6 0.6 1 3\n" + "Zephyr 1.1 1.0 1.0 2 8\n"
-			+ "Infernum 0.7 0.5 0.5 2 4\n" + "Seraphim 1.3 1.2 1.1 2 5\n" + "Phoenix 0.8 0.6 0.6 0 7\n"
+			+ "Infernum 0.7 0.5 0.5 2 4\n" + "Seraphim 1.3 1.2 1.1 2 5\n" + "Phoenix 0.8 0.6 0.6 0 0\n"
 			+ "Elysium 1.2 1.1 1.1 0 2\n" + "Nemesis 0.9 0.7 0.7 0 8\n" + "Halcyon 1.1 0.9 0.9 1 1\n"
 			+ "Helios 0.7 0.4 0.4 1 3\n" + "Arcadia 1.2 1.0 1.0 1 9\n" + "Abyss 0.8 0.5 0.5 1 6\n"
-			+ "Zenith 1.1 0.9 0.9 2 4\n" + "Aeolus 1.2 1.1 1.0 2 8\n" + "Hades 0.8 0.6 0.6 0 5\n"
+			+ "Zenith 1.1 0.9 0.9 2 0\n" + "Aeolus 1.2 1.1 1.0 2 8\n" + "Hades 0.8 0.6 0.6 0 5\n"
 			+ "Utopia 1.1 1.0 1.0 2 7\n" + "Olympus 0.7 0.4 0.4 1 3\n";
 
 	private final static String SUNDATA = "Sol 1.0 1.0 5778 1.0 4\n" + "Sirius 2.0 1.5 9940 23.6 1\n"

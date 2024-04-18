@@ -1,6 +1,9 @@
 package space.celestial;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
+
 import space.buildable.SpaceStation;
 import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
@@ -96,6 +99,36 @@ public class Planet extends CelestialObject{
 		
 	}
 	
+	public LinkedList<Resource> getResource() {
+		return this.resources;
+	}
+	
+	public LinkedList<String> getResourceNames() {
+	    LinkedList<String> names = new LinkedList<>();
+	    Set<String> countedTypes = new HashSet<>(); 
+	    for (int i = 0; i < getResource().size(); i++) {
+	        Resource currentResource = getResource().get(i);
+	        String type = currentResource.getType();
+	        if (!countedTypes.contains(type)) {
+	            names.add(type + " <" + countResources(currentResource) + ">");
+	            countedTypes.add(type); 
+	        }
+	    }
+	    return names;
+	}
+
+
+	public int countResources(Resource resource) {
+	    int count = 0;
+	    for (int i = 0; i < getResource().size(); i++) {
+	        if (getResource().get(i).getType().equals(resource.getType())) {
+	            count++;
+	        }
+	    }
+	    return count;
+	}
+
+	
 	public LinkedList<String> getMoonNames() {
 		LinkedList<String> names = new LinkedList<>();
 		for (int i = 0; i < getMoons().size(); i++) {
@@ -117,6 +150,11 @@ public class Planet extends CelestialObject{
 			information.add("Monde <" + getMoonsNames() +">");
 		}else {
 			information.add("Monde <Keine Monde vorhanden!>");
+		}
+		if(getResource().size() != 0) {
+			information.add("Ressourcen <" + getResourceNames() +">");
+		}else {
+			information.add("Ressourcen <Keine Ressourcen vorhanden!>");
 		}
 		information.add("Zugehöriger Hauptsequenzstern <" + mainstar.getName()+">");
 		
