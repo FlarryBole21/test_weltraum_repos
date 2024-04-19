@@ -93,6 +93,7 @@ public class Game {
 		System.out.println("Du befindest dich zur Zeit in einem Raumschiff <"+
 		player.getCurrentShip().getType() + "> am Planeten " + planet.getName());
 		System.out.println("im System "+ player.getCurrentSystem().getName());
+		INPUTORACLE.printBreakLineMultiple();
 		MAINACTIONORACLE.setGame(this);
 		MAINACTIONORACLE.setScanner(scanner);
 		MAINACTIONORACLE.run();

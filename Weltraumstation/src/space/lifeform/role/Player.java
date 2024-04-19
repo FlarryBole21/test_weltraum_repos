@@ -9,13 +9,15 @@ import space.SolarSystem;
 import space.Upgradable;
 import space.buildable.ship.BattleShip;
 import space.buildable.ship.Ship;
+import space.celestial.Moon;
+import space.celestial.Planet;
 import space.inventory.Collectable;
+import space.inventory.InventoryObject;
 import space.lifeform.Human;
 import space.lifeform.Killable;
 
 public class Player extends Human implements Upgradable, Killable{
 	
-	private LinkedList<Collectable> inventory;
 	private String name;
 	private int miningLevel;
 	private int harvestLevel;
@@ -27,6 +29,9 @@ public class Player extends Human implements Upgradable, Killable{
 	private SolarSystem currentSystem;
 	private Enterable currentPlace;
 	private Ship currentShip;
+	private LinkedList<InventoryObject> inventory;
+	private LinkedList<Planet> visitedPlanets;
+	private LinkedList<Moon> visitedMoons;
 
 	public Player(String name) {
 		super(3, 10);
@@ -41,6 +46,40 @@ public class Player extends Human implements Upgradable, Killable{
 		this.buildingLevel = 1;
 		this.statusEffect = new Normal();
 		this.currentShip = new BattleShip(10, 10, 100);
+		this.visitedPlanets = new LinkedList<>();
+		this.visitedMoons = new LinkedList<>();
+	}
+	
+	public boolean getShipBool() {
+		if(currentShip instanceof Ship) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public LinkedList<String> getInventoryNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getInventory().size(); i++) {
+			names.add(getInventory().get(i).getType());
+		}
+		return names;
+	}
+	
+	public LinkedList<String> getVisitedPlanetNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getVisitedPlanets().size(); i++) {
+			names.add(getVisitedPlanets().get(i).getType());
+		}
+		return names;
+	}
+	
+	public LinkedList<String> getMoonNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getVisitedMoons().size(); i++) {
+			names.add(getVisitedMoons().get(i).getType());
+		}
+		return names;
 	}
 	
 	public Ship getCurrentShip() {
@@ -67,11 +106,27 @@ public class Player extends Human implements Upgradable, Killable{
 		this.currentPlace = currentPlace;
 	}
 	
-	public LinkedList<Collectable> getInventory() {
+	public LinkedList<InventoryObject> getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(LinkedList<Collectable> inventory) {
+	public LinkedList<Planet> getVisitedPlanets() {
+		return visitedPlanets;
+	}
+
+	public void setVisitedPlanets(LinkedList<Planet> visitedPlanets) {
+		this.visitedPlanets = visitedPlanets;
+	}
+
+	public LinkedList<Moon> getVisitedMoons() {
+		return visitedMoons;
+	}
+
+	public void setVisitedMoons(LinkedList<Moon> visitedMoons) {
+		this.visitedMoons = visitedMoons;
+	}
+
+	public void setInventory(LinkedList<InventoryObject> inventory) {
 		this.inventory = inventory;
 	}
 
@@ -137,6 +192,39 @@ public class Player extends Human implements Upgradable, Killable{
 	
 	public void setStatusEffect(Effect statusEffect) {
 	     this.statusEffect = statusEffect;
+	}
+	
+	public LinkedList<String> getInformation() {
+		LinkedList<String> information = new LinkedList<>();
+		information.add("Name <" + name+">");
+		information.add("Stärke <" + super.getStrength()+">");
+		information.add("Lebenspunkte <" + super.getHealth()+">");
+		information.add("Typ <" + super.getType()+">");
+		information.add("Bergbau-Level <" + miningLevel+">");
+		information.add("Farm-Level <" + harvestLevel+">");
+		information.add("Holzfäller-Level <" + woodCuttingLevel+">");
+		information.add("Koch-Level <" + cookingLevel+">");
+		information.add("Crafting-Level <" + craftingLevel+">");
+		information.add("Bau-Level <" + buildingLevel+">");
+		information.add("Aktueller Status-Effekt <" + statusEffect.getType()+">");
+		information.add("Im Schiff <" + getShipBool()+">");
+		if(getInventoryNames().size() != 0) {
+			information.add("Inventar <" + getInventoryNames() +">");
+		}else {
+			information.add("Inventar <Inventar ist leer!>");
+		}
+		if(getVisitedPlanetNames().size() != 0) {
+			information.add("Besuchte Planeten <" + getVisitedPlanetNames() +">");
+		}else {
+			information.add("Besuchte Planeten <Keine Planeten besucht!>");
+		}
+		if(getMoonNames().size() != 0) {
+			information.add("Besuchte Monde <" + getMoonNames() +">");
+		}else {
+			information.add("Besuchte Monde <Keine Monde besucht!>");
+		}
+		return information;
+		
 	}
 
 	@Override

@@ -54,19 +54,41 @@ public class MainActionOracle extends ActionOracle{
 	}
 
 	@Override
-	public void run() throws RuntimeException{
+	public void run() throws RuntimeException {
 		testBeforeMain();
 		String input;
+		Player player = getGame().getPlayer();
 		while(true) {
-			System.out.print(
-					"Was möchtest du jetzt machen? "
-					+ "(1 -> Charakter-Info einsehen, "
-					+ "2 -> Orts-Info einsehen, "
-					+ "3 -> Planeten betreten,"
-					+ "4 -> Zum anderen Planeten reisen"
-					+ "5 -> Spiel beenden");
+			System.out.println("Was möchtest du jetzt machen?");
+			System.out.println("0 -> Spiel beenden");
+			System.out.println("1 -> Charakter-Info einsehen");
+			System.out.println("2 -> Orts-Info einsehen");
+			System.out.println("3 -> Anliegenden lokalen Ort betreten");
+			System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
+			System.out.println("5 -> Zum anderen Planeten reisen");
 			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
-			if(input.equals("5")) {
+			
+			if(input.equals("0")) {
+			    break;
+			}else if(input.equals("1")) {
+			    while(true) {
+			    	Game.INPUTORACLE.printBreakLineMultiple();
+				    for(String information: player.getInformation()) {
+				    	System.out.println(information);
+				    }
+				    Game.INPUTORACLE.printBreakLineMultiple();
+				    boolean output = Game.ASKORACLE.returnBackToPreviousMenu(scanner);
+				    if(output) {
+				    	break;
+				    }
+			    }
+			}else if(input.equals("2")) {
+			    break;
+			}else if(input.equals("3")) {
+			    break;
+			}else if(input.equals("4")) {
+			    break;
+			}else if(input.equals("5")) {
 			    break;
 			}
 

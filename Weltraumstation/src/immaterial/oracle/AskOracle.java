@@ -240,6 +240,18 @@ public class AskOracle extends Oracle{
 		
 	}
 	
+	public boolean returnBackToPreviousMenu(Scanner scanner) {
+		String input;
+		System.out.println("Zurück zum vorherigen Menü? "
+    			+ "1 -> Zurück, Irgendwas anderes -> Noch nicht");
+    	input = Game.INPUTORACLE.inputEmptyCheck(scanner);
+    	if(input.equals("1")) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+	}
+	
 
 
 	
