@@ -128,6 +128,10 @@ public abstract class ResourceOracle extends Oracle {
 	private static Neutronium getNeutronium() {
 		return new Neutronium(LEVEL8,5);
 	}
+	
+	private static Neutronium getWaterMelon() {
+		return new Neutronium(LEVEL7,100);
+	}
 
 	public static void basicResources(SolarSystem solarsystem, int planetNumber) {
 		solarsystem.getPlanets().get(planetNumber).addResource(getCrystal());
@@ -203,6 +207,7 @@ public abstract class ResourceOracle extends Oracle {
 			solarsystem.getPlanets().get(planetNumber).addResource(getMango());
 		}
 		if(randomResourceNumber >= 2) {
+			solarsystem.getPlanets().get(planetNumber).addResource(getWaterMelon());
 			solarsystem.getPlanets().get(planetNumber).addResource(getNanite());
 		}
 		if(randomResourceNumber >= 2 && randomResourceNumber2 == 1) {
