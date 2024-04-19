@@ -45,9 +45,9 @@ public class Game {
 		} catch (Exception e) {
 		    System.err.println("Exception --> " + e.getMessage() + "!");
 		} finally {
-		    System.out.println("------------------------------");
+			INPUTORACLE.printBreakLine();
 		    System.out.println("Programm wird beendet!");
-		    System.out.println("------------------------------");
+		    INPUTORACLE.printBreakLine();
 		}
 
 
@@ -71,6 +71,7 @@ public class Game {
 		+ "> und im System <" + start.getSolarsystem().getName()+">");
 		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
 		System.out.println("und versuche zu überleben, denn du bist nicht der Einzige in dieser Welt");
+		INPUTORACLE.printBreakLine();
 		System.out.println("Hauptspiel wird nun gestartet... Bitte warten...");
 		scanner.close();
 		

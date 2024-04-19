@@ -4,12 +4,13 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Scanner;
 
+import immaterial.Game;
 import space.Galaxy;
 import space.SolarSystem;
 import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.star.Sun;
-import space.lifeform.role.Player;
+
 
 public class AskOracle extends Oracle{
 	
@@ -20,7 +21,7 @@ public class AskOracle extends Oracle{
 	
 	public void askUniverseInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
-		System.out.println("-------------------------------------");
+		Game.INPUTORACLE.printBreakLineBefore();
 		System.out.println("Universum-, Galaxie- & Sonnensystem-Daten einsehen?");
 		System.out.print(
 				"(1 -> Infos einsehen, Irgendwas anderes -> Keine Infos): ");
@@ -33,13 +34,14 @@ public class AskOracle extends Oracle{
 				System.out.println("Sonnensystem <"+ solarsystem.getName() +">");
 			}
 		}
+		Game.INPUTORACLE.printBreakLineAfter();
 	}
 	
 	
 	public void askSunSystemInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		int count=0;
-		System.out.println("-------------------------------------");
+		Game.INPUTORACLE.printBreakLineBefore();
 		System.out.println("Planten-, Sonnen- Daten einsehen?");
 		System.out.print(
 				"(1 -> Infos einsehen (Nur Namen), 2 -> Infos einsehen (Mehr Details), Irgendwas anderes -> Keine Infos): ");
@@ -94,13 +96,14 @@ public class AskOracle extends Oracle{
 			}
 
 		}
+		Game.INPUTORACLE.printBreakLineAfter();
 
 	}
 	
 	
 	public void askMoonInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
-		System.out.println("-------------------------------------");
+		Game.INPUTORACLE.printBreakLineBefore();
 		System.out.println("Mond-Daten einsehen?");
 		System.out.print(
 				"(1 -> Infos einsehen (Nur Namen), 2 -> Infos einsehen (Mehr Details), Irgendwas anderes -> Keine Infos): ");
@@ -156,12 +159,15 @@ public class AskOracle extends Oracle{
 				System.out.println();
 			}
 		}
+		Game.INPUTORACLE.printBreakLineAfter();
+		
 	}
 	
 	
 	public Planet askDestinationStart(Scanner scanner,Galaxy galaxy) {
 		String input;
 		Planet start = null;
+		Game.INPUTORACLE.printBreakLineBefore();
 		LinkedList<SolarSystem> solarsystems = galaxy.getSolarSystems();
 		if(solarsystems.size() > 1) {
 			System.out.println("Zu welchem Sonnensystem möchtest du reisen?");
@@ -213,7 +219,7 @@ public class AskOracle extends Oracle{
 			SolarSystem solarsystem = solarsystems.get(0);
 			start=checkNormalAtmosphere(solarsystem);
 		}
-		System.out.println();
+		Game.INPUTORACLE.printBreakLineAfter();
 		return start;
 	}
 	

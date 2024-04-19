@@ -76,12 +76,14 @@ public class CreateOracle extends Oracle{
 	
 	public Player setPlayer (Scanner scanner) throws RuntimeException {
 		String input;
+		Game.INPUTORACLE.printBreakLineBefore();
 		System.out.println("Als nächstes erstellen wir dich!, Du brauchst einen Namen!");
 		System.out.print("Wie heißt du?: ");
 		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		Player player = new Player(input);
 		System.out.println("Hallo " + input + "!");
 		System.out.println();
+		Game.INPUTORACLE.printBreakLineAfter();
 		return player;
 		
 	}

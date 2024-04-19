@@ -28,6 +28,21 @@ public class InputOracle extends Oracle{
             System.out.println();
         }
 	}
+	
+	
+	public void printBreakLine() {
+		System.out.println("--------------------------------------------------------------------------------------");
+	}
+	
+	public void printBreakLineBefore() {
+		System.out.println("--------------------------------------------------------------------------------------");
+		System.out.println();
+	}
+	
+	public void printBreakLineAfter() {
+		System.out.println();
+		System.out.println("--------------------------------------------------------------------------------------");
+	}
 
 
 }
