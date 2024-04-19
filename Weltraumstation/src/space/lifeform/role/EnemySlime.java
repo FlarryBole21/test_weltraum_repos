@@ -3,8 +3,8 @@ package space.lifeform.role;
 public class EnemySlime extends EnemyMonster{
 	
 
-	public EnemySlime(String name, int strength, int defense) {
-		super(name, strength, defense);
+	public EnemySlime(int strength, int defense) {
+		super(strength, defense);
 		super.setType("Feindlicher Schleim");
 	}
 

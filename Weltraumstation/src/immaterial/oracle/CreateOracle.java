@@ -13,6 +13,7 @@ import space.lifeform.role.Player;
 public class CreateOracle extends Oracle{
 	
 	private Universe universe;
+	private Player player;
 	
 	public CreateOracle() {
 		super.setType("Orakel der Kreation");
@@ -70,14 +71,16 @@ public class CreateOracle extends Oracle{
 
 	}
 	
-	public void setPlayer (Scanner scanner) throws RuntimeException {
+	public Player setPlayer (Scanner scanner) throws RuntimeException {
 		String input;
 		System.out.println("Als nächstes erstellen wir dich!, Du brauchst einen Namen!");
 		System.out.print("Wie heißt du?: ");
 		input = scanner.nextLine();
 		Player player = new Player(input);
+		this.player=player;
 		System.out.println("Hallo " + input + "!");
-		
+		System.out.println();
+		return player;
 		
 	}
 	
@@ -132,8 +135,11 @@ public class CreateOracle extends Oracle{
 					universe.getPlanetTerrains().get((Integer.valueOf(randomData[5]))));
 
 		}
+		
+		System.out.println();
 
 	}
+	
 
 	private void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) throws RuntimeException{
 		boolean mainStar = false;
@@ -320,6 +326,6 @@ public class CreateOracle extends Oracle{
 			}
 		}
 	}
-
+	
 
 }

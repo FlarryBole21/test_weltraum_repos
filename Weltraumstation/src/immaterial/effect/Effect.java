@@ -6,6 +6,7 @@ public abstract class Effect implements Typeable{
 	
 	private String type;
 	
+	
 	@Override
 	public String getType() {
 		return type;

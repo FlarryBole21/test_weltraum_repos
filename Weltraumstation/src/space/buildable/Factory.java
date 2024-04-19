@@ -9,6 +9,14 @@ public abstract class Factory extends Building{
 		this.level = 1;
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	@Override
 	public void demolition() {
 		

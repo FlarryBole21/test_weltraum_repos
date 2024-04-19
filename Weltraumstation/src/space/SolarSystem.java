@@ -66,6 +66,7 @@ public class SolarSystem {
 		
 		Planet planet = new Planet(name, size, mass, gravity, atmosphere, terrain);
 		planets.add(planet);
+		planet.setSolarsystem(this);
 		return planet;
 		
 	}

@@ -16,6 +16,7 @@ import space.Universe;
 import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.star.MainSequenceStar;
+import space.lifeform.role.Player;
 
 public class Game {
 
@@ -52,7 +53,15 @@ public class Game {
 		askOracle.askUniverseInfo(scanner, galaxy);
 		askOracle.askSunSystemInfo(scanner, galaxy);
 		askOracle.askMoonInfo(scanner, galaxy);
-
+		Player player = createOracle.setPlayer(scanner);
+		Planet start =askOracle.askDestinationStart(scanner,galaxy);
+		player.setCurrentPlace(start);
+		player.setCurrentSystem(start.getSolarsystem());
+		System.out.println("Du startest am Planeten <" + start.getName() 
+		+ "> und im System <" + start.getSolarsystem().getName()+">");
+		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
+		System.out.println("und versuche zu überleben, denn du bist nicht der Einzige in dieser Welt");
+		System.out.println("Hauptspiel wird nun gestartet...");
 	}
 
 

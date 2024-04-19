@@ -10,8 +10,8 @@ public abstract class EnemyMonster extends Monster implements Killable{
 	
 	private LinkedList<Droppable> drops;
 	
-	public EnemyMonster(String name, int strength, int defense) {
-		super(name, strength, defense);
+	public EnemyMonster(int strength, int defense) {
+		super(strength, defense);
 		this.drops = new LinkedList<>();
 	}
 

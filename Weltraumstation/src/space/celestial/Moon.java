@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import space.Enterable;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.terrain.Grassland;
 import space.environment.terrain.MoonCrater;
@@ -12,7 +13,7 @@ import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
-public class Moon extends CelestialObject{
+public class Moon extends CelestialObject implements Enterable{
 	
 	private String name;
 	private double size;
@@ -92,6 +93,12 @@ public class Moon extends CelestialObject{
 		information.add("Zugehöriger Planet <" + planet.getName()+">");
 		
 		return information;
+		
+	}
+
+
+	@Override
+	public void enter() {
 		
 	}
 

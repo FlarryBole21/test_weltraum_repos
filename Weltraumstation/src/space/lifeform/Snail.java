@@ -2,8 +2,8 @@ package space.lifeform;
 
 public class Snail extends KillableAnimal{
 
-	public Snail(String name, int strength, int defense) {
-		super(name, strength, defense);
+	public Snail(int strength, int defense) {
+		super(strength, defense);
 		super.setType("Schnecke");
 	}
 

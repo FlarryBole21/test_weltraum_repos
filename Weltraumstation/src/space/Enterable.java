@@ -1,4 +1,4 @@
-package space.environment.terrain;
+package space;
 
 public interface Enterable {
 	

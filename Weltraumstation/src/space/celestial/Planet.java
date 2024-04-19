@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import space.Enterable;
+import space.SolarSystem;
 import space.buildable.SpaceStation;
 import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
@@ -15,7 +17,7 @@ import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
 
-public class Planet extends CelestialObject{
+public class Planet extends CelestialObject implements Enterable{
 	
 	private String name;
 	private double size;
@@ -29,8 +31,9 @@ public class Planet extends CelestialObject{
 	private LinkedList<LifeformObject> lifeforms;
 	private Atmosphere atmosphere;
 	private MainSequenceStar mainstar;
+	private SolarSystem solarsystem;
 	
-	
+
 	public Planet(String name, double size, double mass, double gravity, Atmosphere atmosphere, PlanetTerrain planetTerrain) {
 		super.setType("Planet");
 		this.name = name;
@@ -69,6 +72,14 @@ public class Planet extends CelestialObject{
 	
 	public LinkedList<Moon> getMoons() {
 		return moons;
+	}
+	
+	public SolarSystem getSolarsystem() {
+		return solarsystem;
+	}
+
+	public void setSolarsystem(SolarSystem solarsystem) {
+		this.solarsystem = solarsystem;
 	}
 	
 	public LinkedList<String> getMoonsNames() {
@@ -147,6 +158,13 @@ public class Planet extends CelestialObject{
 		information.add("Zugehöriger Hauptsequenzstern <" + mainstar.getName()+">");
 		
 		return information;
+		
+	}
+	
+	
+
+	@Override
+	public void enter() {
 		
 	}
 	

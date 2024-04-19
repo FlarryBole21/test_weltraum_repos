@@ -12,6 +12,22 @@ public class SpaceStation extends Building{
 	private int capacity;
 	private int level;
 	
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public SpaceStation(int capacity) {
 		super.setType("Raumstation");
 		this.capacity = capacity;

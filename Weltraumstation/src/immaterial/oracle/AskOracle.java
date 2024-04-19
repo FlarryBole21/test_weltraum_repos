@@ -1,5 +1,7 @@
 package immaterial.oracle;
 
+import java.util.LinkedList;
+import java.util.Optional;
 import java.util.Scanner;
 
 import space.Galaxy;
@@ -7,6 +9,7 @@ import space.SolarSystem;
 import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.star.Sun;
+import space.lifeform.role.Player;
 
 public class AskOracle extends Oracle{
 	
@@ -153,6 +156,95 @@ public class AskOracle extends Oracle{
 				System.out.println();
 			}
 		}
+	}
+	
+	
+	public Planet askDestinationStart(Scanner scanner,Galaxy galaxy) {
+		String input;
+		Planet start = null;
+		LinkedList<SolarSystem> solarsystems = galaxy.getSolarSystems();
+		if(solarsystems.size() > 1) {
+			System.out.println("Zu welchem Sonnensystem möchtest du reisen?");
+		}
+		if(solarsystems.size() == 3) {
+			while (true) {
+				System.out.print(
+						"(1 -> " + solarsystems.get(0).getName()+", "
+						+ "2 -> "+ solarsystems.get(1).getName()+", "+"3 -> "+
+						solarsystems.get(2).getName()+"): ");
+				input = scanner.nextLine();
+				if (input.equals("1")) {
+					SolarSystem solarsystem = solarsystems.get(0);
+					start=checkNormalAtmosphere(solarsystem);
+					break;
+				}else if(input.equals("2")) {
+					SolarSystem solarsystem = solarsystems.get(1);
+					start=checkNormalAtmosphere(solarsystem);
+					break;
+					
+				}else if(input.equals("3")) {
+					SolarSystem solarsystem = solarsystems.get(2);
+					start=checkNormalAtmosphere(solarsystem);
+					break;	
+				}else {
+					System.err.println("Error --> Keine gültige Zahl!");
+				}
+			}
+		}else if(solarsystems.size() == 2) {
+			while (true) {
+				System.out.print(
+						"(1 -> " + solarsystems.get(0).getName()+", "
+						+ "2 -> "+ solarsystems.get(1).getName()+"): ");
+				input = scanner.nextLine();
+				if (input.equals("1")) {
+					SolarSystem solarsystem = solarsystems.get(0);
+					start=checkNormalAtmosphere(solarsystem);
+					break;
+				}else if(input.equals("2")) {
+					SolarSystem solarsystem = solarsystems.get(1);
+					start=checkNormalAtmosphere(solarsystem);
+					break;
+					
+				}else {
+					System.err.println("Error --> Keine gültige Zahl!");
+				}
+			}
+		}else if(solarsystems.size() == 1) {
+			SolarSystem solarsystem = solarsystems.get(0);
+			start=checkNormalAtmosphere(solarsystem);
+		}
+		System.out.println();
+		return start;
+	}
+	
+	
+	private Planet checkNormalAtmosphere(SolarSystem solarSystem) {
+		int randomIndex;
+		int errorCount=0;
+		Planet start = null;
+		while(true) {
+			randomIndex = (int) (Math.random() * (solarSystem.getPlanets().size()-1));
+			if(solarSystem.getPlanets().get(randomIndex).getAtmosphere().getType().equals("Normal")) {
+				start = solarSystem.getPlanets().get(randomIndex);
+				break;
+			}
+			errorCount++;
+			if(errorCount >= 10) {
+				Optional<Planet> planetOptional = solarSystem.getPlanets().stream()
+				        .filter(planet -> planet.getAtmosphere().getType().equals("Normal"))
+				        .findFirst();
+				
+				if (planetOptional.isPresent()) {
+				    start = planetOptional.get(); 
+				
+				} else {
+					throw new RuntimeException("Keine normale Atmosphäre im System vorhanden!");
+				}
+				
+			}
+		}
+		return start;
+		
 	}
 
 

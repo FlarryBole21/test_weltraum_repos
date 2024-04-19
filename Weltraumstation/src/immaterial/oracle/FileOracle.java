@@ -17,16 +17,17 @@ public class FileOracle extends Oracle {
 
 	};
 
-	private final static String PLANETDATA = "Terra 1.0 1.0 1.0 1 7\n" + "Draconis 0.8 0.6 0.7 0 3\n"
-			+ "Gaia 1.2 1.2 1.1 2 9\n" + "Aetheria 0.9 0.5 0.6 1 5\n" + "Novaria 1.1 1.3 1.2 1 8\n"
-			+ "Vulcan 0.7 0.4 0.5 0 2\n" + "Eden 1.3 1.5 1.3 2 6\n" + "Oasis 1.0 0.9 0.9 1 4\n"
-			+ "Inferno 0.6 0.3 0.4 0 0\n" + "Aurora 1.2 1.1 1.1 0 9\n" + "Celestia 0.8 0.7 0.7 1 1\n"
-			+ "Serenity 1.0 0.8 0.8 0 6\n" + "Titan 0.9 0.6 0.6 1 3\n" + "Zephyr 1.1 1.0 1.0 2 8\n"
-			+ "Infernum 0.7 0.5 0.5 2 4\n" + "Seraphim 1.3 1.2 1.1 2 5\n" + "Phoenix 0.8 0.6 0.6 0 0\n"
-			+ "Elysium 1.2 1.1 1.1 0 2\n" + "Nemesis 0.9 0.7 0.7 0 8\n" + "Halcyon 1.1 0.9 0.9 1 1\n"
+	private final static String PLANETDATA = "Terra 1.0 1.0 1.0 0 3\n" + "Draconis 0.8 0.6 0.7 1 1\n"
+			+ "Gaia 1.2 1.2 1.1 2 2\n" + "Aetheria 0.9 0.5 0.6 1 8\n" + "Novaria 1.1 1.3 1.2 2 8\n"
+			+ "Vulcan 0.7 0.4 0.5 1 10\n" + "Eden 1.3 1.5 1.3 0 6\n" + "Oasis 1.0 0.9 0.9 0 2\n"
+			+ "Inferno 0.6 0.3 0.4 1 10\n" + "Aurora 1.2 1.1 1.1 0 9\n" + "Celestia 0.8 0.7 0.7 0 1\n"
+			+ "Serenity 1.0 0.8 0.8 1 6\n" + "Agora 0.9 0.6 0.6 1 3\n" + "Zephyr 1.1 1.0 1.0 1 8\n"
+			+ "Infernum 0.7 0.5 0.5 2 10\n" + "Seraphim 1.3 1.2 1.1 2 5\n" + "Phoenix 0.8 0.6 0.6 1 10\n"
+			+ "Elysium 1.2 1.1 1.1 0 2\n" + "Nemesis 0.9 0.7 0.7 2 8\n" + "Halcyon 1.1 0.9 0.9 0 1\n"
 			+ "Helios 0.7 0.4 0.4 1 3\n" + "Arcadia 1.2 1.0 1.0 1 9\n" + "Abyss 0.8 0.5 0.5 1 6\n"
-			+ "Zenith 1.1 0.9 0.9 2 0\n" + "Aeolus 1.2 1.1 1.0 2 8\n" + "Hades 0.8 0.6 0.6 0 5\n"
-			+ "Utopia 1.1 1.0 1.0 2 7\n" + "Olympus 0.7 0.4 0.4 1 10\n";
+			+ "Zenith 1.1 0.9 0.9 2 0\n" + "Aeolus 1.2 1.1 1.0 0 0\n" + "Hades 0.8 0.6 0.6 2 5\n"
+			+ "Utopia 1.1 1.0 1.0 1 7\n" + "Olympus 0.7 0.4 0.4 1 5\n" + "Bambeya 1.2 0.6 0.3 1 7\n"
+			+ "Zestia 0.8 0.7 0.5 0 0\n" + "Homeria 1.3 0.7 0.6 0 0\n";
 
 	private final static String SUNDATA = "Sol 1.0 1.0 5778 1.0 4\n" + "Sirius 2.0 1.5 9940 23.6 1\n"
 			+ "Proxima 0.12 0.15 3042 0.0017 3\n" + "Alpha 1.5 2.0 10370 80.4 0\n"
@@ -64,11 +65,11 @@ public class FileOracle extends Oracle {
 			+ "Atlas 0.8 0.6 0.7 1 1\n" + "Eos 1.2 1.2 1.1 2 2\n" + "Helios 0.7 0.4 0.5 2 2\n"
 			+ "Artemis 1.3 1.5 1.3 1 0\n" + "Asteria 1.0 0.9 0.9 2 0\n" + "Cronus 0.6 0.3 0.4 1 1\n"
 			+ "Phoebe 1.2 1.1 1.1 2 2\n" + "Diana 0.8 0.7 0.7 1 1\n" + "Apollo 1.0 0.8 0.8 1 0\n"
-			+ "Aurora 0.9 0.6 0.6 1 0\n" + "Hyperion 1.1 1.0 1.0 2 1\n" + "Gaia 0.7 0.5 0.5 2 2\n"
+			+ "Aurome 0.9 0.6 0.6 1 0\n" + "Hyperion 1.1 1.0 1.0 2 1\n" + "Gama 0.7 0.5 0.5 2 2\n"
 			+ "Athena 1.3 1.2 1.1 0 0\n" + "Demeter 0.8 0.6 0.6 1 1\n" + "Hera 1.1 1.0 1.0 2 0\n"
 			+ "Eros 0.8 0.5 0.5 1 2\n" + "Hermes 1.2 1.0 1.0 1 0\n" + "Hestia 0.8 0.5 0.5 1 2\n"
 			+ "Icarus 1.1 0.9 0.9 2 2\n" + "Iris 0.7 0.4 0.4 1 1\n" + "Janus 1.2 1.0 1.0 1 2\n"
-			+ "Metis 0.8 0.6 0.6 1 1\n" + "Nemesis 1.1 1.0 1.0 2 0\n" + "Pan 0.7 0.5 0.5 2 0\n"
+			+ "Metis 0.8 0.6 0.6 1 1\n" + "Nemos 1.1 1.0 1.0 2 0\n" + "Pan 0.7 0.5 0.5 2 0\n"
 			+ "Perseus 1.3 1.2 1.1 0 0\n" + "Tethys 1.1 1.0 1.0 2 2\n" + "Themis 0.7 0.4 0.4 1 0\n"
 			+ "Zeus 1.2 1.1 1.0 1 0\n" + "Hephaestus 1.1 0.9 0.9 2 1\n" + "Nyx 0.7 0.4 0.4 1 1\n"
 			+ "Achilles 1.2 1.0 1.0 1 0\n" + "Ariadne 0.8 0.5 0.5 1 1\n";
