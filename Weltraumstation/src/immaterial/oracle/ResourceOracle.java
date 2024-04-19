@@ -207,12 +207,13 @@ public abstract class ResourceOracle extends Oracle {
 			solarsystem.getPlanets().get(planetNumber).addResource(getMango());
 		}
 		if(randomResourceNumber >= 2) {
+			if(randomResourceNumber2 == 1) {
+				solarsystem.getPlanets().get(planetNumber).addResource(getPlasma());
+			}
 			solarsystem.getPlanets().get(planetNumber).addResource(getWaterMelon());
 			solarsystem.getPlanets().get(planetNumber).addResource(getNanite());
 		}
-		if(randomResourceNumber >= 2 && randomResourceNumber2 == 1) {
-			solarsystem.getPlanets().get(planetNumber).addResource(getPlasma());
-		}
+		
 
 		basicResources(solarsystem, planetNumber);
 	}
@@ -276,9 +277,11 @@ public abstract class ResourceOracle extends Oracle {
 		int randomResourceNumber = 0;
 		randomResourceNumber = (int) (Math.random() * (4));
 		planet.getMoons().get(moonNumber).addResource(getGold());
+		planet.getMoons().get(moonNumber).addResource(getSilver());
 		if(randomResourceNumber >= 1) {
 			planet.getMoons().get(moonNumber).addResource(getTitan());
-			planet.getMoons().get(moonNumber).addResource(getSilver());
+			planet.getMoons().get(moonNumber).addResource(getPlasma());
+			
 		}
 		if(randomResourceNumber >= 3) {
 			planet.getMoons().get(moonNumber).addResource(getQuantumVaccum());
