@@ -71,6 +71,7 @@ public class CreateOracle extends Oracle{
 			SolarSystem solarsystem = galaxy.addSolarSystem(input);
 			createRandomSolarSystem(solarsystem);
 		}
+		Game.INPUTORACLE.printBreakLineAfter();
 
 	}
 	

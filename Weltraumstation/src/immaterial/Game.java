@@ -54,6 +54,7 @@ public class Game {
 	}
 	
 	public void start() throws RuntimeException {
+		INPUTORACLE.printBreakLineBefore();
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
 		Galaxy galaxy = CREATEORACLE.setUniverseGalaxy(scanner);
