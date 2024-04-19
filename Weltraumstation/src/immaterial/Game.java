@@ -7,6 +7,7 @@ import immaterial.oracle.AsynchronOracle;
 import immaterial.oracle.CreateOracle;
 import immaterial.oracle.FileOracle;
 import immaterial.oracle.InputOracle;
+import immaterial.oracle.MainActionOracle;
 import immaterial.oracle.ResourceOracle;
 import space.Galaxy;
 import space.celestial.Planet;
@@ -20,6 +21,7 @@ public class Game {
 	public final static InputOracle INPUTORACLE = new InputOracle();
 	public final static AsynchronOracle ASYNCHRONORACLE = new AsynchronOracle();
 	public final static ResourceOracle RESOURCEORACLE = new ResourceOracle();
+	public final static MainActionOracle MAINACTIONORACLE = new MainActionOracle();
 	
 	private Galaxy galaxy;
 	private Player player;
@@ -86,19 +88,24 @@ public class Game {
 
 	public void mainLoop() {
 		Game.INPUTORACLE.printBreakLineBefore();
-		Scanner scanner = new Scanner(System.in);
 		Planet planet = (Planet) player.getCurrentPlace();
 		System.out.println("Hallo " + player.getName());
 		System.out.println("Du befindest dich zur Zeit in einem Raumschiff <"+
 		player.getCurrentShip().getType() + "> am Planeten " + planet.getName());
 		System.out.println("im System "+ player.getCurrentSystem().getName());
-		System.out.println("Was möchtest du jetzt tun?");
-		while(true) {
-			
-		}
-		
-
+		MAINACTIONORACLE.setGame(this);
+		MAINACTIONORACLE.run();
 	}
+	
+	public Galaxy getGalaxy() {
+		return galaxy;
+	}
+
+
+	public Player getPlayer() {
+		return player;
+	}
+
 
 	
 

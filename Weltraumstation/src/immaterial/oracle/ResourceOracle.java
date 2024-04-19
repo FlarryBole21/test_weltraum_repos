@@ -36,6 +36,11 @@ public class ResourceOracle extends Oracle {
 	private static final int LEVEL6 = 25;
 	private static final int LEVEL7 = 30;
 	private static final int LEVEL8 = 35;
+	
+	
+	public ResourceOracle() {
+		super.setType("Orakel der Ressourcen");
+	}
 
 	private Crystal getCrystal() {
 		return new Crystal(LEVEL1,500);

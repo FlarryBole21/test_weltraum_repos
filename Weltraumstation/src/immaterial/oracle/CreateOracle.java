@@ -1,5 +1,6 @@
 package immaterial.oracle;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import immaterial.Game;
@@ -19,7 +20,7 @@ public class CreateOracle extends Oracle{
 		super.setType("Orakel der Kreation");
 	}
 	
-	public Galaxy setUniverseGalaxy(Scanner scanner) throws RuntimeException {
+	public Galaxy setUniverseGalaxy(Scanner scanner) throws RuntimeException{
 		String input;
 		System.out.println("Als Erstes brauchen wir ein Universum!");
 		System.out.print("Bitte gebe dem Universum einen Namen: ");
