@@ -2,6 +2,7 @@ package immaterial.oracle;
 
 import java.util.Scanner;
 
+import immaterial.Game;
 import space.Galaxy;
 import space.SolarSystem;
 import space.Universe;
@@ -13,25 +14,24 @@ import space.lifeform.role.Player;
 public class CreateOracle extends Oracle{
 	
 	private Universe universe;
-	private Player player;
 	
 	public CreateOracle() {
 		super.setType("Orakel der Kreation");
 	}
 	
-	public Galaxy setUniverseGalaxy(Scanner scanner, FileOracle fileOracle) throws RuntimeException {
+	public Galaxy setUniverseGalaxy(Scanner scanner) throws RuntimeException {
 		String input;
 		System.out.println("Als Erstes brauchen wir ein Universum!");
 		System.out.print("Bitte gebe dem Universum einen Namen: ");
-		input = scanner.nextLine();
+		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		Universe universe = new Universe(input);
 		this.universe = universe;
-		universe.setPlanetdata(fileOracle.readFile(fileOracle.getPlanetCreatePath() + ".txt"));
-		universe.setSundata(fileOracle.readFile(fileOracle.getSunCreatePath()+ ".txt"));
-		universe.setMoondata(fileOracle.readFile(fileOracle.getMoonCreatePath() + ".txt"));
+		universe.setPlanetdata(Game.FILEORACLE.readFile(Game.FILEORACLE.getPlanetCreatePath() + ".txt"));
+		universe.setSundata(Game.FILEORACLE.readFile(Game.FILEORACLE.getSunCreatePath()+ ".txt"));
+		universe.setMoondata(Game.FILEORACLE.readFile(Game.FILEORACLE.getMoonCreatePath() + ".txt"));
 		System.out.println("Als Zweites brauchen wir eine Galaxie!");
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
-		input = scanner.nextLine();
+		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		Galaxy galaxy = universe.addGalaxy(input);
 		galaxy.setUniverse(universe);
 		return galaxy;
@@ -45,7 +45,7 @@ public class CreateOracle extends Oracle{
 				"Als Nächstes brauchen wir Sonnensysteme! (Planten, Sonnen, Monde etc. werden zufällig erstellt)");
 		while (true) {
 			System.out.print("Wie viele Sonnensysteme möchtest du deiner Galaxie hinzufügen ? (MIN 1 - MAX 3): ");
-			input = scanner.nextLine();
+			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 			try {
 				numberInput = Integer.valueOf(input);
 				if (numberInput >= 1 && numberInput <= 3) {
@@ -64,7 +64,7 @@ public class CreateOracle extends Oracle{
 			} else {
 				System.out.print("Bitte gebe den Namen für das Sonnensystem ein: ");
 			}
-			input = scanner.nextLine();
+			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 			SolarSystem solarsystem = galaxy.addSolarSystem(input);
 			createRandomSolarSystem(solarsystem);
 		}
@@ -75,9 +75,8 @@ public class CreateOracle extends Oracle{
 		String input;
 		System.out.println("Als nächstes erstellen wir dich!, Du brauchst einen Namen!");
 		System.out.print("Wie heißt du?: ");
-		input = scanner.nextLine();
+		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		Player player = new Player(input);
-		this.player=player;
 		System.out.println("Hallo " + input + "!");
 		System.out.println();
 		return player;
@@ -97,8 +96,6 @@ public class CreateOracle extends Oracle{
 		createRandomSuns(solarsystem, randomSunNumber);
 		createRandomMoons(solarsystem, randomMoonNumber);
 		resourcesToPlanets(solarsystem);
-		
-	
 		
 	}
 
@@ -140,7 +137,6 @@ public class CreateOracle extends Oracle{
 
 	}
 	
-
 	private void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) throws RuntimeException{
 		boolean mainStar = false;
 		for (int i = 0; i < randomSunNumber; i++) {
