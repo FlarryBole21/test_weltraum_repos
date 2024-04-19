@@ -54,7 +54,8 @@ public class Game {
 	}
 	
 	public void start() throws RuntimeException {
-		INPUTORACLE.printBreakLineBefore();
+		INPUTORACLE.printBreakLineAfter();
+		Game.INPUTORACLE.printBreakLineBefore();
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
 		Galaxy galaxy = CREATEORACLE.setUniverseGalaxy(scanner);
@@ -68,18 +69,22 @@ public class Game {
 		Planet start =ASKORACLE.askDestinationStart(scanner,galaxy);
 		player.setCurrentPlace(start);
 		player.setCurrentSystem(start.getSolarsystem());
+		Game.INPUTORACLE.printBreakLineBefore();
 		System.out.println("Du startest am Planeten <" + start.getName() 
 		+ "> und im System <" + start.getSolarsystem().getName()+">");
 		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
 		System.out.println("und versuche zu überleben, denn du bist nicht der Einzige in dieser Welt");
 		INPUTORACLE.printBreakLine();
 		System.out.println("Hauptspiel wird nun gestartet... Bitte warten...");
+		Game.INPUTORACLE.printBreakLineAfter();
+		Game.INPUTORACLE.printBreakLineBefore();
 		scanner.close();
 		
 	}
 
 
 	public void mainLoop() {
+		Game.INPUTORACLE.printBreakLineBefore();
 		Scanner scanner = new Scanner(System.in);
 		Planet planet = (Planet) player.getCurrentPlace();
 		System.out.println("Hallo " + player.getName());
