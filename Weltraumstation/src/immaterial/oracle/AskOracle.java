@@ -8,9 +8,9 @@ import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.star.Sun;
 
-public abstract class AskOracle extends Oracle{
+public class AskOracle extends Oracle{
 	
-	public static void askUniverseInfo(Scanner scanner, Galaxy galaxy) {
+	public void askUniverseInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		System.out.println("-------------------------------------");
 		System.out.println("Universum-, Galaxie- & Sonnensystem-Daten einsehen?");
@@ -28,7 +28,7 @@ public abstract class AskOracle extends Oracle{
 	}
 	
 	
-	public static void askSunSystemInfo(Scanner scanner, Galaxy galaxy) {
+	public void askSunSystemInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		int count=0;
 		System.out.println("-------------------------------------");
@@ -90,7 +90,7 @@ public abstract class AskOracle extends Oracle{
 	}
 	
 	
-	public static void askMoonInfo(Scanner scanner, Galaxy galaxy) {
+	public void askMoonInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		System.out.println("-------------------------------------");
 		System.out.println("Mond-Daten einsehen?");
@@ -149,4 +149,7 @@ public abstract class AskOracle extends Oracle{
 			}
 		}
 	}
+	
+	
+	
 }

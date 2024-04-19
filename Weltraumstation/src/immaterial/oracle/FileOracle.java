@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public abstract class FileOracle extends Oracle {
+public class FileOracle extends Oracle {
 
 	private final static String PLANETCREATEPATH = "data/planetCreate";
 	private final static String SUNCREATEPATH = "data/sunCreate";
@@ -73,36 +73,36 @@ public abstract class FileOracle extends Oracle {
 			+ "Zeus 1.2 1.1 1.0 1 0\n" + "Hephaestus 1.1 0.9 0.9 2 1\n" + "Nyx 0.7 0.4 0.4 1 1\n"
 			+ "Achilles 1.2 1.0 1.0 1 0\n" + "Ariadne 0.8 0.5 0.5 1 1\n";
 
-	public static String getPlanetdata() {
+	public String getPlanetdata() {
 		return PLANETDATA;
 	}
 
-	public static String getSundata() {
+	public String getSundata() {
 		return SUNDATA;
 	}
 
-	public static String getMoondata() {
+	public String getMoondata() {
 		return MOONDATA;
 	}
 
-	public static String getPlanetCreatePath() {
+	public String getPlanetCreatePath() {
 		return PLANETCREATEPATH;
 	}
 
-	public static String getSunCreatePath() {
+	public String getSunCreatePath() {
 		return SUNCREATEPATH;
 	}
 
-	public static String getMoonCreatePath() {
+	public String getMoonCreatePath() {
 		return MOONCREATEPATH;
 	}
 
-	public static void testFiles() throws IOException {
+	public void testFiles() throws IOException {
 
 		String[] textData = new String[FILES.length];
-		textData[0] = FileOracle.getPlanetdata();
-		textData[1] = FileOracle.getSundata();
-		textData[2] = FileOracle.getMoondata();
+		textData[0] = getPlanetdata();
+		textData[1] = getSundata();
+		textData[2] = getMoondata();
 
 		for (int i = 0; i < FILES.length; i++) {
 			if (!FILES[i].exists()) {
@@ -111,7 +111,7 @@ public abstract class FileOracle extends Oracle {
 		}
 	}
 
-	public static void createFileAndWrite(File path, String text) throws IOException {
+	public void createFileAndWrite(File path, String text) throws IOException {
 		path.createNewFile();
 		FileWriter writer = new FileWriter(path);
 		writer.write(text);
@@ -119,7 +119,7 @@ public abstract class FileOracle extends Oracle {
 
 	}
 
-	public static LinkedList<String> readFile(String path) {
+	public LinkedList<String> readFile(String path) {
 		LinkedList<String> rows = null;
 		try {
 			File datei = new File(path);

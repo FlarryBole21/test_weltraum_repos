@@ -21,10 +21,12 @@ public class Game {
 	private Universe universe;
 
 	public static void main(String[] args) {
+		FileOracle fileOracle = new FileOracle();
+		AskOracle askOracle = new AskOracle();
 		try {
-			FileOracle.testFiles();
+			fileOracle.testFiles();
 			Game game = new Game();
-			game.start();
+			game.start(fileOracle, askOracle);
 			game.mainLoop();
 		} catch (FileNotFoundException e) {
 			System.err.println("FileNotFoundException --> " + e.getMessage() + "!");
@@ -42,26 +44,26 @@ public class Game {
 
 	}
 	
-	public void start() throws RuntimeException {
+	public void start(FileOracle fileOracle, AskOracle askOracle) throws RuntimeException {
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
-		Galaxy galaxy = setGalaxy(scanner);
+		Galaxy galaxy = setGalaxy(scanner, fileOracle);
 		setSolar(scanner, galaxy);
-		AskOracle.askUniverseInfo(scanner, galaxy);
-		AskOracle.askSunSystemInfo(scanner, galaxy);
-		AskOracle.askMoonInfo(scanner, galaxy);
+		askOracle.askUniverseInfo(scanner, galaxy);
+		askOracle.askSunSystemInfo(scanner, galaxy);
+		askOracle.askMoonInfo(scanner, galaxy);
 
 	}
 
-	public Galaxy setGalaxy(Scanner scanner) throws RuntimeException {
+	public Galaxy setGalaxy(Scanner scanner, FileOracle fileOracle) throws RuntimeException {
 		String input;
 		System.out.println("Als Erstes brauchen wir ein Universum!");
 		System.out.print("Bitte gebe dem Universum einen Namen: ");
 		input = scanner.nextLine();
 		universe = new Universe(input);
-		universe.setPlanetdata(FileOracle.readFile(FileOracle.getPlanetCreatePath() + ".txt"));
-		universe.setSundata(FileOracle.readFile(FileOracle.getSunCreatePath()+ ".txt"));
-		universe.setMoondata(FileOracle.readFile(FileOracle.getMoonCreatePath() + ".txt"));
+		universe.setPlanetdata(fileOracle.readFile(fileOracle.getPlanetCreatePath() + ".txt"));
+		universe.setSundata(fileOracle.readFile(fileOracle.getSunCreatePath()+ ".txt"));
+		universe.setMoondata(fileOracle.readFile(fileOracle.getMoonCreatePath() + ".txt"));
 		System.out.println("Als Zweites brauchen wir eine Galaxie!");
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
 		input = scanner.nextLine();
