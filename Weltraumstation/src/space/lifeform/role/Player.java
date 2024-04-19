@@ -7,6 +7,8 @@ import immaterial.effect.Normal;
 import space.Enterable;
 import space.SolarSystem;
 import space.Upgradable;
+import space.buildable.ship.BattleShip;
+import space.buildable.ship.Ship;
 import space.inventory.Collectable;
 import space.lifeform.Human;
 import space.lifeform.Killable;
@@ -24,6 +26,7 @@ public class Player extends Human implements Upgradable, Killable{
 	private Effect statusEffect;
 	private SolarSystem currentSystem;
 	private Enterable currentPlace;
+	private Ship currentShip;
 
 	public Player(String name) {
 		super(3, 10);
@@ -37,6 +40,15 @@ public class Player extends Human implements Upgradable, Killable{
 		this.craftingLevel = 1;
 		this.buildingLevel = 1;
 		this.statusEffect = new Normal();
+		this.currentShip = new BattleShip(10, 10, 100);
+	}
+	
+	public Ship getCurrentShip() {
+		return currentShip;
+	}
+
+	public void setCurrentShip(Ship currentShip) {
+		this.currentShip = currentShip;
 	}
 	
 	public SolarSystem getCurrentSystem() {

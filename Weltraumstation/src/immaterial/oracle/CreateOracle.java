@@ -24,6 +24,7 @@ public class CreateOracle extends Oracle{
 		System.out.println("Als Erstes brauchen wir ein Universum!");
 		System.out.print("Bitte gebe dem Universum einen Namen: ");
 		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
+		System.out.println();
 		Universe universe = new Universe(input);
 		this.universe = universe;
 		universe.setPlanetdata(Game.FILEORACLE.readFile(Game.FILEORACLE.getPlanetCreatePath() + ".txt"));
@@ -32,6 +33,7 @@ public class CreateOracle extends Oracle{
 		System.out.println("Als Zweites brauchen wir eine Galaxie!");
 		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
 		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
+		System.out.println();
 		Galaxy galaxy = universe.addGalaxy(input);
 		galaxy.setUniverse(universe);
 		return galaxy;
@@ -58,6 +60,7 @@ public class CreateOracle extends Oracle{
 			}
 
 		}
+		System.out.println();
 		for (int i = 0; i < numberInput; i++) {
 			if (numberInput > 1) {
 				System.out.print("Bitte gebe den Namen für das " + (i + 1) + ".Sonnensystem ein: ");

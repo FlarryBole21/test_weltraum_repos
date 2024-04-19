@@ -22,5 +22,12 @@ public class InputOracle extends Oracle{
 		
 		return input;
 	}
+	
+	public void consoleClear() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+	}
+
 
 }
