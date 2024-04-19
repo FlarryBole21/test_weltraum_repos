@@ -25,6 +25,7 @@ public class Game {
 	
 	private Galaxy galaxy;
 	private Player player;
+	private Scanner scanner;
 
 	public static void main(String[] args) {
 	
@@ -41,10 +42,8 @@ public class Game {
 		    System.err.println("IOException --> " + e.getMessage() + "!");
 		} catch (NumberFormatException e) {
 		    System.err.println("NumberFormatException --> " + e.getMessage() + "!");
-		} catch (InterruptedException e) {
-		    System.err.println("InterruptedException --> " + e.getMessage() + "!");
-		    //Thread.currentThread().interrupt();
-		} catch (RuntimeException e) {
+		} 
+		 catch (RuntimeException e) {
 		    System.err.println("RuntimeException --> " + e.getMessage() + "!");
 		} catch (Exception e) {
 		    System.err.println("Exception --> " + e.getMessage() + "!");
@@ -57,10 +56,11 @@ public class Game {
 
 	}
 	
-	public void start() throws RuntimeException {
+	public Scanner start() throws RuntimeException {
 		INPUTORACLE.printBreakLineMultiple();
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
+		this.scanner = scanner;
 		Galaxy galaxy = CREATEORACLE.setUniverseGalaxy(scanner);
 		this.galaxy=galaxy;
 		CREATEORACLE.setSolar(scanner, galaxy);
@@ -81,7 +81,7 @@ public class Game {
 		System.out.println("Hauptspiel wird nun gestartet... Bitte warten...");
 		INPUTORACLE.printBreakLineMultiple();
 
-		scanner.close();
+		return scanner;
 		
 	}
 
@@ -94,6 +94,7 @@ public class Game {
 		player.getCurrentShip().getType() + "> am Planeten " + planet.getName());
 		System.out.println("im System "+ player.getCurrentSystem().getName());
 		MAINACTIONORACLE.setGame(this);
+		MAINACTIONORACLE.setScanner(scanner);
 		MAINACTIONORACLE.run();
 	}
 	

@@ -225,8 +225,6 @@ public class AskOracle extends Oracle{
 	
 	
 	private Planet checkNormalAtmosphere(SolarSystem solarSystem) {
-//		int randomIndex;
-//		int errorCount=0;
 		Planet start = null;
 		Optional<Planet> planetOptional = solarSystem.getPlanets().stream()
 		        .filter(planet -> planet.getAtmosphere().getType().equals("Normal"))
@@ -237,30 +235,11 @@ public class AskOracle extends Oracle{
 		} else {
 			throw new RuntimeException("Keine normale Atmosphäre im System vorhanden!");
 		}
-//		while(true) {
-//			randomIndex = (int) (Math.random() * (solarSystem.getPlanets().size()-1));
-//			if(solarSystem.getPlanets().get(randomIndex).getAtmosphere().getType().equals("Normal")) {
-//				start = solarSystem.getPlanets().get(randomIndex);
-//				break;
-//			}
-//			errorCount++;
-//			if(errorCount >= 3) {
-//				Optional<Planet> planetOptional = solarSystem.getPlanets().stream()
-//				        .filter(planet -> planet.getAtmosphere().getType().equals("Normal"))
-//				        .findFirst();
-//				
-//				if (planetOptional.isPresent()) {
-//				    start = planetOptional.get(); 
-//				
-//				} else {
-//					throw new RuntimeException("Keine normale Atmosphäre im System vorhanden!");
-//				}
-//				
-//			}
-//		}
+
 		return start;
 		
 	}
+	
 
 
 	

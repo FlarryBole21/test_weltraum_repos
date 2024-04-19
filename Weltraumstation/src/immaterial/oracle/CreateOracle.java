@@ -44,23 +44,20 @@ public class CreateOracle extends Oracle{
 	public void setSolar(Scanner scanner, Galaxy galaxy) throws RuntimeException {
 		String input;
 		int numberInput;
+		boolean numberValue;
 		System.out.println(
 				"Als Nächstes brauchen wir Sonnensysteme! (Planten, Sonnen, Monde etc. werden zufällig erstellt)");
 		while (true) {
 			System.out.print("Wie viele Sonnensysteme möchtest du deiner Galaxie hinzufügen ? (MIN 1 - MAX 3): ");
 			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
-			try {
+			numberValue = Game.INPUTORACLE.inputIsNumberAndRangeCheck(1, 3, input);
+			if(numberValue) {
 				numberInput = Integer.valueOf(input);
-				if (numberInput >= 1 && numberInput <= 3) {
-					break;
-				} else {
-					System.err.println("Error --> Zahl ist zu hoch oder zu niedrig!");
-				}
-			} catch (RuntimeException e) {
-				System.err.println("Error --> " + e.getMessage() + "!");
+				break;
 			}
-
+			
 		}
+		
 		System.out.println();
 		for (int i = 0; i < numberInput; i++) {
 			if (numberInput > 1) {

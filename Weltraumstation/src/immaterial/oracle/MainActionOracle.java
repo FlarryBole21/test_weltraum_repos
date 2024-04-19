@@ -9,9 +9,19 @@ import space.lifeform.role.Player;
 public class MainActionOracle extends ActionOracle{
 	
 	private Game game;
-	
+	private Scanner scanner;
+
 	public MainActionOracle() {
 		super.setType("Orakel der Hauptaktionen");
+	}
+	
+	public Scanner getScanner() {
+		return scanner;
+	}
+
+
+	public void setScanner(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
 
@@ -37,11 +47,32 @@ public class MainActionOracle extends ActionOracle{
 			throw new RuntimeException("Spieler nicht gesetzt");
 		}
 		
+		if(getScanner() == null) {
+			throw new RuntimeException("Scanner nicht gesetzt");
+		}
+		
 	}
 
 	@Override
 	public void run() throws RuntimeException{
 		testBeforeMain();
+		String input;
+		while(true) {
+			System.out.print(
+					"Was möchtest du jetzt machen? "
+					+ "(1 -> Charakter-Info einsehen, "
+					+ "2 -> Orts-Info einsehen, "
+					+ "3 -> Planeten betreten,"
+					+ "4 -> Zum anderen Planeten reisen"
+					+ "5 -> Spiel beenden");
+			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
+			if(input.equals("5")) {
+			    break;
+			}
+
+		}
+		
+		scanner.close();
 		
 	}
 
