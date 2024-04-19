@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class InputOracle extends Oracle{
 	
+	private static final long serialVersionUID = 1L;
+
 	public InputOracle() {
 		super.setType("Orakel der Inputs");
 	}
@@ -19,7 +21,6 @@ public class InputOracle extends Oracle{
 				System.err.println("Error --> Keine Eingabe!");
 			}
 		}
-		
 		return input;
 	}
 	

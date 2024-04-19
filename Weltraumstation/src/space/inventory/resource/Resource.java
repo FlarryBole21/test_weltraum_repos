@@ -4,6 +4,7 @@ import space.inventory.InventoryObject;
 
 public abstract class Resource extends InventoryObject{
 	
+	private static final long serialVersionUID = 1L;
 	private int amount;
 	
 	public int getAmount() {

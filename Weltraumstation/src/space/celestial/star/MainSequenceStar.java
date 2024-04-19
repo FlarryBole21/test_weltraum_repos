@@ -6,6 +6,7 @@ import space.celestial.Planet;
 
 public class MainSequenceStar extends Sun{
 	
+	private static final long serialVersionUID = 1L;
 	private LinkedList<Planet> planets;
 
 	public MainSequenceStar(String name, double mass, double radius, double temperature, double luminosity) {

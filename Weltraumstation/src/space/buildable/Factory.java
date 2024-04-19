@@ -2,7 +2,7 @@ package space.buildable;
 
 public abstract class Factory extends Building{
 	
-
+	private static final long serialVersionUID = 1L;
 	private int level;
 	
 	public Factory() {

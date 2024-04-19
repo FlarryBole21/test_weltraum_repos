@@ -2,6 +2,7 @@ package space.buildable;
 
 public class Stock extends Building{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private int stockSize;
 	private int level;

@@ -1,9 +1,11 @@
 package space;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Galaxy {
+public class Galaxy implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private LinkedList<SolarSystem> solarSystems;
 	private Universe universe;

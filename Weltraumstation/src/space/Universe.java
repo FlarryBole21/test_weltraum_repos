@@ -1,5 +1,6 @@
 package space;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import space.celestial.star.Sun;
@@ -31,8 +32,9 @@ import space.celestial.star.RedGiant;
 import space.celestial.star.WhiteDwarf;
 import space.celestial.star.SuperGiant;
 
-public class Universe {
+public class Universe implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private LinkedList<Galaxy> galaxies;
 	private LinkedList<Atmosphere> atmospheres;

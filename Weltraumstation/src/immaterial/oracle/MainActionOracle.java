@@ -3,11 +3,11 @@ package immaterial.oracle;
 import java.util.Scanner;
 
 import immaterial.Game;
-import space.Universe;
 import space.lifeform.role.Player;
 
 public class MainActionOracle extends ActionOracle{
 	
+	private static final long serialVersionUID = 1L;
 	private Game game;
 	private Scanner scanner;
 
@@ -48,7 +48,7 @@ public class MainActionOracle extends ActionOracle{
 		}
 		
 		if(getScanner() == null) {
-			throw new RuntimeException("Scanner nicht gesetzt");
+			scanner = new Scanner(System.in);
 		}
 		
 	}
@@ -66,6 +66,7 @@ public class MainActionOracle extends ActionOracle{
 			System.out.println("3 -> Anliegenden lokalen Ort betreten");
 			System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
 			System.out.println("5 -> Zum anderen Planeten reisen");
+			System.out.println("6 -> Aktuellen Fortschritt speichern");
 			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 			
 			if(input.equals("0")) {
@@ -77,7 +78,9 @@ public class MainActionOracle extends ActionOracle{
 				    	System.out.println(information);
 				    }
 				    Game.INPUTORACLE.printBreakLineMultiple();
-				    boolean output = Game.ASKORACLE.returnBackToPreviousMenu(scanner);
+				    Runnable runnable = () -> System.out.println("Zurück zum vorherigen Menü? "
+				            + "1 -> Zurück, Irgendwas anderes -> Noch nicht");
+				    boolean output = Game.ASKORACLE.trueFalseQuestion(scanner,runnable);
 				    if(output) {
 				    	break;
 				    }
@@ -90,6 +93,10 @@ public class MainActionOracle extends ActionOracle{
 			    break;
 			}else if(input.equals("5")) {
 			    break;
+			}else if(input.equals("6")) {
+				Game.INPUTORACLE.printBreakLineMultiple();
+				Game.FILEORACLE.saveGame(scanner, game);
+				Game.INPUTORACLE.printBreakLineMultiple();
 			}
 
 		}

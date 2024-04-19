@@ -5,7 +5,8 @@ import java.util.LinkedList;
 import space.celestial.CelestialObject;
 
 public abstract class Sun extends CelestialObject{
-	
+
+	private static final long serialVersionUID = 1L;
 	private String name;
     private double mass; 
     private double radius; 

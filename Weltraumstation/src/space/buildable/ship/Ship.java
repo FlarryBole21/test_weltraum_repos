@@ -3,7 +3,8 @@ package space.buildable.ship;
 import space.buildable.Vehicle;
 
 public abstract class Ship extends Vehicle{
-	
+
+	private static final long serialVersionUID = 1L;
 	private int defense;
 	private int capacity;
 	private int level;

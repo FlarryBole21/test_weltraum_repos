@@ -2,6 +2,8 @@ package space.inventory.resource;
 
 public class Banana extends Fruit{
 
+	private static final long serialVersionUID = 1L;
+
 	public Banana(int requiredLevel, int amount) {
 		super(requiredLevel, amount);
 		super.setType("Banane");

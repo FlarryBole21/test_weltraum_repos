@@ -1,5 +1,6 @@
 package space;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import space.celestial.Planet;
 import space.celestial.star.BlueGiant;
@@ -13,8 +14,9 @@ import space.environment.atmosphere.Atmosphere;
 import space.environment.terrain.PlanetTerrain;
 import space.environment.terrain.Terrain;
 
-public class SolarSystem {
+public class SolarSystem implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private LinkedList<Sun> suns;
 	private LinkedList<Planet> planets;

@@ -1,9 +1,12 @@
 package space.lifeform;
 
+import java.io.Serializable;
+
 import space.Typeable;
 
-public abstract class LifeformObject implements Typeable{
+public abstract class LifeformObject implements Typeable, Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private int strength;
 	private int health;
 	private int level;

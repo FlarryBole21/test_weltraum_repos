@@ -1,9 +1,12 @@
 package space.inventory;
 
+import java.io.Serializable;
+
 import space.Typeable;
 
-public abstract class InventoryObject implements Droppable, Useable, Collectable, Typeable{
+public abstract class InventoryObject implements Droppable, Useable, Collectable, Typeable, Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String type;
 	
 	@Override

@@ -9,6 +9,7 @@ import space.inventory.item.Item;
 
 public class SpaceStation extends Building{
 	
+	private static final long serialVersionUID = 1L;
 	private int capacity;
 	private int level;
 	

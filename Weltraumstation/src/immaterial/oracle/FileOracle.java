@@ -1,14 +1,21 @@
 package immaterial.oracle;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import immaterial.Game;
+
 public class FileOracle extends Oracle {
 
+	private static final long serialVersionUID = 1L;
 	private final static String PLANETCREATEPATH = "data/planetCreate";
 	private final static String SUNCREATEPATH = "data/sunCreate";
 	private final static String MOONCREATEPATH = "data/moonCreate";
@@ -129,6 +136,41 @@ public class FileOracle extends Oracle {
 		}
 
 		return rows;
+	}
+	
+	
+	public void saveGame(Scanner scanner, Game game) {
+		Runnable runnable = () -> System.out.println("Aktuellen Fortschritt speichern? "
+	            + "1 -> Ja, Irgendwas anderes -> Nein");
+	    boolean output = Game.ASKORACLE.trueFalseQuestion(scanner, runnable);
+	    if(output) {
+	    	try {
+	            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("spielstand.ser"));
+	            out.writeObject(game);
+	            out.close();
+	            System.out.println("Spielstand erfolgreich gespeichert.");
+	        } catch (IOException e) {
+	            System.err.println("Fehler beim Speichern des Spielstands: " + e.getMessage());
+	        }
+	    	
+	    }
+	}
+	
+	
+	public Game loadGame() {
+		Game loadedGame = null;
+		try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("spielstand.ser"));
+            loadedGame = (Game) in.readObject();
+            in.close();
+            System.out.println("Spielstand erfolgreich geladen:");
+            return loadedGame;
+         
+        } catch (IOException | ClassNotFoundException e) {
+            //System.err.println("Fehler beim Laden des Spielstands: " + e.getMessage());
+        }
+		
+		return loadedGame;
 	}
 
 }

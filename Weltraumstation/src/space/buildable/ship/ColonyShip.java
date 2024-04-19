@@ -2,6 +2,8 @@ package space.buildable.ship;
 
 public class ColonyShip extends Ship{
 
+	private static final long serialVersionUID = 1L;
+
 	public ColonyShip(int defense, int capacity) {
 		super(defense, capacity);
 		super.setType("Kolonieschiff");

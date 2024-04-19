@@ -6,6 +6,7 @@ import space.inventory.item.Item;
 
 public abstract class Weapon extends Item implements Upgradable{
 	
+	private static final long serialVersionUID = 1L;
 	private int strength;
 	private int level;
 	

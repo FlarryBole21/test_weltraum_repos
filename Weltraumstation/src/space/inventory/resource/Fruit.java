@@ -2,6 +2,7 @@ package space.inventory.resource;
 
 public abstract class Fruit extends RawFood implements Harvestable{
 
+	private static final long serialVersionUID = 1L;
 	private int requiredLevel;
 	
 	public Fruit(int requiredLevel, int amount) {

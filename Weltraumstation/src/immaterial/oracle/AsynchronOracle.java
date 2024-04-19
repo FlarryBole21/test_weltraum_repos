@@ -5,6 +5,9 @@ import java.util.TimerTask;
 
 public class AsynchronOracle extends Oracle{
 	
+
+	private static final long serialVersionUID = 1L;
+
 	public AsynchronOracle() {
 		super.setType("Orakel der Asynchronität");
 	}

@@ -1,5 +1,6 @@
 package space.celestial;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -13,8 +14,9 @@ import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
-public class Moon extends CelestialObject implements Enterable{
+public class Moon extends CelestialObject implements Enterable, Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private double size;
 	private double mass;

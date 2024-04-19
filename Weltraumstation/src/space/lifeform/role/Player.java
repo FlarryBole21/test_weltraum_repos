@@ -18,6 +18,7 @@ import space.lifeform.Killable;
 
 public class Player extends Human implements Upgradable, Killable{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private int miningLevel;
 	private int harvestLevel;

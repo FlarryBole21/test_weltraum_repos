@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import space.inventory.item.weapon.Weapon;
 
 public class BattleShip extends Ship{
+
+	private static final long serialVersionUID = 1L;
 	private int strength;
 	private LinkedList<Weapon> weapons;
 

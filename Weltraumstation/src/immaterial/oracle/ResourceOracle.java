@@ -28,6 +28,8 @@ import space.inventory.resource.WillowWood;
 
 public class ResourceOracle extends Oracle {
 
+
+	private static final long serialVersionUID = 1L;
 	private static final int LEVEL1 = 1;
 	private static final int LEVEL2 = 5;
 	private static final int LEVEL3 = 10;

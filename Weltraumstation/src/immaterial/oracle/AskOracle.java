@@ -15,6 +15,8 @@ import space.celestial.star.Sun;
 public class AskOracle extends Oracle{
 	
 	
+	private static final long serialVersionUID = 1L;
+
 	public AskOracle() {
 		super.setType("Orakel der Fragen");
 	}
@@ -240,10 +242,9 @@ public class AskOracle extends Oracle{
 		
 	}
 	
-	public boolean returnBackToPreviousMenu(Scanner scanner) {
+	public boolean trueFalseQuestion(Scanner scanner, Runnable runnable) {
 		String input;
-		System.out.println("Zurück zum vorherigen Menü? "
-    			+ "1 -> Zurück, Irgendwas anderes -> Noch nicht");
+		runnable.run();
     	input = Game.INPUTORACLE.inputEmptyCheck(scanner);
     	if(input.equals("1")) {
     		return true;

@@ -14,6 +14,8 @@ import space.lifeform.role.Player;
 
 public class CreateOracle extends Oracle{
 	
+	
+	private static final long serialVersionUID = 1L;
 	private Universe universe;
 	
 	public CreateOracle() {

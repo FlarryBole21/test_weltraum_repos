@@ -1,6 +1,7 @@
 package immaterial;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Scanner;
 import immaterial.oracle.AskOracle;
 import immaterial.oracle.AsynchronOracle;
@@ -13,8 +14,10 @@ import space.Galaxy;
 import space.celestial.Planet;
 import space.lifeform.role.Player;
 
-public class Game {
+public class Game implements Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
 	public final static FileOracle FILEORACLE = new FileOracle();
 	public final static AskOracle ASKORACLE = new AskOracle();
 	public final static CreateOracle CREATEORACLE = new CreateOracle();
@@ -25,14 +28,21 @@ public class Game {
 	
 	private Galaxy galaxy;
 	private Player player;
-	private Scanner scanner;
+	private transient Scanner scanner;
 
 	public static void main(String[] args) {
-	
+		Game game;
 		try {
 		    FILEORACLE.testFiles();
-		    Game game = new Game();
-		    game.start();
+		    game =FILEORACLE.loadGame();
+		    if(game == null) {
+		    	game = new Game();
+		    	game.start();
+			    FILEORACLE.saveGame(game.scanner, game);
+		    }
+		    INPUTORACLE.printBreakLineMultiple();
+			System.out.println("Hauptspiel wird nun gestartet... Bitte warten...");
+			INPUTORACLE.printBreakLineMultiple();
 		    Thread.sleep(7000); 
 		    INPUTORACLE.consoleClear();
 		    game.mainLoop();
@@ -56,7 +66,7 @@ public class Game {
 
 	}
 	
-	public Scanner start() throws RuntimeException {
+	public void start() throws RuntimeException {
 		INPUTORACLE.printBreakLineMultiple();
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
@@ -78,10 +88,6 @@ public class Game {
 		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
 		System.out.println("und versuche zu überleben, denn du bist nicht der Einzige in dieser Welt");
 		INPUTORACLE.printBreakLineMultiple();
-		System.out.println("Hauptspiel wird nun gestartet... Bitte warten...");
-		INPUTORACLE.printBreakLineMultiple();
-
-		return scanner;
 		
 	}
 
@@ -98,6 +104,7 @@ public class Game {
 		MAINACTIONORACLE.setScanner(scanner);
 		MAINACTIONORACLE.run();
 	}
+	
 	
 	public Galaxy getGalaxy() {
 		return galaxy;
