@@ -2,6 +2,7 @@ package space.lifeform.role;
 
 import java.util.LinkedList;
 
+import immaterial.effect.Effect;
 import space.Upgradable;
 import space.inventory.Collectable;
 import space.lifeform.Human;
@@ -16,9 +17,10 @@ public class Player extends Human implements Upgradable, Killable{
 	private int cookingLevel;
 	private int craftingLevel;
 	private int buildingLevel;
+	private Effect statusEffect;
 	
-	public Player(String name, int strength, int defense) {
-		super(name, strength, defense);
+	public Player(String name) {
+		super(name, 1, 1);
 		super.setType("Spieler");
 		this.inventory = new LinkedList<>();
 		this.miningLevel = 1;

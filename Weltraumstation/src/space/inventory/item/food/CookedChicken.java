@@ -1,6 +1,10 @@
 package space.inventory.item.food;
 
 public class CookedChicken extends CookedFood  {
+	
+	public CookedChicken() {
+		super.setType("Gekochtes Hähnchen");
+	}
 
 	@Override
 	public void eat() {

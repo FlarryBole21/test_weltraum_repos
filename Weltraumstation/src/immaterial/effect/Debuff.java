@@ -1,10 +1,7 @@
 package immaterial.effect;
 
-public class Debuff extends Effect{
+public abstract class Debuff extends Effect{
 
-	@Override
-	public void run() {
-		
-	}
+
 
 }

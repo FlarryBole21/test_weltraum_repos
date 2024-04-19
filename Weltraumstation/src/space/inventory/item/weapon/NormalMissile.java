@@ -4,6 +4,7 @@ public class NormalMissile extends Missile{
 
 	public NormalMissile(int strength) {
 		super(strength);
+		super.setType("Normale Rakete");
 	}
 
 	@Override

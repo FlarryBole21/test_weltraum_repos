@@ -4,6 +4,7 @@ public class AstroplateArmor extends Suit{
 
 	public AstroplateArmor(int defense) {
 		super(defense);
+		super.setType("Astroplatten-Rüstung");
 	}
 
 	@Override

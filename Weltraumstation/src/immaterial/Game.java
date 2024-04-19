@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import immaterial.oracle.AskOracle;
+import immaterial.oracle.CreateOracle;
 import immaterial.oracle.FileOracle;
 import immaterial.oracle.ResourceOracle;
 import space.Galaxy;
@@ -18,15 +19,14 @@ import space.celestial.star.MainSequenceStar;
 
 public class Game {
 
-	private Universe universe;
-
 	public static void main(String[] args) {
 		FileOracle fileOracle = new FileOracle();
 		AskOracle askOracle = new AskOracle();
+		CreateOracle createOracle = new CreateOracle();
 		try {
 			fileOracle.testFiles();
 			Game game = new Game();
-			game.start(fileOracle, askOracle);
+			game.start(fileOracle, askOracle, createOracle);
 			game.mainLoop();
 		} catch (FileNotFoundException e) {
 			System.err.println("FileNotFoundException --> " + e.getMessage() + "!");
@@ -44,306 +44,17 @@ public class Game {
 
 	}
 	
-	public void start(FileOracle fileOracle, AskOracle askOracle) throws RuntimeException {
+	public void start(FileOracle fileOracle, AskOracle askOracle , CreateOracle createOracle) throws RuntimeException {
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
-		Galaxy galaxy = setGalaxy(scanner, fileOracle);
-		setSolar(scanner, galaxy);
+		Galaxy galaxy = createOracle.setUniverseGalaxy(scanner, fileOracle);
+		createOracle.setSolar(scanner, galaxy);
 		askOracle.askUniverseInfo(scanner, galaxy);
 		askOracle.askSunSystemInfo(scanner, galaxy);
 		askOracle.askMoonInfo(scanner, galaxy);
 
 	}
 
-	public Galaxy setGalaxy(Scanner scanner, FileOracle fileOracle) throws RuntimeException {
-		String input;
-		System.out.println("Als Erstes brauchen wir ein Universum!");
-		System.out.print("Bitte gebe dem Universum einen Namen: ");
-		input = scanner.nextLine();
-		universe = new Universe(input);
-		universe.setPlanetdata(fileOracle.readFile(fileOracle.getPlanetCreatePath() + ".txt"));
-		universe.setSundata(fileOracle.readFile(fileOracle.getSunCreatePath()+ ".txt"));
-		universe.setMoondata(fileOracle.readFile(fileOracle.getMoonCreatePath() + ".txt"));
-		System.out.println("Als Zweites brauchen wir eine Galaxie!");
-		System.out.print("Bitte gebe deiner Galaxie einen Namen: ");
-		input = scanner.nextLine();
-		Galaxy galaxy = universe.addGalaxy(input);
-		galaxy.setUniverse(universe);
-		return galaxy;
-	}
-
-	public void setSolar(Scanner scanner, Galaxy galaxy) throws RuntimeException {
-		String input;
-		int numberInput;
-		System.out.println(
-				"Als Nächstes brauchen wir Sonnensysteme! (Planten, Sonnen, Monde etc. werden zufällig erstellt)");
-		while (true) {
-			System.out.print("Wie viele Sonnensysteme möchtest du deiner Galaxie hinzufügen ? (MIN 1 - MAX 3): ");
-			input = scanner.nextLine();
-			try {
-				numberInput = Integer.valueOf(input);
-				if (numberInput >= 1 && numberInput <= 3) {
-					break;
-				} else {
-					System.err.println("Error --> Zahl ist zu hoch oder zu niedrig!");
-				}
-			} catch (RuntimeException e) {
-				System.err.println("Error --> " + e.getMessage() + "!");
-			}
-
-		}
-		for (int i = 0; i < numberInput; i++) {
-			if (numberInput > 1) {
-				System.out.print("Bitte gebe den Namen für das " + (i + 1) + ".Sonnensystem ein: ");
-			} else {
-				System.out.print("Bitte gebe den Namen für das Sonnensystem ein: ");
-			}
-			input = scanner.nextLine();
-			SolarSystem solarsystem = galaxy.addSolarSystem(input);
-			createRandomSolarSystem(solarsystem);
-		}
-
-	}
-
-	public void createRandomSolarSystem(SolarSystem solarsystem) throws RuntimeException {
-		int randomPlanetNumber = 0;
-		int randomSunNumber = 0;
-		int randomMoonNumber = 0;
-		do {
-			randomPlanetNumber = (int) (Math.random() * (10));
-			randomSunNumber = (int) (Math.random() * (10)) - ((int) randomPlanetNumber / 2);
-		} while ((randomSunNumber + 2) > randomPlanetNumber || randomPlanetNumber < 3 || randomSunNumber < 1);
-
-		createRandomPlanets(solarsystem, randomPlanetNumber);
-		createRandomSuns(solarsystem, randomSunNumber);
-		createRandomMoons(solarsystem, randomMoonNumber);
-		resourcesToPlanets(solarsystem);
-		
-	
-		
-	}
-
-	public void createRandomPlanets(SolarSystem solarsystem, int randomPlanetNumber) throws RuntimeException {
-		boolean normalAtmosphere = false;
-		for (int i = 0; i < randomPlanetNumber; i++) {
-			String[] randomData;
-			int randomIndex;
-			int errorCount = 0;
-			String atmosphereType;
-			while (true) {
-				randomIndex = (int) (Math.random() * universe.getPlanetdata().size());
-				randomData = universe.getPlanetdata().get(randomIndex).split(" ");
-				atmosphereType = universe.getAtmospheres().get((Integer.valueOf(randomData[4]))).getType();
-				if (atmosphereType.equals("Normal")) {
-					normalAtmosphere = true;
-				}
-
-				if (randomData.length > 1 && (i != randomPlanetNumber - 1)) {
-					break;
-				} else if ((randomData.length > 1) && (i == randomPlanetNumber - 1) && (normalAtmosphere)) {
-					break;
-				} else {
-					errorCount++;
-				}
-
-				if (errorCount >= 100) {
-					throw new RuntimeException("Planeten konnten nicht ordungsgemäß erstellt werden!");
-				}
-			}
-			universe.getPlanetdata().remove(randomIndex);
-			solarsystem.addPlanet(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
-					Double.valueOf(randomData[1]), universe.getAtmospheres().get((Integer.valueOf(randomData[4]))),
-					universe.getPlanetTerrains().get((Integer.valueOf(randomData[5]))));
-
-		}
-
-	}
-
-	public void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) throws RuntimeException{
-		boolean mainStar = false;
-		for (int i = 0; i < randomSunNumber; i++) {
-			String[] randomData;
-			int randomIndex;
-			int errorCount = 0;
-			String starType;
-			while (true) {
-				if (!mainStar) {
-					randomIndex = (int) (Math.random() * universe.getSundata().size());
-					randomData = universe.getSundata().get(randomIndex).split(" ");
-					starType = universe.getSuns().get((Integer.valueOf(randomData[5]))).getType();
-
-					if (starType.equals("Hauptsequenzstern")) {
-						mainStar = true;
-					}
-				} else {
-					do {
-						randomIndex = (int) (Math.random() * universe.getSundata().size());
-						randomData = universe.getSundata().get(randomIndex).split(" ");
-						starType = universe.getSuns().get((Integer.valueOf(randomData[5]))).getType();
-					} while (starType.equals("Hauptsequenzstern"));
-
-				}
-				if (randomData.length > 1 && (i != randomSunNumber - 1)) {
-					break;
-				} else if ((randomData.length > 1) && (i == randomSunNumber - 1) && (mainStar)) {
-					break;
-				} else {
-					errorCount++;
-				}
-				if (errorCount >= 100) {
-					throw new RuntimeException("Sonnen konnten nicht ordungsgemäß erstellt werden!");
-				}
-			}
-			universe.getSundata().remove(randomIndex);
-			solarsystem.addSun(randomData[0], Double.valueOf(randomData[1]), Double.valueOf(randomData[2]),
-					Double.valueOf(randomData[3]), Double.valueOf(randomData[4]),
-					universe.getSuns().get((Integer.valueOf(randomData[5]))));
-			planetsToMainStar(solarsystem);
-		}
-	}
-
-	public void planetsToMainStar(SolarSystem solarsystem) throws RuntimeException{
-		for (int m = 0; m < solarsystem.getSuns().size(); m++) {
-			if (solarsystem.getSuns().get(m) instanceof MainSequenceStar) {
-				MainSequenceStar mainstar = (MainSequenceStar) solarsystem.getSuns().get(m);
-				if (mainstar.getPlanetNames().size() > 0) {
-					break;
-				}
-				solarsystem.setMainstar(mainstar);
-				for (int n = 0; n < solarsystem.getPlanets().size(); n++) {
-					mainstar.addPlanet(solarsystem.getPlanets().get(n));
-					solarsystem.getPlanets().get(n).setMainstar(mainstar);
-				}
-				break;
-			}
-		}
-	}
-
-	public void createRandomMoons(SolarSystem solarsystem, int randomMoonNumber) throws RuntimeException {
-		MainSequenceStar mainstar = solarsystem.getMainstar();
-
-		for (int i = 0; i < mainstar.getPlanets().size(); i++) {
-			randomMoonNumber = (int) (Math.random() * (5));
-
-			for (int j = 0; j < randomMoonNumber; j++) {
-				String[] randomData;
-				int randomIndex;
-				int errorCount = 0;
-				while (true) {
-					randomIndex = (int) (Math.random() * universe.getMoondata().size());
-					randomData = universe.getMoondata().get(randomIndex).split(" ");
-
-					if (randomData.length > 1) {
-						break;
-					} else {
-						errorCount++;
-					}
-
-					if (errorCount >= 100) {
-						throw new RuntimeException("Monde konnten nicht ordungsgemäß erstellt werden!");
-					}
-
-				}
-				if (randomMoonNumber != 0) {
-					universe.getMoondata().remove(randomIndex);
-					mainstar.getPlanets().get(i).addMoon(randomData[0], Double.valueOf(randomData[1]),
-							Double.valueOf(randomData[2]), Double.valueOf(randomData[3]),
-							universe.getAtmospheres().get((Integer.valueOf(randomData[4]))),
-							universe.getMoonTerrains().get((Integer.valueOf(randomData[5]))));
-
-					moonsToPlanet(mainstar.getPlanets().get(i));
-				}
-			}
-		}
-	}
-	
-	public void resourcesToPlanets(SolarSystem solarsystem) throws RuntimeException{
-		
-		int randomResourceNumber = (int) (Math.random() * (3));
-
-		int count=0;
-		for(Planet planet: solarsystem.getPlanets()) {
-			
-			switch (planet.getPlanetTerrain().getType()) {
-            case "Canyon":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
-                break;
-            case "Krater":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
-                break;
-            case "Wüste":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
-            	break;
-            case "Grassland":
-            	ResourceOracle.addResourcesCategoryB(solarsystem, count);
-                break;
-            case "Dschungel":
-            	ResourceOracle.addResourcesCategoryC(solarsystem, count);
-                break;
-            case "Berge":
-            	ResourceOracle.addResourcesCategoryD(solarsystem, count);
-                break;
-            case "Normaler Wald":
-            	if(randomResourceNumber == 2) {
-            		ResourceOracle.addResourcesCategoryD(solarsystem, count);
-            	}else {
-            		ResourceOracle.addResourcesCategoryB(solarsystem, count);
-            	}
-            	
-                break;
-            case "Savanne":
-            	ResourceOracle.addResourcesCategoryC(solarsystem, count);
-                break;
-            case "Sumpf":
-            	ResourceOracle.addResourcesCategoryB(solarsystem, count);
-                break;
-            case "Tundra":
-            	ResourceOracle.addResourcesCategoryD(solarsystem, count);
-                break;
-            case "Vulkangebiet":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
-                break;
-            default:
-            	throw new RuntimeException("Planeten haben einen ungültigen Terrain-Typ!");
-        }
-			resourcesToMoons(planet);
-			count++;
-		}
-		
-		
-	}
-	
-    public void resourcesToMoons(Planet planet) throws RuntimeException{
-		
-		//int randomResourceNumber = (int) (Math.random() * (3));
-		int count=0;
-		for(Moon moon : planet.getMoons()) {
-			
-			switch (moon.getMoonTerrain().getType()) {
-            case "Mondkrater":
-            	ResourceOracle.addResourcesCategoryE(planet, count);
-                break;
-            case "Eisige Mondebenen":
-            	ResourceOracle.addResourcesCategoryF(planet, count);
-                break;
-            case "Vulkanische Mondebenen":
-            	ResourceOracle.addResourcesCategoryG(planet, count);
-            	break;
-            default:
-            	throw new RuntimeException("Monde haben einen ungültigen Terrain-Typ!");
-			}
-			count++;
-		}
-		
-	}
-
-	public void moonsToPlanet(Planet planet)throws RuntimeException {
-		for (int m = 0; m < planet.getMoons().size(); m++) {
-			if (planet.getMoons().get(m).getPlanet() == null) {
-				planet.getMoons().get(m).setPlanet(planet);
-			}
-		}
-	}
 
 	public void mainLoop() {
 

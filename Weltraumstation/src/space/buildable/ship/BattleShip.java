@@ -10,6 +10,7 @@ public class BattleShip extends Ship{
 
 	public BattleShip(int strength, int defense, int capacity) {
 		super(defense, capacity);
+		super.setType("Kampfschiff");
 		this.strength = strength;
 	}
 

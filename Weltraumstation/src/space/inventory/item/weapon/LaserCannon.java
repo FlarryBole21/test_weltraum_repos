@@ -4,6 +4,7 @@ public class LaserCannon extends EnergyRangeWeapon{
 
 	public LaserCannon(int strength) {
 		super(strength);
+		super.setType("Laserkanone");
 	}
 
 	@Override

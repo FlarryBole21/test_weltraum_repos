@@ -4,6 +4,7 @@ public class GalacticGlideGear extends Suit{
 
 	public GalacticGlideGear(int defense) {
 		super(defense);
+		super.setType("Galaktische Gleiterrüstung");
 	}
 
 	@Override

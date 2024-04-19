@@ -4,6 +4,7 @@ public class CargoShip extends Ship{
 
 	public CargoShip(int defense, int capacity) {
 		super(defense, capacity);
+		super.setType("Frachtschiff");
 	}
 
 	@Override

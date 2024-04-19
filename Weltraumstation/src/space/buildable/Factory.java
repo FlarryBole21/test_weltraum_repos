@@ -2,14 +2,11 @@ package space.buildable;
 
 public abstract class Factory extends Building{
 	
-	private String name;
+
 	private int level;
 	
-	
-	public Factory(String name) {
-		this.name = name;
+	public Factory() {
 		this.level = 1;
-		
 	}
 
 	@Override

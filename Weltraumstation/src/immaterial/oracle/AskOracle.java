@@ -10,6 +10,11 @@ import space.celestial.star.Sun;
 
 public class AskOracle extends Oracle{
 	
+	
+	public AskOracle() {
+		super.setType("Orakel der Fragen");
+	}
+	
 	public void askUniverseInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		System.out.println("-------------------------------------");
@@ -149,7 +154,7 @@ public class AskOracle extends Oracle{
 			}
 		}
 	}
-	
-	
+
+
 	
 }

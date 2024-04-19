@@ -4,6 +4,7 @@ public class PlasmaClaws extends MeleeWeapon{
 
 	public PlasmaClaws(int strength) {
 		super(strength);
+		super.setType("Plasma-Krallen");
 	}
 
 	@Override

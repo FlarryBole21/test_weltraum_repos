@@ -8,13 +8,15 @@ public abstract class CelestialObject implements Typeable{
 	
 	@Override
 	public String getType() {
-		return this.type;
+		return type;
 	}
-
+	
+	
 	@Override
 	public void setType(String type) {
-		this.type = type;
+		this.type=type;
 		
 	}
+
 
 }

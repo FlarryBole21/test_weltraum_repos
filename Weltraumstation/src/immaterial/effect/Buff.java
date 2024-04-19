@@ -1,10 +1,6 @@
 package immaterial.effect;
 
-public class Buff extends Effect{
+public abstract class Buff extends Effect{
 
-	@Override
-	public void run() {
-		
-	}
-
+	
 }

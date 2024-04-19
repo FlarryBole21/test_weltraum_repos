@@ -9,12 +9,11 @@ import space.inventory.item.Item;
 
 public class SpaceStation extends Building{
 	
-	private String name;
 	private int capacity;
 	private int level;
 	
-	public SpaceStation(String name, int capacity) {
-		this.name = name;
+	public SpaceStation(int capacity) {
+		super.setType("Raumstation");
 		this.capacity = capacity;
 		this.level = 1;
 	}

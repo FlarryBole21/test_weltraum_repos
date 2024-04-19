@@ -4,6 +4,7 @@ public class NaniteWhip extends MeleeWeapon{
 
 	public NaniteWhip(int strength) {
 		super(strength);
+		super.setType("Nanite-Peitsche");
 	}
 
 	@Override

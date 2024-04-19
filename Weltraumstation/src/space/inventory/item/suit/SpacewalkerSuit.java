@@ -4,6 +4,7 @@ public class SpacewalkerSuit extends Suit {
 
 	public SpacewalkerSuit(int defense) {
 		super(defense);
+		super.setType("Weltraumwandereranzug");
 	}
 
 	@Override

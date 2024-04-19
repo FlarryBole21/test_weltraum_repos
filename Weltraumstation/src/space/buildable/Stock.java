@@ -7,6 +7,7 @@ public class Stock extends Building{
 	private int level;
 	
 	public Stock(String name, int stockSize) {
+		super.setType("Lager");
 		this.name = name;
 		this.stockSize = stockSize;
 		this.level=1;

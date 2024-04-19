@@ -4,6 +4,7 @@ public class StellarExoSuit extends Suit{
 
 	public StellarExoSuit(int defense) {
 		super(defense);
+		super.setType("Steller-Exo-Anzug");
 	}
 
 	@Override

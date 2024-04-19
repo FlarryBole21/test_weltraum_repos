@@ -73,18 +73,11 @@ public class FileOracle extends Oracle {
 			+ "Zeus 1.2 1.1 1.0 1 0\n" + "Hephaestus 1.1 0.9 0.9 2 1\n" + "Nyx 0.7 0.4 0.4 1 1\n"
 			+ "Achilles 1.2 1.0 1.0 1 0\n" + "Ariadne 0.8 0.5 0.5 1 1\n";
 
-	public String getPlanetdata() {
-		return PLANETDATA;
-	}
-
-	public String getSundata() {
-		return SUNDATA;
-	}
-
-	public String getMoondata() {
-		return MOONDATA;
-	}
-
+	
+	public FileOracle() {
+		super.setType("Orakel der Dateien");
+	}  
+	
 	public String getPlanetCreatePath() {
 		return PLANETCREATEPATH;
 	}
@@ -100,9 +93,9 @@ public class FileOracle extends Oracle {
 	public void testFiles() throws IOException {
 
 		String[] textData = new String[FILES.length];
-		textData[0] = getPlanetdata();
-		textData[1] = getSundata();
-		textData[2] = getMoondata();
+		textData[0] = PLANETDATA;
+		textData[1] = SUNDATA;
+		textData[2] = MOONDATA;
 
 		for (int i = 0; i < FILES.length; i++) {
 			if (!FILES[i].exists()) {

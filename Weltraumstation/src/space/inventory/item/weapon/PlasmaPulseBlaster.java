@@ -4,6 +4,7 @@ public class PlasmaPulseBlaster extends EnergyRangeWeapon{
 
 	public PlasmaPulseBlaster(int strength) {
 		super(strength);
+		super.setType("Plasmapuls-Blaster");
 	}
 
 	@Override
