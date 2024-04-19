@@ -26,7 +26,7 @@ import space.inventory.resource.TeakWood;
 import space.inventory.resource.Titan;
 import space.inventory.resource.WillowWood;
 
-public abstract class ResourceOracle extends Oracle {
+public class ResourceOracle extends Oracle {
 
 	private static final int LEVEL1 = 1;
 	private static final int LEVEL2 = 5;
@@ -37,115 +37,115 @@ public abstract class ResourceOracle extends Oracle {
 	private static final int LEVEL7 = 30;
 	private static final int LEVEL8 = 35;
 
-	private static Crystal getCrystal() {
+	private Crystal getCrystal() {
 		return new Crystal(LEVEL1,500);
 	}
 
-	private static NormalWood getNormalWood() {
+	private NormalWood getNormalWood() {
 		return new NormalWood(LEVEL1,200);
 	}
 
-	private static Copper getCopper() {
+	private Copper getCopper() {
 		return new Copper(LEVEL1,200);
 	}
 
-	private static Iron getIron() {
+	private Iron getIron() {
 		return new Iron(LEVEL2,100);
 	}
 
-	private static Apple getApple() {
+	private Apple getApple() {
 		return new Apple(LEVEL2,200);
 	}
 
-	private static Banana getBanana() {
+	private Banana getBanana() {
 		return new Banana(LEVEL4,200);
 	}
 
-	private static BlueBerry getBlueBerry() {
+	private BlueBerry getBlueBerry() {
 		return new BlueBerry(LEVEL1,200);
 	}
 
-	private static Dattel getDattel() {
+	private Dattel getDattel() {
 		return new Dattel(LEVEL2,200);
 	}
 	
-	private static Silver getSilver() {
+	private Silver getSilver() {
 		return new Silver(LEVEL4,100);
 	}
 	
-	private static Gold getGold() {
+	private Gold getGold() {
 		return new Gold(LEVEL6,50);
 	}
 
-	private static Mango getMango() {
+	private Mango getMango() {
 		return new Mango(LEVEL6,200);
 	}
 
-	private static MapleWood getMapleWood() {
+	private MapleWood getMapleWood() {
 		return new MapleWood(LEVEL5,200);
 	}
 
-	private static Nanite getNanite() {
+	private Nanite getNanite() {
 		return new Nanite(LEVEL6,30);
 	}
 
-	private static OakWood getOakWood() {
+	private OakWood getOakWood() {
 		return new OakWood(LEVEL2,200);
 	}
 
-	private static Plasma getPlasma() {
+	private Plasma getPlasma() {
 		return new Plasma(LEVEL7,10);
 	}
 
-	private static StrawBerry getStrawBerry() {
+	private StrawBerry getStrawBerry() {
 		return new StrawBerry(LEVEL1,200);
 	}
 
-	private static TeakWood getTeakWood() {
+	private TeakWood getTeakWood() {
 		return new TeakWood(LEVEL4,200);
 	}
 
-	private static Titan getTitan() {
+	private Titan getTitan() {
 		return new Titan(LEVEL5,50);
 	}
 
-	private static WillowWood getWillowWood() {
+	private WillowWood getWillowWood() {
 		return new WillowWood(LEVEL3,200);
 	}
 	
-	private static Chronium getChronium() {
+	private Chronium getChronium() {
 		return new Chronium(LEVEL6,30);
 	}
 	
-	private static Stellarite getStellarite() {
+	private Stellarite getStellarite() {
 		return new Stellarite(LEVEL6,10);
 	}
 	
-	private static QuantumVacuum getQuantumVaccum() {
+	private QuantumVacuum getQuantumVaccum() {
 		return new QuantumVacuum(LEVEL8,5);
 	}
 	
-	private static Neutronium getNeutronium() {
+	private Neutronium getNeutronium() {
 		return new Neutronium(LEVEL8,5);
 	}
 	
-	private static Neutronium getWaterMelon() {
+	private Neutronium getWaterMelon() {
 		return new Neutronium(LEVEL7,100);
 	}
 
-	public static void basicResources(SolarSystem solarsystem, int planetNumber) {
+	private void basicResources(SolarSystem solarsystem, int planetNumber) {
 		solarsystem.getPlanets().get(planetNumber).addResource(getCrystal());
 		solarsystem.getPlanets().get(planetNumber).addResource(getNormalWood());
 		solarsystem.getPlanets().get(planetNumber).addResource(getCopper());
 		solarsystem.getPlanets().get(planetNumber).addResource(getIron());
 	}
 	
-	public static void basicMoonResources(Planet planet, int moonNumber) {
+	private void basicMoonResources(Planet planet, int moonNumber) {
 		planet.getMoons().get(moonNumber).addResource(getCrystal());
 		planet.getMoons().get(moonNumber).addResource(getIron());
 	}
 
-	public static void addResourcesCategoryA(SolarSystem solarsystem, int planetNumber) {
+	public void addResourcesCategoryA(SolarSystem solarsystem, int planetNumber) {
 		int randomResourceNumber = (int) (Math.random() * (4));
 		int randomResourceNumber2 = (int) (Math.random() * (2));
 		int randomResourceNumber3 = (int) (Math.random() * (2));
@@ -178,7 +178,7 @@ public abstract class ResourceOracle extends Oracle {
 		basicResources(solarsystem, planetNumber);
 	}
 
-	public static void addResourcesCategoryB(SolarSystem solarsystem, int planetNumber) {
+	public void addResourcesCategoryB(SolarSystem solarsystem, int planetNumber) {
 		int randomResourceNumber = (int) (Math.random() * (3));
 		
 		solarsystem.getPlanets().get(planetNumber).addResource(getStrawBerry());
@@ -196,7 +196,7 @@ public abstract class ResourceOracle extends Oracle {
 		basicResources(solarsystem, planetNumber);
 	}
 
-	public static void addResourcesCategoryC(SolarSystem solarsystem, int planetNumber) {
+	public void addResourcesCategoryC(SolarSystem solarsystem, int planetNumber) {
 		int randomResourceNumber = (int) (Math.random() * (3));
 		int randomResourceNumber2 = (int) (Math.random() * (2));
 		
@@ -218,7 +218,7 @@ public abstract class ResourceOracle extends Oracle {
 		basicResources(solarsystem, planetNumber);
 	}
 
-	public static void addResourcesCategoryD(SolarSystem solarsystem, int planetNumber) {
+	public void addResourcesCategoryD(SolarSystem solarsystem, int planetNumber) {
 		int randomResourceNumber = 0;
 		randomResourceNumber = (int) (Math.random() * (3));
 		solarsystem.getPlanets().get(planetNumber).addResource(getBlueBerry());
@@ -236,7 +236,7 @@ public abstract class ResourceOracle extends Oracle {
 		basicResources(solarsystem, planetNumber);
 	}
 	
-	public static void addResourcesCategoryE(Planet planet, int moonNumber) {
+	public void addResourcesCategoryE(Planet planet, int moonNumber) {
 		int randomResourceNumber = 0;
 		randomResourceNumber = (int) (Math.random() * (4));
 		if(randomResourceNumber >= 1) {
@@ -254,7 +254,7 @@ public abstract class ResourceOracle extends Oracle {
 	}
 	
 	
-	public static void addResourcesCategoryF(Planet planet, int moonNumber) {
+	public void addResourcesCategoryF(Planet planet, int moonNumber) {
 		int randomResourceNumber = 0;
 		randomResourceNumber = (int) (Math.random() * (4));
 		planet.getMoons().get(moonNumber).addResource(getSilver());
@@ -273,7 +273,7 @@ public abstract class ResourceOracle extends Oracle {
 	}
 	
 	
-	public static void addResourcesCategoryG(Planet planet, int moonNumber) {
+	public void addResourcesCategoryG(Planet planet, int moonNumber) {
 		int randomResourceNumber = 0;
 		randomResourceNumber = (int) (Math.random() * (4));
 		planet.getMoons().get(moonNumber).addResource(getGold());

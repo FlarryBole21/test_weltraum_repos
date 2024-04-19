@@ -250,42 +250,42 @@ public class CreateOracle extends Oracle{
 			
 			switch (planet.getPlanetTerrain().getType()) {
             case "Canyon":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryA(solarsystem, count);
                 break;
             case "Krater":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryA(solarsystem, count);
                 break;
             case "Wüste":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryA(solarsystem, count);
             	break;
             case "Grassland":
-            	ResourceOracle.addResourcesCategoryB(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryB(solarsystem, count);
                 break;
             case "Dschungel":
-            	ResourceOracle.addResourcesCategoryC(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryC(solarsystem, count);
                 break;
             case "Berge":
-            	ResourceOracle.addResourcesCategoryD(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryD(solarsystem, count);
                 break;
             case "Normaler Wald":
             	if(randomResourceNumber == 2) {
-            		ResourceOracle.addResourcesCategoryD(solarsystem, count);
+            		Game.RESOURCEORACLE.addResourcesCategoryD(solarsystem, count);
             	}else {
-            		ResourceOracle.addResourcesCategoryB(solarsystem, count);
+            		Game.RESOURCEORACLE.addResourcesCategoryB(solarsystem, count);
             	}
             	
                 break;
             case "Savanne":
-            	ResourceOracle.addResourcesCategoryC(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryC(solarsystem, count);
                 break;
             case "Sumpf":
-            	ResourceOracle.addResourcesCategoryB(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryB(solarsystem, count);
                 break;
             case "Tundra":
-            	ResourceOracle.addResourcesCategoryD(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryD(solarsystem, count);
                 break;
             case "Vulkangebiet":
-            	ResourceOracle.addResourcesCategoryA(solarsystem, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryA(solarsystem, count);
                 break;
             default:
             	throw new RuntimeException("Planeten haben einen ungültigen Terrain-Typ!");
@@ -305,13 +305,13 @@ public class CreateOracle extends Oracle{
 			
 			switch (moon.getMoonTerrain().getType()) {
             case "Mondkrater":
-            	ResourceOracle.addResourcesCategoryE(planet, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryE(planet, count);
                 break;
             case "Eisige Mondebenen":
-            	ResourceOracle.addResourcesCategoryF(planet, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryF(planet, count);
                 break;
             case "Vulkanische Mondebenen":
-            	ResourceOracle.addResourcesCategoryG(planet, count);
+            	Game.RESOURCEORACLE.addResourcesCategoryG(planet, count);
             	break;
             default:
             	throw new RuntimeException("Monde haben einen ungültigen Terrain-Typ!");

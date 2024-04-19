@@ -43,6 +43,11 @@ public class InputOracle extends Oracle{
 		System.out.println();
 		System.out.println("--------------------------------------------------------------------------------------");
 	}
+	
+	public void printBreakLineMultiple() {
+		printBreakLineAfter();
+		printBreakLineBefore();
+	}
 
 
 }

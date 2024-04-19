@@ -7,6 +7,7 @@ import immaterial.oracle.AsynchronOracle;
 import immaterial.oracle.CreateOracle;
 import immaterial.oracle.FileOracle;
 import immaterial.oracle.InputOracle;
+import immaterial.oracle.ResourceOracle;
 import space.Galaxy;
 import space.celestial.Planet;
 import space.lifeform.role.Player;
@@ -18,6 +19,7 @@ public class Game {
 	public final static CreateOracle CREATEORACLE = new CreateOracle();
 	public final static InputOracle INPUTORACLE = new InputOracle();
 	public final static AsynchronOracle ASYNCHRONORACLE = new AsynchronOracle();
+	public final static ResourceOracle RESOURCEORACLE = new ResourceOracle();
 	
 	private Galaxy galaxy;
 	private Player player;
@@ -45,17 +47,16 @@ public class Game {
 		} catch (Exception e) {
 		    System.err.println("Exception --> " + e.getMessage() + "!");
 		} finally {
-			INPUTORACLE.printBreakLine();
+			INPUTORACLE.printBreakLineMultiple();
 		    System.out.println("Programm wird beendet!");
-		    INPUTORACLE.printBreakLine();
+		    INPUTORACLE.printBreakLineMultiple();
 		}
 
 
 	}
 	
 	public void start() throws RuntimeException {
-		INPUTORACLE.printBreakLineAfter();
-		Game.INPUTORACLE.printBreakLineBefore();
+		INPUTORACLE.printBreakLineMultiple();
 		System.out.println("Willkommen in der Weltraumsimulation");
 		Scanner scanner = new Scanner(System.in);
 		Galaxy galaxy = CREATEORACLE.setUniverseGalaxy(scanner);
@@ -69,15 +70,15 @@ public class Game {
 		Planet start =ASKORACLE.askDestinationStart(scanner,galaxy);
 		player.setCurrentPlace(start);
 		player.setCurrentSystem(start.getSolarsystem());
-		Game.INPUTORACLE.printBreakLineBefore();
+		INPUTORACLE.printBreakLineBefore();
 		System.out.println("Du startest am Planeten <" + start.getName() 
 		+ "> und im System <" + start.getSolarsystem().getName()+">");
 		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
 		System.out.println("und versuche zu überleben, denn du bist nicht der Einzige in dieser Welt");
-		INPUTORACLE.printBreakLine();
+		INPUTORACLE.printBreakLineMultiple();
 		System.out.println("Hauptspiel wird nun gestartet... Bitte warten...");
-		Game.INPUTORACLE.printBreakLineAfter();
-		Game.INPUTORACLE.printBreakLineBefore();
+		INPUTORACLE.printBreakLineMultiple();
+
 		scanner.close();
 		
 	}
@@ -89,10 +90,12 @@ public class Game {
 		Planet planet = (Planet) player.getCurrentPlace();
 		System.out.println("Hallo " + player.getName());
 		System.out.println("Du befindest dich zur Zeit in einem Raumschiff <"+
-		player.getCurrentShip().getType() + ">");
-		System.out.println("am Planeten " + planet.getName() + " im System "+
-						player.getCurrentSystem().getName());
+		player.getCurrentShip().getType() + "> am Planeten " + planet.getName());
+		System.out.println("im System "+ player.getCurrentSystem().getName());
 		System.out.println("Was möchtest du jetzt tun?");
+		while(true) {
+			
+		}
 		
 
 	}
