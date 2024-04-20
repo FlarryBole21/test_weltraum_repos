@@ -2,6 +2,7 @@ package space.lifeform.role;
 
 import java.util.LinkedList;
 
+import immaterial.Game;
 import immaterial.effect.Effect;
 import immaterial.effect.Normal;
 import space.Enterable;
@@ -11,7 +12,6 @@ import space.buildable.ship.BattleShip;
 import space.buildable.ship.Ship;
 import space.celestial.Moon;
 import space.celestial.Planet;
-import space.inventory.Collectable;
 import space.inventory.InventoryObject;
 import space.lifeform.Human;
 import space.lifeform.Killable;
@@ -20,12 +20,15 @@ public class Player extends Human implements Upgradable, Killable{
 	
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private int miningLevel;
-	private int harvestLevel;
-	private int woodCuttingLevel;
-	private int cookingLevel;
-	private int craftingLevel;
-	private int buildingLevel;
+	private double strengthExperience;
+	private double healthExperience;
+	private double miningExperience;
+	private double harvestExperience;
+	private double woodCuttingExperience;
+	private double cookingExperience;
+	private double craftingExperience;
+	private double buildingExperience;
+	private int overAllLevel;
 	private Effect statusEffect;
 	private SolarSystem currentSystem;
 	private Enterable currentPlace;
@@ -35,16 +38,19 @@ public class Player extends Human implements Upgradable, Killable{
 	private LinkedList<Moon> visitedMoons;
 
 	public Player(String name) {
-		super(3, 10);
+		super(4, 10);
 		super.setType("Spieler");
 		this.name = name;
 		this.inventory = new LinkedList<>();
-		this.miningLevel = 1;
-		this.harvestLevel = 1;
-		this.woodCuttingLevel = 1;
-		this.cookingLevel = 1;
-		this.craftingLevel = 1;
-		this.buildingLevel = 1;
+		this.strengthExperience=super.getStrength();
+		this.healthExperience=super.getHealth();
+		this.miningExperience=1;
+		this.harvestExperience=1;
+		this.woodCuttingExperience=1;
+		this.cookingExperience=1;
+		this.craftingExperience=1;
+		this.buildingExperience=1;
+		setOverallLevel();
 		this.statusEffect = new Normal();
 		this.currentShip = new BattleShip(10, 10, 100);
 		this.visitedPlanets = new LinkedList<>();
@@ -139,53 +145,6 @@ public class Player extends Human implements Upgradable, Killable{
 		this.name = name;
 	}
 
-	public int getMiningLevel() {
-		return miningLevel;
-	}
-
-	public void setMiningLevel(int miningLevel) {
-		this.miningLevel = miningLevel;
-	}
-
-	public int getHarvestLevel() {
-		return harvestLevel;
-	}
-
-	public void setHarvestLevel(int harvestLevel) {
-		this.harvestLevel = harvestLevel;
-	}
-
-	public int getWoodCuttingLevel() {
-		return woodCuttingLevel;
-	}
-
-	public void setWoodCuttingLevel(int woodCuttingLevel) {
-		this.woodCuttingLevel = woodCuttingLevel;
-	}
-
-	public int getCookingLevel() {
-		return cookingLevel;
-	}
-
-	public void setCookingLevel(int cookingLevel) {
-		this.cookingLevel = cookingLevel;
-	}
-
-	public int getCraftingLevel() {
-		return craftingLevel;
-	}
-
-	public void setCraftingLevel(int craftingLevel) {
-		this.craftingLevel = craftingLevel;
-	}
-
-	public int getBuildingLevel() {
-		return buildingLevel;
-	}
-
-	public void setBuildingLevel(int buildingLevel) {
-		this.buildingLevel = buildingLevel;
-	}
 	
 	public Effect getStatusEffect() {
 		return statusEffect;
@@ -195,19 +154,98 @@ public class Player extends Human implements Upgradable, Killable{
 	     this.statusEffect = statusEffect;
 	}
 	
+	public double getOverallLevel() {
+		return overAllLevel;
+	}
+
+	public void setOverallLevel() {
+		this.overAllLevel = (int)strengthExperience+(int)healthExperience+(int)miningExperience+
+				(int)harvestExperience+(int)woodCuttingExperience+(int)cookingExperience
+				+(int)craftingExperience+(int)buildingExperience;
+	}
+	
+	
+	public double getMiningExperience() {
+		return miningExperience;
+	}
+
+	public void setMiningExperience(double miningExperience) {
+		this.miningExperience += miningExperience;
+	}
+	
+	public void setStrengthExperience(double strengthExperience) {
+		this.strengthExperience += strengthExperience;
+		super.setStrength((int)this.strengthExperience);
+	}
+	
+	public void setHealthExperience(double healthExperience) {
+		this.healthExperience += healthExperience;
+		super.setHealth((int)this.healthExperience);
+	}
+
+	public double getHarvestExperience() {
+		return harvestExperience;
+	}
+
+	public void setHarvestExperience(double harvestExperience) {
+		this.harvestExperience += harvestExperience;
+	}
+
+	public double getWoodCuttingExperience() {
+		return woodCuttingExperience;
+	}
+
+	public void setWoodCuttingExperience(double woodCuttingExperience) {
+		this.woodCuttingExperience += woodCuttingExperience;
+	}
+
+	public double getCookingExperience() {
+		return cookingExperience;
+	}
+
+	public void setCookingExperience(double cookingExperience) {
+		this.cookingExperience += cookingExperience;
+	}
+
+	public double getCraftingExperience() {
+		return craftingExperience;
+	}
+
+	public void setCraftingExperience(double craftingExperience) {
+		this.craftingExperience += craftingExperience;
+	}
+
+	public double getBuildingExperience() {
+		return buildingExperience;
+	}
+
+	public void setBuildingExperience(double buildingExperience) {
+		this.buildingExperience += buildingExperience;
+	}
+
 	public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
 		information.add("Name <" + name+">");
-		information.add("Stärke <" + super.getStrength()+">");
-		information.add("Lebenspunkte <" + super.getHealth()+">");
 		information.add("Typ <" + super.getType()+">");
-		information.add("Bergbau-Level <" + miningLevel+">");
-		information.add("Farm-Level <" + harvestLevel+">");
-		information.add("Holzfäller-Level <" + woodCuttingLevel+">");
-		information.add("Koch-Level <" + cookingLevel+">");
-		information.add("Crafting-Level <" + craftingLevel+">");
-		information.add("Bau-Level <" + buildingLevel+">");
-		information.add("Aktueller Status-Effekt <" + statusEffect.getType()+">");
+		information.add("Gesamt-Level <" + ((int)overAllLevel) + ">");
+		information.add("Stärke <" + super.getStrength() + "> "
+		        + "<" +  Game.MATHORACLE.calcPercent(strengthExperience) + "%>");
+		information.add("Lebenspunkte <" + super.getHealth() + "> "
+		        + "<" +  Game.MATHORACLE.calcPercent(healthExperience) + "%>");
+		information.add("Bergbau-Level <" + ((int)miningExperience) + "> "
+		        + "<" +  Game.MATHORACLE.calcPercent(miningExperience) + "%>");
+		information.add("Ernte-Level <" + ((int)harvestExperience) + "> "
+		        + "<" +  Game.MATHORACLE.calcPercent(harvestExperience) + "%>");
+		information.add("Holzfäller-Level <" + ((int)woodCuttingExperience) + "> "
+		        + "<" + Game.MATHORACLE.calcPercent(woodCuttingExperience) + "%>");
+		information.add("Koch-Level <" + ((int)cookingExperience) + "> "
+		        + "<" + Game.MATHORACLE.calcPercent(cookingExperience) + "%>");
+		information.add("Crafting-Level <" + ((int)craftingExperience) + "> "
+		        + "<" + Game.MATHORACLE.calcPercent(craftingExperience) + "%>");
+		information.add("Bau-Level <" + ((int)buildingExperience) + "> "
+		        + "<" + Game.MATHORACLE.calcPercent(buildingExperience) + "%>");
+		information.add("Aktueller Status-Effekt <" + statusEffect.getType() + ">");
+
 		information.add("Im Schiff <" + getShipBool()+">");
 		if(getInventoryNames().size() != 0) {
 			information.add("Inventar <" + getInventoryNames() +">");
@@ -229,12 +267,14 @@ public class Player extends Human implements Upgradable, Killable{
 	}
 
 	@Override
-	public void upgrade() {
-		
+	public void upgrade(Runnable setExperience) {
+		setExperience.run();
+		setOverallLevel();
 	}
 
 	@Override
 	public void kill() {
+		this.setHealth(0);
 		
 	}
 

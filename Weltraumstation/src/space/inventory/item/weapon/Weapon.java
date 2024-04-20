@@ -21,8 +21,8 @@ public abstract class Weapon extends Item implements Upgradable{
 	}
 
 	@Override
-	public void upgrade() {
-		
+	public void upgrade(Runnable setLevel) {
+		setLevel.run();
 	}
 	
 	

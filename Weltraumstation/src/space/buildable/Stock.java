@@ -25,8 +25,7 @@ public class Stock extends Building{
 	}
 
 	@Override
-	public void upgrade() {
-		
+	public void upgrade(Runnable setLevel) {
+		setLevel.run();
 	}
-
 }

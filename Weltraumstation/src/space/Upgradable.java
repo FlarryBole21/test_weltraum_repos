@@ -2,6 +2,6 @@ package space;
 
 public interface Upgradable {
 	
-	public void upgrade();
+	public void upgrade(Runnable set);
 
 }

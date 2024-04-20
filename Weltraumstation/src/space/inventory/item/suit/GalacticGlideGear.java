@@ -14,10 +14,6 @@ public class GalacticGlideGear extends Suit{
 		
 	}
 
-	@Override
-	public void upgrade() {
-		
-	}
 
 	@Override
 	public String getType() {

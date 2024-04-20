@@ -19,11 +19,6 @@ public class CargoShip extends Ship{
 		
 	}
 
-	@Override
-	public void upgrade() {
-		
-	}
 
-	
 
 }

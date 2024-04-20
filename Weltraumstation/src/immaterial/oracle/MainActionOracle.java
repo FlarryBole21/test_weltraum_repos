@@ -65,7 +65,7 @@ public class MainActionOracle extends ActionOracle{
 			System.out.println("2 -> Orts-Info einsehen");
 			System.out.println("3 -> Anliegenden lokalen Ort betreten");
 			System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
-			System.out.println("5 -> Zum anderen Planeten reisen");
+			System.out.println("5 -> Zum einem anderen Ort reisen");
 			System.out.println("6 -> Aktuellen Fortschritt speichern");
 			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 			
@@ -92,7 +92,14 @@ public class MainActionOracle extends ActionOracle{
 			}else if(input.equals("4")) {
 			    break;
 			}else if(input.equals("5")) {
-			    break;
+				Runnable setExp = () -> {
+					player.setMiningExperience(0.62);
+				};
+				player.upgrade(setExp);
+				setExp = () -> {
+					player.setCookingExperience(0.41);
+				};
+				player.upgrade(setExp);
 			}else if(input.equals("6")) {
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(scanner, game);

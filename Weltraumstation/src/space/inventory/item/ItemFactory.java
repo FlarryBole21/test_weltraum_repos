@@ -10,4 +10,5 @@ public class ItemFactory extends Factory {
 		super.setType("Item-Fabrik");
 	}
 
+
 }

@@ -39,6 +39,11 @@ public abstract class Ship extends Vehicle{
 		this.level = level;
 	}
 	
+	@Override
+	public void upgrade(Runnable setLevel) {
+		setLevel.run();
+	}
+	
 	
 	
 

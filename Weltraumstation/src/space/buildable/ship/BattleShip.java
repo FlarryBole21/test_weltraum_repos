@@ -26,10 +26,6 @@ public class BattleShip extends Ship{
 		
 	}
 
-	@Override
-	public void upgrade() {
-		
-	}
 	
 	public void addWeapon(Weapon weapon) {
 		this.weapons.add(weapon);

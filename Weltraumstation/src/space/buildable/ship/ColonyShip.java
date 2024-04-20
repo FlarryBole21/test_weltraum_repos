@@ -20,11 +20,5 @@ public class ColonyShip extends Ship{
 		
 	}
 
-	@Override
-	public void upgrade() {
-		
-	}
-
 	
-
 }

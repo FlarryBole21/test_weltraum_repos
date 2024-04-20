@@ -20,12 +20,6 @@ public class SpacewalkerSuit extends Suit {
 	}
 
 	@Override
-	public void upgrade() {
-
-		
-	}
-
-	@Override
 	public String getType() {
 		return "Weltraumwanderer-Anzug";
 	}

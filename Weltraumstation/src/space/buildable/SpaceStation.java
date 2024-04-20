@@ -46,8 +46,8 @@ public class SpaceStation extends Building{
 	}
 
 	@Override
-	public void upgrade() {
-		
+	public void upgrade(Runnable setLevel) {
+		setLevel.run();
 	}
 	
     public BattleShip craftBattleShip(LinkedList<Item> items, int amount){

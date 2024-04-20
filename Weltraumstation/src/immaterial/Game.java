@@ -9,6 +9,7 @@ import immaterial.oracle.CreateOracle;
 import immaterial.oracle.FileOracle;
 import immaterial.oracle.InputOracle;
 import immaterial.oracle.MainActionOracle;
+import immaterial.oracle.MathOracle;
 import immaterial.oracle.ResourceOracle;
 import space.Galaxy;
 import space.celestial.Planet;
@@ -25,6 +26,7 @@ public class Game implements Serializable {
 	public final static AsynchronOracle ASYNCHRONORACLE = new AsynchronOracle();
 	public final static ResourceOracle RESOURCEORACLE = new ResourceOracle();
 	public final static MainActionOracle MAINACTIONORACLE = new MainActionOracle();
+	public final static MathOracle MATHORACLE = new MathOracle();
 	
 	private Galaxy galaxy;
 	private Player player;

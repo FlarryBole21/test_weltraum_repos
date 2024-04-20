@@ -15,11 +15,6 @@ public class StellarExoSuit extends Suit{
 	}
 
 	@Override
-	public void upgrade() {
-		
-	}
-
-	@Override
 	public String getType() {
 		return "Astral-Exo-Anzug";
 	}

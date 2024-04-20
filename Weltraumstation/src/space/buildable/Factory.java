@@ -28,9 +28,8 @@ public abstract class Factory extends Building{
 	}
 
 	@Override
-	public void upgrade() {
-		// TODO Auto-generated method stub
-		
+	public void upgrade(Runnable setLevel) {
+		setLevel.run();
 	}
 
 }

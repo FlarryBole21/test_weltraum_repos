@@ -26,5 +26,10 @@ public abstract class Suit extends Item implements Wearable, Upgradable{
 		this.buffs = buffs;
 	}
 	
+	@Override
+	public void upgrade(Runnable setLevel) {
+		setLevel.run();
+	}
+	
 
 }
