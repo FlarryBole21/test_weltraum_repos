@@ -1,10 +1,12 @@
 package immaterial.oracle;
 
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import immaterial.Game;
 import space.celestial.Planet;
 import space.celestial.RoundCelestial;
+import space.environment.atmosphere.Atmosphere;
 import space.lifeform.role.Player;
 
 public class LocalActionOracle extends ActionOracle{
@@ -15,19 +17,19 @@ public class LocalActionOracle extends ActionOracle{
 		super.setType("Orakel der lokalen Aktionen");
 	}
 	
-	
-
 	@Override
 	public void run() throws RuntimeException{
 		testBeforeMain();
 		Planet planet = (Planet) getGame().getPlayer().getCurrentPlace();
-		System.out.println("Du befindest dich zur Zeit in keinem Raumschiff am Ort " 
-		+ planet.getType()+ " <"+ planet.getName()+">");
-		System.out.println("im System <"+ getGame().getPlayer().getCurrentSystem().getName()+">");
 		String input;
 		Player player = getGame().getPlayer();
-		Game.INPUTORACLE.printBreakLineMultiple();
 		while(true) {
+			System.out.println("Du befindest dich zur Zeit in keinem Raumschiff am Ort " 
+			+ planet.getType()+ " <"+ planet.getName()+">");
+			System.out.println("im System <"+ getGame().getPlayer().getCurrentSystem().getName()+">");
+			testAtmoToPlayer(); 
+			Game.MAINACTIONORACLE.checkPlayerHealth();
+			Game.INPUTORACLE.printBreakLineMultiple();
 			System.out.println("Was möchtest du jetzt machen?");
 			System.out.println("0 -> Spiel beenden");
 			System.out.println("1 -> Charakter-Info einsehen");
@@ -83,6 +85,21 @@ public class LocalActionOracle extends ActionOracle{
 		}
 		
 		
+		
+	}
+	
+	
+	private void testAtmoToPlayer() {
+		
+		Atmosphere atmosphere = getGame().getPlayer().getCurrentPlace().getAtmosphere();
+		
+		Predicate<String> normalSuit = (check) ->{
+			return check.equals("Weltraumwanderer-Anzug");
+		};
+		
+		Boolean checked = normalSuit.test(getGame().getPlayer().getCurrentSuit().getType());
+		
+		atmosphere.inhale(checked, getGame().getPlayer());
 		
 	}
 }

@@ -1,10 +1,7 @@
 package space.lifeform.role;
 
 import java.util.LinkedList;
-
 import immaterial.Game;
-import immaterial.effect.Effect;
-import immaterial.effect.Normal;
 import space.Enterable;
 import space.SolarSystem;
 import space.Upgradable;
@@ -34,7 +31,6 @@ public class Player extends Human implements Upgradable, Killable{
 	private double buildingExperience;
 	private int overAllBattle;
 	private int overAllLevel;
-	private Effect statusEffect;
 	private SolarSystem currentSystem;
 	private RoundCelestial currentPlace;
 	private Ship currentShip;
@@ -59,7 +55,6 @@ public class Player extends Human implements Upgradable, Killable{
 		this.cookingExperience=1;
 		this.craftingExperience=1;
 		this.buildingExperience=1;
-		this.statusEffect = new Normal();
 		this.currentShip = new BattleShip(10, 10, 100);
 		this.currentSuit = new SpacewalkerSuit(10);
 		this.currentSuit.wear(this);
@@ -113,6 +108,7 @@ public class Player extends Human implements Upgradable, Killable{
 		return names;
 	}
 	
+	
 	public void leaveShip() {
 		setShipParked(currentShip);
 		setCurrentShip(null);
@@ -123,7 +119,7 @@ public class Player extends Human implements Upgradable, Killable{
 		setShipParked(null);
 	}
 	
-
+	
 	public Ship getCurrentShip() {
 		return currentShip;
 	}
@@ -203,15 +199,6 @@ public class Player extends Human implements Upgradable, Killable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	
-	public Effect getStatusEffect() {
-		return statusEffect;
-	}
-	
-	public void setStatusEffect(Effect statusEffect) {
-	     this.statusEffect = statusEffect;
 	}
 	
 	public double getOverallBattle() {
@@ -323,7 +310,6 @@ public class Player extends Human implements Upgradable, Killable{
 		        + "<" + Game.MATHORACLE.calcPercent(craftingExperience) + "%>");
 		information.add("Bau-Level <" + ((int)buildingExperience) + "> "
 		        + "<" + Game.MATHORACLE.calcPercent(buildingExperience) + "%>");
-		information.add("Aktueller Status-Effekt <" + statusEffect.getType() + ">");
 
 		information.add("Im Schiff <" + getShipBool()+">");
 		if(getCurrentPlace() != null) {

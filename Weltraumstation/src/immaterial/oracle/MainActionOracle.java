@@ -1,7 +1,5 @@
 package immaterial.oracle;
 
-import java.util.LinkedList;
-import java.util.Scanner;
 import java.util.function.Consumer;
 import immaterial.Game;
 import space.celestial.Moon;
@@ -32,6 +30,7 @@ public class MainActionOracle extends ActionOracle{
 		String input;
 		Player player = getGame().getPlayer();
 		while(true) {
+			checkPlayerHealth();
 			if(!getLocalLoop()) {
 				Planet planet = (Planet) player.getCurrentPlace();
 				System.out.println("Hallo " + player.getName());
@@ -189,6 +188,14 @@ public class MainActionOracle extends ActionOracle{
 			    	break;
 			    }
 		    }
+	}
+	
+	public void checkPlayerHealth() {
+		if(getGame().getPlayer().getHealth() <= 0) {
+			Game.INPUTORACLE.printBreakLineMultiple();
+			System.out.println("Spieler " + getGame().getPlayer().getName() + " ist gestorben!");
+			Game.INPUTORACLE.printEndProgram();
+		}
 	}
 	
 	

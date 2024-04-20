@@ -52,6 +52,7 @@ public class InputOracle extends Oracle{
 		printBreakLineMultiple();
 	    System.out.println("Programm wird beendet!");
 	    printBreakLineMultiple();
+	    System.exit(0);
 	}
 	
 	

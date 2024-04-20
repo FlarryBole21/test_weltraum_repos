@@ -19,6 +19,9 @@ public class TravelActionOracle extends ActionOracle {
 		testBeforeMain();
 		RoundCelestial destinationCelestial = whereYouWannaGo();
 		getGame().getPlayer().setCurrentPlace(destinationCelestial);
+		Game.INPUTORACLE.printBreakLineMultiple();
+		System.out.println("Du reist nach " + destinationCelestial.getType() 
+		+ " <" + destinationCelestial.getName()+">");
 	}
 	
 
