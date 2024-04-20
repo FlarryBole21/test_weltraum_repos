@@ -78,7 +78,6 @@ public class MainActionOracle extends ActionOracle{
 				Runnable runnable = ()->{
 					for(String information: player.getInformation()) {
 				    	System.out.println(information);
-				    	
 				    }
 				};
 				subMenu(runnable,true); 
@@ -171,7 +170,9 @@ public class MainActionOracle extends ActionOracle{
 	}
 
 	private void localLoop() {
-		Game.INPUTORACLE.printBreakLineMultiple();
+		if(!getLocalLoop()) {
+			Game.INPUTORACLE.printBreakLineMultiple();
+		}
 		Game.LOCALACTIONORACLE.setGame(super.getGame());
 		Game.LOCALACTIONORACLE.setScanner(super.getScanner());
 		Game.MAINACTIONORACLE.setLocalLoop(true);
@@ -179,7 +180,7 @@ public class MainActionOracle extends ActionOracle{
 	}
 	
 	
-	private void subMenu(Runnable runnable, boolean askBack) {
+	public void subMenu(Runnable runnable, boolean askBack) {
 		boolean output;
 		 while(true) {
 		    	Game.INPUTORACLE.printBreakLineMultiple();

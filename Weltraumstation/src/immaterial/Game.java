@@ -102,7 +102,7 @@ public class Game implements Serializable {
 
 	public void mainLoop(boolean mainLoop) {
 		if(mainLoop) {
-			Game.INPUTORACLE.printBreakLineBefore();
+			INPUTORACLE.printBreakLineMultiple();
 		}
 		MAINACTIONORACLE.setGame(this);
 		MAINACTIONORACLE.setScanner(scanner);

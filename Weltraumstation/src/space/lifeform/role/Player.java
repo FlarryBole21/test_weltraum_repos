@@ -175,9 +175,9 @@ public class Player extends Human implements Upgradable, Killable{
 	}
 
 	public void addVisited(Enterable visited) {
-		if(visited instanceof Planet) {
+		if(visited instanceof Planet && (! visitedPlanets.contains(visited))) {
 			visitedPlanets.add((Planet) visited);
-		}else if(visited instanceof Moon) {
+		}else if(visited instanceof Moon && (!visitedMoons.contains(visited))) {
 			visitedMoons.add((Moon) visited);
 		}
 	}

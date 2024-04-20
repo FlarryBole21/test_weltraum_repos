@@ -59,9 +59,27 @@ public class LocalActionOracle extends ActionOracle{
 				Game.INPUTORACLE.printEndProgram();
 				System.exit(0);
 			}else if(input.equals("1")) {
+				Runnable runnable = ()->{
+					for(String information: player.getInformation()) {
+				    	System.out.println(information);
+				    }
+				};
+				Game.MAINACTIONORACLE.subMenu(runnable, true);
+				Game.INPUTORACLE.printBreakLineMultiple();
 			
 			}else if(input.equals("2")) {
+				Runnable runnable = ()->{
+					Consumer<RoundCelestial> roundConsumer = (round) -> {
+						for(String information: round.getInformation()) {
+					    	System.out.println(information);
+					    }
+			        };
+			        
+			        roundConsumer.accept(player.getCurrentPlace());
+				};
 				
+				Game.MAINACTIONORACLE.subMenu(runnable, true);
+		        Game.INPUTORACLE.printBreakLineMultiple();
 			}else if(input.equals("3")) {
 				Game.MAINACTIONORACLE.setLocalLoop(false);
 				player.enterShip();
