@@ -3,6 +3,7 @@ package immaterial.oracle;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.BiPredicate;
 
 import immaterial.Game;
 import space.Galaxy;
@@ -149,6 +150,7 @@ public class AskOracle extends Oracle{
 							count2++;
 							
 						}
+						
 						if (count1 != solarsystem.getPlanets().size() - 1) {
 							System.out.println();
 						}

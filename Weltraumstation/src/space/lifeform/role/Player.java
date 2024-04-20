@@ -36,6 +36,7 @@ public class Player extends Human implements Upgradable, Killable{
 	private LinkedList<InventoryObject> inventory;
 	private LinkedList<Planet> visitedPlanets;
 	private LinkedList<Moon> visitedMoons;
+	private LinkedList<Planet> colonizedPlanets;
 
 	public Player(String name) {
 		super(4, 10);
@@ -55,6 +56,7 @@ public class Player extends Human implements Upgradable, Killable{
 		this.currentShip = new BattleShip(10, 10, 100);
 		this.visitedPlanets = new LinkedList<>();
 		this.visitedMoons = new LinkedList<>();
+		this.colonizedPlanets = new LinkedList<>();
 	}
 	
 	public boolean getShipBool() {
@@ -76,19 +78,31 @@ public class Player extends Human implements Upgradable, Killable{
 	public LinkedList<String> getVisitedPlanetNames() {
 		LinkedList<String> names = new LinkedList<>();
 		for (int i = 0; i < getVisitedPlanets().size(); i++) {
-			names.add(getVisitedPlanets().get(i).getType());
+			names.add(getVisitedPlanets().get(i).getName());
 		}
 		return names;
 	}
 	
-	public LinkedList<String> getMoonNames() {
+	
+	public LinkedList<String> getVisitedMoonNames() {
 		LinkedList<String> names = new LinkedList<>();
 		for (int i = 0; i < getVisitedMoons().size(); i++) {
-			names.add(getVisitedMoons().get(i).getType());
+			names.add(getVisitedMoons().get(i).getName());
 		}
 		return names;
 	}
 	
+	
+	public LinkedList<String> getColonizedPlanetNames() {
+		LinkedList<String> names = new LinkedList<>();
+		for (int i = 0; i < getColonizedPlanets().size(); i++) {
+			names.add(getColonizedPlanets().get(i).getName());
+		}
+		return names;
+	}
+	
+	
+
 	public Ship getCurrentShip() {
 		return currentShip;
 	}
@@ -121,17 +135,24 @@ public class Player extends Human implements Upgradable, Killable{
 		return visitedPlanets;
 	}
 
-	public void setVisitedPlanets(LinkedList<Planet> visitedPlanets) {
-		this.visitedPlanets = visitedPlanets;
+	public void addVisited(Enterable visited) {
+		if(visited instanceof Planet) {
+			visitedPlanets.add((Planet) visited);
+		}else if(visited instanceof Moon) {
+			visitedMoons.add((Moon) visited);
+		}
 	}
 
 	public LinkedList<Moon> getVisitedMoons() {
 		return visitedMoons;
 	}
 
-	public void setVisitedMoons(LinkedList<Moon> visitedMoons) {
-		this.visitedMoons = visitedMoons;
+	
+	public LinkedList<Planet> getColonizedPlanets() {
+		return colonizedPlanets;
 	}
+
+
 
 	public void setInventory(LinkedList<InventoryObject> inventory) {
 		this.inventory = inventory;
@@ -257,10 +278,15 @@ public class Player extends Human implements Upgradable, Killable{
 		}else {
 			information.add("Besuchte Planeten <Keine Planeten besucht!>");
 		}
-		if(getMoonNames().size() != 0) {
-			information.add("Besuchte Monde <" + getMoonNames() +">");
+		if(getVisitedMoonNames().size() != 0) {
+			information.add("Besuchte Monde <" + getVisitedMoonNames() +">");
 		}else {
 			information.add("Besuchte Monde <Keine Monde besucht!>");
+		}
+		if(getColonizedPlanetNames().size() != 0) {
+			information.add("Kolonisierte Planeten <" + getColonizedPlanetNames() +">");
+		}else {
+			information.add("Kolonisierte Planeten <Keine Planeten kolonisiert!>");
 		}
 		return information;
 		
