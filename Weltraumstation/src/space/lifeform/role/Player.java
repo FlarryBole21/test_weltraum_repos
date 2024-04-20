@@ -12,7 +12,10 @@ import space.buildable.ship.BattleShip;
 import space.buildable.ship.Ship;
 import space.celestial.Moon;
 import space.celestial.Planet;
+import space.celestial.RoundCelestial;
 import space.inventory.InventoryObject;
+import space.inventory.item.suit.SpacewalkerSuit;
+import space.inventory.item.suit.Suit;
 import space.lifeform.Human;
 import space.lifeform.Killable;
 
@@ -21,6 +24,7 @@ public class Player extends Human implements Upgradable, Killable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private double strengthExperience;
+	private double defenseExperience;
 	private double healthExperience;
 	private double miningExperience;
 	private double harvestExperience;
@@ -28,22 +32,25 @@ public class Player extends Human implements Upgradable, Killable{
 	private double cookingExperience;
 	private double craftingExperience;
 	private double buildingExperience;
+	private int overAllBattle;
 	private int overAllLevel;
 	private Effect statusEffect;
 	private SolarSystem currentSystem;
-	private Enterable currentPlace;
+	private RoundCelestial currentPlace;
 	private Ship currentShip;
+	private Suit currentSuit;
 	private LinkedList<InventoryObject> inventory;
 	private LinkedList<Planet> visitedPlanets;
 	private LinkedList<Moon> visitedMoons;
 	private LinkedList<Planet> colonizedPlanets;
 
 	public Player(String name) {
-		super(4, 10);
+		super(5, 5, 10);
 		super.setType("Spieler");
 		this.name = name;
 		this.inventory = new LinkedList<>();
 		this.strengthExperience=super.getStrength();
+		this.defenseExperience=super.getDefense();
 		this.healthExperience=super.getHealth();
 		this.miningExperience=1;
 		this.harvestExperience=1;
@@ -51,12 +58,15 @@ public class Player extends Human implements Upgradable, Killable{
 		this.cookingExperience=1;
 		this.craftingExperience=1;
 		this.buildingExperience=1;
-		setOverallLevel();
 		this.statusEffect = new Normal();
 		this.currentShip = new BattleShip(10, 10, 100);
+		this.currentSuit = new SpacewalkerSuit(10);
+		this.currentSuit.wear(this);
 		this.visitedPlanets = new LinkedList<>();
 		this.visitedMoons = new LinkedList<>();
 		this.colonizedPlanets = new LinkedList<>();
+		setOverallLevel();
+		setOverallBattle();
 	}
 	
 	public boolean getShipBool() {
@@ -111,6 +121,15 @@ public class Player extends Human implements Upgradable, Killable{
 		this.currentShip = currentShip;
 	}
 	
+	public Suit getCurrentSuit() {
+		return currentSuit;
+	}
+
+	public void setCurrentSuit(Suit currentSuit) {
+		this.currentSuit = currentSuit;
+	}
+	
+	
 	public SolarSystem getCurrentSystem() {
 		return currentSystem;
 	}
@@ -119,11 +138,11 @@ public class Player extends Human implements Upgradable, Killable{
 		this.currentSystem = currentSystem;
 	}
 	
-	public Enterable getCurrentPlace() {
+	public RoundCelestial getCurrentPlace() {
 		return currentPlace;
 	}
 
-	public void setCurrentPlace(Enterable currentPlace) {
+	public void setCurrentPlace(RoundCelestial currentPlace) {
 		this.currentPlace = currentPlace;
 	}
 	
@@ -175,12 +194,20 @@ public class Player extends Human implements Upgradable, Killable{
 	     this.statusEffect = statusEffect;
 	}
 	
+	public double getOverallBattle() {
+		return overAllBattle;
+	}
+	
 	public double getOverallLevel() {
 		return overAllLevel;
 	}
+	
+	public void setOverallBattle() {
+		this.overAllBattle = super.getStrength()+super.getDefense()+super.getHealth();
+	}
 
 	public void setOverallLevel() {
-		this.overAllLevel = (int)strengthExperience+(int)healthExperience+(int)miningExperience+
+		this.overAllLevel = (int)strengthExperience+(int)defenseExperience+(int)healthExperience+(int)miningExperience+
 				(int)harvestExperience+(int)woodCuttingExperience+(int)cookingExperience
 				+(int)craftingExperience+(int)buildingExperience;
 	}
@@ -197,6 +224,11 @@ public class Player extends Human implements Upgradable, Killable{
 	public void setStrengthExperience(double strengthExperience) {
 		this.strengthExperience += strengthExperience;
 		super.setStrength((int)this.strengthExperience);
+	}
+	
+	public void setDefenseExperience(double defenseExperience) {
+		this.defenseExperience += defenseExperience;
+		super.setDefense((int)this.defenseExperience);
 	}
 	
 	public void setHealthExperience(double healthExperience) {
@@ -248,10 +280,16 @@ public class Player extends Human implements Upgradable, Killable{
 		LinkedList<String> information = new LinkedList<>();
 		information.add("Name <" + name+">");
 		information.add("Typ <" + super.getType()+">");
+		information.add("Kampf-Level <" + (overAllBattle) + ">");
+		information.add("Gesamtstärke <" + super.getStrength() + ">");
+		information.add("Gesamtverteidigung <" + super.getDefense() + ">");
+		information.add("Gesamtlebenspunkte <" + super.getHealth() + ">");
 		information.add("Gesamt-Level <" + ((int)overAllLevel) + ">");
-		information.add("Stärke <" + super.getStrength() + "> "
+		information.add("Stärke-Level <" + ((int)strengthExperience) + "> "
 		        + "<" +  Game.MATHORACLE.calcPercent(strengthExperience) + "%>");
-		information.add("Lebenspunkte <" + super.getHealth() + "> "
+		information.add("Verteidigung-Level <" + ((int)defenseExperience) + "> "
+		        + "<" +  Game.MATHORACLE.calcPercent(defenseExperience) + "%>");
+		information.add("Lebenspunkte-Level <" + ((int)healthExperience) + "> "
 		        + "<" +  Game.MATHORACLE.calcPercent(healthExperience) + "%>");
 		information.add("Bergbau-Level <" + ((int)miningExperience) + "> "
 		        + "<" +  Game.MATHORACLE.calcPercent(miningExperience) + "%>");
@@ -268,6 +306,18 @@ public class Player extends Human implements Upgradable, Killable{
 		information.add("Aktueller Status-Effekt <" + statusEffect.getType() + ">");
 
 		information.add("Im Schiff <" + getShipBool()+">");
+		if(getCurrentPlace() != null) {
+			information.add("Aktueller Ort <" + getCurrentPlace().getType()  + " <" +
+						getCurrentPlace().getName() + ">>");
+		}else {
+			information.add("Aktueller Ort <Du befindest dich an keinem Ort!>");
+		}
+		if(getCurrentSuit() != null) {
+			information.add("Anzug <" + getCurrentSuit().getType() 
+					+"> Verteidigungswert <" + getCurrentSuit().getDefense()+">");
+		}else {
+			information.add("Anzug <Kein Anzug an!>");
+		}
 		if(getInventoryNames().size() != 0) {
 			information.add("Inventar <" + getInventoryNames() +">");
 		}else {
@@ -296,6 +346,7 @@ public class Player extends Human implements Upgradable, Killable{
 	public void upgrade(Runnable setExperience) {
 		setExperience.run();
 		setOverallLevel();
+		setOverallBattle();
 	}
 
 	@Override

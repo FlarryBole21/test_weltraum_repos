@@ -14,7 +14,7 @@ import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
-public class Moon extends CelestialObject implements Enterable, Serializable{
+public class Moon extends RoundCelestial implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String name;
@@ -78,6 +78,7 @@ public class Moon extends CelestialObject implements Enterable, Serializable{
 	    return names;
 	}
 	
+	@Override
 	public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
 		information.add("Name <" + name+">");
@@ -102,6 +103,12 @@ public class Moon extends CelestialObject implements Enterable, Serializable{
 	@Override
 	public void enter() {
 		
+	}
+
+
+	@Override
+	public Atmosphere getAtmosphere() {
+		return atmosphere;
 	}
 
 }

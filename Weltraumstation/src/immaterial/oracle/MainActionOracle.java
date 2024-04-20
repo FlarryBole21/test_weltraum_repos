@@ -1,11 +1,14 @@
 package immaterial.oracle;
 
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 import immaterial.Game;
 import space.Enterable;
 import space.celestial.Moon;
 import space.celestial.Planet;
+import space.celestial.RoundCelestial;
 import space.lifeform.role.Player;
 
 public class MainActionOracle extends ActionOracle{
@@ -86,19 +89,13 @@ public class MainActionOracle extends ActionOracle{
 					if(player.getVisitedPlanets().contains(player.getCurrentPlace()) 
 							|| player.getVisitedMoons().contains(player.getCurrentPlace())) {
 						
-						Planet enterablePlanet = null;
-						Moon enterableMoon = null;
-						if(player.getCurrentPlace() instanceof Planet) {
-							 enterablePlanet= (Planet) player.getCurrentPlace();
-							 for(String information: enterablePlanet.getInformation()) {
-							    	System.out.println(information);
-							    }
-						}else if(player.getCurrentPlace() instanceof Moon) {
-							enterableMoon= (Moon) player.getCurrentPlace();
-							 for(String information: enterableMoon.getInformation()) {
-							    	System.out.println(information);
-							    }
-						}
+						Consumer<RoundCelestial> roundConsumer = (round) -> {
+							for(String information: round.getInformation()) {
+						    	System.out.println(information);
+						    }
+				        };
+				        
+				        roundConsumer.accept(player.getCurrentPlace());
 						
 					}else {
 						System.err.println("Error --> Ort noch nicht besucht!");
@@ -111,11 +108,34 @@ public class MainActionOracle extends ActionOracle{
 				};
 				subMenu(runnable); 
 			}else if(input.equals("3")) {
-			    break;
+				
+				Runnable runnable = ()->{
+					
+					Consumer<RoundCelestial> roundConsumer = (round) -> {
+						if((!player.getCurrentPlace().getAtmosphere().getType().equals("Normal")) &&
+								player.getCurrentSuit().getType().equals("Weltraumwanderer-Anzug")) {
+							System.err.println("Warnung! " + "Die Atmosphäre ist " + round.getAtmosphere().getType() 
+									+ " und du hast nur einen " + player.getCurrentSuit().getType()+ " an!");
+							System.err.println("Es könnten ungewünschte Effekte auftreten!");
+							System.err.println("Planeten wirklich betreten?");
+						}else {
+							player.addVisited(player.getCurrentPlace());
+							player.setCurrentShip(null);
+							System.out.println("Du bist aus deinem Schiff ausgestiegen");
+							System.out.println("Du befindest dich auf " 
+							+ player.getCurrentPlace().getType() +" <"+ player.getCurrentPlace().getName() + ">");
+						}
+			        };
+			        
+			        roundConsumer.accept(player.getCurrentPlace());
+					//player.addVisited(player.getCurrentPlace());
+						
+				};
+				subMenu(runnable); 
 			}else if(input.equals("4")) {
 			    break;
 			}else if(input.equals("5")) {	
-				player.addVisited(player.getCurrentPlace());
+				break;
 			}else if(input.equals("6")) {
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(scanner, game);
@@ -131,6 +151,7 @@ public class MainActionOracle extends ActionOracle{
 		scanner.close();
 		
 	}
+	
 	
 	private void subMenu(Runnable runnable) {
 		 while(true) {

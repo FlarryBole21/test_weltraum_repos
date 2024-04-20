@@ -18,7 +18,7 @@ import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
 
-public class Planet extends CelestialObject implements Enterable, Serializable{
+public class Planet extends RoundCelestial implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
@@ -61,6 +61,7 @@ public class Planet extends CelestialObject implements Enterable, Serializable{
 		this.mainstar = mainstar;
 	}
 	
+	@Override
 	public Atmosphere getAtmosphere() {
 		return atmosphere;
 	}
@@ -139,6 +140,7 @@ public class Planet extends CelestialObject implements Enterable, Serializable{
 		return names;
 	}
 	
+	@Override
 	public LinkedList<String> getInformation() {
 		LinkedList<String> information = new LinkedList<>();
 		information.add("Name <" + name+">");
