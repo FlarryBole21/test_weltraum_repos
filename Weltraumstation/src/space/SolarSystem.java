@@ -2,6 +2,8 @@ package space;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+
+import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.star.BlueGiant;
 import space.celestial.star.MainSequenceStar;
@@ -21,11 +23,13 @@ public class SolarSystem implements Serializable{
 	private LinkedList<Sun> suns;
 	private LinkedList<Planet> planets;
 	private MainSequenceStar mainstar;
+	private Galaxy galaxy;
 
-	public SolarSystem(String name) {
+	public SolarSystem(String name, Galaxy galaxy) {
 		this.name = name;
 		this.suns = new LinkedList<>();
 		this.planets = new LinkedList<>();
+		this.galaxy=galaxy;
 	}
 	
 	public MainSequenceStar getMainstar() {
@@ -42,6 +46,14 @@ public class SolarSystem implements Serializable{
 	}
 	
 	
+	public Galaxy getGalaxy() {
+		return galaxy;
+	}
+
+	public void setGalaxy(Galaxy galaxy) {
+		this.galaxy = galaxy;
+	}
+
 	public Sun addSun(String name, double mass, double radius, double temperature, double luminosity, Sun suntype) {
 		Sun sun = null;
 		if(suntype instanceof MainSequenceStar) {
@@ -98,6 +110,14 @@ public class SolarSystem implements Serializable{
 			names.add(getSuns().get(i).getName());
 		}
 		return names;
+	}
+	
+	public void getBasicInformation() {
+			System.out.println("-- Sonnensystem <" + getName() + "> --");
+			System.out.println("Planeten-Namen <" + getPlanetNames() + ">");
+			System.out.println("Sonnen-Namen <" + getSunNames() + ">");
+			System.out.println();
+		
 	}
 
 }

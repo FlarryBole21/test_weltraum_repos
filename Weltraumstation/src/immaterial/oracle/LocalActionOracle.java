@@ -1,6 +1,5 @@
 package immaterial.oracle;
 
-import java.util.Scanner;
 import java.util.function.Consumer;
 
 import immaterial.Game;
@@ -16,33 +15,15 @@ public class LocalActionOracle extends ActionOracle{
 		super.setType("Orakel der lokalen Aktionen");
 	}
 	
-	private void testBeforeMain() throws RuntimeException{
-		if(super.getGame() == null) {
-			throw new RuntimeException("Spiel nicht gesetzt");
-		}
-		
-		if(super.getGame().getGalaxy() == null) {
-			throw new RuntimeException("Galaxie nicht gesetzt");
-		}
-		
-		if(super.getGame().getPlayer() == null) {
-			throw new RuntimeException("Spieler nicht gesetzt");
-		}
-		
-		if(super.getScanner() == null) {
-			Scanner scanner = new Scanner(System.in);
-			super.setScanner(scanner);
-		}
-		
-	}
+	
 
 	@Override
 	public void run() throws RuntimeException{
 		testBeforeMain();
-		Planet planet = (Planet) super.getGame().getPlayer().getCurrentPlace();
+		Planet planet = (Planet) getGame().getPlayer().getCurrentPlace();
 		System.out.println("Du befindest dich zur Zeit in keinem Raumschiff am Ort " 
 		+ planet.getType()+ " <"+ planet.getName()+">");
-		System.out.println("im System <"+ super.getGame().getPlayer().getCurrentSystem().getName()+">");
+		System.out.println("im System <"+ getGame().getPlayer().getCurrentSystem().getName()+">");
 		String input;
 		Player player = getGame().getPlayer();
 		Game.INPUTORACLE.printBreakLineMultiple();
@@ -53,7 +34,7 @@ public class LocalActionOracle extends ActionOracle{
 			System.out.println("2 -> Orts-Info einsehen");
 			System.out.println("3 -> Zurück zum Raumschiff");
 			System.out.println("4 -> Aktuellen Fortschritt speichern");
-			input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+			input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			
 			if(input.equals("0")) {
 				Game.INPUTORACLE.printEndProgram();
@@ -83,13 +64,14 @@ public class LocalActionOracle extends ActionOracle{
 			}else if(input.equals("3")) {
 				Game.MAINACTIONORACLE.setLocalLoop(false);
 				player.enterShip();
+				Game.INPUTORACLE.printBreakLineMultiple();
 				System.out.println("Du steigst wieder in dein Raumschiff ein...");
 				Game.INPUTORACLE.printBreakLineMultiple();
 				break;
 				
 			}else if(input.equals("4")) {
 				Game.INPUTORACLE.printBreakLineMultiple();
-				Game.FILEORACLE.saveGame(super.getScanner(), super.getGame());
+				Game.FILEORACLE.saveGame(getScanner(), getGame());
 				Game.INPUTORACLE.printBreakLineMultiple();
 				
 			}else {

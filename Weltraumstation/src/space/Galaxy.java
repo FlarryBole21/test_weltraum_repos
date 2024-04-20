@@ -16,7 +16,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	public SolarSystem addSolarSystem(String name) {
-		SolarSystem solarSystem = new SolarSystem(name);
+		SolarSystem solarSystem = new SolarSystem(name, this);
 		solarSystems.add(solarSystem);
 		return solarSystem;
 		
@@ -44,6 +44,14 @@ public class Galaxy implements Serializable{
 			names.add(getSolarSystems().get(i).getName());
 		}
 		return names;
+	}
+	
+	public void getInformation() {
+		System.out.println("Universum <"+ getUniverse().getName() +">");
+		System.out.println("Galaxie <"+ getName() +">");
+		for(SolarSystem solarsystem : getSolarSystems()) {
+			System.out.println("Sonnensystem <"+ solarsystem.getName() +">");
+		}
 	}
 
 	

@@ -22,40 +22,22 @@ public class AskOracle extends Oracle{
 		super.setType("Orakel der Fragen");
 	}
 	
-	public void askUniverseInfo(Scanner scanner, Galaxy galaxy) {
-		String input;
-		Game.INPUTORACLE.printBreakLineBefore();
-		System.out.println("Universum-, Galaxie- & Sonnensystem-Daten einsehen?");
-		System.out.print(
-				"(1 -> Infos einsehen, Irgendwas anderes -> Keine Infos): ");
-		input = scanner.nextLine();
-		System.out.println();
-		if (input.equals("1")) {
-			System.out.println("Universum <"+ galaxy.getUniverse().getName() +">");
-			System.out.println("Galaxie <"+ galaxy.getName() +">");
-			for(SolarSystem solarsystem : galaxy.getSolarSystems()) {
-				System.out.println("Sonnensystem <"+ solarsystem.getName() +">");
-			}
-		}
-		Game.INPUTORACLE.printBreakLineAfter();
-	}
-	
 	
 	public void askSunSystemInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		int count=0;
 		Game.INPUTORACLE.printBreakLineBefore();
-		System.out.println("Planten-, Sonnen- Daten einsehen?");
-		System.out.print(
-				"(1 -> Infos einsehen (Nur Namen), 2 -> Infos einsehen (Mehr Details), Irgendwas anderes -> Keine Infos): ");
-		input = scanner.nextLine();
+		System.out.println("<SPOILER> Ein einmaliger Einblick in die erstellten Planeten & Sonnen");
+		System.out.println("Planten- & Sonnen-Daten einsehen?");
+		System.out.println(
+				"(1 -> Infos einsehen (Nur Namen), 2 -> Infos einsehen (Mehr Details), "+
+		"Irgendwas anderes -> Keine Infos): ");
+		
+		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		System.out.println();
 		if (input.equals("1")) {
 			for (SolarSystem solarsystem : galaxy.getSolarSystems()) {
-				System.out.println("-- Sonnensystem <" + solarsystem.getName() + "> --");
-				System.out.println("Planeten-Namen <" + solarsystem.getPlanetNames() + ">");
-				System.out.println("Sonnen-Namen <" + solarsystem.getSunNames() + ">");
-				System.out.println();
+				solarsystem.getBasicInformation();
 			}
 		} else if (input.equals("2")) {
 			for (SolarSystem solarsystem : galaxy.getSolarSystems()) {
@@ -107,10 +89,11 @@ public class AskOracle extends Oracle{
 	public void askMoonInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		Game.INPUTORACLE.printBreakLineBefore();
+		System.out.println("<SPOILER> Ein einmaliger Einblick in die erstellten Monde");
 		System.out.println("Mond-Daten einsehen?");
-		System.out.print(
+		System.out.println(
 				"(1 -> Infos einsehen (Nur Namen), 2 -> Infos einsehen (Mehr Details), Irgendwas anderes -> Keine Infos): ");
-		input = scanner.nextLine();
+		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		System.out.println();
 		if (input.equals("1")) {
 			for (SolarSystem solarsystem : galaxy.getSolarSystems()) {
@@ -163,6 +146,9 @@ public class AskOracle extends Oracle{
 				System.out.println();
 			}
 		}
+		Game.INPUTORACLE.printBreakLineBefore();
+		System.out.println("Diese Daten waren ein einmaliger Einblick. Planeten & Monde müssen danach mindestens");
+		System.out.println("einmal betreten werden, bevor Ihre Informationen angezeigt werden können");
 		Game.INPUTORACLE.printBreakLineAfter();
 		
 	}

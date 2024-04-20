@@ -1,8 +1,10 @@
 package immaterial.oracle;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import immaterial.Game;
+import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.RoundCelestial;
 import space.lifeform.role.Player;
@@ -15,27 +17,6 @@ public class MainActionOracle extends ActionOracle{
 	public MainActionOracle() {
 		super.setType("Orakel der Hauptaktionen");
 	}
-	
-	private void testBeforeMain() throws RuntimeException{
-		if(super.getGame() == null) {
-			throw new RuntimeException("Spiel nicht gesetzt");
-		}
-		
-		if(super.getGame().getGalaxy() == null) {
-			throw new RuntimeException("Galaxie nicht gesetzt");
-		}
-		
-		if(super.getGame().getPlayer() == null) {
-			throw new RuntimeException("Spieler nicht gesetzt");
-		}
-		
-		if(super.getScanner() == null) {
-			Scanner scanner = new Scanner(System.in);
-			super.setScanner(scanner);
-		}
-		
-	}
-	
 	
 	public boolean getLocalLoop() {
 		return localLoop;
@@ -67,7 +48,7 @@ public class MainActionOracle extends ActionOracle{
 				System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
 				System.out.println("5 -> Zum einem anderen Ort reisen");
 				System.out.println("6 -> Aktuellen Fortschritt speichern");
-				input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+				input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			}else {
 				input = "3";
 			}
@@ -113,7 +94,7 @@ public class MainActionOracle extends ActionOracle{
 					runnable = ()->{
 						
 						Consumer<RoundCelestial> roundConsumer = (round) -> {
-							if((player.getCurrentPlace().getAtmosphere().getType().equals("Normal")) &&
+							if((!player.getCurrentPlace().getAtmosphere().getType().equals("Normal")) &&
 									player.getCurrentSuit().getType().equals("Weltraumwanderer-Anzug")) {
 								System.err.println("Warnung! " + "Die Atmosphäre ist " + round.getAtmosphere().getType() 
 										+ " und du hast nur einen " + player.getCurrentSuit().getType()+ " an!");
@@ -131,11 +112,26 @@ public class MainActionOracle extends ActionOracle{
 				subMenu(runnable,false); 
 			}else if(input.equals("4")) {
 			    break;
-			}else if(input.equals("5")) {	
-				break;
+			}else if(input.equals("5")) {
+				Runnable runnable = () -> {
+					if(player.getCurrentPlace() instanceof Planet) {
+						Planet planet = (Planet) player.getCurrentPlace();
+						if(planet.getMoons().size() > 0) {
+							Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
+						}else {
+							Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
+						}
+					}else if(player.getCurrentPlace() instanceof Moon) {
+						Moon moon = (Moon) player.getCurrentPlace();
+						Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
+					}
+				};
+				
+				
+				subMenu(runnable,true); 
 			}else if(input.equals("6")) {
 				Game.INPUTORACLE.printBreakLineMultiple();
-				Game.FILEORACLE.saveGame(super.getScanner(), super.getGame());
+				Game.FILEORACLE.saveGame(getScanner(), getGame());
 				Game.INPUTORACLE.printBreakLineMultiple();
 			}else {
 				Game.INPUTORACLE.printBreakLineMultiple();
@@ -150,19 +146,20 @@ public class MainActionOracle extends ActionOracle{
 	}
 	
 	
+
 	private void enterLocalPlace(boolean askEnter) {
 		String input="1";
 		if(askEnter) {
 			System.out.println("Möchtest du diesen Planeten wirklich betreten?");
 			System.out.print(
 					"(1 -> Ja, Irgendwas anderes -> Nein): ");
-			input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+			input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 		}
 		if(input.equals("1")) {
-			super.getGame().getPlayer().addVisited(super.getGame().getPlayer().getCurrentPlace());
-			super.getGame().getPlayer().leaveShip();
-			System.out.println("Du bist aus deinem Raumschiff ausgestiegen...");
+			getGame().getPlayer().addVisited(getGame().getPlayer().getCurrentPlace());
+			getGame().getPlayer().leaveShip();
 			Game.INPUTORACLE.printBreakLineMultiple();
+			System.out.println("Du bist aus deinem Raumschiff ausgestiegen...");
 			localLoop();
 			
 		}
@@ -173,10 +170,8 @@ public class MainActionOracle extends ActionOracle{
 		if(!getLocalLoop()) {
 			Game.INPUTORACLE.printBreakLineMultiple();
 		}
-		Game.LOCALACTIONORACLE.setGame(super.getGame());
-		Game.LOCALACTIONORACLE.setScanner(super.getScanner());
 		Game.MAINACTIONORACLE.setLocalLoop(true);
-		Game.LOCALACTIONORACLE.run();
+		Game.LOCALACTIONORACLE.checkAndRun(Game.LOCALACTIONORACLE,getGame(),getScanner());
 	}
 	
 	
@@ -186,7 +181,7 @@ public class MainActionOracle extends ActionOracle{
 		    	Game.INPUTORACLE.printBreakLineMultiple();
 			    runnable.run();
 			    if(askBack) {
-			    	 output = backToPreviousMenu();
+			    	 output = backToMainMenu();
 			    }else {
 			    	break;
 			    }
@@ -197,12 +192,12 @@ public class MainActionOracle extends ActionOracle{
 	}
 	
 	
-	private boolean backToPreviousMenu() {
+	private boolean backToMainMenu() {
 		
 		Game.INPUTORACLE.printBreakLineMultiple();
-	    Runnable runnable = () -> System.out.println("Zurück zum vorherigen Menü? "
+	    Runnable runnable = () -> System.out.println("Zurück zum Haupt-Menü? "
 	            + "1 -> Zurück, Irgendwas anderes -> Noch nicht");
-	    boolean output = Game.ASKORACLE.trueFalseQuestion(super.getScanner(),runnable);
+	    boolean output = Game.ASKORACLE.trueFalseQuestion(getScanner(),runnable);
 	    return output;
 		
 	}

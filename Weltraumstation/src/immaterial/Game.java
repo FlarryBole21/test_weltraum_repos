@@ -12,7 +12,10 @@ import immaterial.oracle.LocalActionOracle;
 import immaterial.oracle.MainActionOracle;
 import immaterial.oracle.MathOracle;
 import immaterial.oracle.ResourceOracle;
+import immaterial.oracle.SearchOracle;
+import immaterial.oracle.TravelActionOracle;
 import space.Galaxy;
+import space.SolarSystem;
 import space.celestial.Planet;
 import space.lifeform.role.Player;
 
@@ -28,7 +31,9 @@ public class Game implements Serializable {
 	public final static ResourceOracle RESOURCEORACLE = new ResourceOracle();
 	public final static MainActionOracle MAINACTIONORACLE = new MainActionOracle();
 	public final static LocalActionOracle LOCALACTIONORACLE = new LocalActionOracle();
+	public final static TravelActionOracle TRAVELACTIONORACLE= new TravelActionOracle();
 	public final static MathOracle MATHORACLE = new MathOracle();
+	public final static SearchOracle SEARCHORACLE = new SearchOracle();
 	
 	private Galaxy galaxy;
 	private Player player;
@@ -82,7 +87,7 @@ public class Game implements Serializable {
 		Galaxy galaxy = CREATEORACLE.setUniverseGalaxy(scanner);
 		this.galaxy=galaxy;
 		CREATEORACLE.setSolar(scanner, galaxy);
-		ASKORACLE.askUniverseInfo(scanner, galaxy);
+		galaxy.getInformation();
 		ASKORACLE.askSunSystemInfo(scanner, galaxy);
 		ASKORACLE.askMoonInfo(scanner, galaxy);
 		Player player = CREATEORACLE.setPlayer(scanner);
@@ -91,6 +96,8 @@ public class Game implements Serializable {
 		player.setCurrentPlace(start);
 		player.setCurrentSystem(start.getSolarsystem());
 		INPUTORACLE.printBreakLineBefore();
+		System.out.println("Hallo " + player.getName() + "!");
+		System.out.println();
 		System.out.println("Du startest am Planeten <" + start.getName() 
 		+ "> und im System <" + start.getSolarsystem().getName()+">");
 		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
@@ -103,13 +110,11 @@ public class Game implements Serializable {
 	public void mainLoop(boolean mainLoop) {
 		if(mainLoop) {
 			INPUTORACLE.printBreakLineMultiple();
-		}
-		MAINACTIONORACLE.setGame(this);
-		MAINACTIONORACLE.setScanner(scanner);
-		if(!mainLoop) {
+		}else {
 			MAINACTIONORACLE.setLocalLoop(true);
 		}
-		MAINACTIONORACLE.run();
+		MAINACTIONORACLE.checkAndRun(MAINACTIONORACLE,this,scanner);
+	
 	}
 	
 	

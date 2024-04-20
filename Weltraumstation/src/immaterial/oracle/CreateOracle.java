@@ -81,8 +81,6 @@ public class CreateOracle extends Oracle{
 		System.out.print("Wie heißt du?: ");
 		input = Game.INPUTORACLE.inputEmptyCheck(scanner);
 		Player player = new Player(input);
-		System.out.println("Hallo " + input + "!");
-		System.out.println();
 		Game.INPUTORACLE.printBreakLineAfter();
 		return player;
 		

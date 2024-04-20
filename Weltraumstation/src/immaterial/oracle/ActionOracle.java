@@ -28,4 +28,30 @@ public abstract class ActionOracle extends Oracle implements Runnable{
 		this.game = game;
 	}
 	
+	public void checkAndRun(ActionOracle oracle, Game game, Scanner scanner) {
+		oracle.setGame(game);
+		oracle.setScanner(scanner);
+		oracle.run();
+	}
+	
+	public void testBeforeMain() throws RuntimeException{
+		if(getGame() == null) {
+			throw new RuntimeException("Spiel nicht gesetzt");
+		}
+		
+		if(getGame().getGalaxy() == null) {
+			throw new RuntimeException("Galaxie nicht gesetzt");
+		}
+		
+		if(getGame().getPlayer() == null) {
+			throw new RuntimeException("Spieler nicht gesetzt");
+		}
+		
+		if(getScanner() == null) {
+			Scanner scanner = new Scanner(System.in);
+			setScanner(scanner);
+		}
+		
+	}
+	
 }
