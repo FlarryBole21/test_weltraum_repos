@@ -1,12 +1,8 @@
 package immaterial.oracle;
 
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.function.Consumer;
-
 import immaterial.Game;
-import space.Enterable;
-import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.RoundCelestial;
 import space.lifeform.role.Player;
@@ -14,49 +10,39 @@ import space.lifeform.role.Player;
 public class MainActionOracle extends ActionOracle{
 	
 	private static final long serialVersionUID = 1L;
-	private Game game;
-	private Scanner scanner;
+	private boolean localLoop;
 
 	public MainActionOracle() {
 		super.setType("Orakel der Hauptaktionen");
 	}
 	
-	public Scanner getScanner() {
-		return scanner;
-	}
-
-
-	public void setScanner(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-	
-	
 	private void testBeforeMain() throws RuntimeException{
-		if(getGame() == null) {
+		if(super.getGame() == null) {
 			throw new RuntimeException("Spiel nicht gesetzt");
 		}
 		
-		if(getGame().getGalaxy() == null) {
+		if(super.getGame().getGalaxy() == null) {
 			throw new RuntimeException("Galaxie nicht gesetzt");
 		}
 		
-		if(getGame().getPlayer() == null) {
+		if(super.getGame().getPlayer() == null) {
 			throw new RuntimeException("Spieler nicht gesetzt");
 		}
 		
-		if(getScanner() == null) {
-			scanner = new Scanner(System.in);
+		if(super.getScanner() == null) {
+			Scanner scanner = new Scanner(System.in);
+			super.setScanner(scanner);
 		}
 		
+	}
+	
+	
+	public boolean getLocalLoop() {
+		return localLoop;
+	}
+
+	public void setLocalLoop(boolean localLoop) {
+		this.localLoop = localLoop;
 	}
 
 	@Override
@@ -65,15 +51,26 @@ public class MainActionOracle extends ActionOracle{
 		String input;
 		Player player = getGame().getPlayer();
 		while(true) {
-			System.out.println("Was möchtest du jetzt machen?");
-			System.out.println("0 -> Spiel beenden");
-			System.out.println("1 -> Charakter-Info einsehen");
-			System.out.println("2 -> Orts-Info einsehen");
-			System.out.println("3 -> Anliegenden lokalen Ort betreten");
-			System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
-			System.out.println("5 -> Zum einem anderen Ort reisen");
-			System.out.println("6 -> Aktuellen Fortschritt speichern");
-			input = Game.INPUTORACLE.inputEmptyCheck(scanner);
+			if(!getLocalLoop()) {
+				Planet planet = (Planet) player.getCurrentPlace();
+				System.out.println("Hallo " + player.getName());
+				System.out.println("Du befindest dich zur Zeit in einem Raumschiff <"+
+				player.getCurrentShip().getType() + "> am Ort " + planet.getType()+ " <"+ planet.getName()+">");
+				System.out.println("im System <"+ player.getCurrentSystem().getName()+">");
+				Game.INPUTORACLE.printBreakLineMultiple();
+				
+				System.out.println("Was möchtest du jetzt machen?");
+				System.out.println("0 -> Spiel beenden");
+				System.out.println("1 -> Charakter-Info einsehen");
+				System.out.println("2 -> Orts-Info einsehen");
+				System.out.println("3 -> Anliegenden lokalen Ort betreten");
+				System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
+				System.out.println("5 -> Zum einem anderen Ort reisen");
+				System.out.println("6 -> Aktuellen Fortschritt speichern");
+				input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+			}else {
+				input = "3";
+			}
 			
 			if(input.equals("0")) {
 			    break;
@@ -81,9 +78,10 @@ public class MainActionOracle extends ActionOracle{
 				Runnable runnable = ()->{
 					for(String information: player.getInformation()) {
 				    	System.out.println(information);
+				    	
 				    }
 				};
-				subMenu(runnable); 
+				subMenu(runnable,true); 
 			}else if(input.equals("2")) {
 				Runnable runnable = ()->{
 					if(player.getVisitedPlanets().contains(player.getCurrentPlace()) 
@@ -106,39 +104,39 @@ public class MainActionOracle extends ActionOracle{
 					}
 		
 				};
-				subMenu(runnable); 
+				subMenu(runnable,true); 
 			}else if(input.equals("3")) {
+				Runnable runnable;
 				
-				Runnable runnable = ()->{
-					
-					Consumer<RoundCelestial> roundConsumer = (round) -> {
-						if((!player.getCurrentPlace().getAtmosphere().getType().equals("Normal")) &&
-								player.getCurrentSuit().getType().equals("Weltraumwanderer-Anzug")) {
-							System.err.println("Warnung! " + "Die Atmosphäre ist " + round.getAtmosphere().getType() 
-									+ " und du hast nur einen " + player.getCurrentSuit().getType()+ " an!");
-							System.err.println("Es könnten ungewünschte Effekte auftreten!");
-							System.err.println("Planeten wirklich betreten?");
-						}else {
-							player.addVisited(player.getCurrentPlace());
-							player.setCurrentShip(null);
-							System.out.println("Du bist aus deinem Schiff ausgestiegen");
-							System.out.println("Du befindest dich auf " 
-							+ player.getCurrentPlace().getType() +" <"+ player.getCurrentPlace().getName() + ">");
-						}
-			        };
-			        
-			        roundConsumer.accept(player.getCurrentPlace());
-					//player.addVisited(player.getCurrentPlace());
+				if(getLocalLoop()) {
+					runnable = ()->localLoop();
+				}else {
+					runnable = ()->{
 						
-				};
-				subMenu(runnable); 
+						Consumer<RoundCelestial> roundConsumer = (round) -> {
+							if((player.getCurrentPlace().getAtmosphere().getType().equals("Normal")) &&
+									player.getCurrentSuit().getType().equals("Weltraumwanderer-Anzug")) {
+								System.err.println("Warnung! " + "Die Atmosphäre ist " + round.getAtmosphere().getType() 
+										+ " und du hast nur einen " + player.getCurrentSuit().getType()+ " an!");
+								System.err.println("Es könnten ungewünschte Effekte auftreten!");
+								enterLocalPlace(true);
+								
+							}else {
+								enterLocalPlace(false);
+							}
+				        };
+				
+				        roundConsumer.accept(player.getCurrentPlace());
+					};	
+				}	
+				subMenu(runnable,false); 
 			}else if(input.equals("4")) {
 			    break;
 			}else if(input.equals("5")) {	
 				break;
 			}else if(input.equals("6")) {
 				Game.INPUTORACLE.printBreakLineMultiple();
-				Game.FILEORACLE.saveGame(scanner, game);
+				Game.FILEORACLE.saveGame(super.getScanner(), super.getGame());
 				Game.INPUTORACLE.printBreakLineMultiple();
 			}else {
 				Game.INPUTORACLE.printBreakLineMultiple();
@@ -148,16 +146,49 @@ public class MainActionOracle extends ActionOracle{
 
 		}
 		
-		scanner.close();
+		super.getScanner().close();
 		
 	}
 	
 	
-	private void subMenu(Runnable runnable) {
+	private void enterLocalPlace(boolean askEnter) {
+		String input="1";
+		if(askEnter) {
+			System.out.println("Möchtest du diesen Planeten wirklich betreten?");
+			System.out.print(
+					"(1 -> Ja, Irgendwas anderes -> Nein): ");
+			input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+		}
+		if(input.equals("1")) {
+			super.getGame().getPlayer().addVisited(super.getGame().getPlayer().getCurrentPlace());
+			super.getGame().getPlayer().leaveShip();
+			System.out.println("Du bist aus deinem Raumschiff ausgestiegen...");
+			Game.INPUTORACLE.printBreakLineMultiple();
+			localLoop();
+			
+		}
+		
+	}
+
+	private void localLoop() {
+		Game.INPUTORACLE.printBreakLineMultiple();
+		Game.LOCALACTIONORACLE.setGame(super.getGame());
+		Game.LOCALACTIONORACLE.setScanner(super.getScanner());
+		Game.MAINACTIONORACLE.setLocalLoop(true);
+		Game.LOCALACTIONORACLE.run();
+	}
+	
+	
+	private void subMenu(Runnable runnable, boolean askBack) {
+		boolean output;
 		 while(true) {
 		    	Game.INPUTORACLE.printBreakLineMultiple();
 			    runnable.run();
-			    boolean output = backToPreviousMenu();
+			    if(askBack) {
+			    	 output = backToPreviousMenu();
+			    }else {
+			    	break;
+			    }
 			    if(output) {
 			    	break;
 			    }
@@ -170,9 +201,10 @@ public class MainActionOracle extends ActionOracle{
 		Game.INPUTORACLE.printBreakLineMultiple();
 	    Runnable runnable = () -> System.out.println("Zurück zum vorherigen Menü? "
 	            + "1 -> Zurück, Irgendwas anderes -> Noch nicht");
-	    boolean output = Game.ASKORACLE.trueFalseQuestion(scanner,runnable);
+	    boolean output = Game.ASKORACLE.trueFalseQuestion(super.getScanner(),runnable);
 	    return output;
 		
 	}
+	
 
 }

@@ -38,6 +38,7 @@ public class Player extends Human implements Upgradable, Killable{
 	private SolarSystem currentSystem;
 	private RoundCelestial currentPlace;
 	private Ship currentShip;
+	private Ship shipParked;
 	private Suit currentSuit;
 	private LinkedList<InventoryObject> inventory;
 	private LinkedList<Planet> visitedPlanets;
@@ -77,6 +78,7 @@ public class Player extends Human implements Upgradable, Killable{
 		}
 	}
 	
+	
 	public LinkedList<String> getInventoryNames() {
 		LinkedList<String> names = new LinkedList<>();
 		for (int i = 0; i < getInventory().size(); i++) {
@@ -111,14 +113,32 @@ public class Player extends Human implements Upgradable, Killable{
 		return names;
 	}
 	
+	public void leaveShip() {
+		setShipParked(currentShip);
+		setCurrentShip(null);
+	}
+	
+	public void enterShip() {
+		setCurrentShip(shipParked);
+		setShipParked(null);
+	}
 	
 
 	public Ship getCurrentShip() {
 		return currentShip;
 	}
 
-	public void setCurrentShip(Ship currentShip) {
+	private void setCurrentShip(Ship currentShip) {
 		this.currentShip = currentShip;
+	}
+	
+	
+	public Ship getShipParked() {
+		return shipParked;
+	}
+
+	private void setShipParked(Ship shipParked) {
+		this.shipParked = shipParked;
 	}
 	
 	public Suit getCurrentSuit() {

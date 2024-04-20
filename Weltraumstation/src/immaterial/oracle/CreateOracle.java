@@ -1,8 +1,7 @@
 package immaterial.oracle;
 
-import java.io.IOException;
-import java.util.Scanner;
 
+import java.util.Scanner;
 import immaterial.Game;
 import space.Galaxy;
 import space.SolarSystem;
