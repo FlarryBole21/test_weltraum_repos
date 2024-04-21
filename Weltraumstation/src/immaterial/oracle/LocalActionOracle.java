@@ -29,7 +29,7 @@ public class LocalActionOracle extends ActionOracle{
 			System.out.println("im System <"+ getGame().getPlayer().getCurrentSystem().getName()+">");
 			testAtmoToPlayer(); 
 			Game.MAINACTIONORACLE.checkPlayerHealth();
-			Game.INPUTORACLE.printBreakLineMultiple();
+			Game.INPUTORACLE.printBreakLine();
 			System.out.println("Was möchtest du jetzt machen?");
 			System.out.println("0 -> Spiel beenden");
 			System.out.println("1 -> Charakter-Info einsehen");

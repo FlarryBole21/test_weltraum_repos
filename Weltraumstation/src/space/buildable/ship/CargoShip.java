@@ -4,8 +4,8 @@ public class CargoShip extends Ship{
 
 	private static final long serialVersionUID = 1L;
 
-	public CargoShip(int defense, int health, int capacity) {
-		super(defense, health, capacity);
+	public CargoShip(int health, int capacity) {
+		super(health, capacity);
 		super.setType("Frachtschiff");
 	}
 

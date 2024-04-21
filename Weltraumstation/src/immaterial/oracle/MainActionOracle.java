@@ -37,7 +37,7 @@ public class MainActionOracle extends ActionOracle{
 				System.out.println("Du befindest dich zur Zeit in einem Raumschiff <"+
 				player.getCurrentShip().getType() + "> am Ort " + planet.getType()+ " <"+ planet.getName()+">");
 				System.out.println("im System <"+ player.getCurrentSystem().getName()+">");
-				Game.INPUTORACLE.printBreakLineMultiple();
+				Game.INPUTORACLE.printBreakLine();
 				
 				System.out.println("Was möchtest du jetzt machen?");
 				System.out.println("0 -> Spiel beenden");

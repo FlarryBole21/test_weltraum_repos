@@ -23,6 +23,9 @@ import space.lifeform.role.Player;
 public class Game implements Serializable {
 	
 
+	//Konstanten, die von überall über die Game-Klasse zugegriffen werden können
+	//Orakel liefern verschiedene Funktionen -> Reduktion von statischen Methoden innerhalb
+	//der Orakel durch Konstanten
 	private static final long serialVersionUID = 1L;
 	public final static FileOracle FILEORACLE = new FileOracle();
 	public final static AskOracle ASKORACLE = new AskOracle();
@@ -43,6 +46,10 @@ public class Game implements Serializable {
 
 	public static void main(String[] args) {
 		Game game;
+		//Abfangen von Fehlern
+		//Es wird getest, ob Files vorhanden sind --> Falls nicht, werden sie geschrieben
+		//Außerdem werden Spielstände geladen --> Falls vorhanden
+		//Hier werden die meisten Fehler des Programms abgefangen --> Durchreichung von Fehlern und hier abgefangen
 		try {
 		    FILEORACLE.testFiles();
 		    game =FILEORACLE.loadGame();
@@ -81,6 +88,11 @@ public class Game implements Serializable {
 
 	}
 	
+	//Startet den Anfnagsprozess, da am Anfang noch kein Universum und co. existiert
+	//Spieler kann Namen für Universum und co. festlegen
+	//Plus Generierung des einzelnen Sonnensysteme
+	//Plus Erstellung des Spielers
+	//Spieler wird dabei von Anfang durch Text durch den Erstellungsprzess durchgeführt
 	public void start() throws RuntimeException {
 		INPUTORACLE.printBreakLineMultiple();
 		System.out.println("Willkommen in der Weltraumsimulation");
@@ -109,6 +121,11 @@ public class Game implements Serializable {
 	}
 
 
+	//Das Hauptgeschehen spielt sich in dieser Methode ab
+	//wird erst aufgerufen, wenn bereits Univerusm und co. erstellt wurden
+	//Spieler kann Speicherstand innerhalb der mainLoop (im Schiff) oder der localLoop (ausgestiegen auf dem Planeten)
+	//speichern und laden
+	//MAINACTIONORACLE reguliert das Hauptgeschehen
 	public void mainLoop(boolean mainLoop) {
 		if(mainLoop) {
 			INPUTORACLE.printBreakLineMultiple();

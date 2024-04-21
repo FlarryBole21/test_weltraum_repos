@@ -4,8 +4,8 @@ public class ColonyShip extends Ship{
 
 	private static final long serialVersionUID = 1L;
 
-	public ColonyShip(int defense, int health, int capacity) {
-		super(defense, health, capacity);
+	public ColonyShip(int health, int capacity) {
+		super(health, capacity);
 		super.setType("Kolonieschiff");
 		
 	}

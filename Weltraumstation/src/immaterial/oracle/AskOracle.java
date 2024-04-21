@@ -22,7 +22,10 @@ public class AskOracle extends Oracle{
 		super.setType("Orakel der Fragen");
 	}
 	
-	
+	//Man kann sich am Anfang des Spiels bei der Erstellung der Sonnensystem über deren Planten und co. spoilern
+	//also einen kurzen Einblick in die Daten bekommen
+	//Dies ist nur eine einmalige Mögichkeit, danach müssen Platen und co. betreten werden
+	//Hier wird der Spieler gefragt, ob er sich spoiler möchte
 	public void askSunSystemInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		int count=0;
@@ -85,7 +88,7 @@ public class AskOracle extends Oracle{
 
 	}
 	
-	
+	//Das Gleiche wie oben aber nochmal für die Monde
 	public void askMoonInfo(Scanner scanner, Galaxy galaxy) {
 		String input;
 		Game.INPUTORACLE.printBreakLineBefore();
@@ -153,7 +156,9 @@ public class AskOracle extends Oracle{
 		
 	}
 	
-	
+	//Der Spieler wird gefragt zu welchem Sonnensystem er reisen möchte?
+	//Am Anfang des Spiels
+	//Spieler kann das System dnach nicht mehr wechslen
 	public Planet askDestinationStart(Scanner scanner,Galaxy galaxy) {
 		String input;
 		Planet start = null;
@@ -214,6 +219,9 @@ public class AskOracle extends Oracle{
 	}
 	
 	
+	//Es wird gerprüft ob das System mindestens einen Planeten mit normaler Atmosphäre besitzt
+	//Aus der Liste wird dann der erste genommen
+	//Relevant für Methode oben
 	private Planet checkNormalAtmosphere(SolarSystem solarSystem) {
 		Planet start = null;
 		Optional<Planet> planetOptional = solarSystem.getPlanets().stream()
@@ -230,6 +238,9 @@ public class AskOracle extends Oracle{
 		
 	}
 	
+	//Ein Ja Nein Frage
+	// 1 -> Ja
+	// Irgendwas anderers -> Nein
 	public boolean trueFalseQuestion(Scanner scanner, Runnable runnable) {
 		String input;
 		runnable.run();

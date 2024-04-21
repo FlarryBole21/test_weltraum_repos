@@ -21,6 +21,7 @@ public class CreateOracle extends Oracle{
 		super.setType("Orakel der Kreation");
 	}
 	
+	//Erstellung des Universums und einer Galaxie
 	public Galaxy setUniverseGalaxy(Scanner scanner) throws RuntimeException{
 		String input;
 		System.out.println("Als Erstes brauchen wir ein Universum!");
@@ -41,7 +42,7 @@ public class CreateOracle extends Oracle{
 		return galaxy;
 	}
 	
-	
+	//Erstellung der Sonnensysteme 
 	public void setSolar(Scanner scanner, Galaxy galaxy) throws RuntimeException {
 		String input;
 		int numberInput;
@@ -74,6 +75,7 @@ public class CreateOracle extends Oracle{
 
 	}
 	
+	//Erstellung des Spielers
 	public Player setPlayer (Scanner scanner) throws RuntimeException {
 		String input;
 		Game.INPUTORACLE.printBreakLineBefore();
@@ -86,6 +88,9 @@ public class CreateOracle extends Oracle{
 		
 	}
 	
+	//Erstellung der Planeten, Sonnen und Monde innerhalb der Sonnensysteme
+	//Es kann nicht mehr (Sonnen + 2) als Planeten geben
+	//Es muss mindestens 3 und mindestens eine Sonne geben
 	private void createRandomSolarSystem(SolarSystem solarsystem) throws RuntimeException {
 		int randomPlanetNumber = 0;
 		int randomSunNumber = 0;
@@ -102,6 +107,11 @@ public class CreateOracle extends Oracle{
 		
 	}
 
+	//Erstelung zufälliger Planeten
+	//Sonnensysteme müssen immer mindestens einen Planeten besitzen mit einer normalen Atmosphäre
+	//Spieler wird dann später einem Planeten mit normaler Atmosphäre zugeordnet
+	//Falls kein Planet mit normaler Atmosphäre in der ausgelesenen Datei vorhanden ist --> Fehler
+	//Erstellte Planeten werden dem jeweiligen Sonnensystem zugeordnet
 	private void createRandomPlanets(SolarSystem solarsystem, int randomPlanetNumber) throws RuntimeException {
 		boolean normalAtmosphere = false;
 		for (int i = 0; i < randomPlanetNumber; i++) {
@@ -140,6 +150,13 @@ public class CreateOracle extends Oracle{
 
 	}
 	
+	
+	//Erstelle zufällige Sonnen
+	//Jedes Sonnensystem hat genau einen Hauptsequenzstern
+	//Nur um diesen Stern kreisen die Planeten
+	//Die anderen Sonnen sind einfach nur da im System, aber haben keine Planten, da sie nicht die Vorrausetzungen liefern
+	//um Leben auf Planeten zu ermöglichen -> Nur Hauptsequenzsterne haben diese Vorraussetzung
+	//Falls kein Hauptsequenzstern erstelt werden konnte -> Fehler
 	private void createRandomSuns(SolarSystem solarsystem, int randomSunNumber) throws RuntimeException{
 		boolean mainStar = false;
 		for (int i = 0; i < randomSunNumber; i++) {
@@ -183,6 +200,7 @@ public class CreateOracle extends Oracle{
 		}
 	}
 
+	//Planeten werden dem Hauptsequenzstern zugeordnet und umgekehrt
 	private void planetsToMainStar(SolarSystem solarsystem) throws RuntimeException{
 		for (int m = 0; m < solarsystem.getSuns().size(); m++) {
 			if (solarsystem.getSuns().get(m) instanceof MainSequenceStar) {
@@ -200,6 +218,8 @@ public class CreateOracle extends Oracle{
 		}
 	}
 
+	//Erstellung von zufälligen Monden für die Planeten
+	//Ein Planet muss nicht zwangsläufig Monde besitzen
 	private void createRandomMoons(SolarSystem solarsystem, int randomMoonNumber) throws RuntimeException {
 		MainSequenceStar mainstar = solarsystem.getMainstar();
 
@@ -238,6 +258,9 @@ public class CreateOracle extends Oracle{
 		}
 	}
 	
+	//Zufällige (mit Einschrönkungen zufällige) Ressourcen werden den Planeten zugeordent
+	//Kategorien bestimmen welche Ressourcen überhaupt möcglich sind bzw. welche überhaupt vorkommen könnten
+	//Kategorien selbst haben aber nochmal Zufallsmechanismen
 	private void resourcesToPlanets(SolarSystem solarsystem) throws RuntimeException{
 		
 		int randomResourceNumber = (int) (Math.random() * (3));
@@ -294,6 +317,9 @@ public class CreateOracle extends Oracle{
 		
 	}
 	
+	//Zufällige (mit Einschrönkungen zufällige) Ressourcen werden den Monden zugeordnet
+	//Kategorien bestimmen welche Ressourcen überhaupt möcglich sind bzw. welche überhaupt vorkommen könnten
+	//Kategorien selbst haben aber nochmal Zufallsmechanismen
     private void resourcesToMoons(Planet planet) throws RuntimeException{
 		
 		//int randomResourceNumber = (int) (Math.random() * (3));
@@ -317,7 +343,9 @@ public class CreateOracle extends Oracle{
 		}
 		
 	}
-
+    
+    
+    //Monde werden den Planten zugeordnet und umgekehrt
 	private void moonsToPlanet(Planet planet)throws RuntimeException {
 		for (int m = 0; m < planet.getMoons().size(); m++) {
 			if (planet.getMoons().get(m).getPlanet() == null) {

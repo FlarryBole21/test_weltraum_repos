@@ -11,8 +11,8 @@ public class BattleShip extends Ship{
 	private int strength;
 	private LinkedList<Weapon> weapons;
 
-	public BattleShip(int strength, int defense, int health, int capacity) {
-		super(defense, health, capacity);
+	public BattleShip(int strength, int health, int capacity) {
+		super(health, capacity);
 		super.setType("Kampfschiff");
 		this.strength = strength;
 	}
@@ -44,7 +44,6 @@ public class BattleShip extends Ship{
 	public LinkedList<String>  getInformation() {
 		LinkedList<String> information = new LinkedList<>();
 		information.add("Angriff <" + strength+">");
-		information.add("Verteidigung <" + getDefense()+">");
 		information.add("Lebenspunkte <" + getHealth()+">");
 		information.add("Kapazität <" + getCapacity()+">");
 		information.add("Level <" + getLevel()+">");

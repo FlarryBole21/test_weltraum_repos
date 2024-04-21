@@ -90,14 +90,17 @@ public class TravelActionOracle extends ActionOracle {
 		System.out.println("Hoffentlich läuft alles gut!");
 		
 		while(true) {
-			System.out.println("Du befindest dich nun in Runde " + round + "/" + maxRound);
+			System.out.println("Du befindest dich nun in Runde " + (round+1) + "/" + (maxRound+1));
 			randomChance = Math.random();
 			 if (randomChance <= battleChance) {
 				 System.out.println("Du fährst eine Runde...");
 				 travelTime();
 	             System.out.println("Ein gegnerisches Schiff nährt sich!");
 	             travelTime();
-	             Game.INPUTORACLE.printBreakLineMultiple();
+	             Game.INPUTORACLE.printBreakLine();
+	             System.out.println("Betrete Kampf-Phase");
+	             travelTime();
+	             Game.INPUTORACLE.printBreakLine();
 	             Game.SHIPBATTLEACTIONORACLE.checkAndRun(Game.SHIPBATTLEACTIONORACLE,getGame(),getScanner());
 	             
 	        } else {
@@ -106,18 +109,18 @@ public class TravelActionOracle extends ActionOracle {
 	            travelTime();
 	            System.out.println("Nichts passiert!");
 	            travelTime();
-	             Game.INPUTORACLE.printBreakLineMultiple();
+	            Game.INPUTORACLE.printBreakLine();
 	        }
 			 
 			if(removeRound()) {
 				System.out.println("Runde beendet!");
 				travelTime();
-				Game.INPUTORACLE.printBreakLineMultiple();
+				Game.INPUTORACLE.printBreakLine();
 				
 			}else {
 				System.out.println("Runde beendet!");
 				travelTime();
-				Game.INPUTORACLE.printBreakLineMultiple();
+				Game.INPUTORACLE.printBreakLine();
 				break;
 			}
 		}

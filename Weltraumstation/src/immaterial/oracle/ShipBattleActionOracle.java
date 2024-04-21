@@ -26,28 +26,30 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		BattleShip enemyShip = createRandomEnemyShip();
 		while(true) {
 			if(firstRound) {
-				System.out.println("Losen wer anfängt..");
+				System.out.println("Losen wer anfängt.. ");
 				battleTime();
 				randomChance = Math.random();
 				if(randomChance < 0.5) {
 					System.out.println("Feindliches Schiff darf anfangen!");
-					battleTime();
 					battleInformationAll(enemyShip);
+					Game.INPUTORACLE.printBreakLine();
+					System.out.println("Lade nächsten Zug... ");
 					battleTime();
+					System.out.println("Gegner ist am Zug!");
 					enemyTurn(enemyShip);
 				}else {
 					System.out.println("Du darfst anfangen!");
 				}
 				battleTime();
-				Game.INPUTORACLE.printBreakLineMultiple();
+				Game.INPUTORACLE.printBreakLine();
 				firstRound=false;
 			}
 			
-			battleTime();
 			battleInformationAll(enemyShip);
+			Game.INPUTORACLE.printBreakLine();
+			System.out.println("Lade nächsten Zug... ");
 			battleTime();
 			System.out.println("Spieler ist am Zug!");
-			Game.INPUTORACLE.printBreakLine();
 			System.out.println("Was möchtest du jetzt machen?");
 			System.out.println("1 -> Fliehen");
 			System.out.println("2 -> Angreifen");
@@ -64,14 +66,13 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 					System.err.println("Fliehen fehl geschlagen!");
 				}
 				
-				Game.INPUTORACLE.printBreakLineMultiple();
+				Game.INPUTORACLE.printBreakLine();
 				
 			}else if (input.equals("2")) {
 				 enemyShip =playerTurn(enemyShip);
 			}
 			
-			battleTime();
-			Game.INPUTORACLE.printBreakLineMultiple();
+			Game.INPUTORACLE.printBreakLine();
 			enemyTurn(enemyShip);
 			
 		}
@@ -79,7 +80,9 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	}
 	
 	private void battleInformationAll(BattleShip enemyShip) {
-		
+		System.out.println("Lade Informationen... ");
+		battleTime();
+		Game.INPUTORACLE.printBreakLine();
 		System.out.println("Schiff des Spielers <Info>");
 		Game.INPUTORACLE.printBreakLine();
 		battleInformation((BattleShip) getGame().getPlayer().getCurrentShip());
@@ -94,88 +97,74 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		for(String information: ship.getInformation()) {
 			System.out.println(information);
 		}
-		Game.INPUTORACLE.printBreakLine();
 		
 	}
 	
 	
 	private BattleShip playerTurn(BattleShip battleShip) {
-		Game.INPUTORACLE.printBreakLineMultiple();
+		Game.INPUTORACLE.printBreakLine();
 		BattleShip enemyShip = battleShip;
 		BattleShip playerShip = (BattleShip) getGame().getPlayer().getCurrentShip();
 		System.out.println("Spieler greift an!");
 		int playerShipStrength = playerShip.getStrength();
-		if(enemyShip.getDefense() == playerShip.getStrength()) {
-			enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), playerShipStrength, 0, 0);
-		}else if(enemyShip.getDefense() < playerShip.getStrength()){
-			enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), playerShipStrength,
-					playerShipStrength-enemyShip.getDefense(), 0);
-		}else {
-			enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(),playerShipStrength,
-					0, enemyShip.getDefense()-playerShipStrength);
-		}
+		enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), playerShipStrength);
+		battleTime();
 		System.out.println("Zug des Spielers beendet!");
-		Game.INPUTORACLE.printBreakLineMultiple();
+		Game.INPUTORACLE.printBreakLine();
 		return enemyShip;
 	}
 	
 	
 	private void enemyTurn(BattleShip battleShip) {
-		Game.INPUTORACLE.printBreakLineMultiple();
+		Game.INPUTORACLE.printBreakLine();
 		System.out.println("Feindliches Schiff greift an!");
+		battleTime();
 		int playerShipHealth = getGame().getPlayer().getCurrentShip().getHealth();
-		int playerShipDefense = getGame().getPlayer().getCurrentShip().getDefense();
-		if(getGame().getPlayer().getCurrentShip().getDefense() == battleShip.getStrength()) {
-			playerShipTakesDamage(playerShipHealth, battleShip.getStrength(), 0, 0);
-		}else if(playerShipDefense < battleShip.getStrength()){
-			playerShipTakesDamage(playerShipHealth, battleShip.getStrength(), 
-					battleShip.getStrength()-playerShipDefense, 0);
-		}else {
-			playerShipTakesDamage(playerShipHealth, battleShip.getStrength(), 
-					0, playerShipDefense-battleShip.getStrength());
-		}
+		playerShipTakesDamage(playerShipHealth, battleShip.getStrength());
+		battleTime();
 		System.out.println("Zug des Gegners beendet!");
-		Game.INPUTORACLE.printBreakLineMultiple();
+		Game.INPUTORACLE.printBreakLine();
 		
 	}
 	
 	
-	private void playerShipTakesDamage(int playerShipHealth, int battleShipStrength, int enemyBoost, int playerBoost) {
+	private void playerShipTakesDamage(int playerShipHealth, int battleShipStrength) {
 		getGame().getPlayer().getCurrentShip()
-		.setHealth((playerShipHealth + playerBoost) - (battleShipStrength + enemyBoost));
-		System.out.println("Schiff hat " + (battleShipStrength+playerBoost) + "Schaden erhalten");
+		.setHealth(playerShipHealth - battleShipStrength);
+		System.out.println("Schiff hat " + battleShipStrength + " Schaden erhalten");
 		playerShipHealth = getGame().getPlayer().getCurrentShip().getHealth();
 		System.out.println("Das Schiff des Spielers hat nur noch " + playerShipHealth + " Lebenspunkte");
-		Game.INPUTORACLE.printBreakLineMultiple();
+		Game.INPUTORACLE.printBreakLine();
 	}
 	
 	private BattleShip enemyShipTakesDamage(BattleShip battleShip,
-			int battleShipHealth, int playerShipStrength, int playerBoost, int enemyBoost) {
+			int battleShipHealth, int playerShipStrength) {
 		
 		BattleShip enemyShip = battleShip;
 		
-		enemyShip.setHealth((battleShipHealth + enemyBoost) - (playerShipStrength + playerBoost));
-		System.out.println("Feindliches Schiff hat " + (playerShipStrength+playerBoost) + "Schaden erhalten");
-		System.out.println("Das Schiff des Spielers hat nur noch " + enemyShip.getHealth() + " Lebenspunkte");
-		Game.INPUTORACLE.printBreakLineMultiple();
+		enemyShip.setHealth(battleShipHealth - playerShipStrength);
+		System.out.println("Feindliches Schiff hat " + playerShipStrength + " Schaden erhalten");
+		System.out.println("Das Schiff des Gegners hat nur noch " + enemyShip.getHealth() + " Lebenspunkte");
+		Game.INPUTORACLE.printBreakLine();
 		
 		return enemyShip;
 	}
+	
 	
 	private BattleShip createRandomEnemyShip() {
 		int randomShipNumber = (int) (Math.random() * (5));
 		BattleShip enemyShip = null;
 		
 		if(randomShipNumber == 0) {
-			enemyShip = new BattleShip(10, 10, 200, 100);
+			enemyShip = new BattleShip(10, 200, 100);
 		}else if(randomShipNumber == 1) {
-			enemyShip = new BattleShip(15, 15, 210, 100);
+			enemyShip = new BattleShip(15, 210, 100);
 		}else if (randomShipNumber == 2) {
-			enemyShip = new BattleShip(20, 10, 200, 100);
+			enemyShip = new BattleShip(20, 200, 100);
 		}else if(randomShipNumber == 3) {
-			enemyShip = new BattleShip(10, 30, 210, 100);
+			enemyShip = new BattleShip(10, 210, 100);
 		}else if(randomShipNumber == 4) {
-			enemyShip = new BattleShip(20, 30, 220, 100);
+			enemyShip = new BattleShip(20, 220, 100);
 		}
 		
 		return enemyShip;
