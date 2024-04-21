@@ -43,13 +43,14 @@ public class MainActionOracle extends ActionOracle{
 				System.out.println("0 -> Spiel beenden");
 				System.out.println("1 -> Charakter-Info einsehen");
 				System.out.println("2 -> Orts-Info einsehen");
-				System.out.println("3 -> Anliegenden lokalen Ort betreten");
-				System.out.println("4 -> Anliegenden lokalen Ort kolonisieren");
-				System.out.println("5 -> Zum einem anderen Ort reisen");
-				System.out.println("6 -> Aktuellen Fortschritt speichern");
+				System.out.println("3 -> Schifs-Info einsehen");
+				System.out.println("4 -> Anliegenden lokalen Ort betreten");
+				System.out.println("5 -> Anliegenden lokalen Ort kolonisieren");
+				System.out.println("6 -> Zum einem anderen Ort reisen");
+				System.out.println("7 -> Aktuellen Fortschritt speichern");
 				input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			}else {
-				input = "3";
+				input = "4";
 			}
 			
 			if(input.equals("0")) {
@@ -85,6 +86,24 @@ public class MainActionOracle extends ActionOracle{
 				};
 				subMenu(runnable,true); 
 			}else if(input.equals("3")) {
+				Runnable runnable = ()->{
+					if(player.getCurrentShip() != null) {
+						for(String information: player.getCurrentShip().getInformation()) {
+					    	System.out.println(information);
+					    }
+						
+					}else if(player.getShipParked() != null) {
+						for(String information: player.getShipParked().getInformation()) {
+					    	System.out.println(information);
+					    }
+					}else {
+						System.err.println("Schiffs-Informationen konnten nicht geladen werden!");
+						Game.INPUTORACLE.printBreakLine();
+					}
+					
+				};
+				subMenu(runnable,true); 
+			}else if(input.equals("4")) {
 				Runnable runnable;
 				
 				if(getLocalLoop()) {
@@ -109,9 +128,9 @@ public class MainActionOracle extends ActionOracle{
 					};	
 				}	
 				subMenu(runnable,false); 
-			}else if(input.equals("4")) {
-			    break;
 			}else if(input.equals("5")) {
+			    break;
+			}else if(input.equals("6")) {
 				Runnable runnable = () -> {
 					if(player.getCurrentPlace() instanceof Planet) {
 						Planet planet = (Planet) player.getCurrentPlace();
@@ -128,7 +147,7 @@ public class MainActionOracle extends ActionOracle{
 				
 				
 				subMenu(runnable,true); 
-			}else if(input.equals("6")) {
+			}else if(input.equals("7")) {
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(getScanner(), getGame());
 				Game.INPUTORACLE.printBreakLineMultiple();

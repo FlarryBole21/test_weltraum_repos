@@ -13,6 +13,7 @@ import immaterial.oracle.MainActionOracle;
 import immaterial.oracle.MathOracle;
 import immaterial.oracle.ResourceOracle;
 import immaterial.oracle.SearchOracle;
+import immaterial.oracle.ShipBattleActionOracle;
 import immaterial.oracle.TravelActionOracle;
 import space.Galaxy;
 import space.SolarSystem;
@@ -32,6 +33,7 @@ public class Game implements Serializable {
 	public final static MainActionOracle MAINACTIONORACLE = new MainActionOracle();
 	public final static LocalActionOracle LOCALACTIONORACLE = new LocalActionOracle();
 	public final static TravelActionOracle TRAVELACTIONORACLE= new TravelActionOracle();
+	public final static ShipBattleActionOracle SHIPBATTLEACTIONORACLE= new ShipBattleActionOracle();
 	public final static MathOracle MATHORACLE = new MathOracle();
 	public final static SearchOracle SEARCHORACLE = new SearchOracle();
 	
