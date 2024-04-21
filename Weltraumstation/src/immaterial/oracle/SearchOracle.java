@@ -11,6 +11,7 @@ public class SearchOracle extends Oracle{
 		super.setType("Orakel der Suche");
 	}
 	
+	
 	public <T> int findIndex(LinkedList<T> linkedList, T target) {
         for (int i = 0; i < linkedList.size(); i++) {
             if (linkedList.get(i).equals(target)) {

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import immaterial.Game;
 import space.celestial.Moon;
 import space.celestial.Planet;
-import space.celestial.RoundCelestial;
+import space.celestial.EnterableCelestial;
 
 public class TravelActionOracle extends ActionOracle {
 
@@ -37,7 +37,7 @@ public class TravelActionOracle extends ActionOracle {
 	@Override
 	public void run() {
 		testBeforeMain();
-		RoundCelestial destinationCelestial;
+		EnterableCelestial destinationCelestial;
 		if(getGame().getPlayer().getCurrentPlace() instanceof Planet) {
 			destinationCelestial = whereYouWannaGoFromPlanet();
 			
@@ -71,9 +71,11 @@ public class TravelActionOracle extends ActionOracle {
 	
 
 	//Fragt wohin der Spieler hin will
-	private RoundCelestial whereYouWannaGoFromPlanet() {
+	//Diese Methode wird nur ausgeführt, wenn der Spieler sich auf einem Planeten befindet
+	//Spieler kann nur in direkt benachbarte Planeten oder Monde des aktuellen Planeten reisen
+	private EnterableCelestial whereYouWannaGoFromPlanet() {
 		String input;
-		RoundCelestial destinationCelestial = null;
+		EnterableCelestial destinationCelestial = null;
 		System.out.println("Du kannst nur zur sich in der Nähe befindenen Planeten & Monden reisen");
 		System.out.println("Reisen? "
 	            + "1 -> Planet, 2 -> Mond,  Irgendwas anderes -> Doch nicht");
@@ -100,11 +102,12 @@ public class TravelActionOracle extends ActionOracle {
 	}
 	
 	
-	
-	private RoundCelestial backToPlanetFromMoon() {
+	//Spieler kann vom Mond nur zum jeweiligen Planeten zurückreisen
+	//Wenn also der Spieler irgendo anders hinmöchte, dann muss er erst zum Planeten zurückreisen
+	private EnterableCelestial backToPlanetFromMoon() {
 		String input;
 		Moon moon = (Moon) getGame().getPlayer().getCurrentPlace();
-		RoundCelestial destinationCelestial = null;
+		EnterableCelestial destinationCelestial = null;
 		System.out.println("Du kannst nur zum jeweiligen Planeten zurückreisen!");
 		System.out.println("Reisen? "
 	            + "1 -> Züruck zum Planeten "+ moon.getPlanet().getName()+", Irgendwas anderes -> Doch nicht");
@@ -122,7 +125,10 @@ public class TravelActionOracle extends ActionOracle {
 		return destinationCelestial;
 	}
 	
-	private boolean travelPhase(RoundCelestial destination){
+	//Hier ist der Punkt wo die Reise beginnt -> Spieler hat sich entschieden und kann nciht mehr umkehren
+	//Die Fahrt dauert eine gewisse Anzahl an Runden
+	//Der Spieler kann währenddessen von anderen Schiffen angegriffen werden
+	private boolean travelPhase(EnterableCelestial destination){
 		
 		double randomChance;
 		
@@ -183,7 +189,8 @@ public class TravelActionOracle extends ActionOracle {
 		
 	}
 	
-	
+	//Prüft bie benachbarten Planeten des aktuellen Planeten
+	//Basiernd darauf können die Reise-optionen bestimmt werden
 	private Planet checkPlanetsOfPlanet() {
 		LinkedList<Planet> currentPlanets = super.getGame().getPlayer().getCurrentSystem().getPlanets();
 		Planet currentPlanet = (Planet) super.getGame().getPlayer().getCurrentPlace();
@@ -244,8 +251,9 @@ public class TravelActionOracle extends ActionOracle {
 	}
 	
 	
-	
-	private RoundCelestial checkMoonsOfPlanet() {
+	//Prüft die Monde des aktuellen Planeten 
+	//Basierend darauf können die Reise--Optionen bestimmt werden
+	private EnterableCelestial checkMoonsOfPlanet() {
 		LinkedList<Moon> currentMoons; 
 		Planet planet = (Planet)super.getGame().getPlayer().getCurrentPlace();
 		currentMoons = planet.getMoons();

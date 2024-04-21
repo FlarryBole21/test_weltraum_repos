@@ -13,7 +13,7 @@ import space.environment.terrain.Terrain;
 import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
-public class Moon extends RoundCelestial implements Serializable{
+public class Moon extends EnterableCelestial implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String name;

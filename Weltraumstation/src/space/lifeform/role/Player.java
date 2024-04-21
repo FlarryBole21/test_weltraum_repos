@@ -8,7 +8,7 @@ import space.buildable.ship.BattleShip;
 import space.buildable.ship.Ship;
 import space.celestial.Moon;
 import space.celestial.Planet;
-import space.celestial.RoundCelestial;
+import space.celestial.EnterableCelestial;
 import space.inventory.InventoryObject;
 import space.inventory.item.suit.SpacewalkerSuit;
 import space.inventory.item.suit.Suit;
@@ -32,7 +32,7 @@ public class Player extends Human implements Upgradable, Killable{
 	private int overAllBattle;
 	private int overAllLevel;
 	private SolarSystem currentSystem;
-	private RoundCelestial currentPlace;
+	private EnterableCelestial currentPlace;
 	private Ship currentShip;
 	private Ship shipParked;
 	private Suit currentSuit;
@@ -207,11 +207,11 @@ public class Player extends Human implements Upgradable, Killable{
 		this.currentSystem = currentSystem;
 	}
 	
-	public RoundCelestial getCurrentPlace() {
+	public EnterableCelestial getCurrentPlace() {
 		return currentPlace;
 	}
 
-	public void setCurrentPlace(RoundCelestial currentPlace) {
+	public void setCurrentPlace(EnterableCelestial currentPlace) {
 		this.currentPlace = currentPlace;
 	}
 	
@@ -223,7 +223,7 @@ public class Player extends Human implements Upgradable, Killable{
 		return visitedPlanets;
 	}
 
-	public void addVisited(RoundCelestial visited) {
+	public void addVisited(EnterableCelestial visited) {
 		if(visited instanceof Planet && (! visitedPlanets.contains(visited))) {
 			visitedPlanets.add((Planet) visited);
 		}else if(visited instanceof Moon && (!visitedMoons.contains(visited))) {

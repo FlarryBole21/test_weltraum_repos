@@ -12,31 +12,7 @@ public class AsynchronOracle extends Oracle{
 		super.setType("Orakel der Asynchronität");
 	}
 	
-	
-	 public void timer(int seconds, Runnable runnable) {
-	        Timer timer = new Timer();
-
-	        TimerTask task = new TimerTask() {
-	            @Override
-	            public void run() {
-	                runnable.run();
-	            }
-	        };
-
-	        timer.schedule(task, seconds);
-
-	        timer.schedule(new TimerTask() {
-	            @Override
-	            public void run() {
-	                task.cancel();
-	                timer.cancel();
-	                System.out.println("Timer cleared!");
-	            }
-	        }, (seconds + 500));
-	    }
-	
-	
-	
+	//Thread wird pausiert
 	public void threadSleep(int seconds) throws InterruptedException{
             Thread.sleep(seconds); 
 	}

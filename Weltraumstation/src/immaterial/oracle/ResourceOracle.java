@@ -6,30 +6,30 @@ import java.util.Scanner;
 import immaterial.Game;
 import space.SolarSystem;
 import space.celestial.Planet;
-import space.inventory.resource.Apple;
-import space.inventory.resource.Banana;
-import space.inventory.resource.BlueBerry;
-import space.inventory.resource.Chronium;
-import space.inventory.resource.Copper;
-import space.inventory.resource.Crystal;
-import space.inventory.resource.Dattel;
-import space.inventory.resource.Gold;
-import space.inventory.resource.Iron;
-import space.inventory.resource.Mango;
-import space.inventory.resource.MapleWood;
-import space.inventory.resource.Nanite;
-import space.inventory.resource.Neutronium;
-import space.inventory.resource.NormalWood;
-import space.inventory.resource.OakWood;
-import space.inventory.resource.Plasma;
-import space.inventory.resource.QuantumVacuum;
 import space.inventory.resource.Resource;
-import space.inventory.resource.Silver;
-import space.inventory.resource.Stellarite;
-import space.inventory.resource.StrawBerry;
-import space.inventory.resource.TeakWood;
-import space.inventory.resource.Titan;
-import space.inventory.resource.WillowWood;
+import space.inventory.resource.miningresource.Chronium;
+import space.inventory.resource.miningresource.Copper;
+import space.inventory.resource.miningresource.Crystal;
+import space.inventory.resource.miningresource.Gold;
+import space.inventory.resource.miningresource.Iron;
+import space.inventory.resource.miningresource.Nanite;
+import space.inventory.resource.miningresource.Neutronium;
+import space.inventory.resource.miningresource.Plasma;
+import space.inventory.resource.miningresource.QuantumVacuum;
+import space.inventory.resource.miningresource.Silver;
+import space.inventory.resource.miningresource.Stellarite;
+import space.inventory.resource.miningresource.Titan;
+import space.inventory.resource.rawfood.Apple;
+import space.inventory.resource.rawfood.Banana;
+import space.inventory.resource.rawfood.BlueBerry;
+import space.inventory.resource.rawfood.Dattel;
+import space.inventory.resource.rawfood.Mango;
+import space.inventory.resource.rawfood.StrawBerry;
+import space.inventory.resource.wood.MapleWood;
+import space.inventory.resource.wood.NormalWood;
+import space.inventory.resource.wood.OakWood;
+import space.inventory.resource.wood.TeakWood;
+import space.inventory.resource.wood.WillowWood;
 
 public class ResourceOracle extends Oracle {
 
@@ -171,6 +171,7 @@ public class ResourceOracle extends Oracle {
 		return new Neutronium(LEVEL7,100);
 	}
 
+	//Basis-Ressourcen -> Jeder planet hat diese
 	private void basicResources(SolarSystem solarsystem, int planetNumber) {
 		solarsystem.getPlanets().get(planetNumber).addResource(getCrystal());
 		solarsystem.getPlanets().get(planetNumber).addResource(getNormalWood());
@@ -178,11 +179,14 @@ public class ResourceOracle extends Oracle {
 		solarsystem.getPlanets().get(planetNumber).addResource(getIron());
 	}
 	
+	//Basis-Ressourcen für den Mond
 	private void basicMoonResources(Planet planet, int moonNumber) {
 		planet.getMoons().get(moonNumber).addResource(getCrystal());
 		planet.getMoons().get(moonNumber).addResource(getIron());
 	}
 
+	//Ressourcen-Pools für bestimmte Planten, die bestimmte Terrains besitzen
+	//Innerhalb wird aber auch nochmal mit Zufallsfaktoren reguliert
 	public void addResourcesCategoryA(SolarSystem solarsystem, int planetNumber) {
 		int randomResourceNumber = (int) (Math.random() * (4));
 		int randomResourceNumber2 = (int) (Math.random() * (2));
@@ -331,7 +335,7 @@ public class ResourceOracle extends Oracle {
 		basicMoonResources(planet, moonNumber);
 	}
 	
-	
+	//Gebe eine Ressource zurück -> Spieler fragt nach Ressource beim Abbau der Ressource
 	public Resource getResource(Scanner scanner, LinkedList<Resource> resources) {
 		int numberInput;
 		Resource resource=null;

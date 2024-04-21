@@ -25,6 +25,11 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	}
 	
 
+	//Hauptschleife die die Kämofe im Raumschiff steuert
+	//Charaketr kann den Feind angreifen , versuchen zu fliehen, oder nichts tun
+	//Wer anfängt wird ausgelost
+	//Sobald die Lebenspunkte von einer der beiden Parteien auf null fallen, endet der Kampf
+	//Beim Spieler danna auch das Spiel, da er auch im Raumschiff sitzt
 	@Override
 	public void run() {
 		String input;
@@ -95,6 +100,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		
 	}
 	
+	//Zeige Statisken über die Schiffe an
 	private void battleInformationAll(BattleShip enemyShip) {
 		System.out.println("Lade Informationen... ");
 		battleTime();
@@ -109,6 +115,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		
 	}
 	
+	
 	private void battleInformation(BattleShip ship) {
 		for(String information: ship.getInformation()) {
 			System.out.println(information);
@@ -117,6 +124,9 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	}
 	
 	
+	//Zug des Spielers
+	//Er fügt seinem Gegner Schaden zu in Höhe der Stärke seines Raumschiffs (eventuell auch mit Waffen)
+	//Eventuell auch mit kritischen Schaden
 	private BattleShip playerTurn(BattleShip battleShip) {
 		int criticalHit = (int) (Math.random() * (6));
 		Game.INPUTORACLE.printBreakLine();
@@ -138,7 +148,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		return enemyShip;
 	}
 	
-	
+	//Das Gleiche wie oben, aber für den Gegner
 	private void enemyTurn(BattleShip battleShip) {
 		int criticalHit = (int) (Math.random() * (6));
 		Game.INPUTORACLE.printBreakLine();
@@ -160,6 +170,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	}
 	
 	
+	//Spieler nimmt Schaden vom Gegner
 	private void playerShipTakesDamage(int playerShipHealth, int battleShipStrength) {
 		getGame().getPlayer().getCurrentShip()
 		.setHealth(playerShipHealth - battleShipStrength);
@@ -174,6 +185,8 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		Game.INPUTORACLE.printBreakLine();
 	}
 	
+	
+	//Gegner nimmt Schaden vom Spieler
 	private BattleShip enemyShipTakesDamage(BattleShip battleShip,
 			int battleShipHealth, int playerShipStrength) {
 		
@@ -189,7 +202,8 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		return enemyShip;
 	}
 	
-	
+	//Die Schiffe, die der Spieler begegnen kann, haben nicht immer alle die selben Werte
+	//Einige werden mit Waffen ausgerüstet, bevor sie dem Spieler entgegentreten
 	private BattleShip createRandomEnemyShip() {
 		int randomShipNumber = (int) (Math.random() * (12));
 		int randomShipNumber2 = (int) (Math.random() * (6));
@@ -222,6 +236,8 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		
 	}
 	
+	
+	//Pause
 	private void battleTime() {
 		try {
 			Thread.sleep(3000);

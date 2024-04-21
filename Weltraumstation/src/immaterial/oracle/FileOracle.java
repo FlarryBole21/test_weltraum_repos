@@ -16,6 +16,7 @@ import immaterial.Game;
 public class FileOracle extends Oracle {
 
 	private static final long serialVersionUID = 1L;
+	//Pfade wo die Daten gespeichert werden
 	private final static String PLANETCREATEPATH = "data/planetCreate";
 	private final static String SUNCREATEPATH = "data/sunCreate";
 	private final static String MOONCREATEPATH = "data/moonCreate";
@@ -24,6 +25,10 @@ public class FileOracle extends Oracle {
 
 	};
 
+	//Hier sind die Informationen für die Planten, Sonnen und Monde festgelegt
+	//Diese Daten basieren auf keinen ECHTEN Daten und sind frei erfunden
+	//Die Daten werden in Files nieder geschrieben -> Später ausgelesen
+	//Basierend daruf werden dann die Sonnensysteme erstellt -> Zufälige Erstellung
 	private final static String PLANETDATA = "Terra 1.0 1.0 1.0 0 3\n" + "Draconis 0.8 0.6 0.7 1 1\n"
 			+ "Gaia 1.2 1.2 1.1 2 2\n" + "Aetheria 0.9 0.5 0.6 1 8\n" + "Novaria 1.1 1.3 1.2 2 8\n"
 			+ "Vulcan 0.7 0.4 0.5 1 10\n" + "Eden 1.3 1.5 1.3 0 6\n" + "Oasis 1.0 0.9 0.9 0 2\n"
@@ -98,6 +103,8 @@ public class FileOracle extends Oracle {
 		return MOONCREATEPATH;
 	}
 
+	//Testet ob Daten schon vorhanden sind
+	//Wenn nicht, dann werden sie geschrieben
 	public void testFiles() throws IOException {
 
 		String[] textData = new String[FILES.length];
@@ -112,6 +119,7 @@ public class FileOracle extends Oracle {
 		}
 	}
 
+	//Schreibe eine File
 	public void createFileAndWrite(File path, String text) throws IOException {
 		path.createNewFile();
 		FileWriter writer = new FileWriter(path);
@@ -120,6 +128,7 @@ public class FileOracle extends Oracle {
 
 	}
 
+	//Lese eine File
 	public LinkedList<String> readFile(String path) {
 		LinkedList<String> rows = null;
 		try {
@@ -138,7 +147,9 @@ public class FileOracle extends Oracle {
 		return rows;
 	}
 	
-	
+	//Speichert das Spiel
+	//Speichern ist nach Erstellung der Welt, sowie im Haupt-& und LocalMenü möglich
+	//Speichern wird über Serializable realisiert
 	public void saveGame(Scanner scanner, Game game) {
 		Runnable runnable = () -> System.out.println("Aktuellen Fortschritt speichern? "
 	            + "1 -> Ja, Irgendwas anderes -> Nein");
@@ -156,7 +167,8 @@ public class FileOracle extends Oracle {
 	    }
 	}
 	
-	
+	//Spiel wird versucht zu laden --> Prüft .ser Datei
+	//Falls nicht vorhanden, fängt der Spieler von vorne an
 	public Game loadGame() {
 		Game loadedGame = null;
 		try {

@@ -34,6 +34,8 @@ public abstract class ActionOracle extends Oracle implements Runnable{
 		oracle.run();
 	}
 	
+	//Spiel muss von überall erreichbar sein
+	//Scanner, Player und Galaxie dürfen nicht null sein
 	public void testBeforeMain() throws RuntimeException{
 		if(getGame() == null) {
 			throw new RuntimeException("Spiel nicht gesetzt");

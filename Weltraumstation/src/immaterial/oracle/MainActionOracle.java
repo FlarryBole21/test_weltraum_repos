@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import immaterial.Game;
 import space.celestial.Moon;
 import space.celestial.Planet;
-import space.celestial.RoundCelestial;
+import space.celestial.EnterableCelestial;
 import space.lifeform.role.Player;
 
 public class MainActionOracle extends ActionOracle{
@@ -49,10 +49,8 @@ public class MainActionOracle extends ActionOracle{
 				System.out.println("2 -> Orts-Info einsehen");
 				System.out.println("3 -> Schiffs-Info einsehen");
 				System.out.println("4 -> Anliegenden lokalen Ort betreten");
-				System.out.println("5 -> Anliegenden lokalen Ort kolonisieren");
-				System.out.println("6 -> Zum einem anderen lokalen Ort (Planten oder Mond) reisen");
-				System.out.println("7 -> Zu einer Raumstation fahren");
-				System.out.println("8 -> Aktuellen Fortschritt speichern");
+				System.out.println("5 -> Zum einem anderen lokalen Ort (Planten oder Mond) reisen");
+				System.out.println("6 -> Aktuellen Fortschritt speichern");
 				input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			}else {
 				input = "4";
@@ -75,7 +73,7 @@ public class MainActionOracle extends ActionOracle{
 					if(player.getVisitedPlanets().contains(player.getCurrentPlace()) 
 							|| player.getVisitedMoons().contains(player.getCurrentPlace())) {
 						
-						Consumer<RoundCelestial> roundConsumer = (round) -> {
+						Consumer<EnterableCelestial> roundConsumer = (round) -> {
 							for(String information: round.getInformation()) {
 						    	System.out.println(information);
 						    }
@@ -122,7 +120,7 @@ public class MainActionOracle extends ActionOracle{
 				}else {
 					runnable = ()->{
 						
-						Consumer<RoundCelestial> roundConsumer = (round) -> {
+						Consumer<EnterableCelestial> roundConsumer = (round) -> {
 							if((!player.getCurrentPlace().getAtmosphere().getType().equals("Normal")) &&
 									player.getCurrentSuit().getType().equals("Weltraumwanderer-Anzug")) {
 								System.err.println("Warnung! " + "Die Atmosphäre ist " + round.getAtmosphere().getType() 
@@ -140,8 +138,6 @@ public class MainActionOracle extends ActionOracle{
 				}	
 				subMenu(runnable,false); 
 			}else if(input.equals("5")) {
-			    break;
-			}else if(input.equals("6")) {
 				//Spieler wird gefragt wohin er reisen möchte -> Da kann er noch zum hauptmenü zurück
 				//Spieler reist zu einem anderen Ort -> Sobald die Runden starten geht es nicht mehr
 				//Reise benötigt Zeit in Runden und ist nicht garantiert
@@ -151,14 +147,8 @@ public class MainActionOracle extends ActionOracle{
 				};
 				
 				subMenu(runnable,true); 
-			}else if(input.equals("7")) {
-				
-				Runnable runnable = ()->{
-					
-				};
-				subMenu(runnable,true); 
 			}
-			else if(input.equals("8")) {
+			else if(input.equals("6")) {
 				//Speichern des Spiels
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(getScanner(), getGame());

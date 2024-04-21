@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import immaterial.Game;
-import space.celestial.RoundCelestial;
+import space.celestial.EnterableCelestial;
 import space.environment.atmosphere.Atmosphere;
 import space.inventory.resource.Resource;
 import space.lifeform.role.Player;
@@ -62,7 +62,7 @@ public class LocalActionOracle extends ActionOracle{
 			}else if(input.equals("2")) {
 				//Orts-Informationen -> Siehe Hauptmenü
 				Runnable runnable = ()->{
-					Consumer<RoundCelestial> roundConsumer = (round) -> {
+					Consumer<EnterableCelestial> roundConsumer = (round) -> {
 						for(String information: round.getInformation()) {
 					    	System.out.println(information);
 					    }
@@ -73,6 +73,7 @@ public class LocalActionOracle extends ActionOracle{
 				Game.MAINACTIONORACLE.subMenu(runnable, true);
 		        Game.INPUTORACLE.printBreakLineMultiple();
 			}else if(input.equals("3")) {
+				//Charakter kann Ressourcen zu seinem Inventar hinzufügen und auch die Menge der jeweiligen Ressource
 				Runnable runnable = ()->{
 					inputForResource();
 				};
@@ -106,7 +107,7 @@ public class LocalActionOracle extends ActionOracle{
 		
 	}
 	
-	
+	//Spieler wird gefragt welche Ressource er gerne abbaucen möchte und wie viel
 	private void inputForResource() {
 		
 		LinkedList<Resource> listedResources = new LinkedList<>();

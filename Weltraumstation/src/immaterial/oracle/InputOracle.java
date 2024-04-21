@@ -10,7 +10,7 @@ public class InputOracle extends Oracle{
 		super.setType("Orakel der Inputs");
 	}
 	
-	
+	//Prüft ob eine Eingabe leer ist
 	public String inputEmptyCheck(Scanner scanner) {
 		String input;
 		while(true) {
@@ -24,6 +24,7 @@ public class InputOracle extends Oracle{
 		return input;
 	}
 	
+	//Prüft ob eine Eingabe innerhalb eines Bereichs ist
 	public boolean inputIsNumberAndRangeCheck(int lowNumber, int highNumber, String input){
 		int numberInput;
 		try {
@@ -42,12 +43,16 @@ public class InputOracle extends Oracle{
 		
 	}
 	
+	//"Leert die Konsole"
 	public void consoleClear() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
 	}
 	
+	
+	//Beendet das Programm
+	//Bei Fehler / Exception oder wenn der Spieler stirbt
 	public void printEndProgram(){
 		printBreakLineMultiple();
 	    System.out.println("Programm wird beendet!");

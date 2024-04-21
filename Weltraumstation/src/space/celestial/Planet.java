@@ -16,7 +16,7 @@ import space.inventory.resource.Resource;
 import space.lifeform.LifeformObject;
 
 
-public class Planet extends RoundCelestial implements Serializable{
+public class Planet extends EnterableCelestial implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
