@@ -8,11 +8,4 @@ public class Grassland extends Plains {
 		super.setType("Grassland");
 	}
 
-	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

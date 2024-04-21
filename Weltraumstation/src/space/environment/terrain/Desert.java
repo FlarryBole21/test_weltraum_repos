@@ -8,11 +8,4 @@ public class Desert extends PlanetTerrain{
 		super.setType("Wüste");
 	}
 
-	@Override
-	public void enter() {
-		
-	}
-
-	
-
 }

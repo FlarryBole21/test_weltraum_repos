@@ -8,12 +8,4 @@ public class Volcano extends PlanetTerrain{
 		super.setType("Vulkangebiet");
 	}
 
-	@Override
-	public void enter() {
-		
-	}
-
-	
-	
-
 }

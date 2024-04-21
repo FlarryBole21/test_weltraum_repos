@@ -9,9 +9,4 @@ public class MoonIcyPlains extends MoonPlains{
 		super.setType("Eisige Mondebenen");
 	}
 
-	@Override
-	public void enter() {
-		
-	}
-
 }

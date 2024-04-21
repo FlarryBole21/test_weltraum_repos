@@ -1,13 +1,11 @@
 package immaterial.oracle;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import immaterial.Game;
-import space.celestial.Planet;
 import space.celestial.RoundCelestial;
 import space.environment.atmosphere.Atmosphere;
 import space.inventory.resource.Resource;
@@ -44,9 +42,8 @@ public class LocalActionOracle extends ActionOracle{
 			System.out.println("1 -> Charakter-Info einsehen");
 			System.out.println("2 -> Orts-Info einsehen");
 			System.out.println("3 -> Ressourcen sammeln");
-			System.out.println("4 -> Gebäude bauen");
-			System.out.println("5 -> Zurück zum Raumschiff");
-			System.out.println("6 -> Aktuellen Fortschritt speichern");
+			System.out.println("4 -> Zurück zum Raumschiff");
+			System.out.println("5 -> Aktuellen Fortschritt speichern");
 			input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			
 			if(input.equals("0")) {
@@ -76,25 +73,13 @@ public class LocalActionOracle extends ActionOracle{
 				Game.MAINACTIONORACLE.subMenu(runnable, true);
 		        Game.INPUTORACLE.printBreakLineMultiple();
 			}else if(input.equals("3")) {
-				
 				Runnable runnable = ()->{
 					inputForResource();
-					
-					
-					
 				};
 				Game.MAINACTIONORACLE.subMenu(runnable, true);
 				Game.INPUTORACLE.printBreakLineMultiple();
 			
 			}else if(input.equals("4")) {
-		
-				Runnable runnable = ()->{
-					
-				};
-				Game.MAINACTIONORACLE.subMenu(runnable, true);
-				Game.INPUTORACLE.printBreakLineMultiple();
-			
-			}else if(input.equals("5")) {
 				//Spieler steigt wieder in sein Schiff ein -> Rückkehr ins Hauptmenü
 				Game.MAINACTIONORACLE.setLocalLoop(false);
 				player.enterShip();
@@ -103,7 +88,7 @@ public class LocalActionOracle extends ActionOracle{
 				Game.INPUTORACLE.printBreakLineMultiple();
 				break;
 				
-			}else if(input.equals("6")) {
+			}else if(input.equals("5")) {
 				//Speichern
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(getScanner(), getGame());

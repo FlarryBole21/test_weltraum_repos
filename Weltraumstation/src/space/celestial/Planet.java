@@ -1,16 +1,14 @@
 package space.celestial;
 
 import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
-
-import space.Enterable;
 import space.SolarSystem;
 import space.buildable.SpaceStation;
 import space.celestial.star.MainSequenceStar;
 import space.environment.atmosphere.Atmosphere;
-import space.environment.terrain.Grassland;
 import space.environment.terrain.MoonTerrain;
 import space.environment.terrain.PlanetTerrain;
 import space.environment.terrain.Terrain;
@@ -163,13 +161,6 @@ public class Planet extends RoundCelestial implements Serializable{
 		information.add("Zugehöriger Hauptsequenzstern <" + mainstar.getName()+">");
 		
 		return information;
-		
-	}
-	
-	
-
-	@Override
-	public void enter() {
 		
 	}
 	

@@ -2,7 +2,6 @@ package space.lifeform.role;
 
 import java.util.LinkedList;
 import immaterial.Game;
-import space.Enterable;
 import space.SolarSystem;
 import space.Upgradable;
 import space.buildable.ship.BattleShip;
@@ -224,7 +223,7 @@ public class Player extends Human implements Upgradable, Killable{
 		return visitedPlanets;
 	}
 
-	public void addVisited(Enterable visited) {
+	public void addVisited(RoundCelestial visited) {
 		if(visited instanceof Planet && (! visitedPlanets.contains(visited))) {
 			visitedPlanets.add((Planet) visited);
 		}else if(visited instanceof Moon && (!visitedMoons.contains(visited))) {

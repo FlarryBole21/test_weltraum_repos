@@ -9,10 +9,5 @@ public class Crater extends PlanetTerrain{
 		super.setType("Krater");
 	}
 
-	@Override
-	public void enter() {
-	
-	}
-
 	
 }

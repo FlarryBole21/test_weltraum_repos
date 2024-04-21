@@ -9,10 +9,4 @@ public class Jungle extends Forest{
 		super.setType("Dschungel");
 	}
 
-	@Override
-	public void enter() {
-		
-	}
-
-
 }

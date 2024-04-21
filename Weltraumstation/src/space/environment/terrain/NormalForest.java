@@ -8,11 +8,5 @@ public class NormalForest extends Forest {
 		super.setType("Normaler Wald");
 	}
 
-	@Override
-	public void enter() {
-	
-		
-	}
-
 
 }

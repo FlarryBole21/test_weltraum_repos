@@ -8,8 +8,4 @@ public class MoonVolcanicPlains extends MoonPlains{
 	   super.setType("Vulkanische Mondebenen");
 	}
 
-	@Override
-	public void enter() {
-	}
-
 }

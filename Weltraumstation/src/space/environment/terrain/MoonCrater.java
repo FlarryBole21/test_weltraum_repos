@@ -8,10 +8,4 @@ public class MoonCrater extends MoonTerrain{
 		super.setType("Mondkrater");
 	}
 
-	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

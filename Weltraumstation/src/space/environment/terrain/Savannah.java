@@ -8,12 +8,4 @@ public class Savannah extends Plains{
 		super.setType("Savanne");
 	}
 	
-	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 }

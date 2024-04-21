@@ -1,11 +1,10 @@
 package space.celestial;
 
 import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
-
-import space.Enterable;
 import space.environment.atmosphere.Atmosphere;
 import space.environment.terrain.Grassland;
 import space.environment.terrain.MoonCrater;
@@ -98,13 +97,6 @@ public class Moon extends RoundCelestial implements Serializable{
 		return information;
 		
 	}
-
-
-	@Override
-	public void enter() {
-		
-	}
-
 
 	@Override
 	public Atmosphere getAtmosphere() {
