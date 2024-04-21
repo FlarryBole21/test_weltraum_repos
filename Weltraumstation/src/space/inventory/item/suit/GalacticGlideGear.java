@@ -6,8 +6,8 @@ public class GalacticGlideGear extends Suit{
 
 	private static final long serialVersionUID = 1L;
 
-	public GalacticGlideGear(int defense) {
-		super(defense);
+	public GalacticGlideGear() {
+		super(20);
 		super.setType("Galaktische Gleiterrüstung");
 	}
 

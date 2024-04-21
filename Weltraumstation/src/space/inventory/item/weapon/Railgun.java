@@ -4,8 +4,8 @@ public class Railgun extends EnergyRangeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public Railgun(int strength) {
-		super(strength);
+	public Railgun() {
+		super(20);
 		super.setType("Schienenkanone");
 	}
 

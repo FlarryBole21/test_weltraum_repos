@@ -4,8 +4,8 @@ public abstract class PhotonTorpedo extends Missile{
 
 	private static final long serialVersionUID = 1L;
 
-	public PhotonTorpedo(int strength) {
-		super(strength);
+	public PhotonTorpedo() {
+		super(40);
 		super.setType("Photonen-Torpedo");
 	}
 

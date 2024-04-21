@@ -4,8 +4,8 @@ public class TitanTurret extends KineticWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public TitanTurret(int strength) {
-		super(strength);
+	public TitanTurret() {
+		super(20);
 		super.setType("Titan-Turret");
 	}
 

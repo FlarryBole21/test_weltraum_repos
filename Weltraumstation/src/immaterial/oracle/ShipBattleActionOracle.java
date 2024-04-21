@@ -3,6 +3,10 @@ package immaterial.oracle;
 import immaterial.Game;
 import space.buildable.ship.BattleShip;
 import space.buildable.ship.Ship;
+import space.inventory.item.weapon.CloseInWeaponSystem;
+import space.inventory.item.weapon.NormalMissile;
+import space.inventory.item.weapon.NovaSeekerMissile;
+import space.inventory.item.weapon.StarshockMissile;
 
 public class ShipBattleActionOracle extends BattleActionOracle{
 
@@ -10,6 +14,10 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	private static final long serialVersionUID = 1L;
 	
 	private double esacpeChance;
+	private NormalMissile normalMissile = new NormalMissile();
+	private CloseInWeaponSystem closeInWeaponSystem = new CloseInWeaponSystem();
+	private NovaSeekerMissile novaSeekerMissile = new NovaSeekerMissile();
+	private StarshockMissile starsShockMissile = new StarshockMissile();
 	
 	public ShipBattleActionOracle() {
 		super.setType("Orakel der Schiffskampfaktionen");
@@ -25,14 +33,22 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		
 		BattleShip enemyShip = createRandomEnemyShip();
 		while(true) {
+
+			if(enemyShip.getHealth() <= 0) {
+				break;
+			}
+			if(getGame().getPlayer().getCurrentShip().getHealth() <= 0) {
+				break;
+			}
+			
 			if(firstRound) {
+				battleInformationAll(enemyShip);
+				Game.INPUTORACLE.printBreakLine();
 				System.out.println("Losen wer anfängt.. ");
 				battleTime();
 				randomChance = Math.random();
 				if(randomChance < 0.5) {
 					System.out.println("Feindliches Schiff darf anfangen!");
-					battleInformationAll(enemyShip);
-					Game.INPUTORACLE.printBreakLine();
 					System.out.println("Lade nächsten Zug... ");
 					battleTime();
 					System.out.println("Gegner ist am Zug!");
@@ -44,10 +60,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 				Game.INPUTORACLE.printBreakLine();
 				firstRound=false;
 			}
-			
-			battleInformationAll(enemyShip);
-			Game.INPUTORACLE.printBreakLine();
-			System.out.println("Lade nächsten Zug... ");
+			System.out.println("Lade Zug des Spielers... ");
 			battleTime();
 			System.out.println("Spieler ist am Zug!");
 			System.out.println("Was möchtest du jetzt machen?");
@@ -72,8 +85,11 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 				 enemyShip =playerTurn(enemyShip);
 			}
 			
+			
 			Game.INPUTORACLE.printBreakLine();
-			enemyTurn(enemyShip);
+			if(enemyShip.getHealth() > 0) {
+				enemyTurn(enemyShip);
+			}
 			
 		}
 		
@@ -102,12 +118,19 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	
 	
 	private BattleShip playerTurn(BattleShip battleShip) {
+		int criticalHit = (int) (Math.random() * (6));
 		Game.INPUTORACLE.printBreakLine();
 		BattleShip enemyShip = battleShip;
 		BattleShip playerShip = (BattleShip) getGame().getPlayer().getCurrentShip();
 		System.out.println("Spieler greift an!");
 		int playerShipStrength = playerShip.getStrength();
-		enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), playerShipStrength);
+		if(criticalHit >= 4) {
+			int criticalHitNumber = (int) (playerShipStrength/3);
+			System.out.println("Spieler fügt zusätzlichen kritischen Schaden zu " + criticalHitNumber);
+			enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), (playerShipStrength+criticalHitNumber));
+		}else {
+			enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), playerShipStrength);
+		}
 		battleTime();
 		System.out.println("Zug des Spielers beendet!");
 		Game.INPUTORACLE.printBreakLine();
@@ -116,11 +139,19 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	
 	
 	private void enemyTurn(BattleShip battleShip) {
+		System.out.println("gayas");
+		int criticalHit = (int) (Math.random() * (6));
 		Game.INPUTORACLE.printBreakLine();
 		System.out.println("Feindliches Schiff greift an!");
 		battleTime();
 		int playerShipHealth = getGame().getPlayer().getCurrentShip().getHealth();
-		playerShipTakesDamage(playerShipHealth, battleShip.getStrength());
+		if(criticalHit >= 4) {
+			int criticalHitNumber = (int) (battleShip.getStrength()/3);
+			System.out.println("Gegner fügt zusätzlichen kritischen Schaden zu " + criticalHitNumber);
+			playerShipTakesDamage(playerShipHealth, (battleShip.getStrength()+ criticalHitNumber));
+		}else {
+			playerShipTakesDamage(playerShipHealth, battleShip.getStrength());
+		}
 		battleTime();
 		System.out.println("Zug des Gegners beendet!");
 		Game.INPUTORACLE.printBreakLine();
@@ -133,7 +164,12 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		.setHealth(playerShipHealth - battleShipStrength);
 		System.out.println("Schiff hat " + battleShipStrength + " Schaden erhalten");
 		playerShipHealth = getGame().getPlayer().getCurrentShip().getHealth();
+		
+		if(playerShipHealth < 0) {
+			playerShipHealth =0;
+		}
 		System.out.println("Das Schiff des Spielers hat nur noch " + playerShipHealth + " Lebenspunkte");
+		
 		Game.INPUTORACLE.printBreakLine();
 	}
 	
@@ -141,9 +177,11 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 			int battleShipHealth, int playerShipStrength) {
 		
 		BattleShip enemyShip = battleShip;
-		
 		enemyShip.setHealth(battleShipHealth - playerShipStrength);
 		System.out.println("Feindliches Schiff hat " + playerShipStrength + " Schaden erhalten");
+		if(enemyShip.getHealth() <0) {
+			enemyShip.setHealth(0);
+		}
 		System.out.println("Das Schiff des Gegners hat nur noch " + enemyShip.getHealth() + " Lebenspunkte");
 		Game.INPUTORACLE.printBreakLine();
 		
@@ -152,19 +190,30 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	
 	
 	private BattleShip createRandomEnemyShip() {
-		int randomShipNumber = (int) (Math.random() * (5));
-		BattleShip enemyShip = null;
+		int randomShipNumber = (int) (Math.random() * (12));
+		int randomShipNumber2 = (int) (Math.random() * (6));
+		BattleShip enemyShip = new BattleShip();
 		
 		if(randomShipNumber == 0) {
-			enemyShip = new BattleShip(10, 200, 100);
+			enemyShip.addWeapon(normalMissile);
 		}else if(randomShipNumber == 1) {
-			enemyShip = new BattleShip(15, 210, 100);
+			enemyShip.addWeapon(closeInWeaponSystem);
 		}else if (randomShipNumber == 2) {
-			enemyShip = new BattleShip(20, 200, 100);
+			enemyShip.addWeapon(novaSeekerMissile);
 		}else if(randomShipNumber == 3) {
-			enemyShip = new BattleShip(10, 210, 100);
-		}else if(randomShipNumber == 4) {
-			enemyShip = new BattleShip(20, 220, 100);
+			enemyShip.addWeapon(starsShockMissile);
+		}else if(randomShipNumber == 4 && randomShipNumber2 > 3) {
+			enemyShip.addWeapon(novaSeekerMissile);
+			enemyShip.addWeapon(normalMissile);
+		}else if(randomShipNumber == 5 && randomShipNumber2 > 3) {
+			enemyShip.addWeapon(normalMissile);
+			enemyShip.addWeapon(closeInWeaponSystem);
+		}else if(randomShipNumber == 6 && randomShipNumber2 > 4) {
+			enemyShip.addWeapon(closeInWeaponSystem);
+			enemyShip.addWeapon(starsShockMissile);
+		}else if(randomShipNumber == 5 && randomShipNumber2 > 4) {
+			enemyShip.addWeapon(novaSeekerMissile);
+			enemyShip.addWeapon(starsShockMissile);
 		}
 		
 		return enemyShip;

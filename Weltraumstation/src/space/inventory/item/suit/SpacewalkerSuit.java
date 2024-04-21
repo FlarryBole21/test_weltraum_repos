@@ -6,8 +6,8 @@ public class SpacewalkerSuit extends Suit {
 
 	private static final long serialVersionUID = 1L;
 
-	public SpacewalkerSuit(int defense) {
-		super(defense);
+	public SpacewalkerSuit() {
+		super(10);
 		super.setType("Weltraumwandereranzug");
 	}
 

@@ -4,8 +4,8 @@ public class CloseInWeaponSystem extends PointDefenseSystem {
 
 	private static final long serialVersionUID = 1L;
 
-	public CloseInWeaponSystem(int strength) {
-		super(strength);
+	public CloseInWeaponSystem() {
+		super(5, 10);
 		super.setType("CloseIn-Waffensystem");
 	}
 

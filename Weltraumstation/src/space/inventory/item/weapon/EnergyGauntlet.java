@@ -4,8 +4,8 @@ public class EnergyGauntlet extends EnergyMeleeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public EnergyGauntlet(int strength) {
-		super(strength);
+	public EnergyGauntlet() {
+		super(15);
 		super.setType("Energie-Handschuhe");
 	
 	}

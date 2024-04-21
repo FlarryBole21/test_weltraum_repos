@@ -4,8 +4,8 @@ public class LaserSword extends EnergyMeleeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public LaserSword(int strength) {
-		super(strength);
+	public LaserSword() {
+		super(15);
 		super.setType("Laserschwert");
 	}
 

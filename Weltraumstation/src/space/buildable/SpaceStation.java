@@ -52,7 +52,7 @@ public class SpaceStation extends Building{
 	
     public BattleShip craftBattleShip(LinkedList<Item> items, int amount){
 		
-		return new BattleShip(10, 200, 100);
+		return new BattleShip();
 		
 	}
 	

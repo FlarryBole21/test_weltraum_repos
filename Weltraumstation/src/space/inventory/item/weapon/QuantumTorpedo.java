@@ -4,8 +4,8 @@ public class QuantumTorpedo extends Missile{
 
 	private static final long serialVersionUID = 1L;
 
-	public QuantumTorpedo(int strength) {
-		super(strength);
+	public QuantumTorpedo() {
+		super(20);
 		super.setType("Quantumtorpedo");
 	}
 

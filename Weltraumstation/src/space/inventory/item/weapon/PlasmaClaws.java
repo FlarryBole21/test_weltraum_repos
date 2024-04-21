@@ -4,8 +4,8 @@ public class PlasmaClaws extends MeleeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public PlasmaClaws(int strength) {
-		super(strength);
+	public PlasmaClaws() {
+		super(30);
 		super.setType("Plasma-Krallen");
 	}
 

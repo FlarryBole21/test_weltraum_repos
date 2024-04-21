@@ -4,8 +4,8 @@ public class NovaSeekerMissile extends Missile{
 
 	private static final long serialVersionUID = 1L;
 
-	public NovaSeekerMissile(int strength) {
-		super(strength);
+	public NovaSeekerMissile() {
+		super(10);
 		super.setType("Nova-Sucher-Rakete");
 	}
 

@@ -4,8 +4,8 @@ public class PhotonPhaser extends EnergyRangeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public PhotonPhaser(int strength) {
-		super(strength);
+	public PhotonPhaser() {
+		super(35);
 		super.setType("Photon-Phaser");
 	}
 

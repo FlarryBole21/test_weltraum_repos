@@ -4,8 +4,8 @@ public class XRayLaser extends EnergyRangeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public XRayLaser(int strength) {
-		super(strength);
+	public XRayLaser() {
+		super(20);
 		super.setType("XRay-Laser");
 	}
 

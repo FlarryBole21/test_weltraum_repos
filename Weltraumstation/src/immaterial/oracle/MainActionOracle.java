@@ -24,6 +24,10 @@ public class MainActionOracle extends ActionOracle{
 		this.localLoop = localLoop;
 	}
 
+	//Hauptschleife des Spiels
+	//Der Spieler wird gefragt welche Option er wählen möchte
+	//Spieler befindet sich hier im Raumschiff an einem Planeten oder Mond
+	//Von hier aus kann man aber in weitere Untermenüs kommen
 	@Override
 	public void run() throws RuntimeException {
 		testBeforeMain();
@@ -56,6 +60,7 @@ public class MainActionOracle extends ActionOracle{
 			if(input.equals("0")) {
 			    break;
 			}else if(input.equals("1")) {
+				//Anzeigen der Spielerinformationen -> Name, Stats und co.
 				Runnable runnable = ()->{
 					for(String information: player.getInformation()) {
 				    	System.out.println(information);
@@ -64,6 +69,8 @@ public class MainActionOracle extends ActionOracle{
 				subMenu(runnable,true); 
 			}else if(input.equals("2")) {
 				Runnable runnable = ()->{
+					//Prüfe, ob der Spieler den lokalen Ort schon besucht hat
+					//Wenn ja, kann er sich die Informationen des lokalen orts anzeigen lassen
 					if(player.getVisitedPlanets().contains(player.getCurrentPlace()) 
 							|| player.getVisitedMoons().contains(player.getCurrentPlace())) {
 						
@@ -86,6 +93,7 @@ public class MainActionOracle extends ActionOracle{
 				};
 				subMenu(runnable,true); 
 			}else if(input.equals("3")) {
+				//Spieler kann Informatioennüber sein Raumschiff abrufen -> Stats und co.
 				Runnable runnable = ()->{
 					if(player.getCurrentShip() != null) {
 						for(String information: player.getCurrentShip().getInformation()) {
@@ -104,6 +112,8 @@ public class MainActionOracle extends ActionOracle{
 				};
 				subMenu(runnable,true); 
 			}else if(input.equals("4")) {
+				//Spieler betritt den lokalen Ort
+				//Falls die Atmosphäre nicht normal ist --> Warnung
 				Runnable runnable;
 				
 				if(getLocalLoop()) {
@@ -131,23 +141,16 @@ public class MainActionOracle extends ActionOracle{
 			}else if(input.equals("5")) {
 			    break;
 			}else if(input.equals("6")) {
+				//Spieler wird gefragt wohin er reisen möchte -> Da kann er noch zum hauptmenü zurück
+				//Spieler reist zu einem anderen Ort -> Sobald die Runden starten geht es nicht mehr
+				//Reise benötigt Zeit in Runden und ist nicht garantiert
+				//Spieler kann während der Reise auch nicht speichern
 				Runnable runnable = () -> {
-					if(player.getCurrentPlace() instanceof Planet) {
-						Planet planet = (Planet) player.getCurrentPlace();
-						if(planet.getMoons().size() > 0) {
-							Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
-						}else {
-							Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
-						}
-					}else if(player.getCurrentPlace() instanceof Moon) {
-						Moon moon = (Moon) player.getCurrentPlace();
-						Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
-					}
+					Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
 				};
-				
-				
 				subMenu(runnable,true); 
 			}else if(input.equals("7")) {
+				//Speichern des Spiels
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(getScanner(), getGame());
 				Game.INPUTORACLE.printBreakLineMultiple();
@@ -165,6 +168,7 @@ public class MainActionOracle extends ActionOracle{
 	
 	
 
+	//Spieler wird gefragt, ob er den lokalen Ort betreten möchte
 	private void enterLocalPlace(boolean askEnter) {
 		String input="1";
 		if(askEnter) {
@@ -184,6 +188,7 @@ public class MainActionOracle extends ActionOracle{
 		
 	}
 
+	//Übergang zum Submenü -> localLoop --> Spieler steigt aus seinem Raumschiff aus
 	private void localLoop() {
 		if(!getLocalLoop()) {
 			Game.INPUTORACLE.printBreakLineMultiple();
@@ -193,6 +198,8 @@ public class MainActionOracle extends ActionOracle{
 	}
 	
 	
+	//Ausführen einer Funktion aus den Optionen, die der Spieler gewäht hat
+	//Danach fragen, ob er zurück will in die Auswahl
 	public void subMenu(Runnable runnable, boolean askBack) {
 		boolean output;
 		 while(true) {
@@ -209,6 +216,7 @@ public class MainActionOracle extends ActionOracle{
 		    }
 	}
 	
+	//Wenn das Leben des Spielers 0 ist -> Tot -> Programm-Ende
 	public void checkPlayerHealth() {
 		if(getGame().getPlayer().getHealth() <= 0) {
 			Game.INPUTORACLE.printBreakLineMultiple();
@@ -218,6 +226,7 @@ public class MainActionOracle extends ActionOracle{
 	}
 	
 	
+	//Frage ob zurück zum Hauptmenü
 	private boolean backToMainMenu() {
 		
 		Game.INPUTORACLE.printBreakLineMultiple();

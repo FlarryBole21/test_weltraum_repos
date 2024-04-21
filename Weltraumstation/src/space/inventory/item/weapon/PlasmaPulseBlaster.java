@@ -4,8 +4,8 @@ public class PlasmaPulseBlaster extends EnergyRangeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public PlasmaPulseBlaster(int strength) {
-		super(strength);
+	public PlasmaPulseBlaster() {
+		super(30);
 		super.setType("Plasmapuls-Blaster");
 	}
 

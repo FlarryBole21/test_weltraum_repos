@@ -4,8 +4,8 @@ public class SentinelShieldArray extends PointDefenseSystem{
 
 	private static final long serialVersionUID = 1L;
 
-	public SentinelShieldArray(int strength) {
-		super(strength);
+	public SentinelShieldArray(int strength, int defense) {
+		super(strength, defense);
 		super.setType("Wächterschildfeld");
 	}
 

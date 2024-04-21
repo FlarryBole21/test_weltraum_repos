@@ -2,6 +2,7 @@ package immaterial.oracle;
 
 import java.util.LinkedList;
 import immaterial.Game;
+import space.celestial.Moon;
 import space.celestial.Planet;
 import space.celestial.RoundCelestial;
 
@@ -30,11 +31,26 @@ public class TravelActionOracle extends ActionOracle {
 		}
 	}
 	
-
+	//Spieler wird gefragt wo er hinreisen möchte
+	//Er kann ins Hauptmenü zurück, wenn er sich nocht nicht komplett entschieden hat (genauer Ortsname)
+	//Nachdem die Runden starten wird er entweder heile ankommen oder sterben
 	@Override
 	public void run() {
 		testBeforeMain();
-		RoundCelestial destinationCelestial = whereYouWannaGo();
+		RoundCelestial destinationCelestial;
+		if(getGame().getPlayer().getCurrentPlace() instanceof Planet) {
+			destinationCelestial = whereYouWannaGoFromPlanet();
+			
+		}else {
+			destinationCelestial = backToPlanetFromMoon();
+		}
+		if(destinationCelestial == null) {
+			return;
+		}
+		if(destinationCelestial.getName().equals(getGame().getPlayer().getCurrentPlace().getName())) {
+			System.out.println("Planet bleibt gleich");
+			return;
+		}
 		boolean travelOutput = travelPhase(destinationCelestial);
 		if(travelOutput) {
 			System.out.println("Du hast die Fahrt überstanden!");
@@ -55,28 +71,55 @@ public class TravelActionOracle extends ActionOracle {
 	}
 	
 
-	private RoundCelestial whereYouWannaGo() {
+	//Fragt wohin der Spieler hin will
+	private RoundCelestial whereYouWannaGoFromPlanet() {
 		String input;
 		RoundCelestial destinationCelestial = null;
-		System.out.println("Du kannst nur zur sich in der Nähe befindenen Planeten & Monden");
+		System.out.println("Du kannst nur zur sich in der Nähe befindenen Planeten & Monden reisen");
 		System.out.println("Reisen? "
 	            + "1 -> Planet, 2 -> Mond,  Irgendwas anderes -> Doch nicht");
 		while(true) {
 			input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
 			if(input.equals("1")) {
-				destinationCelestial =checkPlanets();
+				destinationCelestial =checkPlanetsOfPlanet();
 				return destinationCelestial;
 				
 			}else if (input.equals("2")) {
 				
-				break;
+				destinationCelestial = checkMoonsOfPlanet();
+				if(destinationCelestial == null) {
+					System.out.println("Planet besitzt keine Monde!");
+					return destinationCelestial;
+				}else {
+					return destinationCelestial;
+				}
+			}
+			
+			return destinationCelestial;
+			
+		}
+	}
+	
+	
+	
+	private RoundCelestial backToPlanetFromMoon() {
+		String input;
+		Moon moon = (Moon) getGame().getPlayer().getCurrentPlace();
+		RoundCelestial destinationCelestial = null;
+		System.out.println("Du kannst nur zum jeweiligen Planeten zurückreisen!");
+		System.out.println("Reisen? "
+	            + "1 -> Züruck zum Planeten "+ moon.getPlanet().getName()+", Irgendwas anderes -> Doch nicht");
+		while(true) {
+			input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+			if(input.equals("1")) {
+				destinationCelestial = moon.getPlanet();
+				return destinationCelestial;
 				
 			}else {
 				break;
 			}
 			
 		}
-		
 		return destinationCelestial;
 	}
 	
@@ -102,8 +145,15 @@ public class TravelActionOracle extends ActionOracle {
 	             travelTime();
 	             Game.INPUTORACLE.printBreakLine();
 	             Game.SHIPBATTLEACTIONORACLE.checkAndRun(Game.SHIPBATTLEACTIONORACLE,getGame(),getScanner());
+	             if(getGame().getPlayer().getCurrentShip().getHealth() <= 0) {
+	     			return false;
+	     		 }else {
+	     			Game.INPUTORACLE.printBreakLine();
+	     			System.out.println("Gegnerisches Schiff erfolgreich besiegt!");
+	     			travelTime();
+	     		 }
 	             
-	        } else {
+	        } else { 
 	     
 	            System.out.println("Du fährst eine Runde...");
 	            travelTime();
@@ -125,33 +175,34 @@ public class TravelActionOracle extends ActionOracle {
 			}
 		}
 		
-		if(getGame().getPlayer().getCurrentShip().getHealth() == 0) {
+		
+		if(getGame().getPlayer().getCurrentShip().getHealth() <= 0) {
 			return false;
 		}
-		
+		this.round=maxRound;
 		return true;
 		
 	}
 	
 	
-	private Planet checkPlanets() {
-		LinkedList<Planet> currentPlantes = super.getGame().getPlayer().getCurrentSystem().getPlanets();
+	private Planet checkPlanetsOfPlanet() {
+		LinkedList<Planet> currentPlanets = super.getGame().getPlayer().getCurrentSystem().getPlanets();
 		Planet currentPlanet = (Planet) super.getGame().getPlayer().getCurrentPlace();
 		Planet destinationPlanet = null;
-		int index = Game.SEARCHORACLE.findIndex(currentPlantes, currentPlanet);
+		int index = Game.SEARCHORACLE.findIndex(currentPlanets, currentPlanet);
 		if(Game.SEARCHORACLE.checkIfIndexIsPositive(index)) {
-			if(index != 0 && (index != currentPlantes.size()-1)) {
+			if(index != 0 && (index != currentPlanets.size()-1)) {
 				System.out.println("Planten in der Nähe wurden geprüft...");
 				System.out.println("Zu welchem Reisen? "
-			            + "1 -> "+ currentPlantes.get(index-1).getName() 
-			            + ", 2 -> "+ currentPlantes.get(index+1).getName()+",  Irgendwas anderes -> Doch nicht");
+			            + "1 -> "+ currentPlanets.get(index-1).getName() 
+			            + ", 2 -> "+ currentPlanets.get(index+1).getName()+",  Irgendwas anderes -> Doch nicht");
 				while(true) {
 					String input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
 					if(input.equals("1")) {
-						destinationPlanet =currentPlantes.get(index-1);
+						destinationPlanet =currentPlanets.get(index-1);
 						break;
 					}else if (input.equals("2")) {
-						destinationPlanet =currentPlantes.get(index+1);
+						destinationPlanet =currentPlanets.get(index+1);
 						break;
 					}else {
 						break;
@@ -160,12 +211,12 @@ public class TravelActionOracle extends ActionOracle {
 				
 			}else if( index == 0) {
 				System.out.println("Zu diesem Planeten reisen? "
-			            + "1 -> "+ currentPlantes.get(index+1).getName() 
+			            + "1 -> "+ currentPlanets.get(index+1).getName() 
 			            +  ", Irgendwas anderes -> Doch nicht");
 				while(true) {
 					String input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
 					if(input.equals("1")) {
-						destinationPlanet =currentPlantes.get(index+1);
+						destinationPlanet =currentPlanets.get(index+1);
 						break;
 					}else {
 						break;
@@ -173,12 +224,12 @@ public class TravelActionOracle extends ActionOracle {
 				}
 			}else {
 				System.out.println("Zu diesem Planeten reisen? "
-			            + "1 -> "+ currentPlantes.get(index-1).getName() 
-			            +  "Irgendwas anderes -> Doch nicht");
+			            + "1 -> "+ currentPlanets.get(index-1).getName() 
+			            +  ", Irgendwas anderes -> Doch nicht");
 				while(true) {
 					String input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
 					if(input.equals("1")) {
-						destinationPlanet =currentPlantes.get(index-1);
+						destinationPlanet =currentPlanets.get(index-1);
 						break;
 					}else {
 						break;
@@ -191,6 +242,60 @@ public class TravelActionOracle extends ActionOracle {
 		}
 		
 		return destinationPlanet;
+	}
+	
+	
+	
+	private RoundCelestial checkMoonsOfPlanet() {
+		LinkedList<Moon> currentMoons; 
+		Planet planet = (Planet)super.getGame().getPlayer().getCurrentPlace();
+		currentMoons = planet.getMoons();
+		Moon destinationMoon = null;
+		int numberInput=0;
+			if(currentMoons.size() > 0) {
+				System.out.println("Zu welchem Reisen?");
+				for(int i =0; i<currentMoons.size();i++) {
+					System.out.println((i+1) +"-> " + currentMoons.get(i).getName());
+				}
+				while(true) {
+					String input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
+					try {
+						numberInput = Integer.valueOf(input);
+						if (numberInput > currentMoons.size()) {
+							System.err.println("Error -> Zu hohe oder niedrige Eingabe");
+						}
+					}catch(RuntimeException e) {
+						System.err.println("Error -> Ungültige Eingabe!");
+					}
+					
+					if(input.equals("1") && currentMoons.size() >= 1) {
+						destinationMoon =currentMoons.get(numberInput+1);
+						break;
+					}else if (input.equals("2") && currentMoons.size() >= 2) {
+						destinationMoon =currentMoons.get(numberInput+1);
+						break;
+						
+					}else if (input.equals("3") && currentMoons.size() >= 2) {
+						destinationMoon =currentMoons.get(numberInput+1);
+						break;
+						
+					}else if (input.equals("4") && currentMoons.size() >= 2) {
+						destinationMoon =currentMoons.get(numberInput+1);
+						break;
+						
+					}else if (input.equals("5") && currentMoons.size() >= 2) {
+						destinationMoon =currentMoons.get(numberInput+1);
+						break;
+						
+					}else if (input.toLowerCase().equals("exit")) {
+						return getGame().getPlayer().getCurrentPlace();	
+					}
+					
+				}
+				
+			}
+			
+		return destinationMoon;
 	}
 	
 	

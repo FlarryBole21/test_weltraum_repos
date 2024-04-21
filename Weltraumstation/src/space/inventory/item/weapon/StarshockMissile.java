@@ -4,8 +4,8 @@ public class StarshockMissile extends Missile{
 
 	private static final long serialVersionUID = 1L;
 
-	public StarshockMissile(int strength) {
-		super(strength);
+	public StarshockMissile() {
+		super(20);
 		super.setType("Sternschockrakete");
 	}
 

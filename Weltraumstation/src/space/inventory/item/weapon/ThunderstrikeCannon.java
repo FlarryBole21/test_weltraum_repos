@@ -4,8 +4,8 @@ public class ThunderstrikeCannon extends KineticWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public ThunderstrikeCannon(int strength) {
-		super(strength);
+	public ThunderstrikeCannon() {
+		super(25);
 		super.setType("Donnerschlagkanone");
 	}
 

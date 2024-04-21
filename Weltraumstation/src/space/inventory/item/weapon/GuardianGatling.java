@@ -4,8 +4,8 @@ public class GuardianGatling extends PointDefenseSystem{
 
 	private static final long serialVersionUID = 1L;
 
-	public GuardianGatling(int strength) {
-		super(strength);
+	public GuardianGatling(int strength, int defense) {
+		super(strength, defense);
 		super.setType("Wächter-Gatling");
 	}
 

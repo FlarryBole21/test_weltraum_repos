@@ -15,6 +15,22 @@ public abstract class Weapon extends Item implements Upgradable{
 		this.level = 1;
 	}
 
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	@Override
 	public void use() {
 		

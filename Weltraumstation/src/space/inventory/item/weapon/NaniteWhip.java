@@ -4,8 +4,8 @@ public class NaniteWhip extends MeleeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public NaniteWhip(int strength) {
-		super(strength);
+	public NaniteWhip() {
+		super(50);
 		super.setType("Nanite-Peitsche");
 	}
 

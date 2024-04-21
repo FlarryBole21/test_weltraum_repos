@@ -55,8 +55,8 @@ public class Player extends Human implements Upgradable, Killable{
 		this.cookingExperience=1;
 		this.craftingExperience=1;
 		this.buildingExperience=1;
-		this.currentShip = new BattleShip(10, 200, 100);
-		this.currentSuit = new SpacewalkerSuit(10);
+		this.currentShip = new BattleShip();
+		this.currentSuit = new SpacewalkerSuit();
 		this.currentSuit.wear(this);
 		this.visitedPlanets = new LinkedList<>();
 		this.visitedMoons = new LinkedList<>();

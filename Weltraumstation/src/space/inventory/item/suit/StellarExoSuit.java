@@ -6,8 +6,8 @@ public class StellarExoSuit extends Suit{
 
 	private static final long serialVersionUID = 1L;
 
-	public StellarExoSuit(int defense) {
-		super(defense);
+	public StellarExoSuit() {
+		super(30);
 		super.setType("Steller-Exo-Anzug");
 	}
 

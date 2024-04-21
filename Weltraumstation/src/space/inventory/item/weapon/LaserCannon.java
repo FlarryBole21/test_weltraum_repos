@@ -4,8 +4,8 @@ public class LaserCannon extends EnergyRangeWeapon{
 
 	private static final long serialVersionUID = 1L;
 
-	public LaserCannon(int strength) {
-		super(strength);
+	public LaserCannon() {
+		super(20);
 		super.setType("Laserkanone");
 	}
 

@@ -6,8 +6,8 @@ public class AstroplateArmor extends Suit{
 
 	private static final long serialVersionUID = 1L;
 
-	public AstroplateArmor(int defense) {
-		super(defense);
+	public AstroplateArmor() {
+		super(50);
 		super.setType("Astroplatten-Rüstung");
 	}
 
