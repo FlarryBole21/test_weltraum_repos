@@ -13,6 +13,7 @@ import space.celestial.RoundCelestial;
 import space.inventory.InventoryObject;
 import space.inventory.item.suit.SpacewalkerSuit;
 import space.inventory.item.suit.Suit;
+import space.inventory.resource.Resource;
 import space.lifeform.Human;
 import space.lifeform.Killable;
 
@@ -37,6 +38,7 @@ public class Player extends Human implements Upgradable, Killable{
 	private Ship shipParked;
 	private Suit currentSuit;
 	private LinkedList<InventoryObject> inventory;
+	private int inventorySize;
 	private LinkedList<Planet> visitedPlanets;
 	private LinkedList<Moon> visitedMoons;
 	private LinkedList<Planet> colonizedPlanets;
@@ -46,6 +48,7 @@ public class Player extends Human implements Upgradable, Killable{
 		super.setType("Spieler");
 		this.name = name;
 		this.inventory = new LinkedList<>();
+		this.inventorySize = 10;
 		this.strengthExperience=super.getStrength();
 		this.defenseExperience=super.getDefense();
 		this.healthExperience=super.getHealth();
@@ -77,7 +80,7 @@ public class Player extends Human implements Upgradable, Killable{
 	public LinkedList<String> getInventoryNames() {
 		LinkedList<String> names = new LinkedList<>();
 		for (int i = 0; i < getInventory().size(); i++) {
-			names.add(getInventory().get(i).getType());
+			names.add(getInventory().get(i).getType() + " <" + getInventory().get(i).getAmount()+">");
 		}
 		return names;
 	}
@@ -120,6 +123,15 @@ public class Player extends Human implements Upgradable, Killable{
 	}
 	
 	
+
+	public int getInventorySize() {
+		return inventorySize;
+	}
+
+	public void setInventorySize(int inventorySize) {
+		this.inventorySize = inventorySize;
+	}
+
 	public Ship getCurrentShip() {
 		return currentShip;
 	}
@@ -143,6 +155,48 @@ public class Player extends Human implements Upgradable, Killable{
 
 	public void setCurrentSuit(Suit currentSuit) {
 		this.currentSuit = currentSuit;
+	}
+	
+	public void addResourceToInventory(Resource resource, int amount) {
+		
+		if(inventory.size() ==0) {
+			resource.setAmount(amount);
+			inventory.add(resource);
+		}else {
+			for(int i=0; i<inventory.size();i++) {
+				if(!(inventory.get(i).getType().equals(resource.getType()))) {
+					resource.setAmount(amount);
+					inventory.add(resource);
+				}else {
+					inventory.get(i).addAmount(amount);
+				}
+			}
+			
+		}
+
+	}
+	
+	
+	public void removeObjectFromInventory(InventoryObject inventoryObject, int amount) {
+		if(inventory.size() <0) {
+			System.err.println("Keine Items im Inventar vorhanden!");
+			return;
+		}
+		
+		for(int i=0; i<inventory.size();i++) {
+			if(!(inventory.get(i).getType().equals(inventoryObject.getType()))) {
+				System.err.println("Objekt nicht im Inventar vorhanden");
+			}
+			else {
+				if(inventory.get(i).getAmount() <= 1) {
+					inventory.remove(inventoryObject);
+					
+				}else {
+					inventory.get(i).removeAmount(amount);
+				}
+			}
+		}
+		
 	}
 	
 	

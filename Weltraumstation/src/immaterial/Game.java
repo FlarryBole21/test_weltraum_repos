@@ -114,7 +114,7 @@ public class Game implements Serializable {
 		System.out.println();
 		System.out.println("Du startest am Planeten <" + start.getName() 
 		+ "> und im System <" + start.getSolarsystem().getName()+">");
-		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet, Mond & System");
+		System.out.println("Sammle Ressourcen, Baue Schiffe & Lager, Reise von Planet zu Planet & Mond");
 		System.out.println("und versuche zu überleben, denn du bist nicht der Einzige in dieser Welt");
 		INPUTORACLE.printBreakLineMultiple();
 		

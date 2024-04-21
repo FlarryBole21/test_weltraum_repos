@@ -1,5 +1,8 @@
 package immaterial.oracle;
 
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -7,6 +10,7 @@ import immaterial.Game;
 import space.celestial.Planet;
 import space.celestial.RoundCelestial;
 import space.environment.atmosphere.Atmosphere;
+import space.inventory.resource.Resource;
 import space.lifeform.role.Player;
 
 public class LocalActionOracle extends ActionOracle{
@@ -39,8 +43,10 @@ public class LocalActionOracle extends ActionOracle{
 			System.out.println("0 -> Spiel beenden");
 			System.out.println("1 -> Charakter-Info einsehen");
 			System.out.println("2 -> Orts-Info einsehen");
-			System.out.println("3 -> Zurück zum Raumschiff");
-			System.out.println("4 -> Aktuellen Fortschritt speichern");
+			System.out.println("3 -> Ressourcen sammeln");
+			System.out.println("4 -> Gebäude bauen");
+			System.out.println("5 -> Zurück zum Raumschiff");
+			System.out.println("6 -> Aktuellen Fortschritt speichern");
 			input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			
 			if(input.equals("0")) {
@@ -64,13 +70,31 @@ public class LocalActionOracle extends ActionOracle{
 					    	System.out.println(information);
 					    }
 			        };
-			        
 			        roundConsumer.accept(player.getCurrentPlace());
 				};
 				
 				Game.MAINACTIONORACLE.subMenu(runnable, true);
 		        Game.INPUTORACLE.printBreakLineMultiple();
 			}else if(input.equals("3")) {
+				
+				Runnable runnable = ()->{
+					inputForResource();
+					
+					
+					
+				};
+				Game.MAINACTIONORACLE.subMenu(runnable, true);
+				Game.INPUTORACLE.printBreakLineMultiple();
+			
+			}else if(input.equals("4")) {
+		
+				Runnable runnable = ()->{
+					
+				};
+				Game.MAINACTIONORACLE.subMenu(runnable, true);
+				Game.INPUTORACLE.printBreakLineMultiple();
+			
+			}else if(input.equals("5")) {
 				//Spieler steigt wieder in sein Schiff ein -> Rückkehr ins Hauptmenü
 				Game.MAINACTIONORACLE.setLocalLoop(false);
 				player.enterShip();
@@ -79,7 +103,7 @@ public class LocalActionOracle extends ActionOracle{
 				Game.INPUTORACLE.printBreakLineMultiple();
 				break;
 				
-			}else if(input.equals("4")) {
+			}else if(input.equals("6")) {
 				//Speichern
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(getScanner(), getGame());
@@ -95,6 +119,51 @@ public class LocalActionOracle extends ActionOracle{
 		
 		
 		
+	}
+	
+	
+	private void inputForResource() {
+		
+		LinkedList<Resource> listedResources = new LinkedList<>();
+		Set<Resource> resources = getGame().getPlayer().getCurrentPlace().getResource();
+		String input;
+		int numberValue;
+		for(Resource resource: resources) {
+			listedResources.add(resource);
+		}
+		
+		int index=1;
+		System.out.println("Welche Ressource möchtest du abbauen?");
+		
+		for(Resource resource: getGame().getPlayer().getCurrentPlace().getResource()) {
+			System.out.println(index +"-> " + resource.getType() + " <" + resource.getAmount() + ">");
+			index++;
+		}
+	
+		Resource resource = Game.RESOURCEORACLE.getResource(getScanner(),listedResources);
+		if(resource.getAmount() > 0) {
+			System.out.println("Geforderte Ressource gefunden -> " + resource.getType() + " <" + resource.getAmount()+">");
+			System.out.println("Wie viele möchtest du abbauen?");
+			while(true) {
+				input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
+				try {
+					numberValue = Integer.valueOf(input);
+					if(numberValue <= resource.getAmount()) {
+						
+						//.setAmount(numberValue);
+						getGame().getPlayer().addResourceToInventory(resource, numberValue);
+						//getGame().getPlayer().getCurrentPlace().removeResource(resource, numberValue);
+					}else {
+						System.err.println("Error -> So viel ist von der Ressource nicht vorhanden!");
+						System.err.println("Nur " + resource.getType() + " <"+ resource.getAmount()+ "> vorhanden!" );
+					}
+					break;
+				}catch(RuntimeException e) {
+					System.err.println("Error -> Keine Zahl" + e.getMessage());
+				}
+			}
+		}
+	
 	}
 	
 	//Bei jedem mal, wenn man den Ort betritt oder wenn man nach der Auswahl einer Option wieder ins Submenü zurückkehrt

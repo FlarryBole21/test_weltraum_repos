@@ -256,6 +256,7 @@ public class TravelActionOracle extends ActionOracle {
 				for(int i =0; i<currentMoons.size();i++) {
 					System.out.println((i+1) +"-> " + currentMoons.get(i).getName());
 				}
+				System.out.println("exit -> Doch nicht");
 				while(true) {
 					String input = Game.INPUTORACLE.inputEmptyCheck(super.getScanner());
 					try {

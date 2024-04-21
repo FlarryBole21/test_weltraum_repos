@@ -1,9 +1,11 @@
 package space.celestial;
 
 import java.util.LinkedList;
+import java.util.Set;
 
 import space.Enterable;
 import space.environment.atmosphere.Atmosphere;
+import space.inventory.resource.Resource;
 
 public abstract class RoundCelestial extends CelestialObject implements Enterable{
 
@@ -14,5 +16,7 @@ public abstract class RoundCelestial extends CelestialObject implements Enterabl
 	abstract public Atmosphere getAtmosphere();
 	
 	abstract public String getName();
+	
+	abstract public Set<Resource> getResource();
 
 }

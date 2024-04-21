@@ -1,5 +1,9 @@
 package immaterial.oracle;
 
+import java.util.LinkedList;
+import java.util.Scanner;
+
+import immaterial.Game;
 import space.SolarSystem;
 import space.celestial.Planet;
 import space.inventory.resource.Apple;
@@ -19,6 +23,7 @@ import space.inventory.resource.NormalWood;
 import space.inventory.resource.OakWood;
 import space.inventory.resource.Plasma;
 import space.inventory.resource.QuantumVacuum;
+import space.inventory.resource.Resource;
 import space.inventory.resource.Silver;
 import space.inventory.resource.Stellarite;
 import space.inventory.resource.StrawBerry;
@@ -38,10 +43,36 @@ public class ResourceOracle extends Oracle {
 	private static final int LEVEL6 = 25;
 	private static final int LEVEL7 = 30;
 	private static final int LEVEL8 = 35;
+	private LinkedList<Resource> resources;
 	
 	
 	public ResourceOracle() {
 		super.setType("Orakel der Ressourcen");
+		this.resources=new LinkedList<>();
+		this.resources.add(getApple());
+		this.resources.add(getBanana());
+		this.resources.add(getBlueBerry());
+		this.resources.add(getChronium());
+		this.resources.add(getCopper());
+		this.resources.add(getCrystal());
+		this.resources.add(getDattel());
+		this.resources.add(getGold());
+		this.resources.add(getIron());
+		this.resources.add(getMango());
+		this.resources.add(getMapleWood());
+		this.resources.add(getNanite());
+		this.resources.add(getNeutronium());
+		this.resources.add(getNormalWood());
+		this.resources.add(getOakWood());
+		this.resources.add(getPlasma());
+		this.resources.add(getQuantumVaccum());
+		this.resources.add(getSilver());
+		this.resources.add(getStellarite());
+		this.resources.add(getStrawBerry());
+		this.resources.add(getTeakWood());
+		this.resources.add(getTitan());
+		this.resources.add(getWaterMelon());
+		this.resources.add(getWillowWood());
 	}
 
 	private Crystal getCrystal() {
@@ -299,4 +330,121 @@ public class ResourceOracle extends Oracle {
 
 		basicMoonResources(planet, moonNumber);
 	}
+	
+	
+	public Resource getResource(Scanner scanner, LinkedList<Resource> resources) {
+		int numberInput;
+		Resource resource=null;
+		String input = Game.INPUTORACLE.inputEmptyCheck(scanner);
+		while(true) {
+			try {
+				numberInput = Integer.valueOf(input);
+				if (numberInput > resources.size()) {
+					System.err.println("Error -> Zu hohe oder niedrige Eingabe");
+				}
+			}catch(RuntimeException e) {
+				System.err.println("Error -> Ungültige Eingabe!");
+			}
+			
+			if(input.equals("1") && resources.size() >= 1) {
+				resource =resources.get(0);
+				break;
+			}else if (input.equals("2") && resources.size() >= 2) {
+				resource =resources.get(1);
+				break;
+				
+			}else if (input.equals("3") && resources.size() >= 2) {
+				resource =resources.get(2);
+				break;
+				
+			}else if (input.equals("4") && resources.size() >= 2) {
+				resource =resources.get(3);
+				break;
+				
+			}else if (input.equals("5") && resources.size() >= 2) {
+				resource =resources.get(4);
+				break;
+				
+			}else if (input.equals("6") && resources.size() >= 2) {
+				resource =resources.get(5);
+				break;
+				
+			}else if (input.equals("7") && resources.size() >= 2) {
+				resource =resources.get(6);
+				break;
+				
+			}else if (input.equals("8") && resources.size() >= 2) {
+				resource =resources.get(7);
+				break;
+				
+			}else if (input.equals("9") && resources.size() >= 2) {
+				resource =resources.get(8);
+				break;
+				
+			}else if (input.equals("10") && resources.size() >= 2) {
+				resource =resources.get(9);
+				break;
+				
+			}else if (input.equals("11") && resources.size() >= 2) {
+				resource =resources.get(10);
+				break;
+				
+			}else if (input.equals("12") && resources.size() >= 2) {
+				resource =resources.get(11);
+				break;
+				
+			}else if (input.equals("13") && resources.size() >= 2) {
+				resource =resources.get(12);
+				break;
+				
+			}else if (input.equals("14") && resources.size() >= 2) {
+				resource =resources.get(13);
+				break;
+				
+			}else if (input.equals("15") && resources.size() >= 2) {
+				resource =resources.get(14);
+				break;
+				
+			}else if (input.equals("16") && resources.size() >= 2) {
+				resource =resources.get(15);
+				break;
+				
+			}else if (input.equals("17") && resources.size() >= 2) {
+				resource =resources.get(16);
+				break;
+				
+			}else if (input.equals("18") && resources.size() >= 2) {
+				resource =resources.get(17);
+				break;
+				
+			}else if (input.equals("19") && resources.size() >= 2) {
+				resource =resources.get(18);
+				break;
+				
+			}else if (input.equals("20") && resources.size() >= 2) {
+				resource =resources.get(19);
+				break;
+				
+			}else if (input.equals("21") && resources.size() >= 2) {
+				resource =resources.get(20);
+				break;
+				
+			}else if (input.equals("22") && resources.size() >= 2) {
+				resource =resources.get(21);
+				break;
+				
+			}else if (input.equals("23") && resources.size() >= 2) {
+				resource =resources.get(22);
+				break;
+				
+			}else if (input.equals("24") && resources.size() >= 2) {
+				resource =resources.get(23);
+				break;
+				
+			}
+		}
+		return resource;
+	}
+		
 }
+

@@ -47,11 +47,12 @@ public class MainActionOracle extends ActionOracle{
 				System.out.println("0 -> Spiel beenden");
 				System.out.println("1 -> Charakter-Info einsehen");
 				System.out.println("2 -> Orts-Info einsehen");
-				System.out.println("3 -> Schifs-Info einsehen");
+				System.out.println("3 -> Schiffs-Info einsehen");
 				System.out.println("4 -> Anliegenden lokalen Ort betreten");
 				System.out.println("5 -> Anliegenden lokalen Ort kolonisieren");
-				System.out.println("6 -> Zum einem anderen Ort reisen");
-				System.out.println("7 -> Aktuellen Fortschritt speichern");
+				System.out.println("6 -> Zum einem anderen lokalen Ort (Planten oder Mond) reisen");
+				System.out.println("7 -> Zu einer Raumstation fahren");
+				System.out.println("8 -> Aktuellen Fortschritt speichern");
 				input = Game.INPUTORACLE.inputEmptyCheck(getScanner());
 			}else {
 				input = "4";
@@ -151,6 +152,13 @@ public class MainActionOracle extends ActionOracle{
 				
 				subMenu(runnable,true); 
 			}else if(input.equals("7")) {
+				
+				Runnable runnable = ()->{
+					
+				};
+				subMenu(runnable,true); 
+			}
+			else if(input.equals("8")) {
 				//Speichern des Spiels
 				Game.INPUTORACLE.printBreakLineMultiple();
 				Game.FILEORACLE.saveGame(getScanner(), getGame());
