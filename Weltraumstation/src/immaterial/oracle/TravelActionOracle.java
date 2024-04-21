@@ -48,7 +48,6 @@ public class TravelActionOracle extends ActionOracle {
 			return;
 		}
 		if(destinationCelestial.getName().equals(getGame().getPlayer().getCurrentPlace().getName())) {
-			System.out.println("Planet bleibt gleich");
 			return;
 		}
 		boolean travelOutput = travelPhase(destinationCelestial);
@@ -269,22 +268,22 @@ public class TravelActionOracle extends ActionOracle {
 					}
 					
 					if(input.equals("1") && currentMoons.size() >= 1) {
-						destinationMoon =currentMoons.get(numberInput+1);
+						destinationMoon =currentMoons.get(0);
 						break;
 					}else if (input.equals("2") && currentMoons.size() >= 2) {
-						destinationMoon =currentMoons.get(numberInput+1);
+						destinationMoon =currentMoons.get(1);
 						break;
 						
 					}else if (input.equals("3") && currentMoons.size() >= 2) {
-						destinationMoon =currentMoons.get(numberInput+1);
+						destinationMoon =currentMoons.get(2);
 						break;
 						
 					}else if (input.equals("4") && currentMoons.size() >= 2) {
-						destinationMoon =currentMoons.get(numberInput+1);
+						destinationMoon =currentMoons.get(3);
 						break;
 						
 					}else if (input.equals("5") && currentMoons.size() >= 2) {
-						destinationMoon =currentMoons.get(numberInput+1);
+						destinationMoon =currentMoons.get(4);
 						break;
 						
 					}else if (input.toLowerCase().equals("exit")) {

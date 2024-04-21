@@ -25,12 +25,12 @@ public class LocalActionOracle extends ActionOracle{
 	@Override
 	public void run() throws RuntimeException{
 		testBeforeMain();
-		Planet planet = (Planet) getGame().getPlayer().getCurrentPlace();
+		//Planet planet = (Planet) getGame().getPlayer().getCurrentPlace();
 		String input;
 		Player player = getGame().getPlayer();
 		while(true) {
 			System.out.println("Du befindest dich zur Zeit in keinem Raumschiff am Ort " 
-			+ planet.getType()+ " <"+ planet.getName()+">");
+			+ getGame().getPlayer().getCurrentPlace().getType()+ " <"+ getGame().getPlayer().getCurrentPlace().getName()+">");
 			System.out.println("im System <"+ getGame().getPlayer().getCurrentSystem().getName()+">");
 			testAtmoToPlayer(); 
 			Game.MAINACTIONORACLE.checkPlayerHealth();

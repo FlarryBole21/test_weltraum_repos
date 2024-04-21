@@ -36,10 +36,10 @@ public class MainActionOracle extends ActionOracle{
 		while(true) {
 			checkPlayerHealth();
 			if(!getLocalLoop()) {
-				Planet planet = (Planet) player.getCurrentPlace();
 				System.out.println("Hallo " + player.getName());
 				System.out.println("Du befindest dich zur Zeit in einem Raumschiff <"+
-				player.getCurrentShip().getType() + "> am Ort " + planet.getType()+ " <"+ planet.getName()+">");
+				player.getCurrentShip().getType() + "> am Ort " 
+						+ player.getCurrentPlace().getType()+ " <"+ player.getCurrentPlace().getName()+">");
 				System.out.println("im System <"+ player.getCurrentSystem().getName()+">");
 				Game.INPUTORACLE.printBreakLine();
 				
@@ -148,6 +148,7 @@ public class MainActionOracle extends ActionOracle{
 				Runnable runnable = () -> {
 					Game.TRAVELACTIONORACLE.checkAndRun(Game.TRAVELACTIONORACLE,getGame(),getScanner());
 				};
+				
 				subMenu(runnable,true); 
 			}else if(input.equals("7")) {
 				//Speichern des Spiels

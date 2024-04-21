@@ -126,6 +126,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		int playerShipStrength = playerShip.getStrength();
 		if(criticalHit >= 4) {
 			int criticalHitNumber = (int) (playerShipStrength/3);
+			criticalHitNumber+=playerShipStrength;
 			System.out.println("Spieler fügt zusätzlichen kritischen Schaden zu " + criticalHitNumber);
 			enemyShip=enemyShipTakesDamage(enemyShip,enemyShip.getHealth(), (playerShipStrength+criticalHitNumber));
 		}else {
@@ -139,7 +140,6 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 	
 	
 	private void enemyTurn(BattleShip battleShip) {
-		System.out.println("gayas");
 		int criticalHit = (int) (Math.random() * (6));
 		Game.INPUTORACLE.printBreakLine();
 		System.out.println("Feindliches Schiff greift an!");
@@ -147,6 +147,7 @@ public class ShipBattleActionOracle extends BattleActionOracle{
 		int playerShipHealth = getGame().getPlayer().getCurrentShip().getHealth();
 		if(criticalHit >= 4) {
 			int criticalHitNumber = (int) (battleShip.getStrength()/3);
+			criticalHitNumber+=battleShip.getStrength();
 			System.out.println("Gegner fügt zusätzlichen kritischen Schaden zu " + criticalHitNumber);
 			playerShipTakesDamage(playerShipHealth, (battleShip.getStrength()+ criticalHitNumber));
 		}else {
